@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/salePage.css">
 	
 	<main>
-	
+		
 	</main>
 	
 	
