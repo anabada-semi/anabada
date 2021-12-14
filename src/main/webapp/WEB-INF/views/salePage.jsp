@@ -1,67 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	   <title>아나바다 - 중고거래 웹 사이트</title>
-    <link rel="stylesheet" href="/css/header+footer.css">
-    <link rel="stylesheet" href="/css/salePage.css">
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
-  <div class="wrapper">
-        <header>
-            <!-- 맨 위부분 로그인, 로그아웃, 내 상점 -->
-            <div class="header-top">
-                <div class="header-login">
-                    <div id="login">로그인</div>
-                    <div id="singup">회원가입</div>
-                </div>
-            </div>
-    
-            <div class="header-bottom">
-                <div class="header-main">
-                    <div class="header-main-top">
-                        <div id="logo">
-                            아나바다
-                        </div>
-    
-                        <div id="search">
-                            <input type="text" id="search_input" placeholder="검색어 입력">
-                            <img src="/img/검색.png">
-                        </div>
-    
-                        <div id="logo-right">
-                            <div class="sale">
-                                <img src="/img/판매.png">
-                                <p id="sale">판매하기</p>
-                                <!-- &nbsp;판매하기 -->
-                            </div>
-                            <div class="shop">
-                                <img src="/img/내상점.png">
-                                <p id="shop">내상점</p>
-                                <!-- &nbsp;내상점 -->
-                            </div>
-                            <div class="notice">
-                                <img src="/img/알림.png">
-                                <p id="notice">알림</p>
-                                <!-- &nbsp;알림 -->
-                            </div>
-                        </div>
-    
-                    </div>
-    
-                    <div class="header-main-bottom">
-                        <img src="/img/카테고리.png">
-                    </div>
-    
-                </div>
-            </div>
-        </header>
-    
-        <main>
-            <div id="title"><h3>상품등록</h3></div>
+<div id="title"><h3>상품등록</h3></div>
     <section>
         <h2>기본정보</h2>
         
@@ -122,35 +62,3 @@
     <div id="footer_register">
         <button id="register">등록하기</button>
     </div>
-    
-        </main>
-    
-        <footer>
-            <div class="footer-left">
-                <b>아나바다(주) 사업자정보</b> <br><br>
-                
-                대표이사 : 아나바다  <br>
-                | 개인정보보호담당자 : 아나바다 <br> <br>
-                사업자등록번호 : 12345-123456 <br> <br>
-                EMAIL : anabada@kh.or.kr<br> <br>
-                주소 : 서울시 남대문로 <br> <br>
-                사업자정보 확인
-                
-            </div>
-    
-            <div class="footer-right">
-                <b>고객센터</b> <br><br>
-                1234-1234   <br> <br>
-                운영시간 9시 ~ 18시 <br> <br>
-                (주말/공휴일 휴무, 점심시간 12시 ~13시) <br> <br>
-                <u>공지사항</u>    <br> <br>
-                <u>1:1문의하기</u> <br> <br>
-                <u>자주 묻는 질문</u>  <br> <br>
-            </div>
-        </footer>
-    </div>
-    
-
-	
-</body>
-</html>
