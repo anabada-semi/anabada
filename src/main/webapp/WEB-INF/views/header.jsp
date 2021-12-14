@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 
@@ -10,7 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>아나바다 - 중고거래 웹 사이트</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="${contextPath}/resources/css/myShop/myShop.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/header+footer.css">
+
 
 </head>
 <body>
