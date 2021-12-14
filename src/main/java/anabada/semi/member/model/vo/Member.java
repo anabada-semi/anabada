@@ -66,5 +66,14 @@ public class Member {
 	public void setEnrollDate(String enrollDate) {
 		this.enrollDate = enrollDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberNm="
+				+ memberNm + ", memberEmail=" + memberEmail + ", address=" + address + ", enrollDate=" + enrollDate
+				+ "]";
+	}
+	
+	
 	
 }

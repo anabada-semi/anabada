@@ -30,5 +30,10 @@ public class Shop {
 	public void setShopNo(String shopNo) {
 		this.shopNo = shopNo;
 	}
+
+	@Override
+	public String toString() {
+		return "Shop [memberNo=" + memberNo + ", shopIntroduce=" + shopIntroduce + ", shopNo=" + shopNo + "]";
+	}
 	
 }
