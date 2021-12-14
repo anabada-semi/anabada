@@ -3,6 +3,7 @@
 
 	<!-- header include -->
 	<jsp:include page="header.jsp" />
+	
 	<!-- include 할 jsp 파일 경로 작성 -->
 	<link rel="stylesheet" href="${contextPath}/resources/css/salePage.css">
 	
