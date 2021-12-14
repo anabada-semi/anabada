@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title></title>
-	<link rel="stylesheet" href="/WEB-INF/resources/css/myShop/myShop.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="${contextPath}/resources/css/myShop/myShop.css">
 </head>
 <body>
+	<jsp:include page="../header.jsp" />
+	
 	<section>
         <div class="container">
             <div id="div" class="head1-1">
@@ -78,7 +83,9 @@
             </div>
         </div>
     </section>
+    
+    <jsp:include page="../footer.jsp" />
 
-    <script src="/WEB-INF/resources/js/myShop/myShop.js"></script>
+    <script src="${contextPath}/resources/js/myShop/myShop.js"></script>
 </body>
 </html>
