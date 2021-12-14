@@ -215,3 +215,39 @@ a{
 }
 
 /* =====목록===== */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    /* min-width: 300px; */
+    width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 0;
+    z-index: 1;
+}
+  
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#category-ul{
+  list-style-type: none;
+}
+
+.category_item{
+    height:30px;
+    width: 200px;
+    line-height: 28px;
+    cursor: pointer;
+    /* border: 1px solid black; */
+}
+
+.category_item:hover{
+    color: #689BA6;
+}
