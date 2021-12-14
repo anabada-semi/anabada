@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+		<!-- header include -->
+	<jsp:include page="header.jsp" />
 
 <div id="title"><h3>상품등록</h3></div>
     <section>
@@ -62,3 +65,6 @@
     <div id="footer_register">
         <button id="register">등록하기</button>
     </div>
+    
+    <!-- footer include -->
+	<jsp:include page="footer.jsp" />
