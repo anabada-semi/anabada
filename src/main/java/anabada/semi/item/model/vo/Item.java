@@ -11,6 +11,68 @@ public class Item {
 	private int categoryCode;
 	private int itemStatusCode;
 	private int memberNo;
+	public int getItemNo() {
+		return itemNo;
+	}
+	public void setItemNo(int itemNo) {
+		this.itemNo = itemNo;
+	}
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public int getItemPrice() {
+		return itemPrice;
+	}
+	public void setItemPrice(int itemPrice) {
+		this.itemPrice = itemPrice;
+	}
+	public String getItemImg() {
+		return itemImg;
+	}
+	public void setItemImg(String itemImg) {
+		this.itemImg = itemImg;
+	}
+	public String getItemInfo() {
+		return itemInfo;
+	}
+	public void setItemInfo(String itemInfo) {
+		this.itemInfo = itemInfo;
+	}
+	public String getItemDate() {
+		return itemDate;
+	}
+	public void setItemDate(String itemDate) {
+		this.itemDate = itemDate;
+	}
+	public int getCategoryCode() {
+		return categoryCode;
+	}
+	public void setCategoryCode(int categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+	public int getItemStatusCode() {
+		return itemStatusCode;
+	}
+	public void setItemStatusCode(int itemStatusCode) {
+		this.itemStatusCode = itemStatusCode;
+	}
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+	@Override
+	public String toString() {
+		return "Item [itemNo=" + itemNo + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemImg=" + itemImg
+				+ ", itemInfo=" + itemInfo + ", itemDate=" + itemDate + ", categoryCode=" + categoryCode
+				+ ", itemStatusCode=" + itemStatusCode + ", memberNo=" + memberNo + "]";
+	}
+	
+	
 	
 	
 }
