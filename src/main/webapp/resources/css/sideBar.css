@@ -1,0 +1,60 @@
+/* 사이드바 */
+#side-bar{
+    width: 100px;
+    position: fixed;
+    top: 200px;
+    right: calc(50% - 630px);
+    z-index: 20;
+}
+
+#side-bar > div{
+    border: 1px solid #ccc;
+    background-color: white;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    color:rgb(97, 97, 97);
+}
+
+#side-bar > div:first-child{
+    height: 65px;
+}
+
+#heart-item{
+    margin-top: 13px;
+    height: 20px;
+}
+
+#heart-count{
+    height: 20px;
+    color: #ccc;
+}
+
+#side-bar > div:nth-child(2){
+    height: 180px;
+}
+
+#recently-item{
+    margin-top: 13px;
+    height: 20px;
+}
+
+#recently-dotted{
+    width: 70px;
+    margin: auto;
+    border-bottom: 2px dotted rgb(151, 151, 151);
+}
+
+#side-bar > div:last-child{
+    height: 50px;
+}
+
+#button-top > div{
+    font-size: 16px;
+    margin-top: 12px;
+}
+
+#button-top:hover{
+    cursor: pointer;
+}
