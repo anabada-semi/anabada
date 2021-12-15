@@ -57,7 +57,9 @@
 #h2{
     width: 653px;
     height: 75px;
-    display: flex;
+    /* display: flex; */
+    padding-top: 30px;
+    padding-bottom: 20px;
 
     font-size: 18px;
     font-weight: 600;
@@ -65,9 +67,10 @@
     align-items: center;
     -webkit-box-pack: justify;
 }
-#h2 div{
+/* #h2 div{
     display: flex;
-}
+} */
+#save{display: flex;}
 .head1-1{
     border: 0.2px solid #ccc;
     background-color: transparent;
@@ -94,4 +97,27 @@ button{
     padding: 0px 15px;
     color: rgb(136, 136, 136);
     margin: 0px;
+}
+
+#myShopContent2:hover{
+    cursor: pointer;
+}
+#myShopContent2{
+    margin-top: 111px;
+    border: 1px solid rgb(238, 238, 238);
+    color: rgb(136, 136, 136);
+    display: flex;
+    font-size: 11px;
+}
+#myShopContentBtn{
+    width: 100px;
+    height: 155px;
+    border-top: 1px solid rgb(238, 238, 238);
+    border-right: 1px solid rgb(238, 238, 238);
+    border-bottom: 0.2px solid #ccc;
+    background: rgb(250, 250, 250);
+    color: rgb(136, 136, 136);
+    border-left: 1px solid rgb(238, 238, 238);
+    margin: 0;
+    padding: 0;
 }

@@ -15,7 +15,6 @@
 						<div style="text-align: center;">
 							<span id="userName123">userName</span>
 						</div>
-						<!-- 첫 번째 이미지는 회색별 나머지는 노란색 별 -->
 						<img
 							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAYAAAB2+A+pAAAAAXNSR0IArs4c6QAAAqNJREFUSA2tVk1rE0EYzrYbSKQXRYIfCaUiggaJJiH+AIsnL1poRQ+CBy8VvOivUA8evHgoeNCbRz3pH5B8HlIvYpG0VULxJBqMZn2eZWc7O5nZ7I5deJl33vf5yMzsTpvJWD6tVussw5KembMlgnc9CCsJa2PP81YYVq4gOTbEXq+3NB6PP5ObzWZPVSqVrbQ6ViuGKbfZf+Rc1JKMVsaO44RbLOdJDAUm9Va32+0TONtthM+FsYcoVqvVXSGaZEy9YhheE6Y0YM5aEjMZk9oY5PB8JSFdTWpPp6m2utlsHoXEN8S8IvUX82P1en1PqRunbrfbvYitOmRESI3JZLIMrGpKxDzOeb3T6byT4MYU2J8Orz2IvQLqghF5sI0ujG/O1Wq1j/l8/hImjxHewXrsq1GbHvSiZ+SM8alcxupfIE7uU/4/g+EO4jY+ufdCLWLMYr/fPzIajZ7DPLwkBNhmhOHrXC53t1wuf5f5U8aiidXfgflTxIKopRlh+ANxH6vc0PGMxgTjxTsN45dIGzpyTO0DTG/hLD+ZMLHGJMHYxep7GM+ZROQ6DDexygrGP3JdzWfeXPg2D8P0jEo0zYklx9QX9ZnGAPIlcwUhwUjszBdzpjFWcCOBWQSShBN7xribj+Os+Cdw6gei7l+P6C1HXDFBb4J6EXf3V7Un5lOCohGMq6opRH+j9wAv0BUG86AWUgPOaljQJLHGEFyTOZhvIhpYyROMvAK9IG+wp2AjXLnH3LjV+IQW8cu3ED4Gws8KhcLDUqn0SxXhfDAY5IfD4SPg1zkPftgSduUL5+pjXDEEuM3gO0OQruIyuGcypSh7xBBLDrnUYE/3xBnzbX7ruu55bOcbHVlXI5YccmGc7ovA/81FXJf+lunEk9aoQS0d/h/pAwlu3rYpxwAAAABJRU5ErkJggg=="
 							width="15" height="14" alt="작은 별점 0점 이미지"> <img
@@ -35,15 +34,25 @@
 
 			<div class="head2">
 				<div id="h2">
-					<div id="save">
+					<div id="save" style="padding-bottom: 30px;">
 						<span id="userNameCng">userName</span>
 						<button class="shopNameBtn">상점명 수정</button>
 					</div>
+
+					<div>
+
+						<div id="myShopContent" style="font-weight: lighter;">청춘! 이는 듣기만 하여도 가슴이 설레는 말이다 청춘! 너의 두손을 가슴에 대고 물방아 같은 심장의 고동을 들어 보라 청춘의 피는 끓는다 끓는 피에 뛰노는 심장은 거선의 기관과 같이 힘있다 이것이다 인류의 역사를(소개글)</div>
+						<div id="myShopContent1">
+							<div id="myShopContent2" style="padding: 0px 10px 0px 10px; font-weight: lighter; border: 0.3px solid #ccc; font-size: 12px; display: inline-block;">소개글 수정</div>			
+						</div>
+					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
 
+	
 	<div class="container">
 		<div id="div">
 			<div class="btn active" onclick="location.href='${contextPath}/myShop/itemList';">
@@ -63,6 +72,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<br>
 	<br>
 	
