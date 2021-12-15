@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+*:not(body, html){
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    
+}
+
+/* --------------------------------------- */
+
+#login-section{
+    margin: 100px;
+}
+
+#login-area{
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    background-color: #F2F2CE;
+}
+
+#login-area div{
+    text-align: center;
+}
+
+#login-area2{
+    padding-top: 120px;
+}
+
+#login-area3{
+    padding-top: 20px;
+}
+
+
+#login-area a{
+    color: black;
+    text-decoration: none;
+    font-family: 'GmarketSansMedium';
+}
+
+#searchId{
+    margin-left: 100px;
+}
+
+#login-area input{
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: 5px;
+}
+
+#login-area button{
+    background-color: #B8CC7A;
+    color: white;
+    font-family: 'GmarketSansMedium';
+    border: none;
+    border-radius: 5px;
+    width: 300px;
+    height: 45px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+#login-area button:active{
+    background-color: #668053;
+}
+
+
