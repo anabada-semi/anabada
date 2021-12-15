@@ -3,6 +3,7 @@
 	
 		<!-- header include -->
 	<jsp:include page="../header.jsp" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/member/signUpPage.css">
 
     <section id="signUpPage">
         <div id="top-banner">회원 가입</div>

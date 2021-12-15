@@ -3,6 +3,7 @@
 	
 		<!-- header include -->
 	<jsp:include page="../header.jsp" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/member/loginPage.css">
 
 
     <section id="login-section">
