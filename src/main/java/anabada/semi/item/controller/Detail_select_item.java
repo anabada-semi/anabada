@@ -12,6 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 public class Detail_select_item extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/myShop/myShop.jsp").forward(req, resp);
 	}
 }

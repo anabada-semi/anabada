@@ -27,5 +27,4 @@
             </div>
         </footer>
     </div>
-    
-    <script src="${contextPath}/resources/js/myShop/myShop.js"></script>
+   
