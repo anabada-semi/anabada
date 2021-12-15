@@ -1,0 +1,181 @@
+    #title{
+            width: 100%;
+            height : 4rem;
+            text-align: center;
+            color : rgb(255, 80, 88);
+            border-bottom: 1px solid rgb(238, 238, 238);
+            border-top: 1px solid rgb(238, 238, 238);
+            
+        }
+
+        h2{
+            width: 100%;
+            height : 80px;
+            border-bottom: 2px solid rgb(238, 238, 238);
+            line-height: 75px;
+        }
+        
+        li{
+            list-style-type: none;
+            display: flex;
+            width: 100%;
+            
+            
+        }
+
+        #footer_update{
+            height : 100px;
+            width: 100%;
+            background-color: #ebebeb;
+
+        }
+
+        #update{
+            height: 3rem;
+            width: 8rem;
+            float : right;
+            margin-right: 100px;
+            margin-top : 25px;
+            background-color:#b3e0f2 ;
+            border :rgb(238, 238, 238)
+
+        }
+
+        #photo{
+            width:30px;
+        }
+
+        label { 
+            display: inline-block; 
+            padding: 30px 30px;
+            padding-top: 40px;
+            color: black; 
+            width: 150px;
+            height: 150px;
+            text-align: center;
+            font-size: inherit; 
+            line-height: normal; 
+            vertical-align: middle; 
+            background-color: #b3e0f2; 
+            cursor: pointer; 
+            border: 1px solid #ebebeb; 
+            border-bottom-color: #e2e2e2;
+            border-radius: .25em; } 
+
+        input[type="file"] { 
+            /* 파일 필드 숨기기 */
+             position: absolute; 
+             width: 1px; 
+             height: 1px; 
+             padding: 0; 
+             margin: -1px; 
+             overflow: hidden; 
+             clip:rect(0,0,0,0);
+              border: 0; }
+
+            #guide{
+                margin-top: 1.5rem;
+                 color: rgb(74, 164, 255);
+                 line-height: 1.5;
+                font-size: 14px;
+                width: 100%;
+            }
+
+            .line{
+                border-bottom: 1px solid rgb(220, 219, 228);
+                width: 100%;
+                margin-top : 30px;
+                padding-bottom : 30px;
+            }
+
+            .content_title{
+                width: 10.5rem;
+                font-size : 18px;
+                padding-top : 8px;
+                font-weight: bolder;
+
+            }
+
+            .content_title  small{
+                font-weight: normal;
+                font-size : 12px;
+
+            }
+
+            li > div{
+                width: 60%;
+               position: relative;
+            }
+
+            .input_title{
+                width: 100%;
+                height: 3rem;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+               
+            }
+
+            .input_price{
+                width: 40%;
+                height: 3rem;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+
+            }
+            /* ------------- */
+
+            ul{
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                
+            }
+
+            .line{
+                /* padding-left: 20%; */
+                /* padding-right: 20%; */
+            }
+      
+            section, ul {
+                width: 100%;
+            }
+
+            section > *{
+                margin-right: 0;
+            }
+
+            #title > h3{
+                width: 100%;
+            }
+
+            .content_photo{
+                width: 100%;
+            }
+
+            textarea{
+                width: 100%;
+            }
+
+            .category_list{
+                border : 1px solid rgb(220, 219, 228);
+                overflow: scroll;
+                overflow-x: hidden;
+                height : 250px;
+            }
+
+            .category_list > li{
+
+                border-top:1px solid rgb(220, 219, 228);
+            
+                border-bottom:1px solid rgb(220, 219, 228);
+                
+
+                padding : 10px 10px 10px;
+
+                font-size: 20px;
+            }
+            
