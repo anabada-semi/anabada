@@ -3,19 +3,21 @@
 
 	<!-- header include -->
 	<jsp:include page="header.jsp" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mainPage.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	
     <section id="carousel">
         <!-- Bootstrap Carousel-->
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active" data-bs-interval="5000" onclick="location.href='https://m.bunjang.co.kr/'">
-                <img src="img/ku2.jpg" class="d-block w-100" alt="...">
+                <img src="${contextPath}/resources/images/main/ku2.jpg" class="d-block w-100" alt="...">
               </div>
               <div class="carousel-item" data-bs-interval="5000" onclick="location.href='https://www.naver.com/'">
-                <img src="img/ku3.jpg" class="d-block w-100" alt="...">
+                <img src="${contextPath}/resources/images/main/ku3.jpg" class="d-block w-100" alt="...">
               </div>
               <div class="carousel-item" data-bs-interval="5000" onclick="location.href='https://www.youtube.com/'">
-                <img src="img/ku4.jpg" class="d-block w-100" alt="...">
+                <img src="${contextPath}/resources/images/main/ku4.jpg" class="d-block w-100" alt="...">
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
@@ -30,13 +32,13 @@
     </section>
 
     <section id="middle-banner">
-        <div><img src="img/mo.jpg" alt=""></div>
+        <div><img src="${contextPath}/resources/images/main/mo.jpg" alt=""></div>
     </section>
 
     <section id="item-box">
-        <div><h3>오늘의 상품 추천</h3></div>
+        <div><h3>새로운 상품 추천</h3></div>
         <div class="item" id="it-1" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -44,7 +46,7 @@
             </div>
         </div>
         <div class="item" id="it-2" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -52,7 +54,7 @@
             </div>
         </div>
         <div class="item" id="it-3" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -60,7 +62,7 @@
             </div>
         </div>
         <div class="item" id="it-4" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -68,7 +70,7 @@
             </div>
         </div>
         <div class="item" id="it-5" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -76,7 +78,7 @@
             </div>
         </div>
         <div class="item" id="it-6" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -84,7 +86,7 @@
             </div>
         </div>
         <div class="item" id="it-7" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -92,7 +94,7 @@
             </div>
         </div>
         <div class="item" id="it-8" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -100,7 +102,7 @@
             </div>
         </div>
         <div class="item" id="it-9" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -108,7 +110,7 @@
             </div>
         </div>
         <div class="item" id="it-10" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -116,7 +118,7 @@
             </div>
         </div>
         <div class="item" id="it-11" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -124,7 +126,7 @@
             </div>
         </div>
         <div class="item" id="it-12" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -132,7 +134,7 @@
             </div>
         </div>
         <div class="item" id="it-13" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -140,7 +142,7 @@
             </div>
         </div>
         <div class="item" id="it-14" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -148,7 +150,7 @@
             </div>
         </div>
         <div class="item" id="it-15" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -164,7 +166,7 @@
             </div>
         </div>
         <div class="item" id="it-17" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -172,7 +174,7 @@
             </div>
         </div>
         <div class="item" id="it-18" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -180,7 +182,7 @@
             </div>
         </div>
         <div class="item" id="it-19" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -188,7 +190,7 @@
             </div>
         </div>
         <div class="item" id="it-20" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
+            <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
                 <span style="float: left;">12,000원</span>
@@ -210,6 +212,7 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
 	
+	<jsp:include page="sideBar.jsp" />
 	
 	<!-- footer include -->
 	<jsp:include page="footer.jsp" />

@@ -3,6 +3,7 @@
 	
 		<!-- header include -->
 	<jsp:include page="../header.jsp" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/member/myPage.css">
 
     <section id="myPage">
         <div id="top-banner">내 정보 조회</div>

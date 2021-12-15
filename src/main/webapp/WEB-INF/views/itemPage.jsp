@@ -3,7 +3,8 @@
 	
 		<!-- header include -->
 	<jsp:include page="header.jsp" />
-
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/itemPage.css">
+	
     <section>
 
     </section>
