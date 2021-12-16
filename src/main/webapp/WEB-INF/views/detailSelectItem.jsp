@@ -48,7 +48,7 @@
                         </div>
                         <div class="product-btn">
                             <button>찜</button>
-                            <button>문의하기</button>
+                            <button onclick="">문의하기</button>
                             <button>수정하기</button>
                         </div>
     
@@ -80,6 +80,9 @@
                         <div class="submit">
                             <label for="secret">비밀글</label> <input type="checkbox" id="secret">
                             <button>등록</button>
+                        </div>
+                        <div class="">
+
                         </div>
                         <p>fdsafdsfadsf</p>
                         <p>fdsafdsfadsf</p>
