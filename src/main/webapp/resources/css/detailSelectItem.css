@@ -1,5 +1,15 @@
 @charset "UTF-8";
 /* 메인 */
+*:not(body, html, hr, footer) {
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    /* width: 1024px; */
+}
+
+footer ul, footer ul > li{
+    width: 100%;
+}
+
 main{
     width: 60%;
     margin-left: 20%; margin-right: 20%;
@@ -119,7 +129,6 @@ main{
 
 .product-infrom-detail, .product-question{
     width: 100%;
-    height: 50%;
     /* border: 2px solid rgb(250, 101, 151); */
 }
 
@@ -147,7 +156,7 @@ main{
 .user-reply{
     display: block;
     width: 80%;
-    height: 100%;
+    /* height: 100%; */
     margin-left: 10%;
     margin-right: 10%;
     padding-top: 5px;
@@ -184,6 +193,7 @@ main{
     width: 100%;
     height: 6.25em;
     resize: none;
+    margin-bottom: 5px;
 }
 
 .product-question input{
