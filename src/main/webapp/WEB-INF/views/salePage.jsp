@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
+	<link rel="stylesheet" href="${contextPath}/resources/css/salePage.css">
 		<!-- header include -->
 	<jsp:include page="header.jsp" />
-
+	
+<main>
 <div id="title"><h3>상품등록</h3></div>
     <section>
         <h2>기본정보</h2>
@@ -65,6 +67,6 @@
     <div id="footer_register">
         <button id="register">등록하기</button>
     </div>
-    
+  </main>  
     <!-- footer include -->
 	<jsp:include page="footer.jsp" />
