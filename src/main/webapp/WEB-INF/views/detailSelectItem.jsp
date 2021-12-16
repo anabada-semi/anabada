@@ -5,7 +5,7 @@
 	<!-- header include -->
 	<jsp:include page="header.jsp" />
 
-	<main>
+		<main>
             <div class="category">
                 <img src="${contextPath}/resources/images/itemIcon/home.png"> 홈 >
                 <select>
