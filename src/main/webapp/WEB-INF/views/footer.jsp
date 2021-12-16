@@ -2,7 +2,7 @@
 
 <%-- JSTL c태그 사용을 위한 taglib 추가 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		<hr style="border: 1px solid #ccc">
+		<hr style= "border : none; border-top: 1px solid #ccc; width: 100%;">
         <footer>
 			<div class="footer-div">
 	        	<div class="footer-info-left">

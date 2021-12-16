@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	
-		<!-- header include -->
+	<link rel="stylesheet" href="${contextPath}/resources/css/detailSelectItem.css">
+	
+	<!-- header include -->
 	<jsp:include page="header.jsp" />
-	<link rel="stylesheet" href="${contextPath}/resources/css/itemSelect.css">
 
 	<main>
             <div class="category">
-                <img src="/img/home.png"> 홈 >
+                <img src="${contextPath}/resources/images/itemIcon/home.png"> 홈 >
                 <select>
                     <option value ="">여성의류</option>
                     <option value ="">남성의류</option>
@@ -42,9 +42,9 @@
                     </div>
                     <div class="product-intro-bottom">
                         <div class="product-inform">
-                            <span><img src="/img/heart.png"> 100</span>
-                            <span><img src="/img/viewer.png"> 12</span>
-                            <span><img src="/img/clock.png"> 1시간 전</span>
+                            <span><img src="${contextPath}/resources/images/itemIcon/heart.png"> 100</span>
+                            <span><img src="${contextPath}/resources/images/itemIcon/viewer.png"> 12</span>
+                            <span><img src="${contextPath}/resources/images/itemIcon/clock.png"> 1시간 전</span>
                         </div>
                         <div class="product-btn">
                             <button>찜</button>
@@ -69,7 +69,7 @@
     
                         <div class="detail-bottom">
     
-                            <h4><img src="/img/category.png"> 카테고리</h4>
+                            <h4><img src="${contextPath}/resources/images/itemIcon/category.png"> 카테고리</h4>
                             <span>의류</span>
                         </div>
                     </div>
