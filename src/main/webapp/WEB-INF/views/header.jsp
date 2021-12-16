@@ -34,9 +34,11 @@
 						<div id="logo" onclick="location.href='#'">아나바다</div>
 
 						<div id="search">
-							<input type="text" id="search_input" placeholder="검색어 입력">
-							<img src="${contextPath}/resources/images/header+footer/검색.png"
-								id="search-img" onclick="location.href='#'">
+							<div id="search-border">
+								<input type="text" id="search_input" placeholder="검색어 입력">
+								<img src="${contextPath}/resources/images/header+footer/검색.png"
+									id="search-img" onclick="location.href='#'">
+							</div>
 						</div>
 
 						<div id="logo-right">
