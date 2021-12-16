@@ -8,7 +8,7 @@
 
     <section id="login-section">
         <div id="login-area">
-            <form action="" method="">
+            <form action="${contextPath}/member/login" method="POST">
                 <div id="login-area2">
                     <input type="text" id="id" placeholder="아이디(ID)"> <br>
                     <input type="password" id="pw"> <br>
