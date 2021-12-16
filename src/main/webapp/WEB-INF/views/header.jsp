@@ -10,9 +10,7 @@
 
 <title>아나바다 - 중고거래 웹 사이트</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="${contextPath}/resources/css/myShop/myShop.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/header+footer.css">
-
 
 </head>
 <body>
