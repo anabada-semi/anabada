@@ -14,11 +14,13 @@
                     <input type="password" id="memberPw" required> <br>
                     <a href="#" id="searchId">아이디</a>|<a href="#" id="searchPw">비밀번호 찾기</a>
                 </div>
-                <div id="login-area3">
+                <div class="login-area3">
                     <button type="submit" id="login">로그인</button> <br>
-                    <button type="submit" id="signUp">회원가입</button>
                 </div>
             </form>
+                <div class="login-area3">
+	                <button onclick="location.href='${contextPath}/member/signUp'">회원가입</button>            
+                </div>
         </div>
     </section>
     
