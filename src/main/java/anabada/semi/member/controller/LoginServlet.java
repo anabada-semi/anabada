@@ -28,8 +28,8 @@ public class LoginServlet extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		String memberId = req.getParameter("id");
-		String memberPw = req.getParameter("pw");
+		String memberId = req.getParameter("memberId");
+		String memberPw = req.getParameter("memberPw");
 		
 		MemberService service = new MemberService();
 		
