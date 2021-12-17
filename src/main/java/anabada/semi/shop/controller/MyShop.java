@@ -18,7 +18,7 @@ public class MyShop extends HttpServlet {
 		String contextPath = req.getContextPath();
 		
 		String command = uri.substring((contextPath + "/myShop/").length());
-		System.out.println(contextPath);
+//		System.out.println(contextPath);
 		
 		String path = null;
 		
