@@ -27,7 +27,7 @@
                         <br>
                         - 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
                         <br>
-                        최대 지원 사이즈인 640 X 640 으로 리사이즈 해서 올려주세요.(개당 이미지 최대 10M)
+                         최대 지원 사이즈인 640 X 640 으로 리사이즈 해서 올려주세요.(개당 이미지 최대 10M)
 
                     </div>
                 </div>
@@ -37,6 +37,9 @@
                <div>
                 <input class = "input_title" type="text" placeholder="상품 제목을 입력해주세요">
                </div>
+               <div id="title_counter">
+                <p><span>0</span>/40</p>
+            </div>
             
             </li>
             <li class="line"> <div class="content_title">카테고리</div> 
@@ -51,14 +54,18 @@
                 </div>
             </li>
             <li class="line"> <div class="content_title">가격</div> 
-                <div>
+                <div id = "price">
                  <input class="input_price"  type="number" placeholder="숫자만 입력해주세요"> 
-                
                 </div>
+                <p id="won">원</p>
+
             </li>
             <li class="line"> <div class="content_title">설명<br><small>최대 200글자</small></div> 
                 <div>
                     <textarea rows="10" cols="100" style="resize:none"></textarea>
+                </div>
+                <div id ="content_counter">
+                    <p><span>0</span>/40</p>
                 </div>
             </li>
         </ul>
