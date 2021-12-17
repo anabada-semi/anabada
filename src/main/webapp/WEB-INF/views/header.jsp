@@ -20,10 +20,10 @@
 			<div class="header-top">
 				<div class="header-login">
 					<div id="login">
-						<a href="#">로그인</a>
+						<a href="${contextPath}/member/login">로그인</a>
 					</div>
 					<div id="singup">
-						<a href="#">회원가입</a>
+						<a href="${contextPath}/member/signUp">회원가입</a>
 					</div>
 				</div>
 			</div>
