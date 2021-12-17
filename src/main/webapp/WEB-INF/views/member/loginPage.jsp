@@ -12,7 +12,7 @@
                 <div id="login-area2">
                     <input type="text" id="id" placeholder="아이디(ID)" required> <br>
                     <input type="password" id="pw" required> <br>
-                    <a href="" id="searchId">아이디</a>|<a href="" id="searchPw">비밀번호 찾기</a>
+                    <a href="#" id="searchId">아이디</a>|<a href="#" id="searchPw">비밀번호 찾기</a>
                 </div>
                 <div id="login-area3">
                     <button id="login">로그인</button> <br>
