@@ -47,15 +47,13 @@
 
         label { 
             display: inline-block; 
-            padding: 30px 30px;
-            padding-top: 40px;
+            padding: 60px 30px 0px 30px;
             color: black; 
             width: 150px;
             height: 150px;
             text-align: center;
             font-size: inherit; 
             line-height: normal; 
-            vertical-align: middle; 
             background-color: #b3e0f2; 
             cursor: pointer; 
             border: 1px solid #ebebeb; 
@@ -90,7 +88,7 @@
 
             .content_title{
                 width: 10.5rem;
-                font-size : 18px;
+                font-size : 17px;
                 padding-top : 8px;
                 font-weight: bolder;
 
@@ -154,6 +152,7 @@
 
             .content_photo{
                 width: 100%;
+                margin-left: 40px;
             }
 
             textarea{
@@ -177,4 +176,36 @@
                 padding : 10px 10px 10px;
 
                 font-size: 20px;
+            }
+
+          /*---------------*/
+            #title_counter{
+               width: 10px;
+               margin-left: 10px;
+               margin-top : 10px;
+               font-size : 10px;
+            }
+
+            #content_counter{
+                width: 10px;
+                margin-left: 10px;
+                margin-top: 110px;
+                font-size: 10px;
+            }
+        
+            #won{
+                width:10px;
+                margin-left: 5px;
+            }
+                  
+            input::-webkit-inner-spin-button{
+                -webkit-appearance: none;
+            }
+        
+            #price{
+                  width:40%;
+            }
+        
+            .input_price{
+                   width: 100%;
             }
