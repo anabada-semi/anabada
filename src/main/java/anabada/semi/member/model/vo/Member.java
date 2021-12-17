@@ -9,7 +9,34 @@ public class Member {
 	private String address;
 	private String enrollDate;
 	
+	private String memberPhone;
+	
 	public Member() {}
+
+	
+	
+	public Member(String memberId, String memberPw, String memberNm, String memberEmail, String memberPhone) {
+		super();
+		this.memberId = memberId;
+		this.memberPw = memberPw;
+		this.memberNm = memberNm;
+		this.memberEmail = memberEmail;
+		this.memberPhone = memberPhone;
+	}
+
+
+
+	public String getMemberPhone() {
+		return memberPhone;
+	}
+
+
+
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
+	}
+
+
 
 	public int getMemberNo() {
 		return memberNo;
@@ -67,13 +94,16 @@ public class Member {
 		this.enrollDate = enrollDate;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberNm="
 				+ memberNm + ", memberEmail=" + memberEmail + ", address=" + address + ", enrollDate=" + enrollDate
-				+ "]";
+				+ ", memberPhone=" + memberPhone + "]";
 	}
-	
+
+
 	
 	
 }
