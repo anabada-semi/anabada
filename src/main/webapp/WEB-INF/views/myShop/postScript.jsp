@@ -4,7 +4,6 @@
 
 
 <div>
-	<!-- <div id="div"> -->
 	<div>
 		상점후기 <span>2</span>
 	</div>
