@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<title>물품 상세 조회</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/detailSelectItem.css">
 	
 	<!-- header include -->
@@ -8,7 +9,15 @@
 		<main>
             <div class="category">
                 <img src="${contextPath}/resources/images/itemIcon/home.png"> 홈 >
-                <select>
+               
+               	<label>카테고리</label>
+                <select class="item-category-list">
+                	<c:forEach items="${category}" var="C">
+                		<option value="${c.categoryCode}">${c.categoryName}</option>
+                	</c:forEach>	
+                </select>
+                
+                <!-- <select>
                     <option value ="">여성의류</option>
                     <option value ="">남성의류</option>
                     <option value ="">신발</option>
@@ -29,7 +38,8 @@
                     <option value ="">유아동/출산</option>
                     <option value ="">반려동물용품</option>
                     <option value ="">기타</option>
-                </select>
+                </select> -->
+                
             </div>
             <div class="main-top">
                 <div class="product-img">
