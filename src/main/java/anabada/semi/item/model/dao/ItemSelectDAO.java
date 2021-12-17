@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -36,10 +37,9 @@ public class ItemSelectDAO {
 	
 	public List<Item> selectCategory(Connection conn) throws Exception{
 		
-		List<Item> categoryList = null;
+		List<Item> categoryList = new ArrayList<Item>();
 		
 		try {
-			
 			String sql = prop.getProperty("selectCategory");
 			pstmt = conn.prepareStatement(sql);
 			
@@ -55,11 +55,9 @@ public class ItemSelectDAO {
 				categoryList.add(category);
 			}
 			
-			
-			
-			
 		} finally {
-			// TODO: handle finally clause
+			close(rs);
+			close(pstmt);
 		}
 		
 		return categoryList;
