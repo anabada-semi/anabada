@@ -10,8 +10,8 @@
         <div id="login-area">
             <form action="${contextPath}/member/login" method="POST">
                 <div id="login-area2">
-                    <input type="text" id="id" placeholder="아이디(ID)"> <br>
-                    <input type="password" id="pw"> <br>
+                    <input type="text" id="id" placeholder="아이디(ID)" required> <br>
+                    <input type="password" id="pw" required> <br>
                     <a href="" id="searchId">아이디</a>|<a href="" id="searchPw">비밀번호 찾기</a>
                 </div>
                 <div id="login-area3">
