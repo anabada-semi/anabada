@@ -30,7 +30,7 @@ public class DetailSelectItemServlet extends HttpServlet{
 			
 			List<Item> categoryList = service.selectCategory();
 			
-			
+//			System.out.println("categoryList : " + categoryList);
 			
 			
 			
