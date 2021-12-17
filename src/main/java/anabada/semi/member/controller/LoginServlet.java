@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import anabada.semi.member.model.service.MemberService;
 import anabada.semi.member.model.vo.Member;
@@ -27,14 +28,28 @@ public class LoginServlet extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		String memberId = req.getParameter("id");
-		String memberPw = req.getParameter("pw");
+		String memberId = req.getParameter("memberId");
+		String memberPw = req.getParameter("memberPw");
 		
 		MemberService service = new MemberService();
 		
 		try {
 			
-			Member member = service.login(memberId, memberPw);
+			Member loginMember = service.login(memberId, memberPw);
+			
+			System.out.println(loginMember);
+			
+			HttpSession session = req.getSession();
+			
+			if(loginMember != null) {
+				System.out.println("로그인 성공");
+				session.setAttribute("loginMember", loginMember);
+				session.setMaxInactiveInterval(3600);
+				
+				resp.sendRedirect(req.getContextPath());
+			}else {
+				System.out.println("없는 회원");
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
