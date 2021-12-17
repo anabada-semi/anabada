@@ -11,6 +11,13 @@ public class Item {
 	private int categoryCode;
 	private int itemStatusCode;
 	private int memberNo;
+	
+//	CATEGORY 테이블의 CATEGORY_NM 추가
+	private String categoryName;
+	
+//	기본 생성자
+	public Item() {	}
+	
 	public int getItemNo() {
 		return itemNo;
 	}
@@ -65,14 +72,23 @@ public class Item {
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
+	
+	// CATEGORY_NM 추가
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
 	@Override
 	public String toString() {
 		return "Item [itemNo=" + itemNo + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemImg=" + itemImg
 				+ ", itemInfo=" + itemInfo + ", itemDate=" + itemDate + ", categoryCode=" + categoryCode
-				+ ", itemStatusCode=" + itemStatusCode + ", memberNo=" + memberNo + "]";
+				+ ", itemStatusCode=" + itemStatusCode + ", memberNo=" + memberNo + ", categoryName=" + categoryName
+				+ "]";
 	}
-	
-	
-	
+
 	
 }

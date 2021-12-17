@@ -19,6 +19,11 @@ body{
     font-family: 'GmarketSansMedium';
 }
 
+button{
+    text-decoration: none;
+    font-family: 'GmarketSansMedium';
+}
+
 header{
     width: 100%;
     height: 180px;

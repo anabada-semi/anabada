@@ -3,10 +3,14 @@ package anabada.semi.item.model.dao;
 import static anabada.semi.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Properties;
+
+import anabada.semi.item.model.vo.Item;
 
 public class ItemSelectDAO {
 
@@ -26,5 +30,38 @@ public class ItemSelectDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	
+	
+	public List<Item> selectCategory(Connection conn) throws Exception{
+		
+		List<Item> categoryList = null;
+		
+		try {
+			
+			String sql = prop.getProperty("selectCategory");
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				Item category = new Item();
+				
+				category.setCategoryCode(rs.getInt("CATEGORY_CD"));
+				category.setCategoryName(rs.getString("CATEGORY_NM"));
+				
+				categoryList.add(category);
+			}
+			
+			
+			
+			
+		} finally {
+			// TODO: handle finally clause
+		}
+		
+		return categoryList;
 	}
 }

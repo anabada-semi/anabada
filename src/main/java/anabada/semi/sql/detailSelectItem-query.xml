@@ -3,9 +3,9 @@
 <properties>
 
 	<!-- 전체 게시글 수 조회 -->
-	<entry key="getListCount">
-		SELECT COUNT(*) FROM BOARD
-		WHERE BOARD_STATUS_CD != 302
+	<entry key="selectCategory">
+		SELECT * FROM CATEGORY
+		ORDER BY CATEGORY_CD
 	</entry>
 	
 </properties>
