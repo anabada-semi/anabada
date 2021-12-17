@@ -61,19 +61,15 @@
 			<div class="btn active">
 				<span>상품</span>
 			</div>
-			<%-- <div class="btn" onclick="location.href='${contextPath}/myShop/wishList';"> --%>
 			<div class="btn">
 				<span>찜 목록</span>
 			</div>
-			<%-- <div class="btn" onclick="location.href='${contextPath}/myShop/postScript';"> --%>
 			<div class="btn">
 				<span>상점후기</span>
 			</div>
-			<%-- <div class="btn" onclick="location.href='${contextPath}/myShop/buyList';"> --%>
 			<div class="btn">
 				<span>구매내역</span>
 			</div>
-			<%-- <div class="btn" onclick="location.href='${contextPath}/myShop/sellList';"> --%>
 			<div class="btn">
 				<span>판매내역</span>
 			</div>
