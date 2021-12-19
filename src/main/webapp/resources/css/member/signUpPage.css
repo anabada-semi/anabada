@@ -56,7 +56,7 @@ body{
 }
 
 .dup-Btn{
-    height: 30px;
+    height: 40px;
 }
 
 #signUp-Btn{
@@ -67,4 +67,43 @@ body{
     
 }
 
+#signUpPage-info input{
+	width: 95%;
+	height: 30px;
+}
 
+#phone-box > input{
+	width: 30%;
+
+}
+
+#phone-box > select{
+	width: 30%;
+	height: 30px;
+	font-size: 14px;
+
+}
+
+#address-box input{
+	margin-top: 5px;
+}
+
+#address-box1, #address-box2{
+	display: inline-block;
+}
+
+#address-box1{
+	width: 39%;
+}
+
+#address-box2{
+	width: 56%;
+}
+
+#address-box1 > input{
+	color : white;
+    background-color: #B8cc7a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

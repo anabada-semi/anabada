@@ -19,12 +19,24 @@
 			<!-- 맨 위부분 로그인, 로그아웃, 내 상점 -->
 			<div class="header-top">
 				<div class="header-login">
-					<div id="login">
-						<a href="${contextPath}/member/login">로그인</a>
-					</div>
-					<div id="singup">
-						<a href="${contextPath}/member/signUp">회원가입</a>
-					</div>
+					<c:choose>
+						<c:when test="${ empty sessionScope.loginMember }">
+							<div id="login">
+								<a href="${contextPath}/member/login">로그인</a>
+							</div>
+							<div id="singup">
+								<a href="${contextPath}/member/signUp">회원가입</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div id="login">
+								<a href="${contextPath}/member/login">로그아웃</a>
+							</div>
+							<div id="singup">
+								<a href="${contextPath}/member/signUp">내 정보</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 

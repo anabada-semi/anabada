@@ -33,3 +33,13 @@
         </footer>
     </div>
    
+<%-- 알림창 --%>
+	<c:if test="${ !empty sessionScope.message}">
+	<script>
+	$(function(){
+	 alert("${message}");		
+	})	
+	</script>
+	<c:remove var="message" scope="session"/>
+	
+	</c:if>   

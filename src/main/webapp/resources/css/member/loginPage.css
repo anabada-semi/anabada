@@ -35,7 +35,7 @@ body{
     padding-top: 120px;
 }
 
-#login-area3{
+.login-area3{
     padding-top: 20px;
 }
 
@@ -46,7 +46,7 @@ body{
     font-family: 'GmarketSansMedium';
 }
 
-#searchId{
+#search-IdPw{
     margin-left: 100px;
 }
 
