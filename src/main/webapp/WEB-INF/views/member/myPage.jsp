@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <th>주소</th>
-                    <td>${addr[0]}${addr[1]}${addr[2]}${addr[3]}</td>
+                    <td>${addr[0]} ${addr[1]}${addr[2]}${addr[3]}</td>
                 </tr>
             </table>
             <button class="btn-style" onclick="location.href='${contextPath}/member/myInfoModify'">내 정보 수정하기</button>

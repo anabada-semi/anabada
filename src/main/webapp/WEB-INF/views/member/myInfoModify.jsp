@@ -28,7 +28,7 @@
                     </tr>
                     <tr>
                         <th>비밀번호</th>
-                        <td><input type="password" name="memberPw" value="${sessionScope.loginMember.memberPw}" id="pwd1" required></td>
+                        <td><input type="password" name="memberPw" id="pwd1" required></td>
                         <td><div id="checkPw1"></div></td>
                     </tr>
                     <tr>
@@ -52,8 +52,8 @@
 									<option>017</option>
 									<option>019</option>
 								</select>
-		                        <input type="number" class="phone-length" name="memberPhone" value="${ph[1]} id="memberPhone2" required>
-		                        <input type="number" class="phone-length" name="memberPhone" value="${ph[2]} id="memberPhone3" required>                        	
+		                        <input type="number" class="phone-length" name="memberPhone" value="${ph[1]}" id="memberPhone2" required>
+		                        <input type="number" class="phone-length" name="memberPhone" value="${ph[2]}" id="memberPhone3" required>                        	
                         	</div>                   
                         </td>
                     </tr>
@@ -65,10 +65,10 @@
 								<input type="button" id="address-search-btn" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
 							</div>
 							<div id="address-box2">
-		                       	<input type="text" name="address" value="${addr[0]}" id="sample2_postcode" placeholder="우편번호">		                    	
+		                       	<input type="text" name="address" value="${addr[0]}" id="sample2_postcode" placeholder="우편번호" required>		                    	
 	                    	</div>
-							<input type="text" name="address" value="${addr[1]}" id="sample2_address" placeholder="주소"><br>
-							<input type="text" name="address" value="${addr[2]}" id="sample2_detailAddress" placeholder="상세주소">
+							<input type="text" name="address" value="${addr[1]}" id="sample2_address" placeholder="주소" required><br>
+							<input type="text" name="address" value="${addr[2]}" id="sample2_detailAddress" placeholder="상세주소" required>
 							<input type="text" name="address" value="${addr[3]}" id="sample2_extraAddress" placeholder="참고항목">
 	                    </div>
 	                    </td> 

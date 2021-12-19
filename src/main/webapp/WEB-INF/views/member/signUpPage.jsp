@@ -60,10 +60,10 @@
 								<input type="button" id="address-search-btn" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
 							</div>
 							<div id="address-box2">
-		                       	<input type="text" name="address" id="sample2_postcode" placeholder="우편번호">		                    	
+		                       	<input type="text" name="address" id="sample2_postcode" placeholder="우편번호" required>		                    	
 	                    	</div>
-							<input type="text" name="address" id="sample2_address" placeholder="주소"><br>
-							<input type="text" name="address" id="sample2_detailAddress" placeholder="상세주소">
+							<input type="text" name="address" id="sample2_address" placeholder="주소" required><br>
+							<input type="text" name="address" id="sample2_detailAddress" placeholder="상세주소" required>
 							<input type="text" name="address" id="sample2_extraAddress" placeholder="참고항목">
 	                    </div>
 	                    </td> 
