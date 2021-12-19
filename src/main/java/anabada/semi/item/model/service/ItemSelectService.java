@@ -27,5 +27,22 @@ public class ItemSelectService {
 		
 		return categoryList;
 	}
+
+
+	/** 상품 조회
+	 * @param itemNo 
+	 * @return item
+	 * @throws Exception
+	 */
+	public Item selectItem(int itemNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		Item item = dao.selectItem(itemNo, conn);
+		
+		close(conn);
+		
+		return item;
+	}
 	
 }

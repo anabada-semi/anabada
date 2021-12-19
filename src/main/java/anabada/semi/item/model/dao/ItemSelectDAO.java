@@ -62,4 +62,51 @@ public class ItemSelectDAO {
 		
 		return categoryList;
 	}
+
+
+
+	/** 상품 조회
+	 * @param itemNo
+	 * @param conn
+	 * @return item
+	 * @throws Exception
+	 */
+	public Item selectItem(int itemNo, Connection conn) throws Exception{
+
+		Item item = null;
+		
+		try {
+			
+			String sql = prop.getProperty("selectItem");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, itemNo);
+			pstmt.setInt(2, itemNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				item = new Item();
+				
+				item.setItemNo(rs.getInt("ITEM_NO"));
+				item.setItemName(rs.getString("ITEM_NM"));
+				item.setItemInfo(rs.getString("ITEM_INFO"));
+				item.setItemDate(rs.getString("ITEM_DATE"));
+				item.setCategoryCode(rs.getInt("CATEGORY_CD"));
+				item.setItemStatusCode(rs.getInt("ITEM_STATUS_CD"));
+				item.setMemberNo(rs.getInt("MEMBER_NO"));
+				item.setReadCount(rs.getInt("READ_COUNT"));
+				item.setWish(rs.getInt("WISH"));
+
+				item.setItemPrice(rs.getString("ITEM_PRICE"));
+			}
+			
+		} finally {
+			close(rs); 
+			close(pstmt);
+		}
+		
+		return item;
+	}
 }
