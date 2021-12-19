@@ -28,7 +28,6 @@
     background-color: white;
 }
 #img{width: 100px; height: 100px; border-radius: 50%;}
-#userPostImg{width: 50px; height: 50px; border-radius: 50%;}
 
 .container {
     width: 1024px;
@@ -70,7 +69,9 @@
 /* #h2 div{
     display: flex;
 } */
-#save{display: flex;}
+#userNameDiv{text-align: center;}
+
+#save{display: flex; padding-bottom: 30px;}
 .head1-1{
     border: 0.2px solid #ccc;
     background-color: transparent;
@@ -90,6 +91,7 @@ button{
 }
 #userName{
     font-size: 14px;
+    border: 0.3px solid #ccc;
 }
 .userNameBtn{
     font-size: 13px;
@@ -97,17 +99,26 @@ button{
     padding: 0px 15px;
     color: rgb(136, 136, 136);
     margin: 0px;
+    border: 0.3px solid #ccc;
 }
+
+#myShopContent{font-weight: lighter;}
 
 #myShopContent2:hover{
     cursor: pointer;
 }
+
 #myShopContent2{
-    margin-top: 111px;
+    /* margin-top: 111px; */
     border: 1px solid rgb(238, 238, 238);
     color: rgb(136, 136, 136);
     display: flex;
     font-size: 11px;
+    padding: 0px 10px 0px 10px; 
+    font-weight: lighter; 
+    border: 0.3px solid #ccc; 
+    font-size: 12px; 
+    display: inline-block;
 }
 #myShopContentBtn{
     width: 100px;
@@ -121,3 +132,74 @@ button{
     margin: 0;
     padding: 0;
 }
+
+
+/* buyList css */
+.buyTr{margin-bottom: 10px;}
+.buyTd{
+    width: 25%; 
+    height: 250px; 
+    border: 1px solid #ccc; 
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+}
+
+.buyImgDiv{ margin: 10px auto; position: relative; }
+.buyImgSpan{padding: 10px 20px; border-radius: 10px; background-color: rgba(242, 96, 92, 0.5); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+.buyImg{width: 100%; vertical-align: middle; height: 175px;}
+.buyTextDiv{height: 30%;}
+.buyText2{float: left;}
+.buyText3{float: right;}
+/* buyList css */
+
+/* itemList css */
+.itemTr{margin-bottom: 10px;}
+.itemTd{
+    width: 25%; 
+    height: 250px; 
+    border: 1px solid #ccc; 
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+}
+.itemImg{width: 98%; height: 70%;}
+.itemTextDiv{height: 30%;}
+.itemText2{float: left;}
+.itemText3{float: right;}
+/* itemList css */
+
+/* postScript css */
+.userPost{height: 140px;}
+.userPostImgDiv{float: left; height: 100%; margin-right: 30px; margin-left: 20px;}
+.userPostImg{width: 50px; height: 50px; border-radius: 50%;}
+.userPostStarImg{width:15px; height:14px;}
+.userPostDelete{float: right; border: none; width: 150px; height: 30px;}
+.userPostUpdate{float: right; border: none; width: 150px; height: 30px;}
+/* postScript css */
+
+/* sellList css */
+.sellTr{margin-bottom: 10px;}
+.sellTd{width: 25%; height: 250px; border: 1px solid #ccc; padding: 10px 10px 10px 10px; text-align: center;}
+.sellImgDiv{margin: 10px auto; position: relative;}
+.sellImgSpan{
+    padding: 10px 20px; 
+    border-radius: 10px; 
+    background-color: rgba(139, 245, 244, 0.5); 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+.sellImg{width: 100%; vertical-align: middle; height: 175px;}
+.sellTextDiv{height: 30%;}
+.sellText2{float: left;}
+.sellText3{float: right;}
+/* sellList css */
+
+/* wishList css */
+.wishContainer{width: 45%; height: 150px; float: left; border: 1px solid #ccc; margin: 5px 20px;}
+.wishImg{float: left; width: 30%; height: 100%;}
+.wishTextDiv{float: right;  width: 70%;}
+.wishTitle{margin-top:20px;}
+.wishDeleteBtn{border: 0.3px solid #ccc; float: right; margin-right: 20; padding: 0 20 20;}
+.wishText1, .wishText2{margin-top: 20px;}
+/* wishList css */
