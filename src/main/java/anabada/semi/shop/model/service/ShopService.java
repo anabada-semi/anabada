@@ -1,5 +1,9 @@
 package anabada.semi.shop.model.service;
 
-public class ShopService {
+import static anabada.semi.common.JDBCTemplate.*;
 
+import anabada.semi.shop.model.dao.ShopDAO;
+
+public class ShopService {
+	private ShopDAO dao = new ShopDAO();
 }
