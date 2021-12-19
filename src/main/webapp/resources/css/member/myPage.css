@@ -49,9 +49,25 @@ body{
 }
 
 #myPage-info th{
+	width: 100px;
     background-color: #B8CC7A;
     color: white;
 }
 
+.btn-style{
+	margin: 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: #B8CC7A;
+    color: white;
+	width: 200px;
+	height: 40px;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.btn-style:active{
+	background-color: #668053;
+}
 
 

@@ -30,10 +30,10 @@
 						</c:when>
 						<c:otherwise>
 							<div id="login">
-								<a href="${contextPath}/member/login">로그아웃</a>
+								<a href="${contextPath}/member/logout">로그아웃</a>
 							</div>
 							<div id="singup">
-								<a href="${contextPath}/member/signUp">내 정보</a>
+								<a href="${contextPath}/member/myPage">내 정보</a>
 							</div>
 						</c:otherwise>
 					</c:choose>
