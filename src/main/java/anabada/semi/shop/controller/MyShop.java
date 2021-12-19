@@ -13,6 +13,7 @@ public class MyShop extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String method = req.getMethod();
 		
 		String uri = req.getRequestURI();
 		String contextPath = req.getContextPath();
@@ -25,30 +26,55 @@ public class MyShop extends HttpServlet {
 		try {
 			
 			if(command.equals("itemList")) {
-				path = "/WEB-INF/views/myShop/itemList.jsp";
-				req.getRequestDispatcher(path).forward(req, resp);
+				if(method.equals("GET")) {
+					path = "/WEB-INF/views/myShop/itemList.jsp";
+					req.getRequestDispatcher(path).forward(req, resp);
+				}else {
+					
+				}
 				
 			}else if(command.equals("wishList")) {
-				path = "/WEB-INF/views/myShop/wishList.jsp";
-				req.getRequestDispatcher(path).forward(req, resp);
+				if(method.equals("GET")) {
+					path = "/WEB-INF/views/myShop/wishList.jsp";
+					req.getRequestDispatcher(path).forward(req, resp);
+				}else {
+					
+				}
 				
 			}else if(command.equals("postScript")) {
-				path = "/WEB-INF/views/myShop/postScript.jsp";
-				req.getRequestDispatcher(path).forward(req, resp);
+				if(method.equals("GET")) {
+					path = "/WEB-INF/views/myShop/postScript.jsp";
+					req.getRequestDispatcher(path).forward(req, resp);
+				}else {
+					
+				}
 				
 			}else if(command.equals("buyList")) {
-				path = "/WEB-INF/views/myShop/buyList.jsp";
-				req.getRequestDispatcher(path).forward(req, resp);
+				if(method.equals("GET")) {
+					path = "/WEB-INF/views/myShop/buyList.jsp";
+					req.getRequestDispatcher(path).forward(req, resp);
+				}else {
+					
+				}
 				
 			}else if(command.equals("sellList")) {
-				path = "/WEB-INF/views/myShop/sellList.jsp";
-				req.getRequestDispatcher(path).forward(req, resp);
+				if(method.equals("GET")) {
+					path = "/WEB-INF/views/myShop/sellList.jsp";
+					req.getRequestDispatcher(path).forward(req, resp);
+				}else {
+					
+				}
 				
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
 	}
 	
 }

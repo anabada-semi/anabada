@@ -9,8 +9,7 @@
 
 <div class="userPost"><!-- ajax -->
 	<div class="userPostImgDiv">
-		<img class="userPostImg"
-			src="${contextPath}/resources/images/myShop/profile/캐릭터.png">
+		<img class="userPostImg" src="${contextPath}/resources/images/myShop/profile/캐릭터.png">
 	</div>
 	<div class="userPost-area">
 		<div class="userPost-name">user02</div>
@@ -36,8 +35,7 @@
 
 <div class="userPost">
 	<div class="userPostImgDiv">
-		<img class="userPostImg"
-			src="${contextPath}/resources/images/myShop/profile/셔츠.jpg">
+		<img class="userPostImg" src="${contextPath}/resources/images/myShop/profile/셔츠.jpg">
 	</div>
 	<div class="userPost-area">
 		<div class="userPost-name">유저삼</div>
@@ -64,8 +62,7 @@
 
 <div class="userPost">
 	<div class="userPostImgDiv">
-		<img class="userPostImg"
-			src="${contextPath}/resources/images/myShop/profile/셔츠.jpg">
+		<img class="userPostImg" src="${contextPath}/resources/images/myShop/profile/셔츠.jpg">
 	</div>
 	<div class="userPost-area">
 		<div class="userPost-name">만약에나라면</div>
@@ -91,6 +88,15 @@
 	</div>
 </div>
 
+<hr>
+
+<div class="userPost">
+	<div class="userPostImgDiv">
+		<img class="userPostImg" src="${contextPath}/resources/images/myShop/profile/캐릭터.png">
+	</div>
+	<textarea id='userPostTextarea'></textarea>
+	<button id='userPostTextareaBtn'>확인<br>0/120</button>
+</div>
 <hr>
 
 
