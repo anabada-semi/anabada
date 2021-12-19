@@ -1,24 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix= "fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	
+
 		<!-- header include -->
 	<jsp:include page="../header.jsp" />
-	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/member/signUpPage.css">
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/member/myInfoModify.css">
 
     <section id="signUpPage">
-        <div id="top-banner">회원 가입</div>
+    	
+    	<c:set var="addr" value="${fn:split(loginMember.memberAddress, ',,')}"/>
+		<c:set var="ph" value="${fn:split(loginMember.memberPhone, '-')}"/>
+    
+        <div id="top-banner">내 정보 수정</div>
         <div id="signUpPage-info">
             <form action="${contextPath}/member/signUp" method="POST" onsubmit="return validate();">
                 <table>
                     <tr>
                         <th>아이디</th>
-                        <td><input type="text" name="memberId" id="memberId" required></td>
-                        <td><div id="checkId" style="color: #ccc;">중복 불가</div></td>
+                        <td>${sessionScope.loginMember.memberId}</td>
                     </tr>
                     <tr>
                         <th>이름</th>
-                        <td><input type="text" name="memberNm" id="memberNm" required></td>
+                        <td><input type="text" name="memberNm" id="memberNm" value="${sessionScope.loginMember.memberNm}" required></td>
                         <td><div id="checkNm" style="color: #ccc;">한글 2~6</div></td>
                     </tr>
                     <tr>
@@ -33,7 +38,7 @@
                     </tr>
                     <tr>
                         <th>E-MAIL</th>
-                        <td><input type="email" name="memberEmail" id="memberEmail" required></td>
+                        <td><input type="email" name="memberEmail" value="${sessionScope.loginMember.memberEmail}" id="memberEmail" required></td>
                         <td><div id="checkEmail" style="color: #ccc;">중복 불가</div></td>
                     </tr>
                     <tr>
@@ -47,8 +52,8 @@
 									<option>017</option>
 									<option>019</option>
 								</select>
-		                        <input type="number" class="phone-length" name="memberPhone" id="memberPhone2" required>
-		                        <input type="number" class="phone-length" name="memberPhone" id="memberPhone3" required>                        	
+		                        <input type="number" class="phone-length" name="memberPhone" value="${ph[1]}" id="memberPhone2" required>
+		                        <input type="number" class="phone-length" name="memberPhone" value="${ph[2]}" id="memberPhone3" required>                        	
                         	</div>                   
                         </td>
                     </tr>
@@ -60,16 +65,16 @@
 								<input type="button" id="address-search-btn" onclick="sample2_execDaumPostcode()" value="우편번호 찾기">
 							</div>
 							<div id="address-box2">
-		                       	<input type="text" name="address" id="sample2_postcode" placeholder="우편번호" required>		                    	
+		                       	<input type="text" name="address" value="${addr[0]}" id="sample2_postcode" placeholder="우편번호" required>		                    	
 	                    	</div>
-							<input type="text" name="address" id="sample2_address" placeholder="주소" required><br>
-							<input type="text" name="address" id="sample2_detailAddress" placeholder="상세주소" required>
-							<input type="text" name="address" id="sample2_extraAddress" placeholder="참고항목">
+							<input type="text" name="address" value="${addr[1]}" id="sample2_address" placeholder="주소" required><br>
+							<input type="text" name="address" value="${addr[2]}" id="sample2_detailAddress" placeholder="상세주소" required>
+							<input type="text" name="address" value="${addr[3]}" id="sample2_extraAddress" placeholder="참고항목">
 	                    </div>
 	                    </td> 
                     </tr>
                     <tr>
-                        <td colspan="3"><button type="submit" id="signUp-Btn" class="btn-style">회원 가입</button></td>
+                        <td colspan="3"><button type="submit" id="signUp-Btn" class="btn-style">내 정보 수정</button></td>
                     </tr>
                 </table>
             </form>

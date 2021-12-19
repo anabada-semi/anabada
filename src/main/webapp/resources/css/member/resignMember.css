@@ -15,7 +15,7 @@ body{
 }
 
 
-#myPage{
+#signUpPage{
     font-family: 'GmarketSansMedium';
     text-align: center;
 }
@@ -30,44 +30,41 @@ body{
     border-bottom: 1px solid #ccc;
 }
 
-#myPage-info{
+#signUpPage-info{
     display: inline-block;
     margin: 120px;
 }
 
-#myPage-info table{
-    width: 750px;
+#signUpPage-info table{
+    width: 450px;
     font-size: 18px;
     text-align: left;
     border-collapse: collapse;
 }
 
-#myPage-info th, #myPage-info td{
+#signUpPage-info th, #signUpPage-info td{
     height: 70px;
-    border: 1px solid rgb(189, 189, 189);
-    padding-left: 10px;
-}
-
-#myPage-info th{
-	width: 100px;
-    background-color: #B8CC7A;
-    color: white;
+    padding-left: 20px;
 }
 
 .btn-style{
-	margin: 10px;
-	border: none;
-	border-radius: 5px;
-	background-color: #B8CC7A;
-    color: white;
-	width: 200px;
-	height: 40px;
-	font-size: 18px;
-	cursor: pointer;
+    color : white;
+    background-color: #B8cc7a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.btn-style:active{
-	background-color: #668053;
+.dup-Btn{
+    height: 30px;
+}
+
+#signUp-Btn{
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    
 }
 
 

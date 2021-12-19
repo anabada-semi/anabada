@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*:not(body, html){
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    font-family: 'GmarketSansMedium';
+}
+
+section{
+    width: 1024px;
+    margin: 0 auto;
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+
+
+#greet-Box{
+    font-weight: bold;
+    font-size: 50px;
+    margin: 10px;
+}
+
+.float-Box{
+    float: left;
+    line-height: 50px;
+}
+
+#greetPage img{
+    width: 400px;
+    animation: rotate_image  10s linear infinite;
+    transform-origin: 50% 50%;
+}
+
+#greetPage button{
+    margin-top: 100px;
+    float: right;
+    background-color: #689BA6;
+    color: white;
+    font-family: 'GmarketSansMedium';
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 150px;
+    height: 45px;
+    cursor: pointer;
+}
+
+#greetPage button:active{
+    background-color: #34666d;
+}
+
+@keyframes rotate_image {
+    100% {transform: rotate(360deg);}
+}

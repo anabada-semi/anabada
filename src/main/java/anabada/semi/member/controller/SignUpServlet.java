@@ -32,18 +32,14 @@ public class SignUpServlet extends HttpServlet{
 		String memberPw = req.getParameter("memberPw");
 		String memberNm = req.getParameter("memberNm");
 		String memberEmail = req.getParameter("memberEmail");
+
 		String[] phone = req.getParameterValues("memberPhone");
-		String[] address = req.getParameterValues("address");
 		String memberPhone = String.join("-", phone);
 
-		String memberAddress = null;
-		
-		if(!address[0].equals("")) {
-			memberAddress = String.join(",,", address);
-			memberAddress = replaceParameter(memberAddress);
-		}
-		
-		
+		String[] address = req.getParameterValues("address");
+		String memberAddress = String.join(",,", address);
+		memberAddress = replaceParameter(memberAddress);
+
 		Member member = new Member(memberId, memberPw, memberNm, memberEmail, memberPhone, memberAddress);
 
 		try {
@@ -52,16 +48,11 @@ public class SignUpServlet extends HttpServlet{
 			
 			int result = service.signUp(member);
 			
-			String message = null;
+			req.setAttribute("memberNm", member.getMemberNm());
 			
-			if(result > 0 ) {
-				message = "회원 가입 성공!";
-			}
-			
-			HttpSession session = req.getSession();
-			session.setAttribute("message", message);
-			
-			resp.sendRedirect(req.getContextPath());
+			String path = "/WEB-INF/views/member/greetPage.jsp";
+			req.getRequestDispatcher(path).forward(req, resp);
+
 			
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -71,6 +62,7 @@ public class SignUpServlet extends HttpServlet{
 
 	}
 	
+	// 크로스 사이트 스크립트 방지
 	private String replaceParameter(String param) {
 
 		String result = param;
