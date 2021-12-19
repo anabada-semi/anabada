@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	
 		<!-- header include -->
 	<jsp:include page="../header.jsp" />
@@ -12,7 +13,7 @@
                 <div id="login-area2">
                     <input type="text" name="memberId" id="memberId" placeholder="아이디(ID)" required> <br>
                     <input type="password" name="memberPw" id="memberPw" required> <br>
-                    <a href="#" id="searchId">아이디</a>|<a href="#" id="searchPw">비밀번호 찾기</a>
+                    <a href="${contextPath}/member/searchIdPw" id="search-IdPw">아이디|비밀번호 찾기</a>
                 </div>
                 <div class="login-area3">
                     <button type="submit" id="login">로그인</button> <br>
@@ -23,6 +24,6 @@
                 </div>
         </div>
     </section>
-    
+
     <!-- footer include -->
 	<jsp:include page="../footer.jsp" />

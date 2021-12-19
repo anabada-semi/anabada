@@ -47,7 +47,7 @@ public class MemberDAO {
 		 * @param memberId
 		 * @param memberPw
 		 * @param conn
-		 * @return member
+		 * @return loginMember
 		 * @throws Exception
 		 */
 		public Member login(String memberId, String memberPw, Connection conn) throws Exception{
@@ -67,8 +67,14 @@ public class MemberDAO {
 				
 					loginMember = new Member();
 					
-					loginMember.setMemberId(rs.getString("MEMBER_ID"));
-					loginMember.setMemberPw(rs.getString("MEMBER_PW"));
+					loginMember.setMemberNo(rs.getInt("MEMBER_NO"));
+					loginMember.setMemberId(memberId);
+					loginMember.setMemberPw(memberPw);
+					loginMember.setMemberNm(rs.getString("MEMBER_NM"));
+					loginMember.setMemberEmail(rs.getString("MEMBER_EMAIL"));
+					loginMember.setMemberPhone(rs.getString("MEMBER_PHONE"));
+					loginMember.setMemberAddress(rs.getString("ADDRESS"));
+					loginMember.setEnrollDate(rs.getString("ENROLL_DATE"));
 					
 				}
 				
@@ -78,6 +84,38 @@ public class MemberDAO {
 			}
 			
 			return loginMember;
+		}
+
+
+		/** 회원가입
+		 * @param member
+		 * @param conn
+		 * @return result(1성공)
+		 * @throws Exception
+		 */
+		public int signUp(Member member, Connection conn) throws Exception{
+			
+			int result = 0;
+			
+			try {
+				String sql = prop.getProperty("signUp");
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, member.getMemberId());
+				pstmt.setString(2, member.getMemberPw());
+				pstmt.setString(3, member.getMemberNm());
+				pstmt.setString(4, member.getMemberEmail());
+				pstmt.setString(5, member.getMemberPhone());
+				pstmt.setString(6, member.getMemberAddress());
+				
+				result = pstmt.executeUpdate();
+				
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
 		}
 	
 }

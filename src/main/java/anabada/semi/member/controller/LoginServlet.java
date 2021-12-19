@@ -2,8 +2,10 @@ package anabada.semi.member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,9 +27,7 @@ public class LoginServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		req.setCharacterEncoding("UTF-8");
-		
+
 		String memberId = req.getParameter("memberId");
 		String memberPw = req.getParameter("memberPw");
 		
@@ -37,26 +37,32 @@ public class LoginServlet extends HttpServlet{
 			
 			Member loginMember = service.login(memberId, memberPw);
 			
-			System.out.println(loginMember);
-			
 			HttpSession session = req.getSession();
-			
+
 			if(loginMember != null) {
-				System.out.println("로그인 성공");
-				session.setAttribute("loginMember", loginMember);
-				session.setMaxInactiveInterval(3600);
-				
-				resp.sendRedirect(req.getContextPath());
+					
+					session.setAttribute("loginMember", loginMember);
+
+					session.setMaxInactiveInterval(600);
+
 			}else {
-				System.out.println("없는 회원");
+				
+				session.setAttribute("message", "아이디 또는 비밀번호가 틀렸습니다!");
+				
 			}
 			
-		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(loginMember);
+			
+			resp.sendRedirect(req.getContextPath());
+
+		}catch(Exception e) {
+			
 		}
-		
-		
 		
 	}
 	
 }
+		
+		
+	
+
