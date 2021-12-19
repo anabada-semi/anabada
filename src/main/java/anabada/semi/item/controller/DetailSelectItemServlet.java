@@ -23,16 +23,34 @@ public class DetailSelectItemServlet extends HttpServlet{
 		
 		try {
 			
+			// 카테고리 옵션 목록
 			ItemSelectService service = new ItemSelectService();
 			
-			String path = "/WEB-INF/views/detailSelectItem.jsp";
-			req.getRequestDispatcher(path).forward(req, resp);
-			
+			// 카테고리 목록 불러오기
 			List<Item> categoryList = service.selectCategory();
 			
 //			System.out.println("categoryList : " + categoryList);
+//			System.out.println("categoryList : " + categoryList);
+			
+			req.setAttribute("categoryList", categoryList);
+			System.out.println("item 전");
+			int itemNo = 3;
+			
+			// 선택한 아이템 조회
+			Item item = service.selectItem(itemNo);
+			System.out.println("item : " + item);
+//			System.out.println("item 후");
+//			
+			req.setAttribute("item", item);
 			
 			
+			
+			
+			
+			
+			
+			String path = "/WEB-INF/views/detailSelectItem.jsp";
+			req.getRequestDispatcher(path).forward(req, resp);
 			
 			
 		} catch (Exception e) {

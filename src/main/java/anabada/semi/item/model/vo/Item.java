@@ -4,16 +4,20 @@ public class Item {
 
 	private int itemNo;
 	private String itemName;
-	private int itemPrice;
+	private String itemPrice;
 	private String itemImg;
 	private String itemInfo;
 	private String itemDate;
 	private int categoryCode;
 	private int itemStatusCode;
 	private int memberNo;
+	private int readCount;
 	
 //	CATEGORY 테이블의 CATEGORY_NM 추가
 	private String categoryName;
+	
+//	WISH 테이블의 WISH 추가
+	private int wish;
 	
 //	기본 생성자
 	public Item() {	}
@@ -30,10 +34,10 @@ public class Item {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public int getItemPrice() {
+	public String getItemPrice() {
 		return itemPrice;
 	}
-	public void setItemPrice(int itemPrice) {
+	public void setItemPrice(String itemPrice) {
 		this.itemPrice = itemPrice;
 	}
 	public String getItemImg() {
@@ -72,7 +76,13 @@ public class Item {
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
-	
+	public int getReadCount() {
+		return readCount;
+	}
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
+
 	// CATEGORY_NM 추가
 	public String getCategoryName() {
 		return categoryName;
@@ -81,13 +91,22 @@ public class Item {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+	
+	// wish 추가
+	public int getWish() {
+		return wish;
+	}
+	
+	public void setWish(int wish) {
+		this.wish = wish;
+	}
 
 	@Override
 	public String toString() {
 		return "Item [itemNo=" + itemNo + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemImg=" + itemImg
 				+ ", itemInfo=" + itemInfo + ", itemDate=" + itemDate + ", categoryCode=" + categoryCode
-				+ ", itemStatusCode=" + itemStatusCode + ", memberNo=" + memberNo + ", categoryName=" + categoryName
-				+ "]";
+				+ ", itemStatusCode=" + itemStatusCode + ", memberNo=" + memberNo + ", readCount=" + readCount
+				+ ", categoryName=" + categoryName + ", wish=" + wish + "]";
 	}
 
 	

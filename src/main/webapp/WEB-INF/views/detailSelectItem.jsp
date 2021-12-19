@@ -12,49 +12,27 @@
                
                	<label>카테고리</label>
                 <select class="item-category-list">
-                	<c:forEach items="${category}" var="C">
+                	<c:forEach items="${categoryList}" var="c">
                 		<option value="${c.categoryCode}">${c.categoryName}</option>
                 	</c:forEach>	
                 </select>
-                
-                <!-- <select>
-                    <option value ="">여성의류</option>
-                    <option value ="">남성의류</option>
-                    <option value ="">신발</option>
-                    <option value ="">가방</option>
-                    <option value ="">시계/쥬얼리</option>
-                    <option value ="">패션 액세서리</option>
-                    <option value ="">디지털/가전</option>
-                    <option value ="">스포츠/레저</option>
-                    <option value ="">차량/오토바이</option>
-                    <option value ="">스타굿즈</option>
-                    <option value ="">키덜트</option>
-                    <option value ="">예술/희귀/수집품</option>
-                    <option value ="">음반/악기</option>
-                    <option value ="">도서/티켓/문구</option>
-                    <option value ="">뷰티/미용</option>
-                    <option value ="">가구/인테리어</option>
-                    <option value ="">생활/가공식품</option>
-                    <option value ="">유아동/출산</option>
-                    <option value ="">반려동물용품</option>
-                    <option value ="">기타</option>
-                </select> -->
                 
             </div>
             <div class="main-top">
                 <div class="product-img">
                     <img src="https://via.placeholder.com/450">
+                    <!-- <img src="https://via.placeholder.com/450"> -->
                 </div>
                 <div class="product-intro">
                     <div class="product-intro-top">
-                        <h3>후드티</h3>
-                        <h1>30,000</h1>
+                        <h3>${item.itemName}</h3>
+                        <h1>${item.itemPrice}</h1>
                     </div>
                     <div class="product-intro-bottom">
                         <div class="product-inform">
-                            <span><img src="${contextPath}/resources/images/itemIcon/heart.png"> 100</span>
-                            <span><img src="${contextPath}/resources/images/itemIcon/viewer.png"> 12</span>
-                            <span><img src="${contextPath}/resources/images/itemIcon/clock.png"> 1시간 전</span>
+                            <span><img src="${contextPath}/resources/images/itemIcon/heart.png"> ${item.wish}</span>
+                            <span><img src="${contextPath}/resources/images/itemIcon/viewer.png"> ${item.readCount}</span>
+                            <span><img src="${contextPath}/resources/images/itemIcon/clock.png"> ${item.itemDate}</span>
                         </div>
                         <div class="product-btn">
                             <button>찜</button>
@@ -72,15 +50,14 @@
                         <div class="detail-top">
                             <h3>상품 정보</h3>
                             <span>
-                                생명을 불어 넣는 것은 따뜻한 봄바람이다 풀밭에 속잎나고 가지에 싹이 트고 꽃 피고 새 우는 봄날의 천지는 얼마나 기쁘며 얼마나 아름다우냐? 이것을 얼음
-                                속에서 불러 내는 것이 따뜻한 봄바람이다 인생에 따뜻한 봄바람을
+                                ${item.itemInfo}
                             </span>
                         </div>
     
                         <div class="detail-bottom">
     
                             <h4><img src="${contextPath}/resources/images/itemIcon/category.png"> 카테고리</h4>
-                            <span>의류</span>
+                            <span>dfs</span>
                         </div>
                     </div>
                     <div class="product-question">

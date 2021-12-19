@@ -7,5 +7,16 @@
 		SELECT * FROM CATEGORY
 		ORDER BY CATEGORY_CD
 	</entry>
+
+	<!-- 전체 게시글 수 조회 -->
+	<entry key="selectItem">
+		SELECT  ITEM_NO, ITEM_NM, TO_CHAR(ITEM_PRICE, 'FM9,999,999') ITEM_PRICE, 
+        TO_CHAR(ITEM_INFO) ITEM_INFO, TO_CHAR(ITEM_DATE) ITEM_DATE, 
+        b.CATEGORY_nm, ITEM_STATUS_CD, MEMBER_NO, READ_COUNT,
+        (SELECT COUNT(*) FROM WISH WHERE ITEM_NO = ) WISH
+		FROM ITEM
+		join CATEGORY b using(CATEGORY_CD)
+		WHERE ITEM_NO = 
+	</entry>
 	
 </properties>
