@@ -21,18 +21,18 @@
             <div class="main-top">
                 <div class="product-img">
                     <img src="https://via.placeholder.com/450">
-                    <!-- <img src="https://via.placeholder.com/450"> -->
+                    <img src="${contextPath}${itemImg.imgPath}${itemImg.img_name}">
                 </div>
                 <div class="product-intro">
                     <div class="product-intro-top">
                         <h3>${item.itemName}</h3>
-                        <h1>${item.itemPrice}</h1>
+                        <h1>${item.itemPrice}원</h1>
                     </div>
                     <div class="product-intro-bottom">
                         <div class="product-inform">
                             <span><img src="${contextPath}/resources/images/itemIcon/heart.png"> ${item.wish}</span>
                             <span><img src="${contextPath}/resources/images/itemIcon/viewer.png"> ${item.readCount}</span>
-                            <span><img src="${contextPath}/resources/images/itemIcon/clock.png"> ${item.itemDate}</span>
+                            <span><img src="${contextPath}/resources/images/itemIcon/clock.png"> ${date}</span>
                         </div>
                         <div class="product-btn">
                             <button>찜</button>
@@ -57,7 +57,7 @@
                         <div class="detail-bottom">
     
                             <h4><img src="${contextPath}/resources/images/itemIcon/category.png"> 카테고리</h4>
-                            <span>dfs</span>
+                            <span>카테고리 이름</span>
                         </div>
                     </div>
                     <div class="product-question">

@@ -1,13 +1,14 @@
 package anabada.semi.item.model.vo;
 
+import java.sql.Timestamp;
+
 public class Item {
 
 	private int itemNo;
 	private String itemName;
 	private String itemPrice;
-	private String itemImg;
 	private String itemInfo;
-	private String itemDate;
+	private Timestamp itemDate;
 	private int categoryCode;
 	private int itemStatusCode;
 	private int memberNo;
@@ -40,23 +41,17 @@ public class Item {
 	public void setItemPrice(String itemPrice) {
 		this.itemPrice = itemPrice;
 	}
-	public String getItemImg() {
-		return itemImg;
-	}
-	public void setItemImg(String itemImg) {
-		this.itemImg = itemImg;
-	}
 	public String getItemInfo() {
 		return itemInfo;
 	}
 	public void setItemInfo(String itemInfo) {
 		this.itemInfo = itemInfo;
 	}
-	public String getItemDate() {
+	public Timestamp getItemDate() {
 		return itemDate;
 	}
-	public void setItemDate(String itemDate) {
-		this.itemDate = itemDate;
+	public void setItemDate(Timestamp timestamp) {
+		this.itemDate = timestamp;
 	}
 	public int getCategoryCode() {
 		return categoryCode;
@@ -103,11 +98,12 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item [itemNo=" + itemNo + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemImg=" + itemImg
-				+ ", itemInfo=" + itemInfo + ", itemDate=" + itemDate + ", categoryCode=" + categoryCode
-				+ ", itemStatusCode=" + itemStatusCode + ", memberNo=" + memberNo + ", readCount=" + readCount
-				+ ", categoryName=" + categoryName + ", wish=" + wish + "]";
+		return "Item [itemNo=" + itemNo + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemInfo="
+				+ itemInfo + ", itemDate=" + itemDate + ", categoryCode=" + categoryCode + ", itemStatusCode="
+				+ itemStatusCode + ", memberNo=" + memberNo + ", readCount=" + readCount + ", categoryName="
+				+ categoryName + ", wish=" + wish + "]";
 	}
+
 
 	
 }
