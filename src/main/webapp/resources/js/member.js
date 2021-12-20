@@ -1,11 +1,11 @@
 // 각 입력 값이 유효성 검사를 진행했는지 기록할 객체
 const signUpCheckObj = {
-    "id" : false,
-    "name" : false,
-    "email" : false,
+    "memberId" : false,
+    "memberNm" : false,
+    "memberEmail" : false,
     "pwd1" : false,
     "pwd2" : false,
-    "phone3" : false
+    "memberPhone3" : false
 
 }
 
@@ -18,12 +18,12 @@ function validate(){
             let message;
             
             switch(key){
-            case "id" : message = "아이디가 유효하지 않습니다."; break;
-            case "name" : message = "이름이 유효하지 않습니다."; break;
-            case "email" : message = "이메일이 유효하지 않습니다."; break;
+            case "memberId" : message = "아이디가 유효하지 않습니다."; break;
+            case "memberNm" : message = "이름이 유효하지 않습니다."; break;
+            case "memberEmail" : message = "이메일이 유효하지 않습니다."; break;
             case "pwd1" : message = "비밀번호가 유효하지 않습니다."; break;
             case "pwd2" : message = "비밀번호가 일치하지 않습니다."; break;
-            case "phone3" : message = "전화번호가 유효하지 않습니다."; break;
+            case "memberPhone3" : message = "전화번호가 유효하지 않습니다."; break;
             }
 
             alert(message);
@@ -53,7 +53,7 @@ document.getElementById("memberId").addEventListener("input", function(e){
     }else if( regExp.test(inputId)){
 
         $.ajax({
-            url : "/member/idDupCheck",
+            url : "idDupCheck",
             data : {"inputId" : inputId},
             type : "GET",                
             success : function(result){
@@ -104,21 +104,21 @@ $("#memberEmail").on("input", function(){
 
     if(inputEmail.length == 0){
         $("#checkEmail").text("");
-        signUpCheckObj.email = false;
+        signUpCheckObj.memberEmail = false;
     }else if(regExp.test(inputEmail)){
 
         $.ajax({
-            url : "/member/emailDupCheck",
+            url : "emailDupCheck",
             type : "GET",
             data : {"inputEmail" : inputEmail},
             success : function(result){
                 
                 if(result == 0){
                     $("#checkEmail").text("사용 가능").css("color", "green");
-                    signUpCheckObj.email = true;
+                    signUpCheckObj.memberEmail = true;
                 }else{
                     $("#checkEmail").text("중복").css("color", "red");
-                    signUpCheckObj.email = false;
+                    signUpCheckObj.memberEmail = false;
                 }
                 
             },
@@ -141,7 +141,7 @@ $("#memberEmail").on("input", function(){
 
     }else{
         $("#checkEmail").text("");
-        signUpCheckObj.email = false;
+        signUpCheckObj.memberEmail = false;
     }
 })
 
@@ -155,13 +155,13 @@ $("#memberNm").on("input", function(){
 
     if(inputName.length == 0){
         $("#checkNm").text("");
-        signUpCheckObj.name = false;
+        signUpCheckObj.memberNm = false;
     }else if(regExp.test(inputName)){
 		$("#checkNm").text("");
-        signUpCheckObj.name = true;
+        signUpCheckObj.memberNm = true;
     }else{
         $("#checkNm").text("사용 불가").css("color", "red");
-        signUpCheckObj.name = false;
+        signUpCheckObj.memberNm = false;
     }
 
 })
@@ -231,11 +231,11 @@ $(".phone-length").on("input", function(){
     const regExp3 = /^\d{4}$/;
 
     if(inputPhone2.length == 0 && inputPhone3.length == 0 ){
-        signUpCheckObj.phone3 = false;
+        signUpCheckObj.memberPhone3 = false;
     }else if(regExp2.test(inputPhone2) && regExp3.test(inputPhone3)){
-        signUpCheckObj.phone3 = true;
+        signUpCheckObj.memberPhone3 = true;
     }else{
-        signUpCheckObj.phone3 = false;
+        signUpCheckObj.memberPhone3 = false;
     }
 
 })
