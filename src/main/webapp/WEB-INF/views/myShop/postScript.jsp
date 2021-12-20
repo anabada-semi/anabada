@@ -35,7 +35,7 @@
 
 <div class="userPost">
 	<div class="userPostImgDiv">
-		<img class="userPostImg" src="${contextPath}/resources/images/myShop/profile/셔츠.jpg">
+		<img class="userPostImg" src="${contextPath}/resources/images/myShop/profile/캐릭터.png">
 	</div>
 	<div class="userPost-area">
 		<div class="userPost-name">유저삼</div>
@@ -62,7 +62,7 @@
 
 <div class="userPost">
 	<div class="userPostImgDiv">
-		<img class="userPostImg" src="${contextPath}/resources/images/myShop/profile/셔츠.jpg">
+		<img class="userPostImg" src="${contextPath}/resources/images/myShop/profile/캐릭터.png">
 	</div>
 	<div class="userPost-area">
 		<div class="userPost-name">만약에나라면</div>

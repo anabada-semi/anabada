@@ -120,48 +120,7 @@ function selectReplyList() {
 
 }
 
-$(function() {
-	$(".imgProfile").on("click", function() {
-		var index = $(".imgProfile").index(this);
-			// 현재 클릭된 요소가 .boardImg 중 몇 번째 인덱스인지 반환
 
-		$("[type=file]").eq(index).click();
-		// 타입이 file인 요소 중 몇번째 인덱스 요소를 선택하여 클릭해라
-	});
-
-});
-
-// 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
-function loadImg(value, num) {
-	// 매개변수 value == 클릭된 input 요소
-
-
-	// 파일이 선택된 경우 true
-	if (value.files && value.files[0]) {
-
-		var reader = new FileReader();
-		// 자바스크립트 FileReader
-		// 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
-
-		// 선택된 파일 읽기 시작
-		reader.readAsDataURL(value.files[0]);
-		// FileReader.readAsDataURL()
-		// 지정된 내용을 읽기 시작합니다. Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.
-
-		// FileReader.onload
-		// load 이벤트의 핸들러. 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.
-
-		// 다 읽은 경우
-		reader.onload = function(e) {
-			//console.log(e.target.result);
-			// e.target.result
-			// -> 파일 읽기 동작을 성공한 객체에(fileTag) 올라간 결과(이미지 또는 파일)
-
-			$(".imgProfile").eq(num).attr("src", e.target.result);
-		}
-
-	}
-}
 
 const textCountLimit = 120;
 
@@ -171,7 +130,7 @@ $(document).on("click",".shopNameBtn", function(){
     $("#save").append("<input type='text' id='userName'>");
     $("#save").append("<button class='userNameBtn'>확인</button>");
 });
-
+const nowName = $("#userName").val();
 /* 상점명 변경 확인 버튼 */
 $(document).on("click",".userNameBtn", function(){
     const inputName = $("#userName");
@@ -179,11 +138,31 @@ $(document).on("click",".userNameBtn", function(){
     const reg = /^[\w\dㄱ-힣][\w\dㄱ-힣-_]{3,12}$/;
 
     if(reg.test(inputName.val())){
-        $("#userName123").text("");
-        $("#userName123").text(inputName.val());
-        $("#save").empty();
-        $("#save").append("<span id='userNameCng'>" + inputName.val() + "</span>");
-        $("#save").append("<button class='shopNameBtn'>상점명 수정</button>");
+
+        $.ajax({
+            url:"myShop/shopNameCng",
+            data: { "memberNo": loginMemberNo, "inputName": inputName.val() },
+            success: function(r){
+                if(r > 0){
+                    $("#userName123").text("");
+                    $("#userName123").text(inputName.val());
+                    $("#save").empty();
+                    $("#save").append("<span id='userNameCng'>" + inputName.val() + "</span>");
+                    $("#save").append("<button class='shopNameBtn'>상점명 수정</button>");
+                }else{
+                    alert("상점명 변경 실패");
+                    $("#userName123").text("");
+                    $("#userName123").text(nowName);
+                    $("#save").empty();
+                    $("#save").append("<span id='userNameCng'>" + nowName + "</span>");
+                    $("#save").append("<button class='shopNameBtn'>상점명 수정</button>");
+                }
+            },
+            error:function(req, status, er){
+                console.log(req.responseText);
+            }
+        });
+
     }else{
         alert("4글자 이상");
     }
@@ -206,15 +185,33 @@ $(document).on("click", "#myShopContent2", function(){
 
 });
 
+const nowContent = $("#myShopContent").val();
 /* 소개글 변경 후 확인 버튼 */
 $(document).on("click", "#myShopContentBtn", function(){
     const contentTextarea = $("#contentTextarea");
-
     const parent = $("#myShopContent1");
-    parent.empty();
-    parent.append('<div id="myShopContent2">소개글 수정</div>');
 
-    $("#myShopContent").text(contentTextarea.val() );
+    $.ajax({
+        url:"myShop/shopContentCng",
+        data: { "memberNo": loginMemberNo, "inputContent": contentTextarea.val() },
+        success: function(r){
+            if(r > 0){
+                parent.empty();
+                parent.append('<div id="myShopContent2">소개글 수정</div>');
+                $("#myShopContent").text(contentTextarea.val() );
+            }else{
+                parent.empty();
+                parent.append('<div id="myShopContent2">소개글 수정</div>');
+
+                $("#myShopContent").text(nowContent);
+            }
+        },
+        error:function(req, status, er){
+            console.log(req.responseText);
+        }
+    });
+
+    
 });
 
 /* 소개글 최대 120글자 */
@@ -245,7 +242,7 @@ $(document).on("input", "#userPostTextarea", function(){
 $(document).on("click", "#userPostTextareaBtn", function(){
     const locationPost = $(".userPost").eq($(".userPost").length - 2).next();
 
-    locationPost.after('<div class="userPost"><div class="userPostImgDiv"><img class="userPostImg" src="/anabada/resources/images/myShop/profile/셔츠.jpg">');
+    locationPost.after('<div class="userPost"><div class="userPostImgDiv"><img class="userPostImg" src="/anabada/resources/images/myShop/profile/캐릭터.png">');
 	$(".userPost").eq($(".userPost").length - 2).append('<div class="userPost-area"><div class="userPost-name">유저사<div class="userPost-star">별사진');
 	$(".userPost-star").eq($(".userPost-star").length - 1).after('<div class="userPost-shop">이동<div class="userPost-content">' + $("#userPostTextarea").val() + '<div class="userPost-report">신고하기')
 	$(".userPost").eq($(".userPost").length - 2).after("<hr>");

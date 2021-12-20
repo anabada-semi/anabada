@@ -1,6 +1,7 @@
 package anabada.semi.shop.controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 
 import anabada.semi.common.MyRenamePolicy;
+import anabada.semi.common.XSS;
+import anabada.semi.shop.model.service.ShopService;
 
 @WebServlet("/myShop/*")
 public class MyShopController extends HttpServlet {
@@ -27,6 +30,8 @@ public class MyShopController extends HttpServlet {
 //		System.out.println(contextPath);
 		
 		String path = null;
+		
+		ShopService service = new ShopService();
 		
 		try {
 			
@@ -85,17 +90,33 @@ public class MyShopController extends HttpServlet {
 					// 실제 경로
 					String realPath = root + filePath;
 					
-					MultipartRequest mReq 
-					= new MultipartRequest(req, realPath, maxSize, "UTF-8", new MyRenamePolicy());     
+					MultipartRequest mReq = new MultipartRequest(req, realPath, maxSize, "UTF-8", new MyRenamePolicy());     
 					
-					String boardTitle = mReq.getParameter("boardTitle");
-					String boardContent = mReq.getParameter("boardContent");
-					int categoryCode = Integer.parseInt( mReq.getParameter("categoryCode") );
+					
+					Enumeration<String> files = mReq.getFileNames();
 					
 					path = "/WEB-INF/views/myShop/myShop.jsp";
 					req.getRequestDispatcher(path).forward(req, resp);
 				}else {
 					
+				}
+			}else if(command.equals("shopNameCng")) {
+				if(method.equals("GET")) {
+					String inputName = new XSS().replaceParameter(req.getParameter("inputName"));
+					int memberNo = Integer.parseInt( req.getParameter("memberNo") );
+					
+					resp.getWriter().print(service.updateShopName(inputName, memberNo));
+				}
+			}else if(command.equals("shopContentCng")) {
+				if(method.equals("GET")) {
+					String inputContent = new XSS().replaceParameter(req.getParameter("inputContent"));
+					int memberNo = Integer.parseInt( req.getParameter("memberNo") );
+					
+					resp.getWriter().print(service.updateShopContent(inputContent, memberNo));
+				}
+			}else if(command.equals("myShop")) {
+				if(method.equals("GET")) {
+					req.getRequestDispatcher("/WEB-INF/views/myShop/myShop.jsp").forward(req, resp);
 				}
 			}
 			
