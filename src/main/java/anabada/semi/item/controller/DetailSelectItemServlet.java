@@ -15,6 +15,7 @@ import anabada.semi.item.model.service.ItemSelectService;
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.item.model.vo.ItemImg;
 import anabada.semi.item.model.vo.Time;
+import edu.kh.semi.board.model.vo.Reply;
 
 @WebServlet("/detail")
 public class DetailSelectItemServlet extends HttpServlet{
@@ -36,7 +37,7 @@ public class DetailSelectItemServlet extends HttpServlet{
 			
 			req.setAttribute("categoryList", categoryList);
 			System.out.println("item 전");
-			int itemNo = 21;
+			int itemNo = 3;
 			
 			// 선택한 아이템 조회
 			Item item = service.selectItem(itemNo);
@@ -52,9 +53,6 @@ public class DetailSelectItemServlet extends HttpServlet{
 //			System.out.println("ItemImg: " + ItemImg);
 			
 			req.setAttribute("itemImg", itemImg);
-			
-			
-			
 			
 			String path = "/WEB-INF/views/detailSelectItem.jsp";
 			req.getRequestDispatcher(path).forward(req, resp);
