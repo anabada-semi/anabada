@@ -12,9 +12,8 @@
 			<div class="head1">
 				<div id="h1">
 					<div>
-						<form style="display: inline-block;" action="insert" method="post" enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">
-							<img class="imgProfile" src="${contextPath}/resources/images/myShop/profile/기본 프로필.png">
-						</form>
+						<img class="imgProfile" src="${contextPath}/resources/images/myShop/profile/기본 프로필.png">
+
 						<div id="userNameDiv">
 							<span id="userName123">${locationShop.shopName}</span>
 						</div>
@@ -41,7 +40,7 @@
 			<div class="head2">
 				<div id="h2">
 					<div id="save">
-						<span id="userNameCng">userName</span>
+						<span id="userNameCng">${locationShop.shopName}</span>
 						<button class="shopNameBtn">상점명 수정</button>
 					</div>
 
@@ -96,6 +95,7 @@
 
 <script>
 	const contextPath = "${contextPath}";
+	const loginMemberNo = "${loginMember.memberNo}";
 	const locationShop = "${locationShop}";
 	
 
