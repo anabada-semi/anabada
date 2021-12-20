@@ -59,11 +59,23 @@
 								<p id="sale">판매하기</p>
 								<!-- &nbsp;판매하기 -->
 							</div>
-							<div class="shop" onclick="location.href='#'">
-								<img src="${contextPath}/resources/images/header+footer/내상점.png">
-								<p id="shop">내상점</p>
-								<!-- &nbsp;내상점 -->
-							</div>
+							<c:choose>
+								<c:when test="${ empty sessionScope.loginMember}">
+									<div class="shop" onclick="location.href='${contextPath}/member/login';">
+										<img src="${contextPath}/resources/images/header+footer/내상점.png">
+										<p id="shop">내상점</p>
+										<!-- &nbsp;내상점 -->
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="shop" onclick="location.href='${contextPath}/myShop/myShop';">
+										<img src="${contextPath}/resources/images/header+footer/내상점.png">
+										<p id="shop">내상점</p>
+										<!-- &nbsp;내상점 -->
+									</div>
+								</c:otherwise>
+							</c:choose>
+							
 							<div class="notice" onclick="location.href='#'">
 								<img src="${contextPath}/resources/images/header+footer/알림.png">
 								<p id="notice">알림</p>
