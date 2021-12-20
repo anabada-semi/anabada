@@ -53,4 +53,34 @@ public class MemberService {
 		
 	}
 
+	
+
+	/** 회원 탈퇴
+	 * @param memberPw
+	 * @param memberNo
+	 * @return result(1성공)
+	 * @throws Exception
+	 */
+	public int resignMember(String memberPw, int memberNo) throws Exception{
+		
+		int result = 0;
+		
+		Connection conn = getConnection();
+		
+		int result2 = dao.passwordChk(memberPw, conn);
+		
+		if(result2 > 0) {
+			
+			result = dao.resignMember(memberNo, conn);
+			
+			if(result > 0) commit(conn);
+			else		   rollback(conn);
+		}
+
+		close(conn);
+		
+		return result;
+		
+	}
+
 }

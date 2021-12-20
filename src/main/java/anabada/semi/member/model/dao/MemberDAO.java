@@ -117,5 +117,68 @@ public class MemberDAO {
 			
 			return result;
 		}
+
+
+		
+		/** 비밀번호 확인
+		 * @param memberPw
+		 * @param conn
+		 * @return 1(일치)
+		 * @throws Exception
+		 */
+		public int passwordChk(String memberPw, Connection conn) throws Exception{
+
+			int result2 = 0;
+			
+			try {
+				
+				String sql = prop.getProperty("passwordChk");
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, memberPw);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					result2 = rs.getInt(1);
+				}
+				
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			return result2;
+		}
 	
+		
+		
+		/** 회원 탈퇴
+		 * @param memberNo
+		 * @param conn
+		 * @return result(1성공)
+		 * @throws Exception
+		 */
+		public int resignMember(int memberNo, Connection conn) throws Exception{
+			
+			int result = 0;
+			
+			try {
+				
+			String sql = prop.getProperty("resignMember");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			
+			result = pstmt.executeUpdate();
+			
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+
+
+
 }
