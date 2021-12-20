@@ -54,7 +54,7 @@
 						</div>
 
 						<div id="logo-right">
-							<div class="sale" onclick="location.href='#'">
+							<div class="sale" onclick="location.href='${contextPath}/item/insert';">
 								<img src="${contextPath}/resources/images/header+footer/판매.png">
 								<p id="sale">판매하기</p>
 								<!-- &nbsp;판매하기 -->
