@@ -1,84 +1,95 @@
 package anabada.semi.item.model.vo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Reply {
 	
-	private int ReplyNo;
-	private String ReplyContent;
-	private Date ReplyDate;
-	private int ReplySecret;
-	private int MemberNo;
-	private int ItemNo;
-	private int ReplyStatusCode;
+	private int replyNo;
+	private String replyContent;
+	private Timestamp replyDate;
+	private int replySecret;
+	private int memberNo;
+	private int itemNo;
+	private int replyStatusCode;
+	
+	private String memberName;
 	
 	public Reply() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public int getReplyNo() {
-		return ReplyNo;
+		return replyNo;
 	}
 
 	public void setReplyNo(int replyNo) {
-		ReplyNo = replyNo;
+		this.replyNo = replyNo;
 	}
 
 	public String getReplyContent() {
-		return ReplyContent;
+		return replyContent;
 	}
 
 	public void setReplyContent(String replyContent) {
-		ReplyContent = replyContent;
+		this.replyContent = replyContent;
 	}
 
-	public Date getReplyDate() {
-		return ReplyDate;
+	public Timestamp getReplyDate() {
+		return replyDate;
 	}
 
-	public void setReplyDate(Date replyDate) {
-		ReplyDate = replyDate;
+	public void setReplyDate(Timestamp replyDate) {
+		this.replyDate = replyDate;
 	}
 
 	public int getReplySecret() {
-		return ReplySecret;
+		return replySecret;
 	}
 
 	public void setReplySecret(int replySecret) {
-		ReplySecret = replySecret;
+		this.replySecret = replySecret;
 	}
 
 	public int getMemberNo() {
-		return MemberNo;
+		return memberNo;
 	}
 
 	public void setMemberNo(int memberNo) {
-		MemberNo = memberNo;
+		this.memberNo = memberNo;
 	}
 
 	public int getItemNo() {
-		return ItemNo;
+		return itemNo;
 	}
 
 	public void setItemNo(int itemNo) {
-		ItemNo = itemNo;
+		this.itemNo = itemNo;
 	}
 
 	public int getReplyStatusCode() {
-		return ReplyStatusCode;
+		return replyStatusCode;
 	}
 
 	public void setReplyStatusCode(int replyStatusCode) {
-		ReplyStatusCode = replyStatusCode;
+		this.replyStatusCode = replyStatusCode;
 	}
 
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
 
 	@Override
 	public String toString() {
-		return "Reply [ReplyNo=" + ReplyNo + ", ReplyContent=" + ReplyContent + ", ReplyDate=" + ReplyDate
-				+ ", ReplySecret=" + ReplySecret + ", MemberNo=" + MemberNo + ", ItemNo=" + ItemNo
-				+ ", ReplyStatusCode=" + ReplyStatusCode + "]";
+		return "Reply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyDate=" + replyDate
+				+ ", replySecret=" + replySecret + ", memberNo=" + memberNo + ", itemNo=" + itemNo
+				+ ", replyStatusCode=" + replyStatusCode + ", memberName=" + memberName + "]";
 	}
+	
 	
 	
 }

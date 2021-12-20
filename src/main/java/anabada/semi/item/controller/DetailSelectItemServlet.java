@@ -11,61 +11,72 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import anabada.semi.item.model.service.ItemSelectService;
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.item.model.vo.ItemImg;
+import anabada.semi.item.model.vo.Reply;
 import anabada.semi.item.model.vo.Time;
-import edu.kh.semi.board.model.vo.Reply;
+import anabada.semi.member.model.vo.Member;
 
-@WebServlet("/detail")
+
+@WebServlet("/detail/*")
 public class DetailSelectItemServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		ItemSelectService service = new ItemSelectService();
 		
 		try {
 			
 			// 카테고리 옵션 목록
-			ItemSelectService service = new ItemSelectService();
-			
 			// 카테고리 목록 불러오기
 			List<Item> categoryList = service.selectCategory();
 			
-//			System.out.println("categoryList : " + categoryList);
-//			System.out.println("categoryList : " + categoryList);
-			
 			req.setAttribute("categoryList", categoryList);
-			System.out.println("item 전");
 			int itemNo = 3;
 			
 			// 선택한 아이템 조회
 			Item item = service.selectItem(itemNo);
-			System.out.println("item 후");
 			
 			String date = Time.calculateTime(item.getItemDate());
 			
-			req.setAttribute("item", item);
-			req.setAttribute("date", date);
+			req.setAttribute("item", item);	// 상품
+			req.setAttribute("date", date);	// 상품 등록 날짜
 			
+			// 상품 이미지 조회
 			List<ItemImg> itemImg = service.selectItemImg(itemNo);
 			
 //			System.out.println("ItemImg: " + ItemImg);
 			
-			req.setAttribute("itemImg", itemImg);
+			req.setAttribute("itemImg", itemImg);	// 상품 이미지
+			
+			// 로그인한 회원의 세션 정보 얻어오기
+			Member loginMember = (Member)req.getSession().getAttribute("loginMember"); 
+			
+			int memberNo = 0;
+			
+			if(loginMember != null) {
+				memberNo = loginMember.getMemberNo();
+			}
+			
+			// 댓글 조회하기
+			List<Reply> rList = service.selectReplyList(itemNo);
+			req.setAttribute("rList", rList);	// 댓글 목록
+			
+//			System.out.println(rList);
 			
 			String path = "/WEB-INF/views/detailSelectItem.jsp";
 			req.getRequestDispatcher(path).forward(req, resp);
-			
+				
 			
 		} catch (Exception e) {
 
 		
 		
 		}
-		
-		
-		
 		
 	}
 	
