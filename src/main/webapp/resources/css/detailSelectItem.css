@@ -215,3 +215,25 @@ main{
     width: 80%;
     margin: 10%;
 }
+
+.reply-div > ul{
+    list-style:none;
+    padding-left:0px;
+}
+
+.reply-row {
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+    min-height: 80px;
+}
+
+.rWriter{
+    font-size: bold;
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.rDate{
+    font-size: 12px;
+    display: inline-block;
+}
