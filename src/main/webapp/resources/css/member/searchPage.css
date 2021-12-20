@@ -42,29 +42,38 @@ body{
     border-collapse: collapse;
 }
 
-#signUpPage-info th, #signUpPage-info td{
-    height: 70px;
-    padding-left: 20px;
+#signUpPage-info input{
+	width: 100%;
+	height: 30px;
 }
 
-.btn-style{
-    color : white;
-    background-color: #B8cc7a;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+#signUpPage-info th, #signUpPage-info td{
+    height: 50px;
 }
 
 .dup-Btn{
     height: 30px;
 }
 
-#signUp-Btn{
-    width: 100%;
+#searchUp-Btn{
+    color : white;
+    background-color: #B8cc7a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+	float: right;
+    width: 80px;
     height: 40px;
     font-size: 20px;
     font-weight: bold;
     
+}
+
+#key-Btn{
+	float: right;
+    width: 80px;
+    height: 40px;
+    font-size: 14px;
 }
 
 

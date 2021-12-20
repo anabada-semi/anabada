@@ -40,7 +40,7 @@ function validate(){
 
 const existingEmail = $("#memberEmail").val();
 
-$("#memberEmail").on("input", function(){
+$("#memberEmail").on("change", function(){
     const inputEmail = $(this).val();
     const regExp = /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/;
 
@@ -92,7 +92,7 @@ $("#memberEmail").on("input", function(){
 
 
 // 이름 유효성 검사
-$("#memberNm").on("input", function(){
+$("#memberNm").on("change", function(){
 
     const inputName = $(this).val();
 
@@ -114,7 +114,7 @@ $("#memberNm").on("input", function(){
 
 
 // 비밀번호 유효성 검사
-document.getElementById("pwd1").addEventListener("input", (e)=> {
+document.getElementById("pwd1").addEventListener("change", (e)=> {
     const inputPw = e.target.value;
     const regExp = /^[a-zA-z\d\!\@\#\-\_]{6,20}$/;
     const checkPw1 = document.getElementById("checkPw1");
@@ -136,7 +136,7 @@ document.getElementById("pwd1").addEventListener("input", (e)=> {
 
 
 // 비밀번호 확인 유효성 검사
-$("#pwd2, #pwd1").on("input", function(e){
+$("#pwd2, #pwd1").on("change", function(e){
     const pwd1 = document.getElementById("pwd1").value;
     const pwd2 = document.getElementById("pwd2").value;
 
@@ -159,7 +159,7 @@ $("#pwd2, #pwd1").on("input", function(e){
 
 
 // 전화번호 글자 수 제한 + 유효성 검사
-$(".phone-length").on("input", function(){
+$(".phone-length").on("change", function(){
 
     if( $(this).val().length > 4){
 

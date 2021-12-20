@@ -15,7 +15,7 @@
     
         <div id="top-banner">내 정보 수정</div>
         <div id="signUpPage-info">
-            <form action="${contextPath}/member/signUp" method="POST" onsubmit="return validate();">
+            <form action="${contextPath}/member/myInfoModify" method="POST" onsubmit="return validate();">
                 <table>
                     <tr>
                         <th>아이디</th>
