@@ -191,6 +191,8 @@ public class MemberDAO {
 				rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
+					
+					shop = new Shop();
 					shop.setMemberNo(memberNo);
 					shop.setShopIntroduce(rs.getString("SHOP_INTRODUCE"));
 					shop.setShopName(rs.getString("SHOP_NM"));
