@@ -7,6 +7,7 @@ import java.util.List;
 
 import anabada.semi.item.model.dao.ItemSelectDAO;
 import anabada.semi.item.model.vo.Item;
+import anabada.semi.item.model.vo.ItemImg;
 
 public class ItemSelectService {
 
@@ -40,9 +41,27 @@ public class ItemSelectService {
 		
 		Item item = dao.selectItem(itemNo, conn);
 		
+		List<ItemImg> img = dao.selectItemImg(itemNo, conn);
+		
 		close(conn);
 		
 		return item;
+	}
+	
+	/** 상품 이미지 조회
+	 * @param itemNo 
+	 * @return item
+	 * @throws Exception
+	 */
+	public List<ItemImg> selectItemImg(int itemNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		List<ItemImg> ItmeImg = dao.selectItemImg(itemNo, conn);
+		
+		close(conn);
+		
+		return ItmeImg;
 	}
 	
 }

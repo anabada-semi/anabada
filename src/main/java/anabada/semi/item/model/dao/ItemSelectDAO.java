@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import anabada.semi.item.model.vo.Item;
+import anabada.semi.item.model.vo.ItemImg;
 
 public class ItemSelectDAO {
 
@@ -76,7 +77,6 @@ public class ItemSelectDAO {
 		Item item = null;
 		
 		try {
-			
 			String sql = prop.getProperty("selectItem");
 			
 			pstmt = conn.prepareStatement(sql);
@@ -92,13 +92,14 @@ public class ItemSelectDAO {
 				item.setItemNo(rs.getInt("ITEM_NO"));
 				item.setItemName(rs.getString("ITEM_NM"));
 				item.setItemInfo(rs.getString("ITEM_INFO"));
-				item.setItemDate(rs.getString("ITEM_DATE"));
+				item.setItemDate(rs.getTimestamp("ITEM_DATE"));
 				item.setCategoryCode(rs.getInt("CATEGORY_CD"));
 				item.setItemStatusCode(rs.getInt("ITEM_STATUS_CD"));
 				item.setMemberNo(rs.getInt("MEMBER_NO"));
 				item.setReadCount(rs.getInt("READ_COUNT"));
+				item.setCategoryName(rs.getString("CATEGORY_NM"));
 				item.setWish(rs.getInt("WISH"));
-
+				
 				item.setItemPrice(rs.getString("ITEM_PRICE"));
 			}
 			
@@ -106,7 +107,43 @@ public class ItemSelectDAO {
 			close(rs); 
 			close(pstmt);
 		}
-		
 		return item;
 	}
+
+
+
+	public List<ItemImg> selectItemImg(int itemNo, Connection conn)  throws Exception{
+
+		List<ItemImg> itemImg = new ArrayList<ItemImg>();
+		
+		try {
+			String sql = prop.getProperty("selectItemImg");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, itemNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				ItemImg img = new ItemImg();
+				
+				img.setImgName(rs.getString("IMG_NM"));
+				img.setImgPath(rs.getString("IMG_PATH"));
+				img.setImgLevel(rs.getInt("IMG_LEVEL"));
+				
+				itemImg.add(img);
+			}
+			
+		} finally {
+			close(rs); 
+			close(pstmt);
+		}
+		return itemImg;
+	}
+
+
+
+
 }
