@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <div>
@@ -7,53 +8,46 @@
 </div>
 
 <hr>
-
 <table>
 	<tr><td></td><td></td><td></td><td></td></tr>
-	<tr class="itemTr">
-		<td class="itemTd">
-			<img class="itemImg" src="${contextPath}/resources/images/myShop/itemList/신발.jpg">
-			<div class="itemTextDiv">
-				<div class="itemText1">운동화 팔아요~</div>
-				<div class="itemText2">40,000원</div>
-				<div class="itemText3">10분 전</div>
-			</div>
-		</td>
-		<td class="itemTd">
-			<img class="itemImg" src="${contextPath}/resources/images/myShop/itemList/핸드폰.jpg">
-			<div class="itemTextDiv">
-				<div class="itemText1">핸드폰 팔아요</div>
-				<div class="itemText2">200,000원</div>
-				<div class="itemText3">3일 전</div>
-			</div>
-		</td>
-		<td class="itemTd">
-			<img class="itemImg" src="${contextPath}/resources/images/myShop/itemList/셔츠.jpg">
-			<div class="itemTextDiv">
-				<div class="itemText1">셔츠</div>
-				<div class="itemText2">20,000원</div>
-				<div class="itemText3">4달 전</div>
-			</div>
-		</td>
-		<td class="itemTd">
-			<img class="itemImg" src="${contextPath}/resources/images/myShop/itemList/셔츠_남.jpg">
-			<div class="itemTextDiv">
-				<div class="itemText1">셔츠</div>
-				<div class="itemText2">20,000원</div>
-				<div class="itemText3">4달 전</div>
-			</div>
-		</td>
-	</tr>
+	<c:forEach var="s" items="${itemList}" varStatus="i">
+		<c:set var="idx" value="${i.index/4}"></c:set>
+		<c:set var="trIdx" value="${i.index}"></c:set>
+<%-- 		<h1>${s.itemName}</h1>
+		<h1>${i.last }</h1> --%>
+		
+		
+ 		<c:if test="${i.index % 4 == 0}">
+			<tr class="itemTr">
+				<c:forEach var="d" items="${itemList}" varStatus="j">
+					<c:if test="${j.index < i.index && j.index >= i.index-4}">
+						<td class="itemTd">
+							<img class="itemImg" src="${contextPath}/resources/images/myShop/itemList/신발.jpg">
+							<div class="itemTextDiv">
+								<div class="itemText1">${d.itemName}</div>
+								<div class="itemText2">${d.itemPrice}원</div>
+								<div class="itemText3">${d.uploadDate}</div>
+							</div>
+						</td>
+					</c:if>
+				</c:forEach>
+			</tr>
+		</c:if>
+	</c:forEach>
 	
 	<tr class="itemTr">
-		<td class="itemTd">
-			<img class="itemImg" src="${contextPath}/resources/images/myShop/itemList/배찌.jpg">
-			<div class="itemTextDiv">
-				<div class="itemText1">배찌 인형 팜</div>
-				<div class="itemText2">40,000,000원</div>
-				<div class="itemText3">3년 전</div>
-			</div>
-		</td>
+		<c:forEach var="s" items="${itemList}" varStatus="i">
+			<c:if test="${ i.index > trIdx - (idx - (idx%1)) }">
+				<td class="itemTd">
+					<img class="itemImg" src="${contextPath}/resources/images/myShop/itemList/신발.jpg">
+					<div class="itemTextDiv">
+						<div class="itemText1">${s.itemName}</div>
+						<div class="itemText2">${s.itemPrice}원</div>
+						<div class="itemText3">${s.uploadDate}</div>
+					</div>
+				</td>
+			</c:if>
+		</c:forEach>
 	</tr>
 </table>
 

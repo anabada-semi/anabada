@@ -101,7 +101,7 @@ button{
     border: 0.3px solid #ccc;
 }
 
-#myShopContent{font-weight: lighter;}
+#myShopContent{height: 190px; font-weight: lighter;}
 
 
 #myShopContent2:hover{
@@ -128,6 +128,7 @@ button{
     color: rgb(136, 136, 136);
     margin: 0;
     padding: 0;
+    float:right;
 }
 #userPostTextareaBtn{
     width: 100px;
@@ -154,7 +155,6 @@ button{
 	height: 149px;
 }
 #contentTextarea:focus{outline: none;}
-#myShopContentBtn{float:right;}
 
 
 /* buyList css */
