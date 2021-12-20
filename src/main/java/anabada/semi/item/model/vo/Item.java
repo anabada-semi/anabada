@@ -14,7 +14,17 @@ public class Item {
 	private int memberNo;
 	private int readCount;
 	
-//	CATEGORY 테이블의 CATEGORY_NM 추가
+	private String uploadDate;
+	
+	public String getUploadDate() {
+		return uploadDate;
+	}
+
+	public void setUploadDate(String uploadDate) {
+		this.uploadDate = uploadDate;
+	}
+
+	//	CATEGORY 테이블의 CATEGORY_NM 추가
 	private String categoryName;
 	
 //	WISH 테이블의 WISH 추가

@@ -1,6 +1,6 @@
 /* 내 상점 페이지 */
 $(".btn").on("click", function(){
-		
+	console.log($(this).index());	
     $(".btn").removeClass("active");
     $(this).addClass("active");
 
@@ -9,9 +9,10 @@ $(".btn").on("click", function(){
     switch($(this).index()){
         case 0: 
             $.ajax({
-                url: "myShop/itemList",
+                url: contextPath + "/myShop/itemList",
                 success: function(r){
                     $("#changeDiv").append(r);
+
                 },
                 error:function(req,status,er){
                     console.log(req.responseText);
@@ -20,7 +21,7 @@ $(".btn").on("click", function(){
 
         case 1: 
             $.ajax({
-                url: "myShop/wishList",
+                url: contextPath + "/myShop/wishList",
                 success: function(r){
                     $("#changeDiv").append(r);
                 },
@@ -31,7 +32,7 @@ $(".btn").on("click", function(){
 
         case 2: 
             $.ajax({
-                url: "myShop/postScript",
+                url: contextPath + "/myShop/postScript",
                 success: function(r){
                     $("#changeDiv").append(r);
                 },
@@ -42,7 +43,7 @@ $(".btn").on("click", function(){
 
         case 3: 
             $.ajax({
-                url: "myShop/buyList",
+                url: contextPath + "/myShop/buyList",
                 success: function(r){
                     $("#changeDiv").html(r);
                 },
@@ -53,7 +54,7 @@ $(".btn").on("click", function(){
 
         case 4: 
             $.ajax({
-                url: "myShop/sellList",
+                url: contextPath + "/myShop/sellList",
                 success: function(r){
                     $("#changeDiv").html(r);
                 },
@@ -170,7 +171,7 @@ $(document).on("click",".userNameBtn", function(){
 
 /* 소개글 변경 */
 $(document).on("click", "#myShopContent2", function(){
-    
+
     const parent = $("#myShopContent1");
     parent.empty();
     parent.append("<textarea name='' id='contentTextarea'></textarea>");
@@ -179,7 +180,7 @@ $(document).on("click", "#myShopContent2", function(){
 
     const textLength = $("#contentTextarea").val().length;
 
-    $("#myShopContent").text("");
+    $("#myShopContent").text("").css("height", "0px");
     
     parent.append("<button id='myShopContentBtn'>확인<br>" + textLength + "/120</button>");
 
@@ -196,14 +197,15 @@ $(document).on("click", "#myShopContentBtn", function(){
         data: { "memberNo": loginMemberNo, "inputContent": contentTextarea.val() },
         success: function(r){
             if(r > 0){
+
                 parent.empty();
                 parent.append('<div id="myShopContent2">소개글 수정</div>');
-                $("#myShopContent").text(contentTextarea.val() );
+                $("#myShopContent").text( contentTextarea.val() ).css("height", "190px");
             }else{
                 parent.empty();
                 parent.append('<div id="myShopContent2">소개글 수정</div>');
 
-                $("#myShopContent").text(nowContent);
+                $("#myShopContent").text(nowContent).css("height", "190px");
             }
         },
         error:function(req, status, er){

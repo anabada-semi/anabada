@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet{
 				session.setMaxInactiveInterval(600);
 
 			}else {
-				session.setAttribute("message", "아이디 또는 비밀번호가 틀렸습니다!");
+				session.setAttribute("message", "아이디 또는 비밀번호를 확인해주세요!");
 				
 			}
 			
@@ -65,6 +65,9 @@ public class LoginServlet extends HttpServlet{
 
 		}catch(Exception e) {
 			e.printStackTrace();
+			req.setAttribute("errorMessage", "로그인 과정에서 문제 발생");
+			req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);
+			
 		}
 		
 	}

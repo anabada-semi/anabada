@@ -1,6 +1,5 @@
 // 각 입력 값이 유효성 검사를 진행했는지 기록할 객체
-const signUpCheckObj = {
-    "memberId" : false,
+const updateCheckObj = {
     "memberNm" : false,
     "memberEmail" : false,
     "pwd1" : false,
@@ -12,13 +11,12 @@ const signUpCheckObj = {
 
 function validate(){
 
-    for(key in signUpCheckObj){
-        if( !signUpCheckObj[key] ){
+    for(key in updateCheckObj){
+        if( !updateCheckObj[key] ){
 
             let message;
             
             switch(key){
-            case "memberId" : message = "아이디가 유효하지 않습니다."; break;
             case "memberNm" : message = "이름이 유효하지 않습니다."; break;
             case "memberEmail" : message = "이메일이 유효하지 않습니다."; break;
             case "pwd1" : message = "비밀번호가 유효하지 않습니다."; break;
@@ -37,74 +35,21 @@ function validate(){
 
 }
 
-// ID 유효성 검사
-document.getElementById("memberId").addEventListener("input", function(e){
 
-    const inputId = this.value;
-    const regExp = /^[a-zA-Z\d]{5,20}$/;
-    
-    const checkId = document.getElementById("checkId");
+// 이메일 유효성 검사 + 기존 이메일 중복 검사 x
 
-    // 유효성 검사
-    if(inputId.length == 0){
-        $(checkId).text("");
-        signUpCheckObj.memberId = false;
+const existingEmail = $("#memberEmail").val();
 
-    }else if( regExp.test(inputId)){
-
-        $.ajax({
-            url : "idDupCheck",
-            data : {"inputId" : inputId},
-            type : "GET",                
-            success : function(result){
-
-                if(result == 0){
-                    checkId.innerText = "사용 가능";
-                    checkId.style.color = "green";
-                    signUpCheckObj.memberId = true;
-
-                }else{
-                    checkId.innerText = "중복";
-                    checkId.style.color = "red";
-                    signUpCheckObj.memberId = false;
-
-                }
-
-            },   
-
-            error : function(request, status, error){
-                
-				if(request.status == 404){
-                    console.log("ajax 요청 주소가 올바르지 않습니다.");
-                    
-                }else if(request.status == 500){
-                    console.log("서버 내부 에러 발생");
-                    console.log(request.responText);
-                }
-				
-            },
-            complete : function(){
-                console.log("complete");
-            }
-
-        });
-
-    }else{
-        $(checkId).text("5글자 이상").css("color", "red");
-        signUpCheckObj.memberId = false;
-    }
-
-})
-
-
-// 이메일 유효성 검사
 $("#memberEmail").on("input", function(){
     const inputEmail = $(this).val();
     const regExp = /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/;
 
-    if(inputEmail.length == 0){
+	if(inputEmail == existingEmail){
+		updateCheckObj.memberEmail = true;
+
+    }else if(inputEmail.length == 0){
         $("#checkEmail").text("");
-        signUpCheckObj.memberEmail = false;
+        updateCheckObj.memberEmail = false;
     }else if(regExp.test(inputEmail)){
 
         $.ajax({
@@ -115,10 +60,10 @@ $("#memberEmail").on("input", function(){
                 
                 if(result == 0){
                     $("#checkEmail").text("사용 가능").css("color", "green");
-                    signUpCheckObj.memberEmail = true;
+                    updateCheckObj.memberEmail = true;
                 }else{
                     $("#checkEmail").text("중복").css("color", "red");
-                    signUpCheckObj.memberEmail = false;
+                    updateCheckObj.memberEmail = false;
                 }
                 
             },
@@ -141,7 +86,7 @@ $("#memberEmail").on("input", function(){
 
     }else{
         $("#checkEmail").text("");
-        signUpCheckObj.memberEmail = false;
+        updateCheckObj.memberEmail = false;
     }
 })
 
@@ -155,13 +100,13 @@ $("#memberNm").on("input", function(){
 
     if(inputName.length == 0){
         $("#checkNm").text("");
-        signUpCheckObj.memberNm = false;
+        updateCheckObj.memberNm = false;
     }else if(regExp.test(inputName)){
 		$("#checkNm").text("");
-        signUpCheckObj.memberNm = true;
+        updateCheckObj.memberNm = true;
     }else{
         $("#checkNm").text("사용 불가").css("color", "red");
-        signUpCheckObj.memberNm = false;
+        updateCheckObj.memberNm = false;
     }
 
 })
@@ -176,15 +121,15 @@ document.getElementById("pwd1").addEventListener("input", (e)=> {
 
     if(inputPw.length==0){
         checkPw1.innerText = "";
-        signUpCheckObj.pwd1 = false;
+        updateCheckObj.pwd1 = false;
     }else if(regExp.test(inputPw)){
         checkPw1.innerText = "사용 가능";
         checkPw1.style.color = "green";
-        signUpCheckObj.pwd1 = true;
+        updateCheckObj.pwd1 = true;
     }else{
         checkPw1.innerText = "사용 불가";
         checkPw1.style.color = "red";
-        signUpCheckObj.pwd1 = false;
+        updateCheckObj.pwd1 = false;
     }
 
 })
@@ -199,15 +144,15 @@ $("#pwd2, #pwd1").on("input", function(e){
 
     if(pwd2.trim().length == 0){
         checkPw2.innerText = "";
-        signUpCheckObj.pwd2 = false;
+        updateCheckObj.pwd2 = false;
     }else if(pwd1 == pwd2){
         checkPw2.innerText = "일치";
         checkPw2.style.color = "green";
-        signUpCheckObj.pwd2 = true;
+        updateCheckObj.pwd2 = true;
     }else{
         checkPw2.innerText = "불일치";
         checkPw2.style.color = "red";
-        signUpCheckObj.pwd2 = false;
+        updateCheckObj.pwd2 = false;
     }
 
 })
@@ -231,11 +176,11 @@ $(".phone-length").on("input", function(){
     const regExp3 = /^\d{4}$/;
 
     if(inputPhone2.length == 0 && inputPhone3.length == 0 ){
-        signUpCheckObj.memberPhone3 = false;
+        updateCheckObj.memberPhone3 = false;
     }else if(regExp2.test(inputPhone2) && regExp3.test(inputPhone3)){
-        signUpCheckObj.memberPhone3 = true;
+        updateCheckObj.memberPhone3 = true;
     }else{
-        signUpCheckObj.memberPhone3 = false;
+        updateCheckObj.memberPhone3 = false;
     }
 
 })

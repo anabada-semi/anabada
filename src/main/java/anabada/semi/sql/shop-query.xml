@@ -9,4 +9,8 @@
 		UPDATE SHOP SET SHOP_INTRODUCE = ? WHERE MEMBER_NO = ?
 	</entry>
 	
+	<entry key="selectItem">
+		SELECT * FROM ITEM WHERE MEMBER_NO = ?
+	</entry>
+	
 </properties>
