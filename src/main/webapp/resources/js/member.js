@@ -48,12 +48,12 @@ document.getElementById("memberId").addEventListener("input", function(e){
     // 유효성 검사
     if(inputId.length == 0){
         $(checkId).text("");
-        signUpCheckObj.id = false;
+        signUpCheckObj.memberId = false;
 
     }else if( regExp.test(inputId)){
 
         $.ajax({
-            url : "idDupCheck",
+            url : "/member/idDupCheck",
             data : {"inputId" : inputId},
             type : "GET",                
             success : function(result){
@@ -61,12 +61,12 @@ document.getElementById("memberId").addEventListener("input", function(e){
                 if(result == 0){
                     checkId.innerText = "사용 가능";
                     checkId.style.color = "green";
-                    signUpCheckObj.id = true;
+                    signUpCheckObj.memberId = true;
 
                 }else{
                     checkId.innerText = "중복";
                     checkId.style.color = "red";
-                    signUpCheckObj.id = false;
+                    signUpCheckObj.memberId = false;
 
                 }
 
@@ -91,7 +91,7 @@ document.getElementById("memberId").addEventListener("input", function(e){
 
     }else{
         $(checkId).text("5글자 이상").css("color", "red");
-        signUpCheckObj.id = false;
+        signUpCheckObj.memberId = false;
     }
 
 })
@@ -108,7 +108,7 @@ $("#memberEmail").on("input", function(){
     }else if(regExp.test(inputEmail)){
 
         $.ajax({
-            url : "emailDupCheck",
+            url : "/member/emailDupCheck",
             type : "GET",
             data : {"inputEmail" : inputEmail},
             success : function(result){
