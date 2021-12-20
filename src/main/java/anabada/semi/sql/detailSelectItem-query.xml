@@ -8,15 +8,23 @@
 		ORDER BY CATEGORY_CD
 	</entry>
 
-	<!-- 전체 게시글 수 조회 -->
+	<!-- 상세 조회 -->
 	<entry key="selectItem">
-		SELECT  ITEM_NO, ITEM_NM, TO_CHAR(ITEM_PRICE, 'FM9,999,999') ITEM_PRICE, 
-        TO_CHAR(ITEM_INFO) ITEM_INFO, TO_CHAR(ITEM_DATE) ITEM_DATE, 
-        b.CATEGORY_nm, ITEM_STATUS_CD, MEMBER_NO, READ_COUNT,
-        (SELECT COUNT(*) FROM WISH WHERE ITEM_NO = ) WISH
-		FROM ITEM
-		join CATEGORY b using(CATEGORY_CD)
-		WHERE ITEM_NO = 
+		SELECT  ITEM_NO, ITEM_NM, 
+				TO_CHAR(ITEM_PRICE, 'FM9,999,999') ITEM_PRICE,
+				ITEM_INFO,ITEM_DATE, CATEGORY_CD, ITEM_STATUS_CD, 
+				MEMBER_NO, READ_COUNT, b.CATEGORY_NM,
+				(SELECT COUNT(*) FROM WISH WHERE ITEM_NO = ?) WISH
+			FROM ITEM
+			join category b using(CATEGORY_CD)
+		WHERE ITEM_NO = ?
+	</entry>
+
+	<!-- 이미지 조회 -->
+	<entry key="selectItemImg">
+		SELECT IMG_NM, IMG_PATH, IMG_LEVEL
+		    FROM ITEM_IMG
+		WHERE ITEM_NO = ?
 	</entry>
 	
 </properties>
