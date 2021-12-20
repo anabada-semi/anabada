@@ -7,7 +7,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+
+import anabada.semi.item.model.vo.Item;
+import anabada.semi.item.model.vo.Time;
 
 public class ShopDAO {
 	private Statement stmt;
@@ -58,5 +63,38 @@ public class ShopDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public List<Item> selectItem(int memberNo, Connection conn) throws Exception {
+		List<Item> itemList = new ArrayList<Item>();
+		
+		try {
+			String sql = prop.getProperty("selectItem");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Item item = new Item();
+				item.setItemNo(rs.getInt(1));
+				item.setItemName(rs.getString(2));
+				item.setItemPrice(rs.getString(3));
+				item.setItemInfo(rs.getString(4));
+				item.setItemDate(rs.getTimestamp(5));
+				item.setCategoryCode(rs.getInt(6));
+				item.setItemStatusCode(rs.getInt(7));
+				item.setMemberNo(rs.getInt(8));
+				item.setReadCount(rs.getInt(9));
+				
+				item.setUploadDate(new Time().calculateTime(item.getItemDate()));
+				itemList.add(item);
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return itemList;
 	}
 }

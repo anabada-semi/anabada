@@ -1,7 +1,9 @@
 package anabada.semi.shop.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +16,10 @@ import com.oreilly.servlet.MultipartRequest;
 
 import anabada.semi.common.MyRenamePolicy;
 import anabada.semi.common.XSS;
+import anabada.semi.item.model.vo.Item;
+import anabada.semi.member.model.vo.Member;
 import anabada.semi.shop.model.service.ShopService;
+import anabada.semi.shop.model.vo.Shop;
 
 @WebServlet("/myShop/*")
 public class MyShopController extends HttpServlet {
@@ -32,13 +37,24 @@ public class MyShopController extends HttpServlet {
 		String path = null;
 		
 		ShopService service = new ShopService();
+		HttpSession session = req.getSession();
+		
+		Shop shop = null;
 		
 		try {
 			
 			if(command.equals("itemList")) {
 				if(method.equals("GET")) {
+					
+					int memberNo = ((Member)(session.getAttribute("loginMember"))).getMemberNo();
+					
+					List<Item> itemList = service.selectItem(memberNo);
+
+					session.setAttribute("itemList", itemList);
+					
 					path = "/WEB-INF/views/myShop/itemList.jsp";
 					req.getRequestDispatcher(path).forward(req, resp);
+					
 				}else {
 					
 				}
@@ -79,7 +95,6 @@ public class MyShopController extends HttpServlet {
 				if(method.equals("GET")) {
 					
 					int maxSize = 1024 * 1024 * 100;
-					HttpSession session = req.getSession();
 					
 					// 프로젝트의 webapp폴더의 컴퓨상 실제 절대 경로
 					String root = session.getServletContext().getRealPath("/");
@@ -116,7 +131,10 @@ public class MyShopController extends HttpServlet {
 				}
 			}else if(command.equals("myShop")) {
 				if(method.equals("GET")) {
+					
 					req.getRequestDispatcher("/WEB-INF/views/myShop/myShop.jsp").forward(req, resp);
+				}else {
+					
 				}
 			}
 			

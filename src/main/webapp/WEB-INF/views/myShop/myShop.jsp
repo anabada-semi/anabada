@@ -46,9 +46,9 @@
 
 					<div>
 
-						<div id="myShopContent">청춘! 이는 듣기만 하여도 가슴이 설레는 말이다 청춘! 너의 두손을 가슴에 대고...</div>
+						<div id="myShopContent">${locationShop.shopIntroduce}</div>
 						<div id="myShopContent1">
-							<div id="myShopContent2">소개글 수정</div>			
+							<div id="myShopContent2">소개글 수정</div>
 						</div>
 					</div>
 				</div>
@@ -96,7 +96,6 @@
 <script>
 	const contextPath = "${contextPath}";
 	const loginMemberNo = "${loginMember.memberNo}";
-	const locationShop = "${locationShop}";
 	
 
 </script>
