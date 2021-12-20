@@ -30,7 +30,7 @@
 
         }
 
-        #register{
+        #register, #update{
             height: 3rem;
             width: 8rem;
             float : right;
