@@ -10,6 +10,7 @@ import java.sql.Connection;
 
 import anabada.semi.member.model.dao.MemberDAO;
 import anabada.semi.member.model.vo.Member;
+import anabada.semi.shop.model.vo.Shop;
 
 public class MemberService {
 
@@ -81,6 +82,31 @@ public class MemberService {
 		
 		return result;
 		
+	}
+
+
+	public Shop selectShop(int memberNo) throws Exception {
+		Connection conn = getConnection();
+		
+		Shop shop = dao.selectShop(memberNo, conn);
+		
+		close(conn);
+		
+		return shop;
+	}
+
+
+	public int createShop(int memberNo, String memberNm) throws Exception {
+		Connection conn = getConnection();
+		
+		int createS = dao.createShop(memberNo, memberNm, conn);
+		
+		if(createS > 0) commit(conn);
+		else		   rollback(conn);
+		
+		close(conn);
+		
+		return createS;
 	}
 
 }

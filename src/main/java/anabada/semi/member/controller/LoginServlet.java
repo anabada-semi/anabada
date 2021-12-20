@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import anabada.semi.member.model.service.MemberService;
 import anabada.semi.member.model.vo.Member;
+import anabada.semi.shop.model.vo.Shop;
 
 @WebServlet("/member/login")
 public class LoginServlet extends HttpServlet{
@@ -36,17 +37,24 @@ public class LoginServlet extends HttpServlet{
 		try {
 			
 			Member loginMember = service.login(memberId, memberPw);
+			Shop shop = service.selectShop(loginMember.getMemberNo());
+			
+			if(shop == null) {// 상점이 없을 시
+				if(service.createShop(loginMember.getMemberNo(), loginMember.getMemberNm()) > 0 ) {// 상점 생성
+					shop = service.selectShop(loginMember.getMemberNo()); // 생성 후 다시 조회
+				}
+			}
 			
 			HttpSession session = req.getSession();
 
 			if(loginMember != null) {
 					
 					session.setAttribute("loginMember", loginMember);
+					session.setAttribute("locationShop", shop);
 
 					session.setMaxInactiveInterval(600);
 
 			}else {
-				
 				session.setAttribute("message", "아이디 또는 비밀번호가 틀렸습니다!");
 				
 			}
