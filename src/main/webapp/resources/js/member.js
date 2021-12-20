@@ -11,7 +11,7 @@ const signUpCheckObj = {
 
 
 function validate(){
-	/*
+
     for(key in signUpCheckObj){
         if( !signUpCheckObj[key] ){
 
@@ -34,8 +34,116 @@ function validate(){
         }
 
     }
-	*/
+
 }
+
+// ID 유효성 검사
+document.getElementById("memberId").addEventListener("input", function(e){
+
+    const inputId = this.value;
+    const regExp = /^[a-zA-Z\d]{5,20}$/;
+    
+    const checkId = document.getElementById("checkId");
+
+    // 유효성 검사
+    if(inputId.length == 0){
+        $(checkId).text("");
+        signUpCheckObj.id = false;
+
+    }else if( regExp.test(inputId)){
+
+        $.ajax({
+            url : "idDupCheck",
+            data : {"inputId" : inputId},
+            type : "GET",                
+            success : function(result){
+
+                if(result == 0){
+                    checkId.innerText = "사용 가능";
+                    checkId.style.color = "green";
+                    signUpCheckObj.id = true;
+
+                }else{
+                    checkId.innerText = "중복";
+                    checkId.style.color = "red";
+                    signUpCheckObj.id = false;
+
+                }
+
+            },   
+
+            error : function(request, status, error){
+                
+				if(request.status == 404){
+                    console.log("ajax 요청 주소가 올바르지 않습니다.");
+                    
+                }else if(request.status == 500){
+                    console.log("서버 내부 에러 발생");
+                    console.log(request.responText);
+                }
+				
+            },
+            complete : function(){
+                console.log("complete");
+            }
+
+        });
+
+    }else{
+        $(checkId).text("5글자 이상").css("color", "red");
+        signUpCheckObj.id = false;
+    }
+
+})
+
+
+// 이메일 유효성 검사
+$("#memberEmail").on("input", function(){
+    const inputEmail = $(this).val();
+    const regExp = /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/;
+
+    if(inputEmail.length == 0){
+        $("#checkEmail").text("");
+        signUpCheckObj.email = false;
+    }else if(regExp.test(inputEmail)){
+
+        $.ajax({
+            url : "emailDupCheck",
+            type : "GET",
+            data : {"inputEmail" : inputEmail},
+            success : function(result){
+                
+                if(result == 0){
+                    $("#checkEmail").text("사용 가능").css("color", "green");
+                    signUpCheckObj.email = true;
+                }else{
+                    $("#checkEmail").text("중복").css("color", "red");
+                    signUpCheckObj.email = false;
+                }
+                
+            },
+            error : function(request, status, error){
+
+                if(request.status == 404){
+                    console.log("ajax 요청 주소가 올바르지 않습니다.");
+                    
+                }else if(request.status == 500){
+                    console.log("서버 내부 에러 발생");
+                    console.log(request.responText);
+                }
+
+            },
+            complete : function(){
+                console.log("complete");
+            }
+
+        });
+
+    }else{
+        $("#checkEmail").text("");
+        signUpCheckObj.email = false;
+    }
+})
 
 
 // 이름 유효성 검사

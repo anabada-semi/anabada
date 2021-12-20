@@ -8,7 +8,7 @@
     <section id="signUpPage">
         <div id="top-banner">회원 탈퇴</div>
         <div id="signUpPage-info">
-            <form action="${contextPath}/member/resignMember" method="post">
+            <form action="${contextPath}/member/resignMember" method="post" onsubmit="return deleteCheck();">
                 <table>
                     <tr>
                         <th>아이디</th>
@@ -19,7 +19,7 @@
                         <td><input type="password" name="memberPw"></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><button id="signUp-Btn" class="btn-style" onclick="return deleteCheck();">회원 탈퇴</button></td>
+                        <td colspan="2"><button id="signUp-Btn" class="btn-style">회원 탈퇴</button></td>
                     </tr>
                 </table>
             </form>

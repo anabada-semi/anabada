@@ -5,6 +5,7 @@ import static anabada.semi.common.JDBCTemplate.close;
 import static anabada.semi.common.JDBCTemplate.commit;
 import static anabada.semi.common.JDBCTemplate.getConnection;
 import static anabada.semi.common.JDBCTemplate.rollback;
+import static edu.kh.semi.common.JDBCTemplate.close;
 
 import java.sql.Connection;
 
@@ -107,6 +108,41 @@ public class MemberService {
 		close(conn);
 		
 		return createS;
+	}
+
+
+	/** 아이디 중복 체크
+	 * @param inputId
+	 * @return result(1 중복)
+	 * @throws Exception
+	 */
+	public int idDupCheck(String inputId) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.idDupCheck(inputId, conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	
+	/** 이메일 중복 체크
+	 * @param inputEmail
+	 * @return result(1 중복)
+	 * @throws Exception
+	 */
+	public int EmailDupCheck(String inputEmail) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.emailDupCheck(inputEmail, conn);
+		
+		close(conn);
+		
+		return result;
 	}
 
 }
