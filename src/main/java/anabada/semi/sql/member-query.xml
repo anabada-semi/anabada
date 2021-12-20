@@ -41,13 +41,13 @@
 	<!-- 아이디 중복확인 -->
 	<entry key="idDupCheck">
 		SELECT COUNT(*) FROM MEMBER
-		AND MEMBER_ID = ?
+		WHERE MEMBER_ID = ?
 	</entry>
 	
 	<!-- 이메일 중복확인 -->
 	<entry key="emailDupCheck">
 		SELECT COUNT(*) FROM MEMBER
-		AND MEMBER_EMAIL = ?
+		WHERE MEMBER_EMAIL = ?
 	</entry>
 
 </properties>
