@@ -38,7 +38,7 @@ public class ResignMember extends HttpServlet {
 			
 			if(result > 0) {
 				req.setAttribute("message", "회원이 탈퇴되었습니다.");
-				
+				session.invalidate();
 				resp.sendRedirect(req.getContextPath());
 				
 			}else {
