@@ -3,6 +3,28 @@
 
 <properties>
 
+	<!-- 카테고리조회 -->
+	<entry key="selectCategory">
+	SELECT * FROM CATEGORY
+	ORDER BY CATEGORY_CD
+	</entry>
+
+	<!-- 다음 아이템 번호 -->
+	<entry key="nextItemNo">
+		SELECT SEQ_ITEM_NO.NEXTVAL FROM DUAL
+	</entry>
+
+	<!-- 아이템 입력 -->
+	<entry key="insertItem">
+		INSERT INTO ITEM 
+		VALUES(?, ?, ?, ?, DEFAULT, ?, DEFAULT, ?, DEFAULT)
+	</entry>
+	
+		<!-- 아이템이미지 입력 -->
+	<entry key="insertItemImg">
+		INSERT INTO ITEM_IMG
+		VALUES(SEQ_ITEM_IMG_NO.NEXTVAL, ?, ?, ?, ?, ?)
+	</entry>
 
 </properties>
 
