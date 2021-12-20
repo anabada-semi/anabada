@@ -3,7 +3,7 @@ package anabada.semi.shop.model.vo;
 public class Shop {
 	private int memberNo;
 	private String shopIntroduce;
-	private String shopNo;
+	private String shopName;
 	
 	public Shop() {}
 
@@ -23,17 +23,15 @@ public class Shop {
 		this.shopIntroduce = shopIntroduce;
 	}
 
-	public String getShopNo() {
-		return shopNo;
+	public String getShopName() {
+		return shopName;
 	}
 
-	public void setShopNo(String shopNo) {
-		this.shopNo = shopNo;
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
 	}
+	
 
-	@Override
-	public String toString() {
-		return "Shop [memberNo=" + memberNo + ", shopIntroduce=" + shopIntroduce + ", shopNo=" + shopNo + "]";
-	}
+
 	
 }

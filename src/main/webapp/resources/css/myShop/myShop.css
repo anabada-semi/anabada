@@ -27,7 +27,7 @@
     color: #212121;
     background-color: white;
 }
-#img{width: 100px; height: 100px; border-radius: 50%;}
+.imgProfile{width: 100px; height: 100px; border-radius: 50%;}
 
 .container {
     width: 1024px;
@@ -226,3 +226,7 @@ button{
 .wishDeleteBtn{border: 0.3px solid #ccc; float: right; margin-right: 20; padding: 0 20 20;}
 .wishText1, .wishText2{margin-top: 20px;}
 /* wishList css */
+
+#fileArea {
+    display: none;
+ }

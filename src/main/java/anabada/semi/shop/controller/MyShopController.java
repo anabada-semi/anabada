@@ -7,9 +7,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.oreilly.servlet.MultipartRequest;
+
+import anabada.semi.common.MyRenamePolicy;
 
 @WebServlet("/myShop/*")
-public class MyShop extends HttpServlet {
+public class MyShopController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -65,6 +70,33 @@ public class MyShop extends HttpServlet {
 					
 				}
 				
+			}else if(command.equals("imgInsert")) {
+				if(method.equals("GET")) {
+					
+					int maxSize = 1024 * 1024 * 100;
+					HttpSession session = req.getSession();
+					
+					// 프로젝트의 webapp폴더의 컴퓨상 실제 절대 경로
+					String root = session.getServletContext().getRealPath("/");
+					
+					// 나머지 파일 경로 (DB에 저장되어 주소 경로로 사용할 예정)
+					String filePath = "/resources/images/myShop/profile/";
+					
+					// 실제 경로
+					String realPath = root + filePath;
+					
+					MultipartRequest mReq 
+					= new MultipartRequest(req, realPath, maxSize, "UTF-8", new MyRenamePolicy());     
+					
+					String boardTitle = mReq.getParameter("boardTitle");
+					String boardContent = mReq.getParameter("boardContent");
+					int categoryCode = Integer.parseInt( mReq.getParameter("categoryCode") );
+					
+					path = "/WEB-INF/views/myShop/myShop.jsp";
+					req.getRequestDispatcher(path).forward(req, resp);
+				}else {
+					
+				}
 			}
 			
 		} catch (Exception e) {
