@@ -109,4 +109,39 @@ public class MemberService {
 		return createS;
 	}
 
+
+	/** 아이디 중복 체크
+	 * @param inputId
+	 * @return result(1 중복)
+	 * @throws Exception
+	 */
+	public int idDupCheck(String inputId) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.idDupCheck(inputId, conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	
+	/** 이메일 중복 체크
+	 * @param inputEmail
+	 * @return result(1 중복)
+	 * @throws Exception
+	 */
+	public int EmailDupCheck(String inputEmail) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.emailDupCheck(inputEmail, conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
 }

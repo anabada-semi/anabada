@@ -37,17 +37,20 @@ public class ResignMember extends HttpServlet {
 			int result = service.resignMember(memberPw, memberNo);
 			
 			if(result > 0) {
-				req.setAttribute("message", "회원이 탈퇴되었습니다.");
+				session.setAttribute("message", "회원이 탈퇴되었습니다.");
 				session.invalidate();
 				resp.sendRedirect(req.getContextPath());
 				
 			}else {
-				req.setAttribute("message", "비밀번호가 일치하지 않습니다.");
-
+				session.setAttribute("message", "비밀번호가 일치하지 않습니다.");
+				
 			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
+			req.setAttribute("errorMessage", "회원 탈퇴 과정에서 문제 발생");
+			req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);
 		}
 		
 	}

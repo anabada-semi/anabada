@@ -37,6 +37,18 @@
 	<entry key="createShop">
 		INSERT INTO SHOP VALUES(?, '소개글', ?)
 	</entry>
+	
+	<!-- 아이디 중복확인 -->
+	<entry key="idDupCheck">
+		SELECT COUNT(*) FROM MEMBER
+		AND MEMBER_ID = ?
+	</entry>
+	
+	<!-- 이메일 중복확인 -->
+	<entry key="emailDupCheck">
+		SELECT COUNT(*) FROM MEMBER
+		AND MEMBER_EMAIL = ?
+	</entry>
 
 </properties>
 

@@ -1,29 +1,29 @@
 // 각 입력 값이 유효성 검사를 진행했는지 기록할 객체
 const signUpCheckObj = {
-    "id" : false,
-    "name" : false,
-    "email" : false,
+    "memberId" : false,
+    "memberNm" : false,
+    "memberEmail" : false,
     "pwd1" : false,
     "pwd2" : false,
-    "phone3" : false
+    "memberPhone3" : false
 
 }
 
 
 function validate(){
-	/*
+
     for(key in signUpCheckObj){
         if( !signUpCheckObj[key] ){
 
             let message;
             
             switch(key){
-            case "id" : message = "아이디가 유효하지 않습니다."; break;
-            case "name" : message = "이름이 유효하지 않습니다."; break;
-            case "email" : message = "이메일이 유효하지 않습니다."; break;
+            case "memberId" : message = "아이디가 유효하지 않습니다."; break;
+            case "memberNm" : message = "이름이 유효하지 않습니다."; break;
+            case "memberEmail" : message = "이메일이 유효하지 않습니다."; break;
             case "pwd1" : message = "비밀번호가 유효하지 않습니다."; break;
             case "pwd2" : message = "비밀번호가 일치하지 않습니다."; break;
-            case "phone3" : message = "전화번호가 유효하지 않습니다."; break;
+            case "memberPhone3" : message = "전화번호가 유효하지 않습니다."; break;
             }
 
             alert(message);
@@ -34,8 +34,116 @@ function validate(){
         }
 
     }
-	*/
+
 }
+
+// ID 유효성 검사
+document.getElementById("memberId").addEventListener("input", function(e){
+
+    const inputId = this.value;
+    const regExp = /^[a-zA-Z\d]{5,20}$/;
+    
+    const checkId = document.getElementById("checkId");
+
+    // 유효성 검사
+    if(inputId.length == 0){
+        $(checkId).text("");
+        signUpCheckObj.memberId = false;
+
+    }else if( regExp.test(inputId)){
+
+        $.ajax({
+            url : "idDupCheck",
+            data : {"inputId" : inputId},
+            type : "GET",                
+            success : function(result){
+
+                if(result == 0){
+                    checkId.innerText = "사용 가능";
+                    checkId.style.color = "green";
+                    signUpCheckObj.memberId = true;
+
+                }else{
+                    checkId.innerText = "중복";
+                    checkId.style.color = "red";
+                    signUpCheckObj.memberId = false;
+
+                }
+
+            },   
+
+            error : function(request, status, error){
+                
+				if(request.status == 404){
+                    console.log("ajax 요청 주소가 올바르지 않습니다.");
+                    
+                }else if(request.status == 500){
+                    console.log("서버 내부 에러 발생");
+                    console.log(request.responText);
+                }
+				
+            },
+            complete : function(){
+                console.log("complete");
+            }
+
+        });
+
+    }else{
+        $(checkId).text("5글자 이상").css("color", "red");
+        signUpCheckObj.memberId = false;
+    }
+
+})
+
+
+// 이메일 유효성 검사
+$("#memberEmail").on("input", function(){
+    const inputEmail = $(this).val();
+    const regExp = /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/;
+
+    if(inputEmail.length == 0){
+        $("#checkEmail").text("");
+        signUpCheckObj.memberEmail = false;
+    }else if(regExp.test(inputEmail)){
+
+        $.ajax({
+            url : "emailDupCheck",
+            type : "GET",
+            data : {"inputEmail" : inputEmail},
+            success : function(result){
+                
+                if(result == 0){
+                    $("#checkEmail").text("사용 가능").css("color", "green");
+                    signUpCheckObj.memberEmail = true;
+                }else{
+                    $("#checkEmail").text("중복").css("color", "red");
+                    signUpCheckObj.memberEmail = false;
+                }
+                
+            },
+            error : function(request, status, error){
+
+                if(request.status == 404){
+                    console.log("ajax 요청 주소가 올바르지 않습니다.");
+                    
+                }else if(request.status == 500){
+                    console.log("서버 내부 에러 발생");
+                    console.log(request.responText);
+                }
+
+            },
+            complete : function(){
+                console.log("complete");
+            }
+
+        });
+
+    }else{
+        $("#checkEmail").text("");
+        signUpCheckObj.memberEmail = false;
+    }
+})
 
 
 // 이름 유효성 검사
@@ -47,13 +155,13 @@ $("#memberNm").on("input", function(){
 
     if(inputName.length == 0){
         $("#checkNm").text("");
-        signUpCheckObj.name = false;
+        signUpCheckObj.memberNm = false;
     }else if(regExp.test(inputName)){
 		$("#checkNm").text("");
-        signUpCheckObj.name = true;
+        signUpCheckObj.memberNm = true;
     }else{
         $("#checkNm").text("사용 불가").css("color", "red");
-        signUpCheckObj.name = false;
+        signUpCheckObj.memberNm = false;
     }
 
 })
@@ -123,11 +231,11 @@ $(".phone-length").on("input", function(){
     const regExp3 = /^\d{4}$/;
 
     if(inputPhone2.length == 0 && inputPhone3.length == 0 ){
-        signUpCheckObj.phone3 = false;
+        signUpCheckObj.memberPhone3 = false;
     }else if(regExp2.test(inputPhone2) && regExp3.test(inputPhone3)){
-        signUpCheckObj.phone3 = true;
+        signUpCheckObj.memberPhone3 = true;
     }else{
-        signUpCheckObj.phone3 = false;
+        signUpCheckObj.memberPhone3 = false;
     }
 
 })
