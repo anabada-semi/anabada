@@ -1,5 +1,6 @@
 package anabada.semi.member.controller;
 
+import java.io.IOException;
 import java.net.PasswordAuthentication;
 import java.util.Properties;
 import java.util.Random;
@@ -7,6 +8,7 @@ import java.util.Random;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +20,12 @@ import anabada.semi.member.model.vo.Member;
 
 @WebServlet("/member/emailSend")
 public class EmailSend extends HttpServlet{
-	/*
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String memberId = request.getParameter("memberId");
+		String memberId = request.getParameter("memberId");
         String email = request.getParameter("email");
         
+        /*
         //먼저 아이디로 회원정보를 받아오고 가져온 데이터에서 email값을 비교하여 존재하지 않으면 인증메일 보내지 못함
         Member m = new MemberService().memberLogin(memberId);
         if(m==null || !m.getEmail().equals(email))
@@ -100,6 +103,9 @@ public class EmailSend extends HttpServlet{
                 //패스워드 바꿀때 뭘 바꿀지 조건에 들어가는 id
                 request.setAttribute("id", memberId);
                 request.getRequestDispatcher("/views/login_myPage/searchPasswordEnd.jsp").forward(request, response);
+		 
+		
+		System.out.println("넘 어려워");
+		*/
     }
-	*/
 }
