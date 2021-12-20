@@ -26,5 +26,19 @@
 		    FROM ITEM_IMG
 		WHERE ITEM_NO = ?
 	</entry>
+
+	<!-- 댓글 조회 -->
+	<entry key="selectReplyList">
+		SELECT REPLY_NO, REPLY_CONTENT, REPLY_DT, REPLY_SECRET, MEMBER_NO, REPLY_STATUS_CD, MEMBER_NM 
+			FROM REPLY
+		JOIN MEMBER USING(MEMBER_NO)
+		WHERE ITEM_NO = ?
+	</entry>
+
+	<!-- 댓글 삽입 -->
+	<entry key="insertReply">
+		INSERT INTO REPLY 
+		VALUES(SEQ_REPLY_NO.NEXTVAL, ?, default, ?, ?, ?, default);
+	</entry>
 	
 </properties>

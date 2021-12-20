@@ -4,7 +4,7 @@ function selectReplyList() {
     // ajax를 이용해 비동기로 댓글 목록 조회 및 출력
     $.ajax({
         url : contextPath + "/reply/select",
-        data : {"itemNo" : itemNo},
+        data : {"itemNo" : itemNo}, // 
         type : "GET",
         dataType : "JSON",  // 반환되는 데이터 형식 지정 -> 응답 받은 후 형변환 진행
         success : function(rList){
@@ -63,24 +63,13 @@ function selectReplyList() {
 // 댓글 등록
 function addReply(){
 
-    // 상품 번호(itemNo), 로그인한 회원 번호(loginMemberNo)
-    if(loginMemberNo == ""){    // 로그인이 되어 있지 않은 경우
-        alert("로그인 후 이용해 주세요.");
-
-    }else{  // 로그인한 경우
-
-        // 댓글 미작성한 경우
-        if( $("#replyContent").val().trim().length == 0 ){
-            alert("댓글을 작성한 후 버튼을 클릭해주세요.");
-            $("#replyContent").focus();
-
-        } else{ // 댓글을 작성한 경우
-            
+    
             $.ajax({
                 url : contextPath + "/reply/insert",
                 data : {"memberNo" : loginMemberNo, 
                         "itemNo" : itemNo, 
-                        "replyContent" : $("#replyContent").val()
+                        "replyContent" : $("#replyContent").val(),
+                        "secret" : $("#secret").prop("checked")
                         },
                 type : "POST",  // insert는 대부분 post 방식
                 // dataType : "JSON",   // 성공 실패만 알면 되므로 JSON 필요 없음
@@ -101,7 +90,5 @@ function addReply(){
                 }
             });
 
-        }
-
-    }
+        
 }

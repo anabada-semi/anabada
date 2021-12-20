@@ -11,9 +11,20 @@
                 <img src="${contextPath}/resources/images/itemIcon/home.png"> 홈 >
                
                	<label>카테고리</label>
+
+
                 <select class="item-category-list">
-                	<c:forEach items="${categoryList}" var="c">
-                		<option value="${c.categoryCode}">${c.categoryName}</option>
+                    <c:forEach items="${categoryList}" var="c">
+
+                        <c:choose>
+                            <c:when test="${c.categoryCode == item.categoryCode}">
+                                <option value="${c.categoryCode}" selected>${c.categoryName}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${c.categoryCode}">${c.categoryName}</option>
+                            </c:otherwise>
+                        </c:choose>
+
                 	</c:forEach>	
                 </select>
                 
@@ -69,38 +80,40 @@
                             <button id="reply-submit" onclick="addReply();">등록</button>
                         </div>
 
+
                         <div class="reply-div">
-                            <ul>
-
-                                
-                                <div>
-                                    <li class="reply-row">
-                                        <div>
-                                            <p class="rWriter">유저1</p><p class="rDate">2021-12-20</p>
-                                        </div>
-                                        <p class="rContent">댓글입니다.</p>
-                                    </li>
-                                </div>
+                            <ul id="replyListArea">
+                                <c:forEach items="${rList}" var="reply">
 
                                 <div>
                                     <li class="reply-row">
                                         <div>
-                                            <p class="rWriter">유저1</p><p class="rDate">2021-12-20</p>
+                                            <p class="rWriter">${reply.memberName}</p>
+                                            <p class="rDate">작성일 : ${reply.replyDate }</p>
                                         </div>
-                                        <p class="rContent">댓글입니다.</p>
+
+                                        <c:choose>
+                                            <c:when test="${reply.replySecret} == 2">
+                                                <c:when test = "${reply.memberNo == loginMember.memberNo} || ${item.memberNo == loginMember.memberNo}">
+                                                    <p class="rContent">${reply.replyContent }</p>
+                                                </c:when>
+                                                <p class="rContent">비밀글 입니다.</p>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <p class="rContent">${reply.replyContent }</p>
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                        <c:if test="${reply.memberNo == loginMember.memberNo}">
+                                            <div class="replyBtnArea">
+                                                <button id="updateReply" onclick="showUpdateReply("${reply.replyNo}, this)">수정</button>
+                                                <button id="deleteReply" onclick="deleteReply(${reply.replyNo})">삭제</button>
+                                            </div>
+                                        </c:if>
                                     </li>
                                 </div>
 
-                                <div>
-                                    <li class="reply-row">
-                                        <div>
-                                            <p class="rWriter">유저1</p><p class="rDate">2021-12-20</p>
-                                        </div>
-                                        <p class="rContent">댓글입니다.</p>
-                                    </li>
-                                </div>
-
-
+                                </c:forEach>
 
                             </ul>
                         </div>
@@ -132,24 +145,19 @@
             </div>
         </main>
     
-    <script>
+      <script>
+        const contextPath = "${contextPath}";
 
-	// 전역 변수로 댓글 관련 기능에 사용될 변수를 미리 선언
-	// -> 이 때 JSP에서만 사용 가능한 EL 값을 전역 변수로 선언하면
-	//    아래 쪽에 추가된 js파일에서 사용 가능
-	
-	const contextPath = "${contextPath}";
-	
-	// 로그인한 회원의 회원 번호, 비로그인 시 "" (빈문자열)
-	const loginMemberNo = "${loginMember.memberNo}";
-	
-	// 현재 게시글 번호
-	const boardNo = ${board.boardNo};
-	
-	// 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
-	let beforeReplyRow;
-	
-	</script>
-    
+        // 로그인한 회원의 회원 번호, 비로그인 시 "" (빈문자열)
+        const loginMemberNo = "${loginMember.memberNo}";
+        
+        // 현재 게시글 번호
+        const itemNo = ${item.itemNo};
+
+        // 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
+        let beforeReplyRow;
+      </script>  
+
+      <script src="${contextPath}/resources/js/detailSelectItem.js"></script>
     <!-- footer include -->
 	<jsp:include page="footer.jsp" />

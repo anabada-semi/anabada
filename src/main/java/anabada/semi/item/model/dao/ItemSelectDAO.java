@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.item.model.vo.ItemImg;
+import anabada.semi.item.model.vo.Reply;
 
 public class ItemSelectDAO {
 
@@ -36,6 +37,11 @@ public class ItemSelectDAO {
 
 	
 	
+	/** 카테고리 조회
+	 * @param conn
+	 * @return categoryList
+	 * @throws Exception
+	 */
 	public List<Item> selectCategory(Connection conn) throws Exception{
 		
 		List<Item> categoryList = new ArrayList<Item>();
@@ -60,10 +66,8 @@ public class ItemSelectDAO {
 			close(rs);
 			close(pstmt);
 		}
-		
 		return categoryList;
 	}
-
 
 
 	/** 상품 조회
@@ -110,8 +114,6 @@ public class ItemSelectDAO {
 		return item;
 	}
 
-
-
 	public List<ItemImg> selectItemImg(int itemNo, Connection conn)  throws Exception{
 
 		List<ItemImg> itemImg = new ArrayList<ItemImg>();
@@ -141,6 +143,70 @@ public class ItemSelectDAO {
 			close(pstmt);
 		}
 		return itemImg;
+	}
+
+	/** 댓글 조회
+	 * @param itemNo
+	 * @param conn
+	 * @return replyList
+	 * @throws Exception
+	 */
+	public List<Reply> selectReplyList(int itemNo, Connection conn) throws Exception{
+		
+		List<Reply> replyList = new ArrayList<Reply>();
+		try {
+			String sql = prop.getProperty("selectReplyList");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, itemNo);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				Reply reply = new Reply();
+				
+				reply.setReplyNo(rs.getInt("REPLY_NO"));
+				reply.setReplyContent(rs.getString("REPLY_CONTENT"));
+				reply.setReplyDate(rs.getTimestamp("REPLY_DT"));
+				reply.setReplySecret(rs.getInt("REPLY_SECRET"));
+				reply.setMemberNo(rs.getInt("MEMBER_NO"));
+				reply.setReplyStatusCode(rs.getInt("REPLY_STATUS_CD"));
+				reply.setMemberName(rs.getString("MEMBER_NM"));
+				
+				replyList.add(reply);
+			}
+			
+		} finally {
+			close(rs); 
+			close(pstmt);
+		}
+		return replyList;
+	}
+
+
+
+	/** 댓글 삽입
+	 * @param reply
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertReply(Reply reply, Connection conn) throws Exception{
+		int result = 0;
+		try {
+			String sql = prop.getProperty("insertReply");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, reply.getReplyContent());
+			pstmt.setInt(2, reply.getReplySecret());
+			pstmt.setInt(3, reply.getMemberNo());
+			pstmt.setInt(4, reply.getItemNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return 0;
 	}
 
 

@@ -8,6 +8,7 @@ import java.util.List;
 import anabada.semi.item.model.dao.ItemSelectDAO;
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.item.model.vo.ItemImg;
+import anabada.semi.item.model.vo.Reply;
 
 public class ItemSelectService {
 
@@ -62,6 +63,41 @@ public class ItemSelectService {
 		close(conn);
 		
 		return ItmeImg;
+	}
+
+
+	/** 댓글 조회
+	 * @param itemNo
+	 * @return replyList
+	 * @throws Exception
+	 */
+	public List<Reply> selectReplyList(int itemNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		List<Reply> replyList = dao.selectReplyList(itemNo, conn);
+		
+		close(conn);
+		
+		return replyList;
+	}
+
+
+	/** 댓글 삽입
+	 * @param reply
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertReply(Reply reply) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.insertReply(reply, conn);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		return result;
 	}
 	
 }
