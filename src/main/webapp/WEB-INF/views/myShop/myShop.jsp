@@ -12,7 +12,9 @@
 			<div class="head1">
 				<div id="h1">
 					<div>
-						<img id="img" src="${contextPath}/resources/images/myShop/profile/바다.jpg">
+						<form style="display: inline-block;" action="insert" method="post" enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">
+							<img class="imgProfile" src="${contextPath}/resources/images/myShop/profile/기본 프로필.png">
+						</form>
 						<div id="userNameDiv">
 							<span id="userName123">userName</span>
 						</div>
@@ -29,6 +31,10 @@
 							 -->
 					</div>
 				</div>
+			</div>
+
+			<div id="fileArea">
+				<input type="file" name="img0" onchange="loadImg(this,0)">
 			</div>
 
 

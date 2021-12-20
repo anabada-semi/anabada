@@ -29,6 +29,14 @@
 		DELETE FROM MEMBER
 		WHERE MEMBER_NO = ?
 	</entry>
+	
+	<entry key="selectShop">
+		SELECT * FROM SHOP WHERE MEMBER_NO = ?
+	</entry>
+	
+	<entry key="createShop">
+		INSERT INTO SHOP VALUES(?, '소개글', ?)
+	</entry>
 
 </properties>
 

@@ -101,6 +101,7 @@
 
 
  <script>
+ const postScriptNo = ${postScript.postScriptNo}
 	(function(){
 		$("#postScriptText").text($(".userPost").length);
 	}());

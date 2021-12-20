@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import anabada.semi.member.model.dao.MemberDAO;
 import anabada.semi.member.model.vo.Member;
+import anabada.semi.shop.model.vo.Shop;
 
 public class MemberDAO {
 	
@@ -177,6 +178,45 @@ public class MemberDAO {
 			}
 			
 			return result;
+		}
+
+
+		public Shop selectShop(int memberNo, Connection conn) throws Exception {
+			Shop shop = null;
+			try {
+				String sql = prop.getProperty("selectShop");
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, memberNo);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					shop.setMemberNo(memberNo);
+					shop.setShopIntroduce(rs.getString("SHOP_INTRODUCE"));
+					shop.setShopName(rs.getString("SHOP_NM"));
+				}
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return shop;
+		}
+
+
+		public int createShop(int memberNo, String memberNm, Connection conn) throws Exception {
+			int createS = 0;
+			try {
+				String sql = prop.getProperty("createShop");
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, memberNo);
+				pstmt.setString(2, memberNm);
+				
+				createS = pstmt.executeUpdate();
+				
+			} finally {
+				close(pstmt);
+			}
+			return createS;
 		}
 
 
