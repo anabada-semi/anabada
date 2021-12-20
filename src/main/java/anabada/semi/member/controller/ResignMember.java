@@ -7,6 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import anabada.semi.member.model.service.MemberService;
+import anabada.semi.member.model.vo.Member;
 
 @WebServlet("/member/resignMember")
 public class ResignMember extends HttpServlet {
@@ -16,6 +20,35 @@ public class ResignMember extends HttpServlet {
 		
 		String path = "/WEB-INF/views/member/resignMember.jsp";
 		req.getRequestDispatcher(path).forward(req, resp);
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String memberPw = req.getParameter("memberPw");
+		HttpSession session = req.getSession();
+		
+		int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+		
+		MemberService service = new MemberService();
+		
+		try {
+			int result = service.resignMember(memberPw, memberNo);
+			
+			if(result > 0) {
+				req.setAttribute("message", "회원이 탈퇴되었습니다.");
+				
+				resp.sendRedirect(req.getContextPath());
+				
+			}else {
+				req.setAttribute("message", "비밀번호가 일치하지 않습니다.");
+
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 

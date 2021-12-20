@@ -3,6 +3,7 @@
 
 <properties>
 
+	<!-- 로그인 -->
 	<entry key="login">
 		SELECT *
 		FROM MEMBER
@@ -10,9 +11,23 @@
 		AND MEMBER_PW = ?
 	</entry>
 	
+	<!-- 회원가입 -->
 	<entry key="signUp">
 		INSERT INTO MEMBER VALUES
 		(SEQ_MEMBER_NO.NEXTVAL, ?, ?, ?, ?, ?, ?, DEFAULT)
+	</entry>
+
+	<!-- 비밀번호 확인 -->
+	<entry key="passwordChk">
+		SELECT COUNT(*) 
+		FROM MEMBER
+		WHERE MEMBER_PW = ?
+	</entry>
+	
+	<!-- 회원탈퇴 -->
+	<entry key="resignMember">
+		DELETE FROM MEMBER
+		WHERE MEMBER_NO = ?
 	</entry>
 
 </properties>

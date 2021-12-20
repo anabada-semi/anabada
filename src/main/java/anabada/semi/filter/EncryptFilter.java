@@ -29,7 +29,7 @@ import anabada.semi.wrapper.EncryptWrapper;
 // @WebFilter : 어떤 요청을 필터링할지 주소를 작성하고
 //				필터에 이름을 부여하여 필터링 순서를 지정할 수 있게하는 어노테이션
 
-@WebFilter(filterName = "encryptFilter", urlPatterns = {"/member/login" , "/member/signUp"})
+@WebFilter(filterName = "encryptFilter", urlPatterns = {"/member/login" , "/member/signUp" , "/member/resignMember"})
 public class EncryptFilter implements Filter {
 
 	public void init(FilterConfig fConfig) throws ServletException {
