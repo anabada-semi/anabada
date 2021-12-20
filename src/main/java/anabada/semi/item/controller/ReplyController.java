@@ -49,22 +49,41 @@ public class ReplyController extends HttpServlet{
 				int memberNo = Integer.parseInt(req.getParameter("memberNo"));
 				int itemNo = Integer.parseInt(req.getParameter("itemNo"));
 				String replyContent = req.getParameter("replyContent");
-
+				
 				if(req.getParameter("secret") == "true") {
 					reply.setReplySecret(1);	// 비밀O
 				} else {
 					reply.setReplySecret(2);	// 비밀X
 				}
 				
+				System.out.println("secret:"+reply.getReplySecret());
+				
 				reply.setMemberNo(memberNo);
 				reply.setItemNo(itemNo);
 				reply.setReplyContent(replyContent);
-				reply.setReplySecret(itemNo);
 				
 				int result = service.insertReply(reply);
 				
-				resp.getWriter().print(result);
+				System.out.println("result: " + result);
 				
+				resp.getWriter().print(result);
+			}
+			
+			// 댓글 수정
+			else if(command.equals("update")) {
+				
+				int replyNo = Integer.parseInt(req.getParameter("replyNo"));
+				String replyContent = req.getParameter("replyContent");
+				
+				resp.getWriter().print(service.updateReply(replyNo, replyContent));
+			}
+			
+			// 댓글 삭제
+			else if(command.equals("delete")) {
+				
+				int replyNo = Integer.parseInt(req.getParameter("replyNo"));
+
+				resp.getWriter().print(service.deleteReply(replyNo));
 			}
 			
 			

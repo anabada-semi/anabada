@@ -182,8 +182,6 @@ public class ItemSelectDAO {
 		return replyList;
 	}
 
-
-
 	/** 댓글 삽입
 	 * @param reply
 	 * @param conn
@@ -191,6 +189,7 @@ public class ItemSelectDAO {
 	 * @throws Exception
 	 */
 	public int insertReply(Reply reply, Connection conn) throws Exception{
+		
 		int result = 0;
 		try {
 			String sql = prop.getProperty("insertReply");
@@ -206,7 +205,60 @@ public class ItemSelectDAO {
 		} finally {
 			close(pstmt);
 		}
-		return 0;
+		
+		return result;
+	}
+
+
+	/** 댓글 수정
+	 * @param replyNo
+	 * @param replyContent
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateReply(int replyNo, String replyContent, Connection conn) throws Exception{
+
+		int result = 0;
+		try {
+			String sql = prop.getProperty("updateReply");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, replyContent);
+			pstmt.setInt(2, replyNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	/** 댓글 삭제
+	 * @param replyNo
+	 * @param conn
+	 * @return 
+	 * @throws Exception
+	 */
+	public int deleteReply(int replyNo, Connection conn) throws Exception{
+		
+		int result = 0;
+		try {
+			String sql = prop.getProperty("deleteReply");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, replyNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 

@@ -91,25 +91,50 @@
                                             <p class="rWriter">${reply.memberName}</p>
                                             <p class="rDate">작성일 : ${reply.replyDate }</p>
                                         </div>
-
                                         <c:choose>
-                                            <c:when test="${reply.replySecret} == 2">
-                                                <c:when test = "${reply.memberNo == loginMember.memberNo} || ${item.memberNo == loginMember.memberNo}">
-                                                    <p class="rContent">${reply.replyContent }</p>
-                                                </c:when>
-                                                <p class="rContent">비밀글 입니다.</p>
+                                            <c:when test="${reply.replySecret == 1}">
+                                                <c:choose>
+                                                    <c:when test = "${reply.memberNo == loginMember.memberNo} || ${item.memberNo == loginMember.memberNo}">
+                                                        <p class="rContent">${reply.replyContent }</p>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <p class="rContent">비밀글 입니다.</p>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </c:when>
                                             <c:otherwise>
                                                 <p class="rContent">${reply.replyContent }</p>
                                             </c:otherwise>
                                         </c:choose>
-
+                                       
                                         <c:if test="${reply.memberNo == loginMember.memberNo}">
                                             <div class="replyBtnArea">
-                                                <button id="updateReply" onclick="showUpdateReply("${reply.replyNo}, this)">수정</button>
                                                 <button id="deleteReply" onclick="deleteReply(${reply.replyNo})">삭제</button>
+                                                <button id="updateReply" onclick="showUpdateReply(${reply.replyNo}, this)">수정</button>
                                             </div>
                                         </c:if>
+                                        <c:if test="${item.memberNo == loginMember.memberNo && reply.memberNo != loginMember.memberNo}">
+                                            <div class="replyBtnArea">
+                                                <button id="updateReply" onclick="answerReply(${reply.replyNo}, ${loginMember.memberNo}, this)">답글</button>
+                                            </div>
+                                        </c:if>
+
+                                        <div>
+                                            <ul id="answerListArea">
+                                                <li class="answer-row">
+                                                    <p class="answer-sign">⤷</p>
+                                                    <div class="answer-padding">
+                                                        <p class="rWriter">작성자 : ${reply.memberName}</p>
+                                                        <p class="rDate">작성일 : ${reply.replyDate }</p>
+                                                        <p class="rContent">작성 내용 : ${reply.replyContent }</p>
+                                                    </div>
+
+
+                                                </li>
+                                            </ul>
+                                        </div>
+
+
                                     </li>
                                 </div>
 
@@ -139,7 +164,7 @@
                         </div>
 
 
-                        <button class="btn-more">후기 더보기 > </button>
+                        <button class="more-review">후기 더보기 > </button>
                     </div>
                 </div>
             </div>
@@ -156,6 +181,9 @@
 
         // 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
         let beforeReplyRow;
+
+        // 수정 전 답변글 요소를 저장할 변수 (답변글 수정 시 사용)
+        let beforeAnswerRow;
       </script>  
 
       <script src="${contextPath}/resources/js/detailSelectItem.js"></script>

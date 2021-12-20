@@ -32,13 +32,31 @@
 		SELECT REPLY_NO, REPLY_CONTENT, REPLY_DT, REPLY_SECRET, MEMBER_NO, REPLY_STATUS_CD, MEMBER_NM 
 			FROM REPLY
 		JOIN MEMBER USING(MEMBER_NO)
-		WHERE ITEM_NO = ?
+		WHERE ITEM_NO = ? and REPLY_STATUS_CD = 1
 	</entry>
 
 	<!-- 댓글 삽입 -->
 	<entry key="insertReply">
 		INSERT INTO REPLY 
-		VALUES(SEQ_REPLY_NO.NEXTVAL, ?, default, ?, ?, ?, default);
+		VALUES(SEQ_REPLY_NO.NEXTVAL, ?, default, ?, ?, ?, default)
 	</entry>
+	
+	<!-- 댓글 수정 -->
+	<entry key="updateReply">
+		update reply set reply_content = ?
+		where reply_no = ?
+	</entry>
+	
+	<!-- 댓글 삭제 -->
+	<entry key="deleteReply">
+		update reply set REPLY_STATUS_CD = 2
+		where reply_no = ?
+	</entry>
+	
+	
+	
+	
+	
+	
 	
 </properties>
