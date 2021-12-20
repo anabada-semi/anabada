@@ -59,8 +59,6 @@ public class LoginServlet extends HttpServlet{
 				
 			}
 			
-			System.out.println(loginMember);
-			
 			resp.sendRedirect(req.getContextPath());
 
 		}catch(Exception e) {
