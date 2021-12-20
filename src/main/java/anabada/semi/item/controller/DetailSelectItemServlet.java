@@ -15,7 +15,6 @@ import anabada.semi.item.model.service.ItemSelectService;
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.item.model.vo.ItemImg;
 import anabada.semi.item.model.vo.Time;
-import edu.kh.semi.board.model.vo.Reply;
 
 @WebServlet("/detail")
 public class DetailSelectItemServlet extends HttpServlet{
