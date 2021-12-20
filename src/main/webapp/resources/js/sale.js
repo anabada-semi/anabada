@@ -70,6 +70,40 @@ function saleValidate() {
 
         }
     
-
-
     }
+
+$(function() {
+    $(".itemImg").on("click", function(){
+        var index = $(".itemImg").index(this);
+
+        $("[type=file").eq(index).click();
+
+    });
+
+});
+
+
+function loadImg(value, num){
+
+    if(value.files && value.files[0]){
+
+        var reader = new FileReader();
+
+        reader.readAsDataURL(value.files[0]);
+
+        reader.onload = function(e){
+
+           
+
+            $(".itemImg").eq(num).children("img").attr("src",e.target.result);
+            
+
+        }
+    }
+
+
+
+
+
+
+}
