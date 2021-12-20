@@ -178,7 +178,7 @@
 	    }
 	</script>
 	
-	<script src="${contextPath}/resources/js/member.js"></script>
+	<script src="${contextPath}/resources/js/myInfoModify.js"></script>
 	
 
     <!-- footer include -->
