@@ -49,6 +49,17 @@
 		SELECT COUNT(*) FROM MEMBER
 		WHERE MEMBER_EMAIL = ?
 	</entry>
+	
+	<!-- 내 정보 수정 -->
+	<entry key="myInfoModify">
+		UPDATE MEMBER SET
+		MEMBER_PW = ?,
+		MEMBER_NM = ?,
+		MEMBER_EMAIL = ?,
+		MEMBER_PHONE = ?,
+		ADDRESS = ?
+		WHERE MEMBER_NO = ?
+	</entry>
 
 </properties>
 

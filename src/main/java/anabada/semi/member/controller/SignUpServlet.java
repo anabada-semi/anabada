@@ -56,7 +56,8 @@ public class SignUpServlet extends HttpServlet{
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-			
+			req.setAttribute("errorMessage", "회원가입 과정에서 문제 발생");
+			req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);
 		}
 		
 

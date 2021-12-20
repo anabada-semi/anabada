@@ -144,4 +144,25 @@ public class MemberService {
 		return result;
 	}
 
+
+	
+	/** 내 정보 수정
+	 * @param member
+	 * @return result(1 성공)
+	 * @throws Exception
+	 */
+	public int myInfoModify(Member member) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.myInfoModify(member, conn);
+		
+		if(result > 0) commit(conn);
+		else		   rollback(conn);
+
+		close(conn);
+		
+		return result;
+	}
+
 }
