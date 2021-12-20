@@ -28,7 +28,9 @@ public class MyinfoModify extends HttpServlet{
 
 		HttpSession session = req.getSession();
 		
-		int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		
+		int memberNo = loginMember.getMemberNo();
 		
 		String memberPw = req.getParameter("memberPw");
 		String memberNm = req.getParameter("memberNm");
@@ -48,6 +50,12 @@ public class MyinfoModify extends HttpServlet{
 			MemberService service = new MemberService();
 			
 			int result = service.myInfoModify(member);
+			
+			loginMember.setMemberPw(memberPw);
+			loginMember.setMemberNm(memberNm);
+			loginMember.setMemberEmail(memberEmail);
+			loginMember.setMemberPhone(memberPhone);
+			loginMember.setMemberAddress(memberAddress);
 			
 			String path = "/WEB-INF/views/member/myPage.jsp";
 			req.getRequestDispatcher(path).forward(req, resp);
