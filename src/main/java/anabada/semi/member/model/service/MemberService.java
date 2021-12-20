@@ -5,7 +5,6 @@ import static anabada.semi.common.JDBCTemplate.close;
 import static anabada.semi.common.JDBCTemplate.commit;
 import static anabada.semi.common.JDBCTemplate.getConnection;
 import static anabada.semi.common.JDBCTemplate.rollback;
-import static edu.kh.semi.common.JDBCTemplate.close;
 
 import java.sql.Connection;
 
