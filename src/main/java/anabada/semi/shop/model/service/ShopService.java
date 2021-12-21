@@ -45,10 +45,10 @@ public class ShopService {
 		return result;
 	}
 
-	public List<Item> selectItem(int memberNo) throws Exception {
+	public List<Item> selectItem(int shopNo) throws Exception {
 		Connection conn = getConnection();
 		
-		List<Item> itemList = dao.selectItem(memberNo, conn);
+		List<Item> itemList = dao.selectItem(shopNo, conn);
 		
 		close(conn);
 		

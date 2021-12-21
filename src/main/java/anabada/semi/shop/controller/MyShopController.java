@@ -51,12 +51,6 @@ public class MyShopController extends HttpServlet {
 			if(command.equals("itemList")) {
 				if(method.equals("GET")) {
 					
-					int memberNo = ((Member)(session.getAttribute("loginMember"))).getMemberNo();
-					
-					List<Item> itemList = service.selectItem(memberNo);
-
-					session.setAttribute("itemList", itemList);
-					
 					path = "/WEB-INF/views/myShop/itemList.jsp";
 					req.getRequestDispatcher(path).forward(req, resp);
 					
@@ -142,7 +136,6 @@ public class MyShopController extends HttpServlet {
 						shop = new MemberService().selectShop(shopNo);
 					
 					req.setAttribute("locationShop", shop);
-					
 					session.setAttribute("shopNo", shopNo);
 					
 					req.getRequestDispatcher("/WEB-INF/views/myShop/myShop.jsp").forward(req, resp);
@@ -172,6 +165,12 @@ public class MyShopController extends HttpServlet {
 				}else {
 					
 				}
+			}else if(command.equals("selectItemList")) {
+				int shopNo = (int)session.getAttribute("shopNo");
+				
+				List<Item> iList = service.selectItem(shopNo);
+				req.setAttribute("itemList", iList);
+				new Gson().toJson(iList, resp.getWriter());
 			}
 			
 		} catch (Exception e) {
