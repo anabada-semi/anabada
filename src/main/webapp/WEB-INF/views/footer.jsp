@@ -5,7 +5,7 @@
 		<hr style= "border : none; border-top: 1px solid #ccc; width: 100%;">
         <footer>
 			<div class="footer-div">
-	        	<div class="footer-info-left">
+	        	<div class="footer-info-left header-font" >
 		           	<ul>
 		           		<li><b>아나바다(주) 사업자정보</b></li>
 		           		<li>대표이사 : 아나바다</li>
@@ -17,7 +17,7 @@
 		           	</ul>
 	        	</div>
 				
-				<div class="footer-info-right">
+				<div class="footer-info-right header-font">
 		           	<ul>
 		           		<li><b>고객센터</b></li>
 		           		<li>1234-1234</li>

@@ -29,7 +29,6 @@ section{
 }
 
 #item-box{
-    height: 1500px;
     margin: 0 auto;
     font-family: 'GmarketSansMedium';
 }
@@ -92,6 +91,7 @@ section{
     width: 310px;
     height: 80px;
     margin: auto;
+    margin-bottom: 50px;
 }
 
 .move-button > p{

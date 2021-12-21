@@ -15,6 +15,17 @@ public class Item {
 	private int memberNo;
 	private int readCount;
 	
+	// 주소
+	private String address;
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	private String uploadDate;
 	
 	public String getUploadDate() {
