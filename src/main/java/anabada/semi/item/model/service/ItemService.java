@@ -7,6 +7,7 @@ import java.util.List;
 
 import anabada.semi.common.XSS;
 import anabada.semi.item.model.dao.ItemDAO;
+import anabada.semi.item.model.dao.ItemSelectDAO;
 import anabada.semi.item.model.vo.Category;
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.item.model.vo.ItemImg;
@@ -14,6 +15,7 @@ import anabada.semi.item.model.vo.ItemImg;
 public class ItemService {
 	
 	private ItemDAO dao = new ItemDAO();
+	private ItemSelectDAO selDao = new ItemSelectDAO();
 
 	
 	/** 카테고리 조회
@@ -76,6 +78,30 @@ public class ItemService {
 		close(conn);
 		
 		return result;
+	}
+
+	
+
+	/** 수정화면 전환
+	 * @param itemNo
+	 * @return item
+	 * @throws Exception
+	 */
+	public Item updateView(int itemNo)throws Exception {
+
+		Connection conn = getConnection();
+		
+		Item item = selDao.selectItem(itemNo, conn);
+		
+		List<ItemImg> imgList = selDao.selectItemImg(itemNo, conn);
+		
+		item.setImgList(imgList);
+		
+		item.setItemInfo(item.getItemInfo().replaceAll("<br>", "\r\n") );
+		
+		close(conn);
+		
+		return item;
 	}
 	
 

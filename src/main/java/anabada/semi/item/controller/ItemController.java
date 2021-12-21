@@ -123,9 +123,21 @@ public class ItemController extends HttpServlet{
 				
 			}
 			
-			else if(command.equals("update")) {
+			else if(command.equals("updateForm")) {
+				
+				int itemNo = 33;
+				
+				Item item = service.updateView(itemNo);
+				
+				List<Category> category = service.selectCategory();
+				
+				req.setAttribute("item", item);
+				req.setAttribute("category", category);
+				
 				path = "/WEB-INF/views/saleUpdatePage.jsp";
 				req.getRequestDispatcher(path).forward(req, resp);
+				
+				
 				
 				
 			}
