@@ -68,7 +68,7 @@
 									</div>
 								</c:when>
 								<c:otherwise>
-									<div class="shop" onclick="location.href='${contextPath}/myShop/myShop';">
+									<div class="shop" onclick="location.href='${contextPath}/myShop/myShop?no=${loginMember.memberNo}';">
 										<img src="${contextPath}/resources/images/header+footer/내상점.png">
 										<p id="shop">내상점</p>
 										<!-- &nbsp;내상점 -->

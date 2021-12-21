@@ -7,6 +7,7 @@ import java.util.List;
 
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.shop.model.dao.ShopDAO;
+import anabada.semi.shop.model.vo.PostScript;
 import anabada.semi.shop.model.vo.Shop;
 
 public class ShopService {
@@ -53,4 +54,29 @@ public class ShopService {
 		
 		return itemList;
 	}
+
+	public List<PostScript> selectPostList(int shopNo, int memberNo) throws Exception {
+		Connection conn = getConnection();
+		
+		List<PostScript> pList = dao.selectPostList(shopNo, memberNo, conn);
+		
+		close(conn);
+		
+		return pList;
+	}
+
+	public int insertPostScript(int shopNo, int memberNo, String postScript) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = dao.insertPostScript(shopNo, memberNo, postScript, conn);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
 }
