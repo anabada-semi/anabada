@@ -80,6 +80,15 @@ header{
     /* border: 1px solid blue; */
 }
 
+.header-btn-style{
+	color: gray;
+    text-decoration: none;
+}
+
+.header-font{
+	font-family: 'GmarketSansMedium';
+}
+
 #logo{
     width: 15%;
     height: 100%;
