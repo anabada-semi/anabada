@@ -77,6 +77,32 @@ public class ShopService {
 		
 		return result;
 	}
+
+	public int updatePostScript(int postNo, String postScript) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = dao.updatePostScript(postNo, postScript, conn);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int deletePostScript(int postNo) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = dao.deletePostScript(postNo, conn);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	
 }

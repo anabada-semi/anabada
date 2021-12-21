@@ -91,6 +91,15 @@
 	</div>
 </section>
 
+ 
+<div id="popup01">
+    <div class="close">close</div>
+    <div style="margin-top:20px;">Report</div>
+    <textarea class="userReportTextarea"></textarea>
+    <button id="userReportTextareaBtn" class="userReportTextareaBtn">신고하기<br>0/120</button>
+</div>
+
+
 <jsp:include page="../footer.jsp" />
 
 <script>
@@ -98,6 +107,8 @@
 	const loginMemberNo = "${loginMember.memberNo}";
 	const shopNo = "${shopNo}";
 	
+	var flag = false;
+
 
 </script>
 

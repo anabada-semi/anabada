@@ -119,7 +119,13 @@ public class MyShopController extends HttpServlet {
 					String inputName = new XSS().replaceParameter(req.getParameter("inputName"));
 					int memberNo = Integer.parseInt( req.getParameter("memberNo") );
 					
-					resp.getWriter().print(service.updateShopName(inputName, memberNo));
+					int result = service.updateShopName(inputName, memberNo);
+					if(result > 0) {
+						shop =  new MemberService().selectShop(loginMember.getMemberNo());
+						session.setAttribute("locationShop", shop);
+					}
+					
+					resp.getWriter().print(result);
 				}
 			}else if(command.equals("shopContentCng")) {
 				if(method.equals("GET")) {
@@ -149,13 +155,23 @@ public class MyShopController extends HttpServlet {
 					
 					resp.getWriter().print(service.insertPostScript(shopNo, loginMember.getMemberNo(), postScript));
 					
-				}else {
+				}
+			}else if(command.equals("updatePostScript")) {
+				if(method.equals("GET")) {
+					int postNo = Integer.parseInt(req.getParameter("postNo"));
+					String postScript = req.getParameter("postScript");
 					
+					resp.getWriter().print(service.updatePostScript(postNo, postScript));
+				}
+			}else if(command.equals("deletePostScript")) {
+				if(method.equals("GET")) {
+					int postNo = Integer.parseInt(req.getParameter("postNo"));
+					
+					resp.getWriter().print(service.deletePostScript(postNo));
 				}
 			}else if(command.equals("selectPostScript")) {
 				if(method.equals("GET")) {
 					int memberNo = Integer.parseInt(req.getParameter("memberNo"));
-					
 					int shopNo = (int)session.getAttribute("shopNo");
 					
 					List<PostScript> pList = service.selectPostList(shopNo, memberNo);
