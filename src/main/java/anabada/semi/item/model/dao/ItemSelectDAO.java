@@ -171,6 +171,8 @@ public class ItemSelectDAO {
 				reply.setMemberNo(rs.getInt("MEMBER_NO"));
 				reply.setReplyStatusCode(rs.getInt("REPLY_STATUS_CD"));
 				reply.setMemberName(rs.getString("MEMBER_NM"));
+				reply.setReplyNestedCode(rs.getInt("REPLY_NESTED_CD"));
+				reply.setReplyNestedNo(rs.getInt("REPLY_NESTED_NO"));
 				
 				replyList.add(reply);
 			}
@@ -251,6 +253,32 @@ public class ItemSelectDAO {
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, replyNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/** 대댓글 삽입
+	 * @param reply
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertReplyAnswer(Reply reply, Connection conn)  throws Exception{
+		int result = 0;
+		try {
+			String sql = prop.getProperty("insertReplyAnswer");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, reply.getReplyContent());
+			pstmt.setInt(2, reply.getMemberNo());
+			pstmt.setInt(3, reply.getItemNo());
+			pstmt.setInt(4, reply.getReplyNo());
 			
 			result = pstmt.executeUpdate();
 			

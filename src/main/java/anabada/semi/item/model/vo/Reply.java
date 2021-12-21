@@ -12,6 +12,8 @@ public class Reply {
 	private int memberNo;
 	private int itemNo;
 	private int replyStatusCode;
+	private int replyNestedCode;
+	private int replyNestedNo;
 	
 	private String memberName;
 	
@@ -75,6 +77,22 @@ public class Reply {
 		this.replyStatusCode = replyStatusCode;
 	}
 
+	public int getReplyNestedCode() {
+		return replyNestedCode;
+	}
+
+	public void setReplyNestedCode(int replyNestedCode) {
+		this.replyNestedCode = replyNestedCode;
+	}
+
+	public int getReplyNestedNo() {
+		return replyNestedNo;
+	}
+
+	public void setReplyNestedNo(int replyNestedNo) {
+		this.replyNestedNo = replyNestedNo;
+	}
+
 	public String getMemberName() {
 		return memberName;
 	}
@@ -87,9 +105,10 @@ public class Reply {
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyDate=" + replyDate
 				+ ", replySecret=" + replySecret + ", memberNo=" + memberNo + ", itemNo=" + itemNo
-				+ ", replyStatusCode=" + replyStatusCode + ", memberName=" + memberName + "]";
+				+ ", replyStatusCode=" + replyStatusCode + ", replyNestedCode=" + replyNestedCode + ", replyNestedNo="
+				+ replyNestedNo + ", memberName=" + memberName + "]";
 	}
-	
+
 	
 	
 }

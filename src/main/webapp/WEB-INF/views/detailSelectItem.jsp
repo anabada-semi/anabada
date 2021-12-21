@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <title>물품 상세 조회</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/detailSelectItem.css">
 	
@@ -77,69 +79,120 @@
     
                         <div class="submit">
                             <label for="secret">비밀글</label> <input type="checkbox" id="secret">
-                            <button id="reply-submit" onclick="addReply();">등록</button>
+                            <button class="reply-submit" onclick="addReply();">등록</button>
                         </div>
 
 
                         <div class="reply-div">
                             <ul id="replyListArea">
                                 <c:forEach items="${rList}" var="reply">
-
-                                <div>
-                                    <li class="reply-row">
-                                        <div>
-                                            <p class="rWriter">${reply.memberName}</p>
-                                            <p class="rDate">작성일 : ${reply.replyDate }</p>
-                                        </div>
-                                        <c:choose>
-                                            <c:when test="${reply.replySecret == 1}">
-                                                <c:choose>
-                                                    <c:when test = "${reply.memberNo == loginMember.memberNo} || ${item.memberNo == loginMember.memberNo}">
-                                                        <p class="rContent">${reply.replyContent }</p>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <p class="rContent">비밀글 입니다.</p>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <p class="rContent">${reply.replyContent }</p>
-                                            </c:otherwise>
-                                        </c:choose>
-                                       
-                                        <c:if test="${reply.memberNo == loginMember.memberNo}">
-                                            <div class="replyBtnArea">
-                                                <button id="deleteReply" onclick="deleteReply(${reply.replyNo})">삭제</button>
-                                                <button id="updateReply" onclick="showUpdateReply(${reply.replyNo}, this)">수정</button>
-                                            </div>
-                                        </c:if>
-                                        <c:if test="${item.memberNo == loginMember.memberNo && reply.memberNo != loginMember.memberNo}">
-                                            <div class="replyBtnArea">
-                                                <button id="updateReply" onclick="answerReply(${reply.replyNo}, ${loginMember.memberNo}, this)">답글</button>
-                                            </div>
-                                        </c:if>
-
-                                        <div>
-                                            <ul id="answerListArea">
-                                                <li class="answer-row">
-                                                    <p class="answer-sign">⤷</p>
-                                                    <div class="answer-padding">
-                                                        <p class="rWriter">작성자 : ${reply.memberName}</p>
-                                                        <p class="rDate">작성일 : ${reply.replyDate }</p>
-                                                        <p class="rContent">작성 내용 : ${reply.replyContent }</p>
+                                    <c:choose>
+                                        <c:when test="${reply.replyNestedCode != 2 }">
+                                            <div>
+                                                <li class="reply-row">
+                                                    <div>
+                                                        <p class="rWriter">${reply.memberName}</p>
+                                                        <fmt:formatDate var="replyDate" value="${reply.replyDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+                                                        <p class="rDate">작성일 : ${replyDate}</p>
                                                     </div>
 
+                                                    <!-- 비밀 댓글이면(replySecret == 1) -->
+                                                    <!-- 일반 댓글이면(replySecret == 2) -->
+                                                    <c:choose>
+
+                                                        <c:when test="${reply.replySecret == 1}">
+                                                            <c:choose>
+                                                                <c:when test = "${reply.memberNo == loginMember.memberNo || item.memberNo == loginMember.memberNo}">
+                                                                    <p class="rContent">${reply.replyContent }</p>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <p class="rContent">비밀글 입니다.</p>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:when>
+
+                                                        <c:otherwise>
+                                                            <p class="rContent">${reply.replyContent }</p>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    
+                                                    <!-- 버튼 -->
+                                                    <!--             상품 판매자 == 로그인 한 회원      ||   댓글 단 사람 == 로그인 한 회원 -->
+                                                    <c:if test="${item.memberNo == loginMember.memberNo || reply.memberNo == loginMember.memberNo}">
+                                                        <!-- 수정, 삭제, 답글 -->
+                                                        <c:choose>
+                                                            <c:when test="${reply.memberNo == loginMember.memberNo}">
+                                                                <div class="replyBtnArea">
+                                                                    <button id="deleteReply" onclick="deleteReply(${reply.replyNo})">삭제</button>
+                                                                    <button id="updateReply" onclick="showUpdateReply(${reply.replyNo}, this)">수정</button>
+                                                                    <button id="updateAnswer" onclick="answerReply(${reply.replyNo}, ${loginMember.memberNo}, this)">답글</button>
+                                                                </div>
+                                                            </c:when>
+                                                            
+                                                            <c:otherwise>
+                                                                <div class="replyBtnArea">
+                                                                    <button id="updateAnswer" onclick="answerReply(${reply.replyNo}, ${loginMember.memberNo}, this)">답글</button>
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                            
+                                                    </c:if>
+
+
+                                                    <c:forEach items="${rList}" var="answer">
+
+                                                        
+                                                        <div class="replyArea">
+                                                            <!-- textarea -->
+                                                            <ul class="answerListArea">
+
+                                                            <!-- 대댓글이고 댓글 번호와 대댓글 번호가 일치하면 -->
+                                                            <c:choose>
+                                                            <c:when test="${answer.replyNestedCode == 2 && answer.replyNestedNo == reply.replyNo}">
+                                                            
+                                                            <li class="answer-row">
+                                                                <!-- beforeReplyRow -->
+                                                                <p class="answer-sign">⤷</p>
+                                                                <div class="answer-padding">
+                                                                    <p class="rWriter">${answer.memberName}</p>
+                                                                    <p class="rDate">${answer.replyDate }</p>
+                                                                    
+                                                                    <!-- 상품 판매자 == 로그인한 사람 || 댓글 단 사람 == 로그인 한 사람 -->
+                                                                    <c:choose>
+                                                                        <c:when test="${item.memberNo == loginMember.memberNo || reply.memberNo == loginMember.memberNo}">
+                                                                            <p class="rContent">${answer.replyContent }</p>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <p class="rContent">비밀글 입니다.</p>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </div>
+
+                                                                <!-- 상품 판매자 == 로그인 한 사람 || 댓글 단 사람 == 로그인 한 사람 -->
+                                                                <c:choose>
+                                                                    <c:when test="${item.memberNo == loginMember.memberNo || reply.memberNo == loginMember.memberNo}">
+                                                                        <div class="replyBtnArea">
+                                                                            <button id="deleteReply" onclick="deleteReply(${answer.replyNo})">삭제</button>
+                                                                            <button id="updateReply" onclick="updateAnswerReply(${answer.replyNo}, ${loginMember.memberNo}, this)">수정</button>
+                                                                        </div>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                  
+                                                            </li>
+                                                            
+                                                            </c:when>
+                                                            </c:choose>
+
+                                                        </ul>
+                                                    </div>
+
+                                                    </c:forEach>
 
                                                 </li>
-                                            </ul>
-                                        </div>
-
-
-                                    </li>
-                                </div>
-
+                                            </div>
+                                        </c:when>
+                                    </c:choose>
                                 </c:forEach>
-
                             </ul>
                         </div>
                         
@@ -178,12 +231,17 @@
         
         // 현재 게시글 번호
         const itemNo = ${item.itemNo};
+        
+        // 현재 게시글 작성자 번호
+        const itemMemberNo = ${item.memberNo};
 
         // 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
         let beforeReplyRow;
 
         // 수정 전 답변글 요소를 저장할 변수 (답변글 수정 시 사용)
         let beforeAnswerRow;
+        let beforeAnswerBtn1;
+        let beforeAnswerBtn2;
       </script>  
 
       <script src="${contextPath}/resources/js/detailSelectItem.js"></script>

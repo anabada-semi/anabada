@@ -29,16 +29,18 @@
 
 	<!-- 댓글 조회 -->
 	<entry key="selectReplyList">
-		SELECT REPLY_NO, REPLY_CONTENT, REPLY_DT, REPLY_SECRET, MEMBER_NO, REPLY_STATUS_CD, MEMBER_NM 
+		SELECT REPLY_NO, REPLY_CONTENT, REPLY_DT, REPLY_SECRET, MEMBER_NO, 
+				REPLY_STATUS_CD, MEMBER_NM, REPLY_NESTED_CD, REPLY_NESTED_NO
 			FROM REPLY
 		JOIN MEMBER USING(MEMBER_NO)
 		WHERE ITEM_NO = ? and REPLY_STATUS_CD = 1
+		ORDER BY REPLY_NO DESC
 	</entry>
 
 	<!-- 댓글 삽입 -->
 	<entry key="insertReply">
 		INSERT INTO REPLY 
-		VALUES(SEQ_REPLY_NO.NEXTVAL, ?, default, ?, ?, ?, default)
+		VALUES(SEQ_REPLY_NO.NEXTVAL, ?, default, ?, ?, ?, default, default, default)
 	</entry>
 	
 	<!-- 댓글 수정 -->
@@ -53,6 +55,11 @@
 		where reply_no = ?
 	</entry>
 	
+	<!-- 대댓글 삽입 -->
+	<entry key="insertReplyAnswer">
+		INSERT INTO REPLY 
+		VALUES(SEQ_REPLY_NO.NEXTVAL, ?, default, 1, ?, ?, default, 2, ?)
+	</entry>
 	
 	
 	
