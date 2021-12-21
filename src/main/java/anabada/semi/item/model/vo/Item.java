@@ -1,6 +1,7 @@
 package anabada.semi.item.model.vo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Item {
 
@@ -30,7 +31,20 @@ public class Item {
 //	WISH 테이블의 WISH 추가
 	private int wish;
 	
-//	기본 생성자
+	
+	// 해당 아이템 이미지 목록을 저장할 필드
+	private List<ItemImg> imgList;
+	
+	
+	public List<ItemImg> getImgList() {
+		return imgList;
+	}
+
+	public void setImgList(List<ItemImg> imgList) {
+		this.imgList = imgList;
+	}
+
+	//	기본 생성자
 	public Item() {	}
 	
 	public int getItemNo() {
