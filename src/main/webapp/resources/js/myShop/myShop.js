@@ -1,6 +1,6 @@
 /* 내 상점 페이지 */
 $(".btn").on("click", function(){
-	console.log($(this).index());	
+	// console.log($(this).index());	
     $(".btn").removeClass("active");
     $(this).addClass("active");
 
@@ -35,6 +35,7 @@ $(".btn").on("click", function(){
                 url: contextPath + "/myShop/postScript",
                 success: function(r){
                     $("#changeDiv").append(r);
+                    selectReplyList();
                 },
                 error:function(req,status,er){
                     console.log(req.responseText);
@@ -68,49 +69,56 @@ $(".btn").on("click", function(){
 
 // 댓글 목록 조회
 function selectReplyList() {
+    const locationPost = $("#userPostTextareaBtn").parent().prev();
 
-    // ajax를 이용해 비동기로 댓글 목록 조회 및 출력
     $.ajax({
-        url: contextPath + "/myShop/postScript",
-        data: { "postScriptNo": boardNo },
+        url: contextPath + "/myShop/selectPostScript",
+        data: { "memberNo": loginMemberNo },
         dataType: "JSON",
         success: function (r) {
-            console.log(r);
 
-            $("#replyListArea").empty();
+            $.each(r, function (index, post) {
+                console.log(post);
+                console.log(loginMemberNo);
+                const upr = $("<div class='userPost-report'>");
+                upr.text("신고하기");
+                const upc = $("<div class='userPost-content'>");
+                upc.text(post.postScriptCheck).append(upr);
+                
 
-            $.each(r, function (index, reply) {
-                console.log(reply.replyContent);
+                const ups = $("<div class='userPost-shop'>");
+                ups.text("이동").append(upc);
 
-                // const li = $("<li>").addClass("reply-row");
-                const li = $('<li class="reply-row">');
-                const div = $('<div>');
-                const rWriter = $('<p class="rWriter">').text(reply.memberName);
-                const rDate = $('<p class="rDate">').text(reply.replyCreateDate);
+                const upst = $("<div class='userPost-star'>");
+                upst.text("별사진");
 
-                // div에 자식으로 rWriter, rDate 추가
-                div.append(rWriter, rDate);
+                const upn = $("<div class='userPost-name'>");
+                upn.text(post.shopName).append(upst, ups);
+                
+                const upa = $("<div class='userPost-area'>");
+                upa.append(upn);
 
-                // 댓글 내용
-                const rContent = $('<p class="rContent">').html(reply.replyContent);
+                const upi = $("<div class='userPostImgDiv'>");
+                upi.append('<img class="userPostImg" src="/anabada/resources/images/myShop/profile/캐릭터.png">');
 
-                li.append(div, rContent);
+                const up = $("<div class='userPost'>");
+                up.append(upi, upa, "<hr>");
 
-                if (reply.memberNo == loginMemberNo) {
-                    const replyBtnArea = $('<div class="replyBtnArea">');
-                    const showUpdate = $("<button>").addClass("btn btn-primary btn-sm ml-1").text("수정");
-                    showUpdate.attr("onclick", "showUpdateReply(" + reply.replyNo + ", this)");
-
-                    const deleteReply = $("<button>").addClass("btn btn-primary btn-sm ml-1").text('삭제');
-                    deleteReply.attr("onclick", "deleteReply(" + reply.replyNo + ")");
-
-                    replyBtnArea.append(showUpdate, deleteReply);
-
-                    li.append(replyBtnArea);
+                locationPost.after(up);
+                
+                const upd = $('<button class="userPostDelete">삭제</button>');
+                const upu = $('<button class="userPostUpdate">수정</button>');
+            
+                $("#userPostTextarea").val("");
+                
+                if (post.memberNo == loginMemberNo) {
+                    upr.append(upd, upu);
                 }
-
-                $("#replyListArea").append(li);
             });
+
+            (function(){
+                $("#postScriptText").text($(".userPost").length);
+            }());
 
         },
         error: function (req, status, error) {
@@ -141,7 +149,7 @@ $(document).on("click",".userNameBtn", function(){
     if(reg.test(inputName.val())){
 
         $.ajax({
-            url:"myShop/shopNameCng",
+            url: contextPath + "/myShop/shopNameCng",
             data: { "memberNo": loginMemberNo, "inputName": inputName.val() },
             success: function(r){
                 if(r > 0){
@@ -193,7 +201,7 @@ $(document).on("click", "#myShopContentBtn", function(){
     const parent = $("#myShopContent1");
 
     $.ajax({
-        url:"myShop/shopContentCng",
+        url: contextPath + "/myShop/shopContentCng",
         data: { "memberNo": loginMemberNo, "inputContent": contentTextarea.val() },
         success: function(r){
             if(r > 0){
@@ -242,13 +250,31 @@ $(document).on("input", "#userPostTextarea", function(){
 
 /* 댓글 등록 이런식으로 추가 다 ajax 해야되네... */
 $(document).on("click", "#userPostTextareaBtn", function(){
-    const locationPost = $(".userPost").eq($(".userPost").length - 2).next();
+    const locationPost = $("#userPostTextareaBtn").parent().prev();
 
-    locationPost.after('<div class="userPost"><div class="userPostImgDiv"><img class="userPostImg" src="/anabada/resources/images/myShop/profile/캐릭터.png">');
-	$(".userPost").eq($(".userPost").length - 2).append('<div class="userPost-area"><div class="userPost-name">유저사<div class="userPost-star">별사진');
-	$(".userPost-star").eq($(".userPost-star").length - 1).after('<div class="userPost-shop">이동<div class="userPost-content">' + $("#userPostTextarea").val() + '<div class="userPost-report">신고하기')
-	$(".userPost").eq($(".userPost").length - 2).after("<hr>");
+    if($("#userPostTextarea").val().trim().length > 4){
+        $.ajax({
+            url: contextPath + "/myShop/insertPostScript",
+            data: { "memberNo": loginMemberNo, "postScript": $("#userPostTextarea").val() },
+            success: function(r){
+                if(r > 0){
+                    $(".userPost").remove();
+                    alert("성공");
+                    selectReplyList();
+                }else{
+                    alert("후기 등록 실패  이유는 나도 모름");
+                    selectReplyList();
+                }
+            },
+            error:function(req, status, er){
+                console.log(req.responseText);
+            }
+        });
 
-    $("#userPostTextarea").val("");
+        
+    }else{
+        alert("최소 5글자 이상 입력해 주십시오.");
+    }
+
 
 });

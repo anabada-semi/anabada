@@ -48,7 +48,7 @@
 
 <script>
 	(function() {
-		console.log($(".wishContainer").length);
+		//console.log($(".wishContainer").length);
 		$("#wishSpanText").text($(".wishContainer").length);
 	}());
 
@@ -63,7 +63,7 @@
 
 		// 즉시 실행 함수
 		(function() {
-			console.log($(".wishDeleteBtn").length);
+			//console.log($(".wishDeleteBtn").length);
 			$("#wishSpanText").text($(".wishDeleteBtn").length);
 		}());
 

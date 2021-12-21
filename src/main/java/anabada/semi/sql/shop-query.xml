@@ -13,4 +13,19 @@
 		SELECT * FROM ITEM WHERE MEMBER_NO = ?
 	</entry>
 	
+	<entry key="selectPostList">
+		SELECT POSTSCRIRT_NO, POSTSCRIRT_CHECK, SHOP_NO, MEMBER_NO, SHOP_NM 
+		FROM POSTSCRIPT 
+		JOIN SHOP USING(MEMBER_NO)
+		WHERE SHOP_NO = ? AND POSTSCRIPT_STATUS_CD = 0
+		ORDER BY 1
+	</entry>
+	
+	<entry key="insertPostScript">
+		INSERT INTO POSTSCRIPT VALUES(
+		SEQ_POSTSCRIPT_NO.NEXTVAL, ?, 0, ?, ?)
+	</entry>
+	
+
+	
 </properties>
