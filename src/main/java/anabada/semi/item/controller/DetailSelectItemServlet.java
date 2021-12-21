@@ -1,6 +1,8 @@
 package anabada.semi.item.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +65,15 @@ public class DetailSelectItemServlet extends HttpServlet{
 			
 			// 댓글 조회하기
 			List<Reply> rList = service.selectReplyList(itemNo);
+			
+			for(Reply dateItem : rList) {
+				
+				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+		        
+				String dateString = sdf.format(dateItem.getReplyDate());
+				
+			}
+			
 			req.setAttribute("rList", rList);	// 댓글 목록
 			
 //			System.out.println(rList);

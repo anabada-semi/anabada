@@ -37,6 +37,8 @@ public class ReplyController extends HttpServlet{
 				
 				List<Reply> rList = service.selectReplyList(itemNo);
 				
+				System.out.println("뭔데? "+ rList);
+				
 				new Gson().toJson(rList, resp.getWriter());	// 연결된 스트림을 이용하여 ajax로 값 전달
 				
 			}
@@ -50,7 +52,7 @@ public class ReplyController extends HttpServlet{
 				int itemNo = Integer.parseInt(req.getParameter("itemNo"));
 				String replyContent = req.getParameter("replyContent");
 				
-				if(req.getParameter("secret") == "true") {
+				if(req.getParameter("secret").equals("true")) {
 					reply.setReplySecret(1);	// 비밀O
 				} else {
 					reply.setReplySecret(2);	// 비밀X
@@ -64,7 +66,7 @@ public class ReplyController extends HttpServlet{
 				
 				int result = service.insertReply(reply);
 				
-				System.out.println("result: " + result);
+//				System.out.println("result: " + result);
 				
 				resp.getWriter().print(result);
 			}
@@ -85,7 +87,6 @@ public class ReplyController extends HttpServlet{
 
 				resp.getWriter().print(service.deleteReply(replyNo));
 			}
-			
 			
 		} catch (Exception e) {
 			

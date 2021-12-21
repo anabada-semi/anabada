@@ -151,5 +151,29 @@ public class ItemSelectService {
 		
 		return result;
 	}
+
+
+	/** 대댓글 삽입
+	 * @param reply
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertReplyAnswer(Reply reply) throws Exception{
+
+		Connection conn = getConnection();
+		
+		reply.setReplyContent(XSS.replaceParameter(reply.getReplyContent()));
+		
+		reply.setReplyContent( reply.getReplyContent().replaceAll("(\r\n|\r|\n|\n\r)", "<br>") );
+		
+		int result = dao.insertReplyAnswer(reply, conn);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 	
 }
