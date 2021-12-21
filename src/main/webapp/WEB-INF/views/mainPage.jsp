@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 	<!-- header include -->
 	<jsp:include page="header.jsp" />
@@ -36,7 +36,27 @@
     </section>
 
     <section id="item-box">
-        <div><h3>새로운 상품 추천</h3></div>
+        <div><h3>새로 등록된 상품 </h3></div>
+        
+        <%-- 글 생성 --%>
+        <c:choose>
+        	<c:when test="${empty itemList}">
+        	
+        	</c:when>
+        	<c:otherwise>
+        		<c:forEach items="${itemList}" var="item">
+   			        <div class="item" id="it-1" onclick="location.href='${contextPath}/item/view?no=${item.itemNo}&cp=${pagination.currentPage}'">
+			            <img src="${item.imgList[0].imgLevel == 0}">
+			            <div class="item-title">${item.itemName}</div>
+			            <div class="item-content" style="font-weight: bold;">
+			                <span style="float: left;">${item.itemPrice}원</span>
+			                <span style="float: right;">${item.itemDate}</span>
+			            </div>
+			        </div>
+        		</c:forEach>
+        	</c:otherwise>
+        </c:choose>
+        
         <div class="item" id="it-1" onclick="location.href='https://m.bunjang.co.kr/'">
             <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
@@ -46,150 +66,6 @@
             </div>
         </div>
         <div class="item" id="it-2" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-3" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-4" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-5" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-6" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-7" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-8" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-9" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-10" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-11" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-12" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-13" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-14" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-15" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-16" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="img/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-17" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-18" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-19" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-20" onclick="location.href='https://m.bunjang.co.kr/'">
             <img src="${contextPath}/resources/images/main/ku.jpg">
             <div class="item-title">특히나 더 놀란 고양이</div>
             <div class="item-content" style="font-weight: bold;">
