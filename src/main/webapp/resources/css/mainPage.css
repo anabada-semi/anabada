@@ -106,7 +106,8 @@ section{
     color: white;
 }
 
+/*
 [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
     top: 150px;
 }
-
+*/

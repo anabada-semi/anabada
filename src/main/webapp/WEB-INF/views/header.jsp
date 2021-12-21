@@ -22,18 +22,18 @@
 					<c:choose>
 						<c:when test="${ empty sessionScope.loginMember }">
 							<div id="login">
-								<a href="${contextPath}/member/login">로그인</a>
+								<a href="${contextPath}/member/login" class="header-btn-style header-font">로그인</a>
 							</div>
 							<div id="singup">
-								<a href="${contextPath}/member/signUp">회원가입</a>
+								<a href="${contextPath}/member/signUp" class="header-btn-style header-font">회원가입</a>
 							</div>
 						</c:when>
 						<c:otherwise>
 							<div id="login">
-								<a href="${contextPath}/member/logout">로그아웃</a>
+								<a href="${contextPath}/member/logout" class="header-btn-style header-font">로그아웃</a>
 							</div>
 							<div id="singup">
-								<a href="${contextPath}/member/myPage">내 정보</a>
+								<a href="${contextPath}/member/myPage" class="header-btn-style header-font">내 정보</a>
 							</div>
 						</c:otherwise>
 					</c:choose>
@@ -43,7 +43,7 @@
 			<div class="header-bottom">
 				<div class="header-main">
 					<div class="header-main-top">
-						<div id="logo" onclick="location.href='#'">아나바다</div>
+						<div id="logo" class="header-font" onclick="location.href='#'">아나바다</div>
 
 						<div id="search">
 							<div id="search-border">
@@ -56,21 +56,21 @@
 						<div id="logo-right">
 							<div class="sale" onclick="location.href='${contextPath}/item/insert';">
 								<img src="${contextPath}/resources/images/header+footer/판매.png">
-								<p id="sale">판매하기</p>
+								<p id="sale" class="header-font">판매하기</p>
 								<!-- &nbsp;판매하기 -->
 							</div>
 							<c:choose>
 								<c:when test="${ empty sessionScope.loginMember}">
 									<div class="shop" onclick="location.href='${contextPath}/member/login';">
 										<img src="${contextPath}/resources/images/header+footer/내상점.png">
-										<p id="shop">내상점</p>
+										<p id="shop" class="header-font">내상점</p>
 										<!-- &nbsp;내상점 -->
 									</div>
 								</c:when>
 								<c:otherwise>
 									<div class="shop" onclick="location.href='${contextPath}/myShop/myShop?no=${loginMember.memberNo}';">
 										<img src="${contextPath}/resources/images/header+footer/내상점.png">
-										<p id="shop">내상점</p>
+										<p id="shop" class="header-font">내상점</p>
 										<!-- &nbsp;내상점 -->
 									</div>
 								</c:otherwise>
@@ -78,7 +78,7 @@
 							
 							<div class="notice" onclick="location.href='#'">
 								<img src="${contextPath}/resources/images/header+footer/알림.png">
-								<p id="notice">알림</p>
+								<p id="notice" class="header-font">알림</p>
 								<!-- &nbsp;알림 -->
 							</div>
 						</div>
@@ -89,7 +89,7 @@
 							<span><img src="${contextPath}/resources/images/header+footer/카테고리.png"
 								id="category"></span>
 							<div class="dropdown-content">
-								<ul id="category-ul">
+								<ul id="category-ul" class="header-font">
 									<li class="category_item">여성의류</li>
 									<li class="category_item">남성의류</li>
 									<li class="category_item">신발</li>
