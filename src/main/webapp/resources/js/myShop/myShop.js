@@ -12,7 +12,7 @@ $(".btn").on("click", function(){
                 url: contextPath + "/myShop/itemList",
                 success: function(r){
                     $("#changeDiv").append(r);
-
+                    selectitemList();
                 },
                 error:function(req,status,er){
                     console.log(req.responseText);
@@ -78,8 +78,7 @@ function selectReplyList() {
         success: function (r) {
 
             $.each(r, function (index, post) {
-                console.log(post);
-                console.log(loginMemberNo);
+
                 const upr = $("<div class='userPost-report'>");
                 upr.text("신고하기");
                 const upc = $("<div class='userPost-content'>");
@@ -102,7 +101,8 @@ function selectReplyList() {
                 upi.append('<img class="userPostImg" src="/anabada/resources/images/myShop/profile/캐릭터.png">');
 
                 const up = $("<div class='userPost'>");
-                up.append(upi, upa, "<hr>");
+
+                up.append(upi, upa);
 
                 locationPost.after(up);
                 
@@ -115,18 +115,56 @@ function selectReplyList() {
                     upr.append(upd, upu);
                 }
             });
-
             (function(){
                 $("#postScriptText").text($(".userPost").length);
             }());
-
         },
         error: function (req, status, error) {
             console.log("댓글 목록 조회 실패");
             console.log(req.responseText);
         }
     });
+}
 
+// 판매중인 상품 목록 조회
+function selectitemList() {
+    $.ajax({
+        url: contextPath + "/myShop/selectItemList",
+        data: { "shopNo": shopNo },
+        dataType: "JSON",
+        success: function (r) {
+            $.each(r, function (index, item) {
+                
+                const table = $("<table>");
+                const tr = $("<tr class='itemTr'>");
+                const td = $("<td class='itemTd'>");
+                const itemImg = $('<img class="itemImg" src="/anabada/resources/images/myShop/itemList/신발.jpg">');
+                const itD = $('<div class="itemTextDiv">');
+                const it1 = $('<div class="itemText1">' + item.itemName + '<div>');
+                const it2 = $('<div class="itemText2">' + item.itemPrice + '원<div>');
+                const it3 = $('<div class="itemText3">' + item.uploadDate + '<div>');
+
+                itD.append(it1, it2, it3);
+
+                td.append(itemImg, itD);
+
+                tr.append(td);
+                $(".itemTr").eq(Math.floor(index/4)).append(td);
+
+                if(index % 4 == 0)
+                    $(".addItem").append(tr);
+
+            });
+            
+            (function(){
+                $("#itemText").text($(".itemTd").length);
+            }());
+        },
+        error: function (req, status, error) {
+            console.log("댓글 목록 조회 실패");
+            console.log(req.responseText);
+        }
+    });
 }
 
 
