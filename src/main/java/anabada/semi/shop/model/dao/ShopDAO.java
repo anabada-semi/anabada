@@ -13,6 +13,8 @@ import java.util.Properties;
 
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.item.model.vo.Time;
+import anabada.semi.shop.model.vo.PostScript;
+import anabada.semi.shop.model.vo.Shop;
 
 public class ShopDAO {
 	private Statement stmt;
@@ -97,4 +99,52 @@ public class ShopDAO {
 		}
 		return itemList;
 	}
+
+	public List<PostScript> selectPostList(int shopNo, int memberNo, Connection conn) throws Exception {
+		List<PostScript> pList = new ArrayList<PostScript>();
+		try {
+			String sql = prop.getProperty("selectPostList");
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, shopNo);
+//			pstmt.setInt(2, memberNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				PostScript ps = new PostScript();
+				ps.setPostScriptNo(rs.getInt(1));
+				ps.setPostScriptCheck(rs.getString(2));
+				ps.setShopNo(rs.getInt(3));
+				ps.setMemberNo(rs.getInt(4));
+				ps.setShopName(rs.getString(5));
+				
+				pList.add(ps);
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return pList;
+	}
+
+	public int insertPostScript(int shopNo, int memberNo, String postScript, Connection conn) throws Exception{
+		int result = 0;
+		try {
+			String sql = prop.getProperty("insertPostScript");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, postScript);
+			pstmt.setInt(2, shopNo);// 어디에
+			pstmt.setInt(3, memberNo);// 누가
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
 }

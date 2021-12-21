@@ -12,13 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 
 import anabada.semi.common.MyRenamePolicy;
 import anabada.semi.common.XSS;
 import anabada.semi.item.model.vo.Item;
+import anabada.semi.member.model.service.MemberService;
 import anabada.semi.member.model.vo.Member;
 import anabada.semi.shop.model.service.ShopService;
+import anabada.semi.shop.model.vo.PostScript;
 import anabada.semi.shop.model.vo.Shop;
 
 @WebServlet("/myShop/*")
@@ -38,6 +41,8 @@ public class MyShopController extends HttpServlet {
 		
 		ShopService service = new ShopService();
 		HttpSession session = req.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		Shop locationShop = (Shop)session.getAttribute("locationShop");
 		
 		Shop shop = null;
 		
@@ -131,8 +136,39 @@ public class MyShopController extends HttpServlet {
 				}
 			}else if(command.equals("myShop")) {
 				if(method.equals("GET")) {
+					int shopNo = Integer.parseInt(req.getParameter("no"));
+					
+					if(shopNo != loginMember.getMemberNo()) 
+						shop = new MemberService().selectShop(shopNo);
+					
+					req.setAttribute("locationShop", shop);
+					
+					session.setAttribute("shopNo", shopNo);
 					
 					req.getRequestDispatcher("/WEB-INF/views/myShop/myShop.jsp").forward(req, resp);
+				}else {
+					
+				}
+			}else if(command.equals("insertPostScript")) {
+				if(method.equals("GET")) {
+					String postScript = req.getParameter("postScript");
+					int shopNo = (int)session.getAttribute("shopNo");
+					
+					resp.getWriter().print(service.insertPostScript(shopNo, loginMember.getMemberNo(), postScript));
+					
+				}else {
+					
+				}
+			}else if(command.equals("selectPostScript")) {
+				if(method.equals("GET")) {
+					int memberNo = Integer.parseInt(req.getParameter("memberNo"));
+					
+					int shopNo = (int)session.getAttribute("shopNo");
+					
+					List<PostScript> pList = service.selectPostList(shopNo, memberNo);
+
+					new Gson().toJson(pList, resp.getWriter());
+					
 				}else {
 					
 				}
