@@ -96,9 +96,13 @@
 <script>
 	const contextPath = "${contextPath}";
 	const loginMemberNo = "${loginMember.memberNo}";
+	const shopNo = "${shopNo}";
 	
 
 </script>
 
 <script src="${contextPath}/resources/js/myShop/myShop.js"></script>
 
+<script>
+	selectitemList();
+</script>
