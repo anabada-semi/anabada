@@ -36,6 +36,7 @@ $(".btn").on("click", function(){
                 success: function(r){
                     $("#changeDiv").append(r);
                     selectReplyList();
+                    flag = false;
                 },
                 error:function(req,status,er){
                     console.log(req.responseText);
@@ -67,6 +68,7 @@ $(".btn").on("click", function(){
     }
 });
 
+let postNo = [];
 // 댓글 목록 조회
 function selectReplyList() {
     const locationPost = $("#userPostTextareaBtn").parent().prev();
@@ -77,43 +79,52 @@ function selectReplyList() {
         dataType: "JSON",
         success: function (r) {
 
+            count = r.length;
+
             $.each(r, function (index, post) {
 
-                const upr = $("<div class='userPost-report'>");
-                upr.text("신고하기");
-                const upc = $("<div class='userPost-content'>");
-                upc.text(post.postScriptCheck).append(upr);
+                count--;
+                postNo[index] = post.postScriptNo;
+
+                const upd = $('<button class="userPostDelete">삭제</button>');
+                const upu = $('<button class="userPostUpdate">수정</button>');
+                const uprBtn = $('<button class="userPostReport">신고</button>');
+                let upr = $("<div class='userPost-report'>");
+                if (post.memberNo == loginMemberNo) {
+                    upr.append(upd, upu);
+                }else{
+                    upr.append(uprBtn);
+                }
                 
+                const upc = $("<div class='userPost-content'>");
+                upc.text(post.postScriptCheck);
 
                 const ups = $("<div class='userPost-shop'>");
-                ups.text("이동").append(upc);
+                ups.text("이동");
 
                 const upst = $("<div class='userPost-star'>");
                 upst.text("별사진");
 
                 const upn = $("<div class='userPost-name'>");
-                upn.text(post.shopName).append(upst, ups);
+                upn.text(post.shopName);
                 
                 const upa = $("<div class='userPost-area'>");
-                upa.append(upn);
+                upa.append(upn, upst, ups, upc, upr);
 
                 const upi = $("<div class='userPostImgDiv'>");
                 upi.append('<img class="userPostImg" src="/anabada/resources/images/myShop/profile/캐릭터.png">');
 
-                const up = $("<div class='userPost'>");
+                const up = $("<div class='userPost' id='" + index + "'>");
 
                 up.append(upi, upa);
 
                 locationPost.after(up);
                 
-                const upd = $('<button class="userPostDelete">삭제</button>');
-                const upu = $('<button class="userPostUpdate">수정</button>');
+
             
-                $("#userPostTextarea").val("");
+                $(".userPostTextarea").val("");
                 
-                if (post.memberNo == loginMemberNo) {
-                    upr.append(upd, upu);
-                }
+                
             });
             (function(){
                 $("#postScriptText").text($(".userPost").length);
@@ -134,11 +145,16 @@ function selectitemList() {
         dataType: "JSON",
         success: function (r) {
             $.each(r, function (index, item) {
-                
+                // contextPath/myShop/myShop?no=item.itemNo
                 const table = $("<table>");
                 const tr = $("<tr class='itemTr'>");
-                const td = $("<td class='itemTd'>");
-                const itemImg = $('<img class="itemImg" src="/anabada/resources/images/myShop/itemList/신발.jpg">');
+                const td = $("<td class='itemTd' onclick='location.href=" + "#" + ";' >");
+
+                let imgSrc;
+                if(item.itemImgName != null)    imgSrc = contextPath + item.itemPath + item.itemImgName;
+                else                            imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
+                itemImg = $('<a href="' + contextPath + '/detail/select?itemNo=' + item.itemNo + '"><img class="itemImg" src="' + imgSrc + '">');
+
                 const itD = $('<div class="itemTextDiv">');
                 const it1 = $('<div class="itemText1">' + item.itemName + '<div>');
                 const it2 = $('<div class="itemText2">' + item.itemPrice + '원<div>');
@@ -165,6 +181,10 @@ function selectitemList() {
             console.log(req.responseText);
         }
     });
+}
+
+function updatePostScript(psNo, index){
+
 }
 
 
@@ -275,7 +295,7 @@ $(document).on("input", "#contentTextarea", function(){
 });
 
 /* 상점 후기 최대 120글자 */
-$(document).on("input", "#userPostTextarea", function(){
+$(document).on("input", ".userPostArea > .userPostTextarea", function(){
     const textLength = $(this).val().length;
     
     $("#userPostTextareaBtn").html("확인<br>" + textLength + "/120");
@@ -285,15 +305,26 @@ $(document).on("input", "#userPostTextarea", function(){
         $("#userPostTextareaBtn").html("확인<br>120/120");
     }
 });
+/* 상점 후기 수정 최대 120글자 */
+$(document).on("input", ".userPost > .userPostTextarea", function(){
+    const textLength = $(this).val().length;
+    
+    $("#updateUserPostTextareaBtn").html("확인<br>" + textLength + "/120");
+
+    if(textLength > textCountLimit){
+        $(this).val($(this).val().substr(0, textCountLimit));
+        $("#updateUserPostTextareaBtn").html("확인<br>120/120");
+    }
+});
 
 /* 댓글 등록 이런식으로 추가 다 ajax 해야되네... */
 $(document).on("click", "#userPostTextareaBtn", function(){
     const locationPost = $("#userPostTextareaBtn").parent().prev();
 
-    if($("#userPostTextarea").val().trim().length > 4){
+    if($(".userPostTextarea").length == 1){
         $.ajax({
             url: contextPath + "/myShop/insertPostScript",
-            data: { "memberNo": loginMemberNo, "postScript": $("#userPostTextarea").val() },
+            data: { "memberNo": loginMemberNo, "postScript": $(".userPostTextarea").val() },
             success: function(r){
                 if(r > 0){
                     $(".userPost").remove();
@@ -308,11 +339,171 @@ $(document).on("click", "#userPostTextareaBtn", function(){
                 console.log(req.responseText);
             }
         });
-
-        
     }else{
-        alert("최소 5글자 이상 입력해 주십시오.");
+        $.ajax({
+            url: contextPath + "/myShop/insertPostScript",
+            data: { "memberNo": loginMemberNo, "postScript": $(".userPostTextarea").eq(1).val() },
+            success: function(r){
+                if(r > 0){
+                    $(".userPost").remove();
+                    alert("성공");
+                    selectReplyList();
+                }else{
+                    alert("후기 등록 실패  이유는 나도 모름");
+                    selectReplyList();
+                }
+            },
+            error:function(req, status, er){
+                console.log(req.responseText);
+            }
+        });
+    }
+});
+
+function createText(j, text){
+    const img = $('<div class="userPostImgDiv"><img class="userPostImg" src="/anabada/resources/images/myShop/profile/캐릭터.png"></div>');
+    const ta = $('<textarea class="userPostTextarea"></textarea>');
+    const btn = $('<button id="updateUserPostTextareaBtn">확인<br>0/120</button>');
+    $(".userPost[id=" + j + "]").empty();
+    $(".userPost[id=" + j + "]").append(img, ta, btn);
+    $(".userPostTextarea").eq(0).val(text);
+}
+let deleteIndex;
+let Temp = [];
+let postNum;
+/* 상점 후기 수정 요소 만들기 */
+$(document).on("click", ".userPostUpdate", function(){
+    // $(".userPost").eq(0).parent().parent().parent().parent().parent().parent()
+    const upa = $(this).parent().parent().parent(); // 상점 후기 영역 감싸고있는 div
+    
+    postNum = postNo[upa.attr("id")];
+    const nowIndex = upa.attr("id");
+
+
+    Temp[0] = $(".userPost[id=" + nowIndex + "]").html()
+    Temp[1] = $(".userPost[id=" + nowIndex + "]").children().children().eq(4).text()
+    
+    if(flag){
+        if(confirm("고?")){
+            $(".userPost[id=" + deleteIndex + "]").empty();
+            $(".userPost[id=" + deleteIndex + "]").append(Temp[0]);
+            createText(nowIndex, Temp[1]);
+            deleteIndex = nowIndex;
+        }else{
+            return;
+        }
+    }else{
+        createText(nowIndex, Temp[1]);
+        deleteIndex = nowIndex;
+        flag = true;
     }
 
+    console.log(postNum, nowIndex);
+});
 
+/* 상점 후기 삭제 */
+$(document).on("click", ".userPostDelete", function(){
+    const upa = $(this).parent().parent().parent(); // 상점 후기 영역 감싸고있는 div
+    postNum = postNo[upa.attr("id")];
+    const nowIndex = upa.attr("id");
+
+    if(confirm("정말 삭제 하시겠습니까?")){
+
+        $.ajax({
+            url: contextPath + "/myShop/deletePostScript",
+            data: { "postNo": postNum},
+            success: function(r){
+                if(r > 0){
+                    $(".userPost").remove();
+                    alert("상점 후기 삭제 성공");
+                    selectReplyList();
+                }else{
+                    alert("후기 삭제 실패  이유는 나도 모름");
+                    selectReplyList();
+                }
+            },
+            error:function(req, status, er){
+                console.log(req.responseText);
+            }
+        });
+
+    }else{
+        return;
+    }
+});
+
+/* 상점 후기 수정 ajax */
+$(document).on("click", "#updateUserPostTextareaBtn", function(){
+    const locationPost = $("#updateUserPostTextareaBtn").parent().prev();
+
+    $.ajax({
+        url: contextPath + "/myShop/updatePostScript",
+        data: { "postNo": postNum, "postScript": $(".userPostTextarea").eq(0).val() },
+        success: function(r){
+            if(r > 0){
+                $(".userPost").remove();
+                alert("상점 후기 수정 성공");
+                selectReplyList();
+            }else{
+                alert("후기 수정 실패  이유는 나도 모름");
+                selectReplyList();
+            }
+        },
+        error:function(req, status, er){
+            console.log(req.responseText);
+        }
+    });
+
+    flag = false;
+});
+
+
+
+
+
+$(document).on("click", ".userPostReport", function(){
+
+    $("#popup01").show();   //팝업 오픈
+    $("body").append('<div class="backon"></div>'); //뒷배경 생성
+    $("body").on("click", function(event) { 
+
+        if(event.target.className == 'close' || event.target.className == 'backon'){
+
+            $("#popup01").hide(); //close버튼 이거나 뒷배경 클릭시 팝업 삭제
+            $(".backon").hide();
+            $(".userReportTextarea").val("");
+            $("#userReportTextareaBtn").html("확인<br>0/120").css("background", "#ccc");
+
+        }
+    });
+
+});
+
+$(document).on("input", ".userReportTextarea", function(){
+    const textLength = $(this).val().length;
+
+    $("#userReportTextareaBtn").html("확인<br>" + textLength + "/120");
+
+    if(textLength > textCountLimit){
+        $(this).val($(this).val().substr(0, textCountLimit));
+        $("#userReportTextareaBtn").html("확인<br>120/120");
+    }
+
+    if($(this).val().length != 0)
+        $("#userReportTextareaBtn").css("background", "antiquewhite");
+    else
+    $("#userReportTextareaBtn").css("background", "#ccc");
+});
+
+$(".userReportTextareaBtn").on("click", function(){
+    
+    if($(".userReportTextarea").val().length != 0){
+        alert("신고 완료!");
+        $("#popup01").hide(); //close버튼 이거나 뒷배경 클릭시 팝업 삭제
+        $(".backon").hide();
+        $(".userReportTextarea").val("");
+        $("#userReportTextareaBtn").html("확인<br>0/120").css("background", "#ccc");
+    } else{
+        return;
+    }
 });

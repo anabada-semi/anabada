@@ -130,7 +130,7 @@ button{
     padding: 0;
     float:right;
 }
-#userPostTextareaBtn{
+#userPostTextareaBtn, #updateUserPostTextareaBtn{
     width: 100px;
     height: 140px;
     border: 1px solid rgb(238, 238, 238);
@@ -138,15 +138,27 @@ button{
     color: rgb(136, 136, 136);
     margin: 0;
     padding: 0;
+    float:right;
 }
-#userPostTextarea{
+
+#reportBtn{
+width: 100px;
+height: 140px;
+border: 1px solid rgb(238, 238, 238);
+background: rgb(250, 250, 250);
+color: rgb(136, 136, 136);
+margin: 0;
+padding: 0;
+text-align: center;
+}
+
+.userPostTextarea{
 	resize: none; 
 	border:0.3px solid #ccc; 
 	width: 80%; 
 	height: 140px;
 }
-#userPostTextarea:focus{outline: none;}
-#userPostTextareaBtn{float:right;}
+.userPostTextarea:focus{outline: none;}
 
 #contentTextarea{
 	resize: none; 
@@ -184,7 +196,7 @@ button{
     padding: 10px 10px 10px 10px;
     text-align: center;
 }
-.itemImg{width: 98%; height: 70%;}
+.itemImg{width: 230px; height: 70%;}
 .itemTextDiv{height: 30%;}
 .itemText2{float: left;}
 .itemText3{float: right;}
@@ -197,6 +209,7 @@ button{
 .userPostStarImg{width:15px; height:14px;}
 .userPostDelete{float: right; border: none; width: 150px; height: 30px;}
 .userPostUpdate{float: right; border: none; width: 150px; height: 30px;}
+.userPostReport{float: right; border: none; width: 150px; height: 30px;}
 
 .userPostAreaImgDiv {float: left; margin-right: 30px; margin-left: 20px; height: 140px;}
 .userPostAreaImg{width: 50px; height: 50px; border-radius: 50%;}
@@ -233,3 +246,54 @@ button{
 #fileArea {
     display: none;
  }
+
+
+
+
+
+#popup01{display: none;}
+#popup01{
+    width: 500px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -250px 0 0 -250px;
+    background-color: #fff;
+    z-index: 2;
+    position: fixed;
+    text-align: center;
+    border-radius: 40px;
+}
+.backon{
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #00000054;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.close{
+    position:absolute;
+    top:-25px;
+    right: 0;
+    cursor:pointer;
+}
+.userReportTextarea{
+	resize: none; 
+	border:0.3px solid #ccc; 
+	width: 80%; 
+	height: 300px;
+}
+.userReportTextarea:focus{outline: none;}
+#userReportTextareaBtn{
+    width: 80%;
+    height: 40px;
+    border: 1px solid rgb(238, 238, 238);
+    background: rgb(250, 250, 250);
+    color: rgb(136, 136, 136);
+    margin: 0;
+    padding: 0;
+}

@@ -41,21 +41,21 @@
 	<div class="userPostAreaImgDiv">
 		<img class="userPostAreaImg" src="${contextPath}/resources/images/myShop/profile/캐릭터.png">
 	</div>
-	<textarea id='userPostTextarea'></textarea>
+	<textarea class='userPostTextarea'></textarea>
 	<button id='userPostTextareaBtn'>확인<br>0/120</button>
 </div>
 <hr>
 
 
- <script>
- 	//const postScriptNo = ${postScript.postScriptNo}
-	 
- 	$("#userPostTextareaBtn").on("click", function(){
- 		(function(){
-			$("#postScriptText").text($(".userPost").length);
-		}());
- 	});
- </script>
+<script>
+//const postScriptNo = ${postScript.postScriptNo}
+
+$("#userPostTextareaBtn").on("click", function(){
+	(function(){
+		$("#postScriptText").text($(".userPost").length);
+	}());
+});
+</script>
 
 
 

@@ -88,6 +88,8 @@ public class ShopDAO {
 				item.setItemStatusCode(rs.getInt(7));
 				item.setMemberNo(rs.getInt(8));
 				item.setReadCount(rs.getInt(9));
+				item.setItemPath(rs.getString(10));
+				item.setItemImgName(rs.getString(11));
 				
 				item.setUploadDate(new Time().calculateTime(item.getItemDate()));
 				itemList.add(item);
@@ -137,6 +139,36 @@ public class ShopDAO {
 			pstmt.setString(1, postScript);
 			pstmt.setInt(2, shopNo);// 어디에
 			pstmt.setInt(3, memberNo);// 누가
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updatePostScript(int postNo, String postScript, Connection conn) throws Exception {
+		int result = 0;
+		try {
+			String sql = prop.getProperty("updatePostScript");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, postScript);
+			pstmt.setInt(2, postNo);
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deletePostScript(int postNo, Connection conn) throws Exception {
+		int result = 0;
+		try {
+			String sql = prop.getProperty("deletePostScript");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postNo);
 			
 			result = pstmt.executeUpdate();
 			

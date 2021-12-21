@@ -28,6 +28,27 @@ public class Item {
 
 	private String uploadDate;
 	
+	private String itemPath;
+	private String itemImgName;
+	
+	
+	
+	public String getItemPath() {
+		return itemPath;
+	}
+
+	public void setItemPath(String itemPath) {
+		this.itemPath = itemPath;
+	}
+
+	public String getItemImgName() {
+		return itemImgName;
+	}
+
+	public void setItemImgName(String itemImgName) {
+		this.itemImgName = itemImgName;
+	}
+
 	public String getUploadDate() {
 		return uploadDate;
 	}
