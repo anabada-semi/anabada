@@ -36,24 +36,41 @@
 				<input type="file" name="img0" onchange="loadImg(this,0)">
 			</div>
 
-
-			<div class="head2">
-				<div id="h2">
-					<div id="save">
-						<span id="userNameCng">${locationShop.shopName}</span>
-						<button class="shopNameBtn">상점명 수정</button>
-					</div>
-
-					<div>
-
-						<div id="myShopContent">${locationShop.shopIntroduce}</div>
-						<div id="myShopContent1">
-							<div id="myShopContent2">소개글 수정</div>
+			<c:choose>
+				<c:when test="${ sessionScope.loginMember.memberNo != sessionScope.shopNo }">
+					<div class="head2">
+						<div id="h2">
+							<div id="save">
+								<span id="userNameCng">${locationShop.shopName}</span>
+							</div>
+							<div>
+								<div id="myShopContent">${locationShop.shopIntroduce}</div>
+								<div id="myShopContent1">
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-
-			</div>
+				</c:when>
+				<c:otherwise>
+					<div class="head2">
+						<div id="h2">
+							<div id="save">
+								<span id="userNameCng">${locationShop.shopName}</span>
+								<button class="shopNameBtn">상점명 수정</button>
+							</div>
+		
+							<div>
+		
+								<div id="myShopContent">${locationShop.shopIntroduce}</div>
+								<div id="myShopContent1">
+									<div id="myShopContent2">소개글 수정</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:otherwise>
+			</c:choose>
+			
 		</div>
 	</div>
 

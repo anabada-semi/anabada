@@ -7,9 +7,10 @@
 
 <hr>
 
-<table>
+<table class="addSellList">
 	<tr><td></td><td></td><td></td><td></td></tr>
-	<tr class="sellTr">
+</table>
+<%-- 	<tr class="sellTr">
 		<td class="sellTd">
 			<div class="sellImgDiv">
 				<span class="sellImgSpan"> 판매 완료 </span>
@@ -21,6 +22,7 @@
 				<div class="sellText3">10분 전</div>
 			</div>
 		</td>
+		
 		<td class="sellTd">
 			<div class="sellImgDiv">
 				<span class="sellImgSpan"> 판매 완료 </span>
@@ -43,18 +45,7 @@
 				<div class="sellText3">4달 전</div>
 			</div>
 		</td>
-	</tr>
-</table>
+	</tr> --%>
 
 
-<script>
-	(function(){
-		$("#itemText").text($(".sellTd").length);
-	}());
-	
-	$(".sellTd").on("click", function(){
-		(function(){
-			$("#itemText").text($(".sellTd").length);
-		}());
-	});
-</script>
+

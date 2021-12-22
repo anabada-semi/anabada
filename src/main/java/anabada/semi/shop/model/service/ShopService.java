@@ -8,7 +8,9 @@ import java.util.List;
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.shop.model.dao.ShopDAO;
 import anabada.semi.shop.model.vo.PostScript;
+import anabada.semi.shop.model.vo.Purchase;
 import anabada.semi.shop.model.vo.Shop;
+import anabada.semi.shop.model.vo.Wish;
 
 public class ShopService {
 	private ShopDAO dao = new ShopDAO();
@@ -102,6 +104,49 @@ public class ShopService {
 		close(conn);
 		
 		return result;
+	}
+
+	public List<Wish> selectWsih(int shopNo) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Wish> wList = dao.selectWsih(shopNo, conn);
+		
+		close(conn);
+		
+		return wList;
+	}
+
+	public int deleteWish(int itemNo, int shopNo) throws Exception {
+		Connection conn = getConnection();
+		
+		int r = dao.deleteWish(itemNo, shopNo, conn);
+		
+		if(r > 0)	commit(conn);
+		else		rollback(conn);
+		
+		close(conn);
+		
+		return r;
+	}
+
+	public List<Purchase> selectBuyItem(int shopNo) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Purchase> pList = dao.selectBuyItem(shopNo, conn);
+		
+		close(conn);
+		
+		return pList;
+	}
+
+	public List<Item> selectSellItem(int shopNo) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Item> sList = dao.selectSellItem(shopNo, conn);
+		
+		close(conn);
+		
+		return sList;
 	}
 	
 	
