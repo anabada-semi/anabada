@@ -85,6 +85,7 @@ $(".btn").on("click", function(){
     }
 });
 
+let itemPk;
 let postNo = [];
 // 상점 후기 목록 조회
 function selectReplyList() {
@@ -188,6 +189,11 @@ function selectitemList() {
                 $.each(r, function (index, item) {
                     // console.log(item);
 
+                    if(itemPk == item.itemNo){
+                        return;
+                    }
+                    itemPk = item.itemNo;
+
                     const sel = $('<select class="itemOp">');
                     const selling = $('<option value="onSale">판매중</option>');
                     const soldOut = $('<option value="soldOut">판매 완료</option>');
@@ -200,7 +206,7 @@ function selectitemList() {
                     let imgSrc;
                     if(item.itemImgName != null)    imgSrc = contextPath + item.itemPath + item.itemImgName;
                     else                            imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
-                    itemImg = $('<a href="' + contextPath + '/detail/select?itemNo=' + item.itemNo + '"><img class="itemImg" src="' + imgSrc + '">');
+                    itemImg = $('<a href="' + contextPath + '/detail/select?no=' + item.itemNo + '"><img class="itemImg" src="' + imgSrc + '">');
 
                     const itD = $('<div class="itemTextDiv">');
 
@@ -263,15 +269,20 @@ function wishList(){
             }else{
 
                 $.each(r, function (index, wish) {
+                    
+                    if(itemPk == wish.itemNo){
+                        return;
+                    }
+                    itemPk = wish.itemNo;
 
                     wishNo[index] = wish.itemNo;
 
                     const wc = $('<div class="wishContainer" id="' + wishNo[index] + '">');
 
                     let imgSrc;
-                    if(wish.imgName != null)    imgSrc = contextPath + wish.itemPath + wish.imgName;
+                    if(wish.imgName != null)    imgSrc = contextPath + wish.imgPath + wish.imgName;
                     else                        imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
-                    const wi = $('<a href="' + contextPath + '/detail/select?itemNo=' + wish.itemNo + '"><img class="wishImg" src="' + wish.imgSrc + '">');
+                    const wi = $('<a href="' + contextPath + '/detail/select?no=' + wish.itemNo + '"><img class="wishImg" src="' + wish.imgSrc + '">');
 
 
                     const wtd = $('<div class="wishTextDiv">');
@@ -333,6 +344,11 @@ function buyPage(){
 
                 $.each(result, function (index, buyList) {
 
+                    if(itemPk == buyList.itemNo){
+                        return;
+                    }
+                    itemPk = buyList.itemNo;
+
                     const tr = $("<tr class='buyTr'>");
                     const td = $("<td class='buyTd'>");
                     const bid = $('<div class="buyImgDiv">');
@@ -340,7 +356,7 @@ function buyPage(){
                     let imgSrc;
                     if(buyList.itemImgName != null)    imgSrc = contextPath + buyList.itemImgPath + buyList.itemImgName;
                     else                            imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
-                    itemImg = $('<a href="' + contextPath + '/detail/select?itemNo=' + buyList.itemNo + '"><img class="buyImg" src="' + imgSrc + '">');
+                    itemImg = $('<a href="' + contextPath + '/detail/select?no=' + buyList.itemNo + '"><img class="buyImg" src="' + imgSrc + '">');
                     
                     const bis = $('<span class="buyImgSpan"> 구매 완료 </span>');
                     bid.append(bis, itemImg);
@@ -405,6 +421,11 @@ function sellPage(){
 
                 $.each(result, function (index, sellList) {
 
+                    if(itemPk == sellList.itemNo){
+                        return;
+                    }
+                    itemPk = sellList.itemNo;
+
                     const sel = $('<select class="sellOp">');
                     const soldOut = $('<option value="soldOut">판매 완료</option>');
                     const selling = $('<option value="onSale">판매중</option>');
@@ -417,7 +438,7 @@ function sellPage(){
                     let imgSrc;
                     if(sellList.itemImgName != null)    imgSrc = contextPath + sellList.itemPath + sellList.itemImgName;
                     else                            imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
-                    itemImg = $('<a href="' + contextPath + '/detail/select?itemNo=' + sellList.itemNo + '"><img class="sellImg" src="' + imgSrc + '">');
+                    itemImg = $('<a href="' + contextPath + '/detail/select?no=' + sellList.itemNo + '"><img class="sellImg" src="' + imgSrc + '">');
                     
                     const sis = $('<span class="sellImgSpan"> 판매 완료 </span>');
                     sid.append(sis, itemImg);
@@ -855,6 +876,9 @@ $(document).on("click", ".wishDeleteBtn", function(){
 
 /* 판매중인 상품 내역 페이지 판매완료로 변경 시 */
 $(document).on("change", ".itemOp", function(){
+
+    const idx = $(".itemOp").index($(this));
+
     const itemNo = $(this).parent().attr("id");
 
     if($(this).val() == 'soldOut'){// 판매완료로 변경 시
@@ -864,8 +888,10 @@ $(document).on("change", ".itemOp", function(){
             data: { "itemNo": itemNo, "shopNo": shopNo },
             success: function(r){
                 if(r > 0){
-                    $(".itemTd").remove();
-                    selectitemList();
+                    // $(".itemTd").remove();
+                    // selectitemList();
+
+                    $(".itemTd").eq(idx).remove();
                 }else{
                     selectitemList();
                 }
@@ -882,6 +908,8 @@ $(document).on("change", ".itemOp", function(){
 /* 판매완료 상품 내역 페이지 판매중으로 변경 시 */
 $(document).on("change", ".sellOp", function(){
 
+    const idx = $(".sellOp").index($(this));
+
     const itemNo = $(this).parent().attr("id");
 
     if($(this).val() == 'onSale'){// 판매완료로 변경 시
@@ -892,8 +920,10 @@ $(document).on("change", ".sellOp", function(){
             success: function(r){
 
                 if(r > 0){
-                    $(".sellTd").remove();
-                    sellPage();
+                    // $(".sellTd").remove();
+                    // sellPage();
+
+                    $(".sellTd").eq(idx).remove();
                 }else{
                     sellPage();
                 }

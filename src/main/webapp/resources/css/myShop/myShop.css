@@ -228,7 +228,7 @@ text-align: center;
 /* sellList css */
 .sellTr{margin-bottom: 10px;}
 .sellTd{width: 25%; height: 250px; border: 1px solid #ccc; padding: 10px 10px 10px 10px; text-align: center;}
-.sellImgDiv{margin: 10px auto; position: relative;}
+.sellImgDiv{margin: 20px auto; position: relative;}
 .sellImgSpan{
     padding: 10px 20px; 
     border-radius: 10px; 
