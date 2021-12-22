@@ -57,36 +57,19 @@
         	</c:otherwise>
         </c:choose>
         
-        <div class="item" id="it-1" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-        <div class="item" id="it-2" onclick="location.href='https://m.bunjang.co.kr/'">
-            <img src="${contextPath}/resources/images/main/ku.jpg">
-            <div class="item-title">특히나 더 놀란 고양이</div>
-            <div class="item-content" style="font-weight: bold;">
-                <span style="float: left;">12,000원</span>
-                <span style="float: right;">1일 전</span>
-            </div>
-        </div>
-
         <div class="page-button">
-            <div class="move-button page-div" onclick="location.href='list?cp=${pagination.prevPage}'"><p>&#8249;</p></div>
+            <div class="move-button page-div" onclick="location.href='mainItem?cp=${pagination.prevPage}'"><p>&#8249;</p></div>
             <c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" step="1" var="i">
 				<c:choose>
 					<c:when test="${i == pagination.currentPage}">
 						<div class="current-div" style="background-color: #ccc;">${i}</div>								
 					</c:when>
 					<c:otherwise>
-						<div class="page-div" onclick="location.href='list?cp=${i}'">${i}</div>
+						<div class="page-div" onclick="location.href='mainItem?cp=${i}'">${i}</div>
 					</c:otherwise>
 				</c:choose>
             </c:forEach>
-            <div class="move-button page-div" onclick="location.href='list?cp=${pagination.nextPage}'"><p>&#8250;</p></div>
+            <div class="move-button page-div" onclick="location.href='mainItem?cp=${pagination.nextPage}'"><p>&#8250;</p></div>
         </div>
     </section>
 

@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/header+footer.css">
 
 </head>
-<body>
+<body id="body-top">
 	<div class="wrapper">
 		<header>
 			<!-- 맨 위부분 로그인, 로그아웃, 내 상점 -->

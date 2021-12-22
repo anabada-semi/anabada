@@ -15,7 +15,7 @@
                 <div id="recently-img"></div>
             </div>
             <div id="button-top">
-                <div>TOP</div>
+                <div><a href="#body-top" id="top-btn">TOP</a></div>
             </div>
         </div>
     </aside>

@@ -58,6 +58,7 @@ section{
 
 .item > img{
     width: 100%;
+    height: 182px;
 }
 
 .item > div{
@@ -76,7 +77,7 @@ section{
 
 .page-button{
     clear: both;
-    width: 310px;
+    width: 360px;
     height: 80px;
     margin: auto;
     margin-bottom: 50px;
