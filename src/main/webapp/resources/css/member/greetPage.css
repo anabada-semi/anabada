@@ -19,6 +19,7 @@ section{
     margin: 0 auto;
     margin-top: 150px;
     margin-bottom: 150px;
+    text-align: center;
 }
 
 
@@ -29,7 +30,7 @@ section{
 }
 
 .float-Box{
-    float: left;
+    display: inline-block;
     line-height: 50px;
 }
 
