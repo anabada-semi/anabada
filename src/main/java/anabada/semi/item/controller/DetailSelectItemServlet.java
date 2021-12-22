@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -65,18 +66,14 @@ public class DetailSelectItemServlet extends HttpServlet{
 			
 			// 댓글 조회하기
 			List<Reply> rList = service.selectReplyList(itemNo);
-			
-			for(Reply dateItem : rList) {
-				
-				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
-		        
-				String dateString = sdf.format(dateItem.getReplyDate());
-				
-			}
+			List<Reply> answer = service.selectReplyListReverse(itemNo);
 			
 			req.setAttribute("rList", rList);	// 댓글 목록
+			req.setAttribute("answer", answer);	// 댓글 목록
 			
-//			System.out.println(rList);
+			System.out.println("일반: " + rList);
+			System.out.println("역순: " + answer);
+			
 			
 			String path = "/WEB-INF/views/detailSelectItem.jsp";
 			req.getRequestDispatcher(path).forward(req, resp);

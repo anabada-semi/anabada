@@ -125,7 +125,7 @@ public class ItemController extends HttpServlet{
 			
 			else if(command.equals("updateForm")) {
 				
-				int itemNo = 33;
+				int itemNo = 61;
 				
 				Item item = service.updateView(itemNo);
 				
@@ -138,11 +138,73 @@ public class ItemController extends HttpServlet{
 				req.getRequestDispatcher(path).forward(req, resp);
 				
 				
+			}else if(command.equals("update")) {
 				
+				int maxSize = 1024 * 1024 * 100;
+				
+				HttpSession session = req.getSession();
+				
+				String root = session.getServletContext().getRealPath("/");
+				String filePath = "/resources/images/item/";
+				
+				String realPath = root + filePath;
+				
+				MultipartRequest mReq = new MultipartRequest(req, realPath, maxSize, "UTF-8", new MyRenamePolicy());
+				
+				String itemName = mReq.getParameter("itemName");
+				int categoryCode = Integer.parseInt( mReq.getParameter("categoryCode"));
+				String itemPrice = mReq.getParameter("itemPrice");
+				String itemInfo = mReq.getParameter("itemInfo");
+				
+				int itemNo = Integer.parseInt( mReq.getParameter("no"));
+				
+				int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+				
+				Item item = new Item();
+				item.setItemName(itemName);
+				item.setCategoryCode(categoryCode);
+				item.setItemPrice(itemPrice);
+				item.setItemInfo(itemInfo);
+				item.setMemberNo(memberNo);
+				item.setItemNo(itemNo);
+				
+				Enumeration<String> files = mReq.getFileNames();
+				
+				List<ItemImg> imgList = new ArrayList<ItemImg>();
+				
+				while(files.hasMoreElements()){
+					
+					String name = files.nextElement(); 
+					
+					if(mReq.getFilesystemName(name) != null) {
+						
+						ItemImg temp = new ItemImg();
+						
+						temp.setImgName(mReq.getFilesystemName(name));
+						temp.setImgOriginal(mReq.getOriginalFileName(name));
+						temp.setImgPath(filePath);
+						temp.setImgLevel( Integer.parseInt(name.replace("img", "") ) );
+						temp.setItemNo(itemNo);
+						
+						imgList.add(temp);
+					}
+						
+				}
+				
+				int result = service.updateItem(item, imgList);
+				
+				if(result > 0) {
+					message = "게시글이 수정되었습니다.";
+					path = "updateForm";
+				}else {
+					message = "게시글 수정 실패!";
+					path = req.getHeader("referer");
+				}
+				
+				session.setAttribute("message", message);
+				resp.sendRedirect(path);
 				
 			}
-			
-			
 			
 			
 		}catch(Exception e) {
