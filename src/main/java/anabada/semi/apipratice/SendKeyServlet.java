@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import anabada.semi.member.model.service.MemberService;
 import anabada.semi.member.model.vo.Member;
 
-@WebServlet("sendKey")
+@WebServlet("/sendKey")
 public class SendKeyServlet extends HttpServlet {
 
 	@Override
