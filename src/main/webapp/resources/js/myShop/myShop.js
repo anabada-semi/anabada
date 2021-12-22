@@ -24,6 +24,7 @@ $(".btn").on("click", function(){
                 url: contextPath + "/myShop/wishList",
                 success: function(r){
                     $("#changeDiv").append(r);
+                    wishList();
                 },
                 error:function(req,status,er){
                     console.log(req.responseText);
@@ -48,6 +49,7 @@ $(".btn").on("click", function(){
                 url: contextPath + "/myShop/buyList",
                 success: function(r){
                     $("#changeDiv").html(r);
+                    buyPage();
                 },
                 error:function(req,status,er){
                     console.log(req.responseText);
@@ -59,6 +61,7 @@ $(".btn").on("click", function(){
                 url: contextPath + "/myShop/sellList",
                 success: function(r){
                     $("#changeDiv").html(r);
+                    sellPage();
                 },
                 error:function(req,status,er){
                     console.log(req.responseText);
@@ -79,17 +82,15 @@ function selectReplyList() {
         dataType: "JSON",
         success: function (r) {
 
-            count = r.length;
-
             $.each(r, function (index, post) {
 
-                count--;
                 postNo[index] = post.postScriptNo;
 
                 const upd = $('<button class="userPostDelete">삭제</button>');
                 const upu = $('<button class="userPostUpdate">수정</button>');
                 const uprBtn = $('<button class="userPostReport">신고</button>');
                 let upr = $("<div class='userPost-report'>");
+
                 if (post.memberNo == loginMemberNo) {
                     upr.append(upd, upu);
                 }else{
@@ -100,13 +101,16 @@ function selectReplyList() {
                 upc.text(post.postScriptCheck);
 
                 const ups = $("<div class='userPost-shop'>");
-                ups.text("이동");
+                // ups.text("상점 이동");
+                ups.append('<a href="' + contextPath + '/myShop/myShop?no=' + post.memberNo + '">상점 이동</a>');
 
                 const upst = $("<div class='userPost-star'>");
-                upst.text("별사진");
+                // upst.text("별사진");
+                upst.append('<img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png"><img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png"><img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png"><img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png"><img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png">');
 
                 const upn = $("<div class='userPost-name'>");
-                upn.text(post.shopName);
+                // upn.append('<a href="' + contextPath + '/myShop/myShop?no=' + post.memberNo + '">' + post.shopName + '</a>');
+                upn.append(post.shopName);
                 
                 const upa = $("<div class='userPost-area'>");
                 upa.append(upn, upst, ups, upc, upr);
@@ -120,10 +124,7 @@ function selectReplyList() {
 
                 locationPost.after(up);
                 
-
-            
                 $(".userPostTextarea").val("");
-                
                 
             });
             (function(){
@@ -148,7 +149,7 @@ function selectitemList() {
                 // contextPath/myShop/myShop?no=item.itemNo
                 const table = $("<table>");
                 const tr = $("<tr class='itemTr'>");
-                const td = $("<td class='itemTd' onclick='location.href=" + "#" + ";' >");
+                const td = $("<td class='itemTd'>");
 
                 let imgSrc;
                 if(item.itemImgName != null)    imgSrc = contextPath + item.itemPath + item.itemImgName;
@@ -183,8 +184,166 @@ function selectitemList() {
     });
 }
 
-function updatePostScript(psNo, index){
+/* 찜 목록 조회 */
+let wishNo = [];
+function wishList(){
 
+    const abc = $("#wishSpanText").parent().next();
+
+    $.ajax({
+        url: contextPath + "/myShop/wishItemList",
+        data: { "shopNo": shopNo },
+        dataType: "JSON",
+        success: function (r) {
+            $.each(r, function (index, wish) {
+
+                wishNo[index] = wish.itemNo;
+
+                const wc = $('<div class="wishContainer" id="' + wishNo[index] + '">');
+
+                let imgSrc;
+                if(wish.imgName != null)    imgSrc = contextPath + wish.itemPath + wish.imgName;
+                else                        imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
+                const wi = $('<a href="' + contextPath + '/detail/select?itemNo=' + wish.itemNo + '"><img class="wishImg" src="' + wish.imgSrc + '">');
+
+
+                const wtd = $('<div class="wishTextDiv">');
+                const wTitle = $('<div class="wishTitle">');
+                wTitle.text(wish.itemName);
+
+                const wdBtn = $('<button class="wishDeleteBtn">');
+                wdBtn.text('찜 삭제');
+
+                const wt1 = $('<div class="wishText1">');
+                wt1.text(wish.itemPrice);
+
+                const wt2 = $('<div class="wishText2">');
+                wt2.text(wish.uploadDate);
+
+                wTitle.append(wdBtn);
+                wtd.append(wTitle, wt1, wt2);
+                wc.append(wi, wtd);
+
+                abc.after(wc);
+
+            });
+
+            (function() {
+                $("#wishSpanText").text($(".wishContainer").length);
+            }());
+        },
+        error: function (req, status, error) {
+            console.log("댓글 목록 조회 실패");
+            console.log(req.responseText);
+        }
+    });
+}
+
+/* 구매목록 조회 페이지 */
+function buyPage(){
+    $.ajax({
+        url: contextPath + "/myShop/buyItemList",
+        data: { "shopNo": shopNo },
+        dataType: "JSON",
+        success: function (result) {
+            $.each(result, function (index, buyList) {
+
+                const tr = $("<tr class='buyTr'>");
+                const td = $("<td class='buyTd'>");
+                const bid = $('<div class="buyImgDiv">');
+                
+                let imgSrc;
+                if(buyList.itemImgName != null)    imgSrc = contextPath + buyList.itemImgPath + buyList.itemImgName;
+                else                            imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
+                itemImg = $('<a href="' + contextPath + '/detail/select?itemNo=' + buyList.itemNo + '"><img class="buyImg" src="' + imgSrc + '">');
+                
+                const bis = $('<span class="buyImgSpan"> 구매 완료 </span>');
+                bid.append(bis, itemImg);
+
+                const btd = $('<div class="buyTextDiv">');
+                const bt1 = $('<div class="buyText1">');
+                bt1.append(buyList.itemName);
+
+                const bt2 = $('<div class="buyText2">');
+                bt2.append(buyList.itemPrice);
+
+                const bt3 = $('<div class="buyText3">');
+                bt3.append(buyList.uploadDate);
+
+                btd.append(bt1, bt2 ,bt3);
+
+                td.append(bid, btd);
+
+                tr.append(td);
+                $(".buyTr").eq(Math.floor(index/4)).append(td);
+
+                if(index % 4 == 0)
+                    $(".addBuyList").append(tr);
+
+            });
+            (function(){
+                $("#buyText").text($(".buyTd").length);
+            }());
+        },
+        error: function (req, status, error) {
+            console.log("구매 목록 조회 실패");
+            console.log(req.responseText);
+        }
+    });
+}
+
+/* 판매 목록 조회 페이지 */
+function sellPage(){
+    $.ajax({
+        url: contextPath + "/myShop/sellItemList",
+        data: { "shopNo": shopNo },
+        dataType: "JSON",
+        success: function (result) {
+            $.each(result, function (index, sellList) {
+
+                const tr = $("<tr class='sellTr'>");
+                const td = $("<td class='sellTd'>");
+                const sid = $('<div class="sellImgDiv">');
+                
+                let imgSrc;
+                if(sellList.itemImgName != null)    imgSrc = contextPath + sellList.itemPath + sellList.itemImgName;
+                else                            imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
+                itemImg = $('<a href="' + contextPath + '/detail/select?itemNo=' + sellList.itemNo + '"><img class="sellImg" src="' + imgSrc + '">');
+                
+                const sis = $('<span class="sellImgSpan"> 판매 완료 </span>');
+                sid.append(sis, itemImg);
+
+                const std = $('<div class="sellTextDiv">');
+                const st1 = $('<div class="sellText1">');
+                st1.append(sellList.itemName);
+
+                const st2 = $('<div class="sellText2">');
+                st2.append(sellList.itemPrice);
+
+                const st3 = $('<div class="sellText3">');
+                st3.append(sellList.uploadDate);
+
+                std.append(st1, st2 ,st3);
+
+                td.append(sid, std);
+
+                tr.append(td);
+                $(".sellTr").eq(Math.floor(index/4)).append(td);
+
+                if(index % 4 == 0)
+                    $(".addSellList").append(tr);
+
+            });
+            (function(){
+                $("#itemText").text($(".sellTd").length);
+            }());
+
+        },
+        error: function (req, status, error) {
+            console.log("구매 목록 조회 실패");
+            console.log(req.responseText);
+        }
+    });
 }
 
 
@@ -300,16 +459,23 @@ $(document).on("input", ".userPostArea > .userPostTextarea", function(){
     
     $("#userPostTextareaBtn").html("확인<br>" + textLength + "/120");
 
+    if(textLength > 0)  $("#userPostTextareaBtn").css("background", "antiquewhite");
+    else                $("#userPostTextareaBtn").css("background", "rgb(250, 250, 250)");
+
     if(textLength > textCountLimit){
         $(this).val($(this).val().substr(0, textCountLimit));
         $("#userPostTextareaBtn").html("확인<br>120/120");
     }
+
 });
 /* 상점 후기 수정 최대 120글자 */
 $(document).on("input", ".userPost > .userPostTextarea", function(){
     const textLength = $(this).val().length;
     
     $("#updateUserPostTextareaBtn").html("확인<br>" + textLength + "/120");
+
+    if(textLength > 0)  $("#updateUserPostTextareaBtn").css("background", "antiquewhite");
+    else                $("#updateUserPostTextareaBtn").css("background", "rgb(250, 250, 250)");
 
     if(textLength > textCountLimit){
         $(this).val($(this).val().substr(0, textCountLimit));
@@ -331,7 +497,7 @@ $(document).on("click", "#userPostTextareaBtn", function(){
                     alert("성공");
                     selectReplyList();
                 }else{
-                    alert("후기 등록 실패  이유는 나도 모름");
+                    alert("후기 등록 실패");
                     selectReplyList();
                 }
             },
@@ -349,7 +515,7 @@ $(document).on("click", "#userPostTextareaBtn", function(){
                     alert("성공");
                     selectReplyList();
                 }else{
-                    alert("후기 등록 실패  이유는 나도 모름");
+                    alert("후기 등록 실패");
                     selectReplyList();
                 }
             },
@@ -360,14 +526,21 @@ $(document).on("click", "#userPostTextareaBtn", function(){
     }
 });
 
+let backup;
 function createText(j, text){
+    backup = $(".userPost[id=" + j + "]").html();
+
     const img = $('<div class="userPostImgDiv"><img class="userPostImg" src="/anabada/resources/images/myShop/profile/캐릭터.png"></div>');
     const ta = $('<textarea class="userPostTextarea"></textarea>');
     const btn = $('<button id="updateUserPostTextareaBtn">확인<br>0/120</button>');
     $(".userPost[id=" + j + "]").empty();
     $(".userPost[id=" + j + "]").append(img, ta, btn);
     $(".userPostTextarea").eq(0).val(text);
+    $("#updateUserPostTextareaBtn").html('확인<br>' + $(".userPostTextarea").eq(0).val().length + '/120').css("background", "antiquewhite");
+
+
 }
+
 let deleteIndex;
 let Temp = [];
 let postNum;
@@ -418,7 +591,7 @@ $(document).on("click", ".userPostDelete", function(){
                     alert("상점 후기 삭제 성공");
                     selectReplyList();
                 }else{
-                    alert("후기 삭제 실패  이유는 나도 모름");
+                    alert("후기 삭제 실패");
                     selectReplyList();
                 }
             },
@@ -445,7 +618,7 @@ $(document).on("click", "#updateUserPostTextareaBtn", function(){
                 alert("상점 후기 수정 성공");
                 selectReplyList();
             }else{
-                alert("후기 수정 실패  이유는 나도 모름");
+                alert("후기 수정 실패");
                 selectReplyList();
             }
         },
@@ -458,9 +631,7 @@ $(document).on("click", "#updateUserPostTextareaBtn", function(){
 });
 
 
-
-
-
+/* 신고하기 버튼 클릭 시 */
 $(document).on("click", ".userPostReport", function(){
 
     $("#popup01").show();   //팝업 오픈
@@ -479,6 +650,7 @@ $(document).on("click", ".userPostReport", function(){
 
 });
 
+/* 신고하기 모달창 확인버튼 120글자 제한 */
 $(document).on("input", ".userReportTextarea", function(){
     const textLength = $(this).val().length;
 
@@ -495,6 +667,7 @@ $(document).on("input", ".userReportTextarea", function(){
     $("#userReportTextareaBtn").css("background", "#ccc");
 });
 
+/* 신고하기 모달창 신고 완료 */
 $(".userReportTextareaBtn").on("click", function(){
     
     if($(".userReportTextarea").val().length != 0){
@@ -506,4 +679,40 @@ $(".userReportTextareaBtn").on("click", function(){
     } else{
         return;
     }
+});
+
+
+/* 찜 삭제 버튼 클릭 시 */
+$(document).on("click", ".wishDeleteBtn", function(){
+    const idx = $(".wishDeleteBtn").index($(this));
+
+    if (confirm("삭제할래요?")) {
+        
+        $.ajax({
+            url: contextPath + "/myShop/deleteWish",
+            data: { "itemNo": $(".wishContainer").eq(idx).attr("id"), "shopNo": shopNo },
+            success: function(r){
+                if(r > 0){
+                    // $(".wishContainer").eq(idx).remove();
+                    $(".wishContainer").remove();
+                    alert("찜 목록 삭제 성공");
+                    wishList();
+                }else{
+                    alert("찜 목록 삭제 실패");
+                    wishList();
+                }
+            },
+            error:function(req, status, er){
+                console.log(req.responseText);
+            }
+        });
+
+
+        (function() {
+            $("#wishSpanText").text($(".wishDeleteBtn").length);
+        }());
+    } else {
+        return;
+    }
+
 });

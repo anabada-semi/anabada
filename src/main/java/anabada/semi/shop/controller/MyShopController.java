@@ -22,7 +22,9 @@ import anabada.semi.member.model.service.MemberService;
 import anabada.semi.member.model.vo.Member;
 import anabada.semi.shop.model.service.ShopService;
 import anabada.semi.shop.model.vo.PostScript;
+import anabada.semi.shop.model.vo.Purchase;
 import anabada.semi.shop.model.vo.Shop;
+import anabada.semi.shop.model.vo.Wish;
 
 @WebServlet("/myShop/*")
 public class MyShopController extends HttpServlet {
@@ -54,40 +56,34 @@ public class MyShopController extends HttpServlet {
 					path = "/WEB-INF/views/myShop/itemList.jsp";
 					req.getRequestDispatcher(path).forward(req, resp);
 					
-				}else {
-					
 				}
 				
 			}else if(command.equals("wishList")) {
 				if(method.equals("GET")) {
+					
 					path = "/WEB-INF/views/myShop/wishList.jsp";
 					req.getRequestDispatcher(path).forward(req, resp);
-				}else {
-					
 				}
 				
 			}else if(command.equals("postScript")) {
 				if(method.equals("GET")) {
+					
 					path = "/WEB-INF/views/myShop/postScript.jsp";
 					req.getRequestDispatcher(path).forward(req, resp);
-				}else {
-					
 				}
 				
 			}else if(command.equals("buyList")) {
 				if(method.equals("GET")) {
+					
 					path = "/WEB-INF/views/myShop/buyList.jsp";
 					req.getRequestDispatcher(path).forward(req, resp);
-				}else {
-					
 				}
 				
 			}else if(command.equals("sellList")) {
 				if(method.equals("GET")) {
+					
 					path = "/WEB-INF/views/myShop/sellList.jsp";
 					req.getRequestDispatcher(path).forward(req, resp);
-				}else {
-					
 				}
 				
 			}else if(command.equals("imgInsert")) {
@@ -111,31 +107,37 @@ public class MyShopController extends HttpServlet {
 					
 					path = "/WEB-INF/views/myShop/myShop.jsp";
 					req.getRequestDispatcher(path).forward(req, resp);
-				}else {
-					
 				}
+				
 			}else if(command.equals("shopNameCng")) {
 				if(method.equals("GET")) {
+					
 					String inputName = new XSS().replaceParameter(req.getParameter("inputName"));
 					int memberNo = Integer.parseInt( req.getParameter("memberNo") );
 					
 					int result = service.updateShopName(inputName, memberNo);
+					
 					if(result > 0) {
+						
 						shop =  new MemberService().selectShop(loginMember.getMemberNo());
 						session.setAttribute("locationShop", shop);
 					}
 					
 					resp.getWriter().print(result);
 				}
+				
 			}else if(command.equals("shopContentCng")) {
 				if(method.equals("GET")) {
+					
 					String inputContent = new XSS().replaceParameter(req.getParameter("inputContent"));
 					int memberNo = Integer.parseInt( req.getParameter("memberNo") );
 					
 					resp.getWriter().print(service.updateShopContent(inputContent, memberNo));
 				}
+				
 			}else if(command.equals("myShop")) {
 				if(method.equals("GET")) {
+					
 					int shopNo = Integer.parseInt(req.getParameter("no"));
 					
 					if(shopNo != loginMember.getMemberNo()) 
@@ -145,32 +147,38 @@ public class MyShopController extends HttpServlet {
 					session.setAttribute("shopNo", shopNo);
 					
 					req.getRequestDispatcher("/WEB-INF/views/myShop/myShop.jsp").forward(req, resp);
-				}else {
-					
 				}
+				
 			}else if(command.equals("insertPostScript")) {
 				if(method.equals("GET")) {
+					
 					String postScript = req.getParameter("postScript");
 					int shopNo = (int)session.getAttribute("shopNo");
 					
 					resp.getWriter().print(service.insertPostScript(shopNo, loginMember.getMemberNo(), postScript));
 					
 				}
+				
 			}else if(command.equals("updatePostScript")) {
 				if(method.equals("GET")) {
+					
 					int postNo = Integer.parseInt(req.getParameter("postNo"));
 					String postScript = req.getParameter("postScript");
 					
 					resp.getWriter().print(service.updatePostScript(postNo, postScript));
 				}
+				
 			}else if(command.equals("deletePostScript")) {
 				if(method.equals("GET")) {
+					
 					int postNo = Integer.parseInt(req.getParameter("postNo"));
 					
 					resp.getWriter().print(service.deletePostScript(postNo));
 				}
+				
 			}else if(command.equals("selectPostScript")) {
 				if(method.equals("GET")) {
+					
 					int memberNo = Integer.parseInt(req.getParameter("memberNo"));
 					int shopNo = (int)session.getAttribute("shopNo");
 					
@@ -178,15 +186,62 @@ public class MyShopController extends HttpServlet {
 
 					new Gson().toJson(pList, resp.getWriter());
 					
-				}else {
+				}
+				
+			}else if(command.equals("selectItemList")) {
+				if(method.equals("GET")) {
+					
+					int shopNo = (int)session.getAttribute("shopNo");
+					
+					List<Item> iList = service.selectItem(shopNo);
+					
+					req.setAttribute("itemList", iList);
+					
+					new Gson().toJson(iList, resp.getWriter());
+				}
+				
+			}else if(command.equals("wishItemList")) {
+				if(method.equals("GET")) {
+					
+					int shopNo = (int)session.getAttribute("shopNo");
+					
+					List<Wish> wList = service.selectWsih(shopNo);
+					
+					req.setAttribute("wishList", wList);
+					
+					new Gson().toJson(wList, resp.getWriter());
+				}
+				
+			}else if(command.equals("deleteWish")) {
+				if(method.equals("GET")) {
+					
+					int itemNo = Integer.parseInt(req.getParameter("itemNo"));
+					int shopNo = Integer.parseInt(req.getParameter("shopNo"));
+					
+					resp.getWriter().print( service.deleteWish(itemNo, shopNo) );
+				}
+				
+			}else if(command.equals("buyItemList")) {
+				if(method.equals("GET")) {
+					
+					int shopNo = Integer.parseInt(req.getParameter("shopNo"));
+					
+					List<Purchase> pList = service.selectBuyItem(shopNo);
+					
+					new Gson().toJson(pList, resp.getWriter());
 					
 				}
-			}else if(command.equals("selectItemList")) {
-				int shopNo = (int)session.getAttribute("shopNo");
 				
-				List<Item> iList = service.selectItem(shopNo);
-				req.setAttribute("itemList", iList);
-				new Gson().toJson(iList, resp.getWriter());
+			}else if(command.equals("sellItemList")) {
+				if(method.equals("GET")) {
+					
+					int shopNo = Integer.parseInt(req.getParameter("shopNo"));
+					
+					List<Item> sList = service.selectSellItem(shopNo);
+					
+					new Gson().toJson(sList, resp.getWriter());
+				}
+				
 			}
 			
 		} catch (Exception e) {

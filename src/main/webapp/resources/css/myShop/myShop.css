@@ -297,3 +297,14 @@ text-align: center;
     margin: 0;
     padding: 0;
 }
+
+.userPost-shop{
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    width: 150px;
+    height: 30px;
+    line-height: 29px;
+    background: rgb(235 235 235);
+}
