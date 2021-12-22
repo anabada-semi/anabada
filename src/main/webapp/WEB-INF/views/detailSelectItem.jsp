@@ -33,8 +33,8 @@
             </div>
             <div class="main-top">
                 <div class="product-img">
-                    <img src="https://via.placeholder.com/450">
-                    <%-- <img src="${contextPath}${itemImg.imgPath}${itemImg.img_name}"> --%>
+                    <!-- <img src="https://via.placeholder.com/450"> -->
+                    <img src="${contextPath}${itemImg[0].imgPath}${itemImg[0].imgName}">
                 </div>
                 <div class="product-intro">
                     <div class="product-intro-top">
@@ -43,15 +43,14 @@
                     </div>
                     <div class="product-intro-bottom">
                         <div class="product-inform">
-                            <span><img src="${contextPath}/resources/images/itemIcon/heart.png"> ${item.wish}</span>
-                            <span><img src="${contextPath}/resources/images/itemIcon/viewer.png"> ${item.readCount}</span>
+                            <span><img src="${contextPath}/resources/images/itemIcon/heart.png"><p id="wish-count"> ${item.wish}</p></span>
+                            <span><img src="${contextPath}/resources/images/itemIcon/viewer.png"><p id="read-count"> ${item.readCount}</p></span>
                             <span><img src="${contextPath}/resources/images/itemIcon/clock.png"> ${date}</span>
                         </div>
                         <div class="product-btn">
-                            <!-- <button onclick = "wish(${item.itemNo}, this);">찜</button> -->
                             <button onclick = "wish(${item.itemNo}, this)">찜</button>
                             <button id="question">문의하기</button>
-                            <button>수정하기</button>
+                            <button onclick="location.href='${contextPath}/item/updateForm/no=${item.itemNo}'">수정하기</button>
                         </div>
     
                     </div>
@@ -210,10 +209,8 @@
                                 </span>
                             </div>
                         </c:forEach>
-                            
 
-
-                        <button class="more-review" onclick="">후기 더보기 > </button>
+                        <button class="more-review" onclick="location.href='${contextPath}/myShop/myShop?no=${shop.memberNo}'">후기 더보기 > </button>
                     </div>
                 </div>
             </div>

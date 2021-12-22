@@ -97,13 +97,21 @@ function loadImg(value, num){
 
             $(".itemImg").eq(num).children("img").attr("src",e.target.result);
             
-
         }
     }
 
 
 
-
-
-
 }
+
+
+
+$(".deleteBtn").on("click", function(e){
+    e.stopPropagation();
+    $(this).siblings("img").attr("src", "");
+
+    const index = $(".deleteBtn").index($(this));
+
+    $("[name=img"+index+"]").val("");
+});
+
