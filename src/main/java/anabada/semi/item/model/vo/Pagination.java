@@ -6,8 +6,8 @@ public class Pagination {
 	private int currentPage; 	// 현재 페이지 번호
 	private int listCount;   	// 전체 게시글 수
 	
-	private int limit = 10;  	// 한 페이지 목록에 보여지는 게시글 수
-	private int pageSize = 10;	// 보여질 페이지 번호 개수
+	private int limit = 30;  	// 한 페이지 목록에 보여지는 게시글 수
+	private int pageSize = 5;	// 보여질 페이지 번호 개수
 	
 	private int maxPage; 		// 마지막 페이지 번호
 	private int startPage;		// 보여지는 맨 앞 페이지 번호
@@ -109,6 +109,18 @@ public class Pagination {
 		// - 게시글이 100개인 경우 필요한 페이지 수 : 10 페이지
 		// - 게시글이 101개인 경우 필요한 페이지 수 : 11 페이지
 		// - 게시글이 109개인 경우 필요한 페이지 수 : 11 페이지
+		
+		/*
+		currentPage; 	// 현재 페이지 번호
+		listCount;   	// 전체 게시글 수
+		limit = 30;  	// 한 페이지 목록에 보여지는 게시글 수
+		pageSize = 5;	// 보여질 페이지 번호 개수
+		maxPage; 		// 마지막 페이지 번호
+		startPage;		// 보여지는 맨 앞 페이지 번호
+		endPage;		// 보여지는 맨 뒤 페이지 번호
+		prevPage;		// 이전 페이지의 페이지 번호 맨 끝
+		nextPage;		// 다음 페이지의 페이지 번호 맨 앞
+		*/
 		
 		// 전체 게시글 수 / 한 페이지에 보여지는 글 수 -> 올림처리
 		// 	95 / 10 = 9.5  == 10
