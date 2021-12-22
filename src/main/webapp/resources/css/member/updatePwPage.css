@@ -1,0 +1,92 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+*:not(body, html){
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    
+}
+
+
+#updatePwPage{
+    font-family: 'GmarketSansMedium';
+    text-align: center;
+}
+
+#updatePwPage img{
+    width: 150px;
+    height: 150px;
+}
+        
+.wrap{
+    animation: up-down 1.4s infinite ease-in-out alternate;
+}
+        
+@keyframes up-down{
+    from{
+      transform: translatey(0px);
+    }
+    to{
+      transform: translatey(-20px);
+    }
+  }
+
+#top-banner{
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #689BA6;
+    border-bottom: 1px solid #ccc;
+}
+
+#updatePw-info{
+    display: inline-block;
+    margin: 120px;
+}
+
+#updatePw-info table{
+    width: 450px;
+    font-size: 18px;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+#updatePw-info th, #updatePw-info td{
+    height: 60px;
+    padding-left: 20px;
+}
+
+.btn-style{
+    color : white;
+    background-color: #B8cc7a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dup-Btn{
+    height: 30px;
+}
+
+#updatePw-Btn{
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+
+
+#success-text{
+    font-size: 19px;
+    font-weight: bold;
+}

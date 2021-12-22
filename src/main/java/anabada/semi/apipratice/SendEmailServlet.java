@@ -48,6 +48,8 @@ public class SendEmailServlet extends HttpServlet{
        
        // 세션에 인증번호 담기
        HttpSession mailcheck = req.getSession();
+       mailcheck.setAttribute("ran", ran);
+       mailcheck.setMaxInactiveInterval(600);
        
        // 메일에 출력할 텍스트
        StringBuffer sb = new StringBuffer();

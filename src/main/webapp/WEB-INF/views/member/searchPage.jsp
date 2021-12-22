@@ -11,31 +11,21 @@
             <form action="${contextPath}/sendEmail">
                 <table>
                     <tr>
-                        <th>가입한 이메일</th>
+                        <th>회원가입한 이메일</th>
                     </tr>
                     <tr>
                         <td colspan="2"><input type="email" name="inputEmail" id="inputEmail"></td>
+                        <td><button id="key-Btn" disabled>인증번호 보내기</button></td>
                     </tr>
                     <tr>
-                        <td><input type="text"></td>
-                        <td><button id="key-Btn" onclick="confirm();">인증번호 받기</button></td>
-                    </tr>
-                    <tr>
-                    	<td id="keyTime" style="color: #ccc;"></td>
-                        <td><button id="searchUp-Btn">확인</button></td>
+                    	<td id="checkEmail" style="font-size: 16px;"></td>
                     </tr>
                 </table>
             </form>
-            
-
         </div>
     </section>
     
-    <script>
-    	function confirm(){
-    		document.getElementById("keyTime").innerText = "05:00";
-    	}
-    </script>
+   	<script src="${contextPath}/resources/js/searchIdPw.js"></script>
 
     <!-- footer include -->
 	<jsp:include page="../footer.jsp" />
