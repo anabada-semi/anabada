@@ -36,7 +36,7 @@ public class SendKeyServlet extends HttpServlet {
 				
 				// 입력한 이메일을 세션에서 불러와
 				String inputEmail = (String)mailCheck.getAttribute("inputEmail");
-				System.out.println(inputEmail + "성공");
+				System.out.println(inputEmail);
 				
 				MemberService service = new MemberService();
 				
@@ -60,7 +60,7 @@ public class SendKeyServlet extends HttpServlet {
 			
 		}else {
 			path = "/WEB-INF/views/mainPage.jsp";
-			req.setAttribute("message", "인증에 실패하였습니다.");
+			mailCheck.setAttribute("message", "인증에 실패하였습니다.");
 			
 		}
 		

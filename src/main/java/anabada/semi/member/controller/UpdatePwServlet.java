@@ -20,7 +20,30 @@ public class UpdatePwServlet extends HttpServlet {
 		
 		HttpSession mailCheck = req.getSession();
 		
+		String memberPw = req.getParameter("memberPw");
 		int memberNo = ((Member)mailCheck.getAttribute("searchMember")).getMemberNo();
+		System.out.println(memberNo);
+		
+		try {
+			
+			MemberService service = new MemberService();
+			
+			int result = service.updatePw(memberNo, memberPw);
+			
+			
+			if( result > 0 ) {
+				
+				mailCheck.setAttribute("message", "비밀번호 변경 성공!");
+				
+			}else {
+				mailCheck.setAttribute("message", "비밀번호 변경 실패");
+			}
+			
+			resp.sendRedirect(req.getContextPath());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

@@ -337,8 +337,7 @@ public class MemberDAO {
 			
 			try {
 				
-				String sql = prop.getProperty("searchMember");
-				
+				String sql = prop.getProperty("searchIdPw");
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, inputEmail);
 				
@@ -358,7 +357,36 @@ public class MemberDAO {
 				close(pstmt);
 			}
 			
-			return null;
+			return member;
+		}
+
+
+		
+		/** 비밀번호 변경
+		 * @param memberNo
+		 * @param memberPw
+		 * @param conn
+		 * @return result
+		 * @throws Exception
+		 */
+		public int updatePw(int memberNo, String memberPw, Connection conn) throws Exception{
+
+			int result = 0;
+			
+			try {
+				
+				String sql = prop.getProperty("updatePw");
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, memberPw);
+				pstmt.setInt(2, memberNo);
+				
+				result = pstmt.executeUpdate();
+				
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
 		}
 
 
