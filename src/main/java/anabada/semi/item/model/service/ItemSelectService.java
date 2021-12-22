@@ -232,14 +232,27 @@ public class ItemSelectService {
 	/** 찜 하기
 	 * @param itemNo
 	 * @param memberNo
-	 * @return result
+	 * @return result(1: 삽입됨, -1: 있음, -2: 삭제됨)
 	 * @throws Exception
 	 */
-	public int wish(int itemNo, int memberNo) throws Exception{
+	public int wishSelect(int itemNo, int memberNo) throws Exception{
 		
 		Connection conn = getConnection();
+		int result = 0;
 		
-		int result = dao.wish(itemNo, memberNo, conn);
+		// select (0: 없음 , 1:있음, 2: 삭제됨)
+		int select = dao.wishSelect(itemNo, memberNo, conn);
+		
+		if(select == 0) {
+			// 삽입함 (0: 삽입 실패, 1: 삽입 성공)
+			result = dao.wishInsert(itemNo, memberNo, conn);
+			
+		} else if(select == 2){	// 찜 내역에 있었지만 삭제된 경우
+			result = -2;
+			
+		} else if(select == 1){	// 이미 찜한 경우
+			result = -1;
+		}
 		
 		if(result > 0)	commit(conn);
 		else			rollback(conn);
@@ -247,6 +260,98 @@ public class ItemSelectService {
 		close(conn);
 		
 		return result;
+	}
+
+
+	/** 찜 추가(update)
+	 * @param itemNo
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int wishUpdate(int itemNo, int memberNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.wishUpdate(itemNo, memberNo, 1, conn);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	/** 찜 목록 삭제
+	 * @param itemNo
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int wishDelete(int itemNo, int memberNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.wishUpdate(itemNo, memberNo, 2, conn);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	/** 찜 개수 조회
+	 * @param itemNo
+	 * @return count
+	 * @throws Exception
+	 */
+	public int wishCount(int itemNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int count = dao.wishCount(itemNo, conn);
+		
+		close(conn);
+		
+		return count;
+	}
+
+
+	/** 조회수 증가
+	 * @param itemNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateView(int itemNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.wishUpdate(itemNo, conn);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	/** 조회수 조회
+	 * @param itemNo
+	 * @return view
+	 * @throws Exception
+	 */
+	public int selectView(int itemNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int view = dao.selectView(itemNo, conn);
+		
+		close(conn);
+		
+		return view;
 	}
 	
 }

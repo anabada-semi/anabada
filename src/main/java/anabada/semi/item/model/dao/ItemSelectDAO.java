@@ -401,11 +401,50 @@ public class ItemSelectDAO {
 	}
 
 
-
-	public int wish(int itemNo, int memberNo, Connection conn) throws Exception{
+	/** 찜목록 조회
+	 * @param itemNo
+	 * @param memberNo
+	 * @param conn
+	 * @return result (0: 없음 , 1:있음, 2: 삭제됨)
+	 * @throws Exception
+	 */
+	public int wishSelect(int itemNo, int memberNo, Connection conn) throws Exception{
 		int result = 0;
 		try {
-			String sql = prop.getProperty("wish");
+			String sql = prop.getProperty("wishSelect");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, itemNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+	/** 찜 목록 삽입(insert)
+	 * @param itemNo
+	 * @param memberNo
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int wishInsert(int itemNo, int memberNo, Connection conn) throws Exception{
+		
+		int result = 0;
+		try {
+			String sql = prop.getProperty("wishInsert");
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -417,8 +456,118 @@ public class ItemSelectDAO {
 		} finally {
 			close(pstmt);
 		}
-		
 		return result;
+	}
+
+	/** 찜 목록 삽입(update)
+	 * @param itemNo
+	 * @param memberNo
+	 * @param i 
+	 * @param conn 
+	 * @return result
+	 * @throws Exception
+	 */
+	public int wishUpdate(int itemNo, int memberNo, int i, Connection conn) throws Exception{
+		int result = 0;
+		try {
+			String sql = prop.getProperty("wishUpdate");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, i);
+			pstmt.setInt(2, memberNo);
+			pstmt.setInt(3, itemNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+	/** 찜 개수 조회
+	 * @param itemNo
+	 * @param conn
+	 * @return count
+	 * @throws Exception
+	 */
+	public int wishCount(int itemNo, Connection conn) throws Exception{
+		
+		int count = 0;
+		
+		try {
+			String sql = prop.getProperty("wishCount");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, itemNo);
+
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return count;
+	}
+
+	/** 조회수 증가
+	 * @param itemNo
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int wishUpdate(int itemNo, Connection conn) throws Exception{
+		int result = 0;
+		try {
+			String sql = prop.getProperty("updateView");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, itemNo);
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+	/** 조회수 조회
+	 * @param itemNo
+	 * @param conn
+	 * @return view
+	 * @throws Exception
+	 */
+	public int selectView(int itemNo, Connection conn) throws Exception{
+		int view = 0;
+		try {
+			String sql = prop.getProperty("selectView");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, itemNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				view = rs.getInt(1);
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return view;
 	}
 
 
