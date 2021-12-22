@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <link rel="stylesheet" href="${contextPath}/resources/css/salePage.css">
 		<!-- header include -->
@@ -7,18 +8,31 @@
 	
     <main>
      <div id="title"><h3>상품등록</h3></div>
-        <form action="insert" method="post" 
-            enctype="multipart/form-data" role="form" onsubmit="return saleValidate();">
+        <form action="update" method="post" enctype="multipart/form-data"  role="form" onsubmit="return saleValidate();">
             <section>
             <h2>기본정보</h2>
-            
+
+				<c:forEach items="${item.imgList}" var="img">
+					<c:choose>
+						<c:when test="${img.imgLevel == 0 }">
+							<c:set var="img0" value="${contextPath}${img.imgPath}${img.imgName}"/>
+						</c:when>
+						<c:when test="${img.imgLevel == 1 }">
+							<c:set var="img1" value="${contextPath}${img.imgPath}${img.imgName}"/>
+						</c:when>
+						<c:when test="${img.imgLevel == 2 }">
+							<c:set var="img2" value="${contextPath}${img.imgPath}${img.imgName}"/>
+						</c:when>
+					</c:choose>
+				</c:forEach>
+
                 <ul>
                 <li class="line">
                     <div class="content_title">상품이미지<br><small>(최대 3개)</small></div>
                     <div class="content_photo">
-                        <div class="itemImg"><img>클릭하여<br> 이미지<br>업로드</div>
-                        <div class="itemImg"><img>클릭하여<br> 이미지<br>업로드</div>
-                        <div class="itemImg"><img>클릭하여<br> 이미지<br>업로드</div>
+                        <div class="itemImg"><img src="${img0}">클릭하여<br> 이미지<br>업로드</div>
+                        <div class="itemImg"><img src="${img1}">클릭하여<br> 이미지<br>업로드</div>
+                        <div class="itemImg"><img src="${img2}">클릭하여<br> 이미지<br>업로드</div>
                         
                         <div id=fileArea">
                         <input type="file" name="img0" onchange="loadImg(this,0)">
@@ -37,7 +51,7 @@
                 <li class="line">
                 <div class="content_title">제목 <br><small>최대 40글자</small></div> 
                 <div>
-                    <input class ="input_title" type="text" name="itemName" placeholder="상품 제목을 입력해주세요">
+                    <input class ="input_title" type="text" name="itemName" placeholder="상품 제목을 입력해주세요" value ="${item.itemName}">
                 </div>
                 <div id="title_counter">
                     <p><span id = "title_count">0</span>/40</p>
@@ -49,7 +63,15 @@
                         <select id="categoryCode" name="categoryCode" size=8 style="width: 250px;">
                             
                             <c:forEach items="${category}" var="c">
-                            <option value="${c.categoryCode}">${c.categoryName}</option>
+                            	<c:choose>
+                            		<c:when test="${c.categoryCode == item.categoryCode}">
+                            			<c:set var="sel" value="selected"/>
+                            		</c:when>
+                            		<c:otherwise>
+                            			<c:remove var="sel"/>
+                            		</c:otherwise>
+                            	</c:choose>
+                           		 <option value="${c.categoryCode}"${sel}>${c.categoryName}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -57,14 +79,14 @@
 
                 <li class="line"> <div class="content_title">가격</div> 
                     <div id = "price">
-                    <input class="input_price"  type="text"  name="itemPrice" placeholder="숫자만 입력해주세요" > 
+                    <input class="input_price"  type="text"  name="itemPrice" placeholder="숫자만 입력해주세요"  value="${item.itemPrice}"> 
                     </div>
                     <p id="won">원</p>
 
                 </li>
                 <li class="line"> <div class="content_title">설명<br><small>최대 200글자</small></div> 
                     <div>
-                        <textarea class="input_content" name="itemInfo" rows="10" cols="100" style="resize:none"></textarea>
+                        <textarea class="input_content" name="itemInfo" rows="10" cols="100" style="resize:none">${item.itemInfo}</textarea>
                     </div>
                     <div id ="content_counter">
                         <p><span id="content_count">0</span>/200</p>
@@ -76,6 +98,8 @@
                  <div id="footer_register">
                     <button type="submit" id="update">수정하기</button>
                 </div>
+                
+                <input type="hidden" name="no" value="${item.itemNo}">
         </form>
         
           </main>  

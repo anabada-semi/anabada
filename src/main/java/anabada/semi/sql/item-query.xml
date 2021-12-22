@@ -25,6 +25,25 @@
 		INSERT INTO ITEM_IMG
 		VALUES(SEQ_ITEM_IMG_NO.NEXTVAL, ?, ?, ?, ?, ?)
 	</entry>
+	
+	<!-- 아이템 수정 -->
+	<entry key="updateItem">
+		UPDATE ITEM SET 
+		ITEM_NM = ?,
+		ITEM_PRICE = ?,
+		ITEM_INFO = ?,
+		ITEM_DATE = DEFAULT,
+		CATEGORY_CD = ?
+		WHERE ITEM_NO = ?
+	</entry>
 
+	<!-- 아이템 이미지 수정 -->
+	<entry key= "updateItemImg">
+		UPDATE ITEM_IMG SET 
+		IMG_NM = ?,
+		IMG_ORIGINAL = ?
+		WHERE IMG_LEVEL = ?
+		AND ITEM_NO = ?
+	</entry>
 </properties>
 

@@ -103,6 +103,48 @@ public class ItemService {
 		
 		return item;
 	}
+
+
+	/** 게시글 수정
+	 * @param item
+	 * @param imgList
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateItem(Item item, List<ItemImg> imgList) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		item.setItemName(XSS.replaceParameter( item.getItemName() ) );
+		item.setItemInfo(XSS.replaceParameter( item.getItemInfo() ) );
+		
+		String content = item.getItemInfo().replaceAll("(\r\n|\r|\n|\n\r)", "<br>");
+		item.setItemInfo(content);
+		
+		int result = dao.updateItem(item, conn);
+		
+		if(result > 0) {
+			
+			for(ItemImg img : imgList) {
+				
+				result = dao.updateItemImg(img, conn);
+				
+				if(result == 0) {
+					result = dao.insertItemImg(img, conn);
+				}
+			}
+			
+			if(result > 0) commit(conn);
+			else 		  rollback(conn);
+			
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 	
 
 }
