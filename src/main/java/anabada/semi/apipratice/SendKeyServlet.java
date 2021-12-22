@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import anabada.semi.member.model.service.MemberService;
+import anabada.semi.member.model.vo.Member;
+
 @WebServlet("sendKey")
 public class SendKeyServlet extends HttpServlet {
 
@@ -23,7 +26,28 @@ public class SendKeyServlet extends HttpServlet {
 		String path = "";
 		
 		if(key == inputKey) {
-			path = "/WEB-INF/views/member/updatePwPage.jsp";
+			
+			String inputEmail = (String)mailCheck.getAttribute("inputEmail");
+			
+			MemberService service = new MemberService();
+			
+			try {
+				
+				Member member = service.updatePw(inputEmail); 
+				
+				if(member != null) {
+				
+					mailCheck.setAttribute("searchMember", member);
+					
+					path = "/WEB-INF/views/member/updatePwPage.jsp";
+					
+				}else {
+					System.out.println("?");
+				}
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 			
 		}else {
 			path = "/WEB-INF/views/member/referencePage.jsp";

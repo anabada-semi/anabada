@@ -18,11 +18,11 @@
                     </tr>
                     <tr>
                         <th>회원 ID</th>
-                        <td>와자뵤</td>
+                        <td>${sessionScope.searchMember.memberId}</td>
                     </tr>
                     <tr>
                         <th>이름</th>
-                        <td>김치왕</td>
+                        <td>${sessionScope.searchMember.memberNm}</td>
                     </tr>
                     <tr>
                         <th>변경할 비밀번호</th>
