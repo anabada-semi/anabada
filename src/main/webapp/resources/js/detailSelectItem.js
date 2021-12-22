@@ -12,34 +12,36 @@ function selectReplyList() {
             $("#replyListArea").empty();   // 기존 댓글 내용 모두 삭제
             
             const answer = rList;
-            console.log("? ",rList.replyDate);
+            // console.log("? ",rList.replyDate);
             $.each(rList, function(index, reply){   // jQuery 반복문
                 
                 if(reply.replyNestedCode == 1){ // 기본 댓글(대댓글이 아니면)
                     
                     var date =new Date(reply.replyDate).toISOString().replace("T", " ").replace(/\..*/, '');
 
-                    const li = $('<li class="reply-row">');
-                    const div = $("<div>");
+                    const replyRow = $('<li class="reply-row">');
+                    const replyPadding = $("<div>").addClass("reply-padding");
                     
                     const rWriter = $('<p class="rWriter">').text(reply.memberName);
                     const rDate = $('<p class="rDate">').text("작성일 : " + date);
-                    const replyArea = $("<div>").addClass("replyArea");
+
+                    const answerArea = $("<div>").addClass("answerArea");
+                    const answerListArea = $("<ul>").addClass("answerListArea");
 
                     // div에 자식으로 rWriter, rDate 추가
-                    div.append(rWriter, rDate);
+                    replyPadding.append(rWriter, rDate);
     
                     // 댓글 내용
                     const rContent = $('<p class="rContent">').html(reply.replyContent);
                     // text로 내용을 작성하게 되면 개행문자 처리에서 html로 인식을 안해서 띄어쓰기와 특정 문자 처리가 되지 않음
                     // => html로 작성
     
-                    li.append(div, rContent);
+                    replyRow.append(replyPadding, rContent);
     
                     if(itemMemberNo == loginMemberNo || reply.memberNo == loginMemberNo){    // 판매자 == 로그인 멤버 || 댓글 작성자 == 로그인 멤버-> 답글 버튼 생성
                         
                         const answerReply = $('<button>').addClass("reply-submit").text("답글");
-                        answerReply.attr("onclick", "answerReply("+reply.replyNo, loginMemberNo+", this)");
+                        answerReply.attr("onclick", "answerReply("+reply.replyNo+", loginMemberNo, this)");
                         
                         const replyBtnArea = $('<div class="replyBtnArea">');
 
@@ -56,20 +58,22 @@ function selectReplyList() {
                         }
                         
                         replyBtnArea.append(answerReply);
-                        li.append(replyBtnArea);
+                        replyRow.append(replyBtnArea);
                         // $("#replyListArea").append(li);
                     
 
                         $.each(answer, function(index, answer){   // jQuery 반복문
 
+                            var answerDate =new Date(answer.replyDate).toISOString().replace("T", " ").replace(/\..*/, '');
+
                             if(answer.replyNestedNo == reply.replyNo){
-                                const answerListArea = $("<ul>").addClass("answerListArea");
+            
                                 const answerRow = $("<li>").addClass("answer-row");
                                 const answerSign = $("<p>").addClass("answer-sign").text("⤷");
                                 const answerPadding = $("<div>").addClass("answer-padding");
-                                const rWriter = $("<p>").addClass("rWriter").text(reply.memberName);
-                                const rDate = $("<p>").addClass("rDate").text(reply.replyCreateDate);
-                                const rContent = $("<p>").addClass("rContent").text(reply.replyContent);
+                                const rWriter = $("<p>").addClass("rWriter").text(answer.memberName);
+                                const rDate = $("<p>").addClass("rDate").text(answerDate);
+                                const rContent = $("<p>").addClass("rContent").text(answer.replyContent);
                                 const replyBtnArea = $("<div>").addClass("replyBtnArea");
 
                                 answerPadding.append(rWriter,rDate,rContent);
@@ -77,20 +81,20 @@ function selectReplyList() {
                                 answerRow.append(answerSign, answerPadding);
 
                                 const deleteReplyAnswer = $('<button>').attr("id","deleteReply").text("삭제");
-                                deleteReplyAnswer.attr("onclick", "deleteReply("+reply.replyNo+")");
+                                deleteReplyAnswer.attr("onclick", "deleteReply("+answer.replyNo+")");
 
                                 const updateAnswerReply = $('<button>').attr("id","updateReply").text("수정");
-                                updateAnswerReply.attr("onclick", "updateAnswerReply("+reply.replyNo, loginMemberNo+", this)");
+                                updateAnswerReply.attr("onclick", "updateAnswerReply("+answer.replyNo, loginMemberNo+", this)");
 
-                                replyBtnArea.append(updateAnswerReply, deleteReplyAnswer);
+                                replyBtnArea.append(deleteReplyAnswer, updateAnswerReply);
                                 answerRow.append(replyBtnArea);
-                                answerListArea.append(answerRow);
-                                replyArea.append(answerListArea);
-                                li.append(replyArea);
+                                answerListArea.prepend(answerRow);
                             }
+                            answerArea.append(answerListArea);
+                            replyRow.append(answerArea);
                         });
 
-                        $("#replyListArea").append(li);
+                        $("#replyListArea").append(replyRow);
 
                     }
 
@@ -362,6 +366,74 @@ function updateAnswerReply(replyNo, memberNo, el){
     // 댓글 수정화면 출력 전 요소를 저장해둠.
     beforeReplyRow = $(el).parent().parent().html();
     // console.log(beforeReplyRow);
+    
+    // 작성되어있던 내용(수정 전 댓글 내용) 
+    let beforeContent = $(el).parent().prev().find(".rContent").html();
+    console.log("전:" + beforeContent);
+
+    // 이전 댓글 내용의 크로스사이트 스크립트 처리 해제, 개행문자 변경
+    // -> 자바스크립트에는 replaceAll() 메소드가 없으므로 정규 표현식을 이용하여 변경 -> 'g'
+    beforeContent = beforeContent.replace(/&amp;/g, "&");
+    beforeContent = beforeContent.replace(/&lt;/g, "<");
+    beforeContent = beforeContent.replace(/&gt;/g, ">");
+    beforeContent = beforeContent.replace(/&quot;/g, "\"");
+
+    beforeContent = beforeContent.replace(/<br>/g, "\n");
+
+
+    // 기존 댓글 영역을 삭제하고 textarea를 추가 
+    $(el).parent().prev().find(".rContent").remove();
+    const textarea = $("<textarea>").addClass("replyUpdateContent").attr("rows", "3").val(beforeContent);
+    $(el).parent().before(textarea);
+
+    // 수정 버튼
+    const updateReply = $("<button>").addClass("reply-submit").text("대댓글 수정").attr("onclick", "updateReply(" + replyNo + ", this)");
+
+    // 취소 버튼
+    const cancelBtn = $("<button>").addClass("reply-submit").text("취소").attr("onclick", "updateCancel(this)");
+
+    const replyBtnArea = $(el).parent();
+
+    $(replyBtnArea).empty();
+    $(replyBtnArea).append(updateReply);
+    $(replyBtnArea).append(cancelBtn);
+}
+
+//-----------------------------------------------------------------------------------------
+// 대댓글 더보기
+function updateAnswerReply(replyNo, memberNo, el){
+    // 이미 열려있는 댓글 수정 창이 있을 경우 닫아주기
+    if ($(".replyUpdateContent").length > 0) {
+        
+        if(confirm("확인 클릭 시 수정된 내용이 사라지게 됩니다.")){
+            $(".replyUpdateContent").eq(0).parent().html(beforeReplyRow);
+        }else{
+            return;
+        }
+    }
+    
+    $.ajax({
+        url : contextPath + "/answer/select",
+        data : {"itemNo" : itemNo, "replyNo" : replyNo}, // 
+        type : "GET",
+        dataType : "JSON",  // 반환되는 데이터 형식 지정 -> 응답 받은 후 형변환 진행
+        success : function(rList){
+            
+
+
+
+
+        },
+
+        error : function(req, status, error){
+            console.log("댓글 목록 조회 실패");
+            console.log(req.responseText);
+        }
+    });
+
+    // 댓글 수정화면 출력 전 요소를 저장해둠.
+    /* beforeReplyRow = $(el).parent().parent().html();
+    console.log(beforeReplyRow); */
     
     // 작성되어있던 내용(수정 전 댓글 내용) 
     let beforeContent = $(el).parent().prev().find(".rContent").html();
