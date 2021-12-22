@@ -58,18 +58,20 @@
         </c:choose>
         
         <div class="page-button">
-            <div class="move-button page-div" onclick="location.href='mainItem?cp=${pagination.prevPage}'"><p>&#8249;</p></div>
-            <c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" step="1" var="i">
-				<c:choose>
-					<c:when test="${i == pagination.currentPage}">
-						<div class="current-div" style="background-color: #ccc;">${i}</div>								
-					</c:when>
-					<c:otherwise>
-						<div class="page-div" onclick="location.href='mainItem?cp=${i}'">${i}</div>
-					</c:otherwise>
-				</c:choose>
-            </c:forEach>
-            <div class="move-button page-div" onclick="location.href='mainItem?cp=${pagination.nextPage}'"><p>&#8250;</p></div>
+        	<div class="page-box">
+	            <div class="move-button page-div" onclick="location.href='mainItem?cp=${pagination.prevPage}'">&lt;</div>
+	            <c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" step="1" var="i">
+					<c:choose>
+						<c:when test="${i == pagination.currentPage}">
+							<div class="current-div" style="background-color: #ccc;">${i}</div>								
+						</c:when>
+						<c:otherwise>
+							<div class="page-div" onclick="location.href='mainItem?cp=${i}'">${i}</div>
+						</c:otherwise>
+					</c:choose>
+	            </c:forEach>
+	            <div class="move-button page-div" onclick="location.href='mainItem?cp=${pagination.nextPage}'">&gt;</div>
+        	</div>
         </div>
     </section>
 
