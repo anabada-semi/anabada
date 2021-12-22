@@ -1,12 +1,15 @@
 /* 내 상점 페이지 */
 $(".btn").on("click", function(){
 	// console.log($(this).index());	
+
     $(".btn").removeClass("active");
+
     $(this).addClass("active");
 
     $("#changeDiv").empty();
     
     switch($(this).index()){
+
         case 0: 
             $.ajax({
                 url: contextPath + "/myShop/itemList",
@@ -17,7 +20,9 @@ $(".btn").on("click", function(){
                 error:function(req,status,er){
                     console.log(req.responseText);
                 }
-            }); break;
+            }); 
+        break;
+
 
         case 1: 
             $.ajax({
@@ -29,7 +34,9 @@ $(".btn").on("click", function(){
                 error:function(req,status,er){
                     console.log(req.responseText);
                 }
-            }); break;
+            }); 
+        break;
+
 
         case 2: 
             $.ajax({
@@ -42,7 +49,9 @@ $(".btn").on("click", function(){
                 error:function(req,status,er){
                     console.log(req.responseText);
                 }
-            }); break;
+            }); 
+        break;
+
 
         case 3: 
             $.ajax({
@@ -54,7 +63,9 @@ $(".btn").on("click", function(){
                 error:function(req,status,er){
                     console.log(req.responseText);
                 }
-            }); break;
+            }); 
+        break;
+
 
         case 4: 
             $.ajax({
@@ -66,131 +77,165 @@ $(".btn").on("click", function(){
                 error:function(req,status,er){
                     console.log(req.responseText);
                 }
-            }); break;
+            }); 
+        break;
+
+
         default:
     }
 });
 
 let postNo = [];
-// 댓글 목록 조회
+// 상점 후기 목록 조회
 function selectReplyList() {
     const locationPost = $("#userPostTextareaBtn").parent().prev();
 
     $.ajax({
+
         url: contextPath + "/myShop/selectPostScript",
         data: { "memberNo": loginMemberNo },
         dataType: "JSON",
         success: function (r) {
 
-            $.each(r, function (index, post) {
+            if(r == ""){
+                // 상점후기 없을 시
+                $("#postScriptTextDiv").text("이 상점에 첫 후기를 작성해 보세요!");
+            }else{
 
-                postNo[index] = post.postScriptNo;
+                $.each(r, function (index, post) {
+                    
+                    postNo[index] = post.postScriptNo;
+                    
+                    const upd = $('<button class="userPostDelete">삭제</button>');
+                    
+                    const upu = $('<button class="userPostUpdate">수정</button>');
+                    
+                    const uprBtn = $('<button class="userPostReport">신고</button>');
+                    
+                    let upr = $("<div class='userPost-report'>");
+                    
+                    if (post.memberNo == loginMemberNo) {
+                        upr.append(upd, upu);
+                        
+                    }else{
+                        
+                        upr.append(uprBtn);
+                    }
+                    
+                    const upc = $("<div class='userPost-content'>");
+                    upc.text(post.postScriptCheck);
+                    
+                    const ups = $("<div class='userPost-shop'>");
+                    // ups.text("상점 이동");
+                    ups.append('<a href="' + contextPath + '/myShop/myShop?no=' + post.memberNo + '">상점 이동</a>');
+                    
+                    const upst = $("<div class='userPost-star'>");
+                    // upst.text("별사진");
+                    upst.append('<img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png"><img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png"><img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png"><img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png"><img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png">');
+                    
+                    const upn = $("<div class='userPost-name'>");
+                    // upn.append('<a href="' + contextPath + '/myShop/myShop?no=' + post.memberNo + '">' + post.shopName + '</a>');
+                    upn.append(post.shopName);
+                    
+                    const upa = $("<div class='userPost-area'>");
+                    upa.append(upn, upst, ups, upc, upr);
+                    
+                    const upi = $("<div class='userPostImgDiv'>");
+                    upi.append('<img class="userPostImg" src="/anabada/resources/images/myShop/profile/캐릭터.png">');
 
-                const upd = $('<button class="userPostDelete">삭제</button>');
-                const upu = $('<button class="userPostUpdate">수정</button>');
-                const uprBtn = $('<button class="userPostReport">신고</button>');
-                let upr = $("<div class='userPost-report'>");
+                    const up = $("<div class='userPost' id='" + index + "'>");
 
-                if (post.memberNo == loginMemberNo) {
-                    upr.append(upd, upu);
-                }else{
-                    upr.append(uprBtn);
-                }
+                    up.append(upi, upa);
+
+                    locationPost.after(up);
+                    
+                    $(".userPostTextarea").val("");
                 
-                const upc = $("<div class='userPost-content'>");
-                upc.text(post.postScriptCheck);
-
-                const ups = $("<div class='userPost-shop'>");
-                // ups.text("상점 이동");
-                ups.append('<a href="' + contextPath + '/myShop/myShop?no=' + post.memberNo + '">상점 이동</a>');
-
-                const upst = $("<div class='userPost-star'>");
-                // upst.text("별사진");
-                upst.append('<img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png"><img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png"><img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png"><img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png"><img class="userPostStarImg" src="/anabada/resources/images/myShop/profile/하트.png">');
-
-                const upn = $("<div class='userPost-name'>");
-                // upn.append('<a href="' + contextPath + '/myShop/myShop?no=' + post.memberNo + '">' + post.shopName + '</a>');
-                upn.append(post.shopName);
-                
-                const upa = $("<div class='userPost-area'>");
-                upa.append(upn, upst, ups, upc, upr);
-
-                const upi = $("<div class='userPostImgDiv'>");
-                upi.append('<img class="userPostImg" src="/anabada/resources/images/myShop/profile/캐릭터.png">');
-
-                const up = $("<div class='userPost' id='" + index + "'>");
-
-                up.append(upi, upa);
-
-                locationPost.after(up);
-                
-                $(".userPostTextarea").val("");
-                
-            });
+                });
+            }
             (function(){
                 $("#postScriptText").text($(".userPost").length);
             }());
+
         },
         error: function (req, status, error) {
             console.log("댓글 목록 조회 실패");
             console.log(req.responseText);
         }
+
     });
 }
 
 // 판매중인 상품 목록 조회
 function selectitemList() {
+
     $.ajax({
         url: contextPath + "/myShop/selectItemList",
         data: { "shopNo": shopNo },
         dataType: "JSON",
         success: function (r) {
-            $.each(r, function (index, item) {
-                // console.log(item);
 
-                const sel = $('<select class="itemOp">');
-                const selling = $('<option value="onSale">판매중</option>');
-                const soldOut = $('<option value="soldOut">판매 완료</option>');
-                sel.append(selling, soldOut);
+            if(r == ""){
+                const div = $("<div>");
+                const span = $("<span>등록된 상품이 없습니다.</span>");
 
-                const tr = $("<tr class='itemTr'>");
-                const td = $("<td class='itemTd' id='" + item.itemNo + "'>");
+                div.append(span);
 
-                let imgSrc;
-                if(item.itemImgName != null)    imgSrc = contextPath + item.itemPath + item.itemImgName;
-                else                            imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
-                itemImg = $('<a href="' + contextPath + '/detail/select?itemNo=' + item.itemNo + '"><img class="itemImg" src="' + imgSrc + '">');
+                $(".addItem").append(div);
 
-                const itD = $('<div class="itemTextDiv">');
-                const it1 = $('<div class="itemText1">' + item.itemName + '<div>');
-                const it2 = $('<div class="itemText2">' + item.itemPrice + '원<div>');
-                const it3 = $('<div class="itemText3">' + item.uploadDate + '<div>');
+            }else{
+            
+                $.each(r, function (index, item) {
+                    // console.log(item);
 
-                itD.append(it1, it2, it3);
+                    const sel = $('<select class="itemOp">');
+                    const selling = $('<option value="onSale">판매중</option>');
+                    const soldOut = $('<option value="soldOut">판매 완료</option>');
 
-                /* 로그인멤버넘버와 아이템에 저장된 멤버넘버와 같으면 상품 정보 변경 가능 */
-                if(item.memberNo == loginMemberNo){
-                    td.append(sel, itemImg, itD);
-                } else {
-                    td.append(itemImg, itD);
-                }
+                    sel.append(selling, soldOut);
 
-                tr.append(td);
-                $(".itemTr").eq(Math.floor(index/4)).append(td);
+                    const tr = $("<tr class='itemTr'>");
+                    const td = $("<td class='itemTd' id='" + item.itemNo + "'>");
 
-                if(index % 4 == 0)
-                    $(".addItem").append(tr);
+                    let imgSrc;
+                    if(item.itemImgName != null)    imgSrc = contextPath + item.itemPath + item.itemImgName;
+                    else                            imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
+                    itemImg = $('<a href="' + contextPath + '/detail/select?itemNo=' + item.itemNo + '"><img class="itemImg" src="' + imgSrc + '">');
 
-            });
+                    const itD = $('<div class="itemTextDiv">');
+
+                    const it1 = $('<div class="itemText1">' + item.itemName + '<div>');
+                    const it2 = $('<div class="itemText2">' + parseInt(item.itemPrice).toLocaleString() + '원<div>');
+                    const it3 = $('<div class="itemText3">' + item.uploadDate + '<div>');
+
+                    itD.append(it1, it2, it3);
+
+                    /* 로그인멤버넘버와 아이템에 저장된 멤버넘버와 같으면 상품 정보 변경 가능 */
+                    if(item.memberNo == loginMemberNo){
+                        td.append(sel, itemImg, itD);
+                    } else {
+                        td.append(itemImg, itD);
+                    }
+
+                    tr.append(td);
+                    $(".itemTr").eq(Math.floor(index/4)).append(td);
+
+                    if(index % 4 == 0)
+                        $(".addItem").append(tr);
+
+                });
+            }
             
             (function(){
                 $("#itemText").text($(".itemTd").length);
             }());
         },
+
         error: function (req, status, error) {
             console.log("댓글 목록 조회 실패");
             console.log(req.responseText);
         }
+
     });
 }
 
@@ -205,155 +250,207 @@ function wishList(){
         data: { "shopNo": shopNo },
         dataType: "JSON",
         success: function (r) {
-            $.each(r, function (index, wish) {
 
-                wishNo[index] = wish.itemNo;
+            if(r == ""){
 
-                const wc = $('<div class="wishContainer" id="' + wishNo[index] + '">');
+                const div = $("<div>");
+                const span = $("<span>찜한 상품이 없습니다.</span>");
 
-                let imgSrc;
-                if(wish.imgName != null)    imgSrc = contextPath + wish.itemPath + wish.imgName;
-                else                        imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
-                const wi = $('<a href="' + contextPath + '/detail/select?itemNo=' + wish.itemNo + '"><img class="wishImg" src="' + wish.imgSrc + '">');
+                div.append(span);
+
+                $("#changeDiv > hr").after(div);
+
+            }else{
+
+                $.each(r, function (index, wish) {
+
+                    wishNo[index] = wish.itemNo;
+
+                    const wc = $('<div class="wishContainer" id="' + wishNo[index] + '">');
+
+                    let imgSrc;
+                    if(wish.imgName != null)    imgSrc = contextPath + wish.itemPath + wish.imgName;
+                    else                        imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
+                    const wi = $('<a href="' + contextPath + '/detail/select?itemNo=' + wish.itemNo + '"><img class="wishImg" src="' + wish.imgSrc + '">');
 
 
-                const wtd = $('<div class="wishTextDiv">');
-                const wTitle = $('<div class="wishTitle">');
-                wTitle.text(wish.itemName);
+                    const wtd = $('<div class="wishTextDiv">');
+                    const wTitle = $('<div class="wishTitle">');
+                    wTitle.text(wish.itemName);
 
-                const wdBtn = $('<button class="wishDeleteBtn">');
-                wdBtn.text('찜 삭제');
+                    const wdBtn = $('<button class="wishDeleteBtn">');
+                    wdBtn.text('찜 삭제');
 
-                const wt1 = $('<div class="wishText1">');
-                wt1.text(wish.itemPrice);
+                    const wt1 = $('<div class="wishText1">');
+                    wt1.text(parseInt(wish.itemPrice).toLocaleString() + "원");
+                    
 
-                const wt2 = $('<div class="wishText2">');
-                wt2.text(wish.uploadDate);
+                    const wt2 = $('<div class="wishText2">');
+                    wt2.text(wish.uploadDate);
 
-                wTitle.append(wdBtn);
-                wtd.append(wTitle, wt1, wt2);
-                wc.append(wi, wtd);
+                    wTitle.append(wdBtn);
+                    wtd.append(wTitle, wt1, wt2);
+                    wc.append(wi, wtd);
 
-                abc.after(wc);
+                    abc.after(wc);
 
-            });
+                });
+            }
 
             (function() {
                 $("#wishSpanText").text($(".wishContainer").length);
             }());
+
         },
         error: function (req, status, error) {
             console.log("댓글 목록 조회 실패");
             console.log(req.responseText);
         }
+
     });
 }
 
 /* 구매목록 조회 페이지 */
 function buyPage(){
+
     $.ajax({
+
         url: contextPath + "/myShop/buyItemList",
         data: { "shopNo": shopNo },
         dataType: "JSON",
         success: function (result) {
-            $.each(result, function (index, buyList) {
 
-                const tr = $("<tr class='buyTr'>");
-                const td = $("<td class='buyTd'>");
-                const bid = $('<div class="buyImgDiv">');
-                
-                let imgSrc;
-                if(buyList.itemImgName != null)    imgSrc = contextPath + buyList.itemImgPath + buyList.itemImgName;
-                else                            imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
-                itemImg = $('<a href="' + contextPath + '/detail/select?itemNo=' + buyList.itemNo + '"><img class="buyImg" src="' + imgSrc + '">');
-                
-                const bis = $('<span class="buyImgSpan"> 구매 완료 </span>');
-                bid.append(bis, itemImg);
+            if(result == ""){
 
-                const btd = $('<div class="buyTextDiv">');
-                const bt1 = $('<div class="buyText1">');
-                bt1.append(buyList.itemName);
+                const div = $("<div>");
+                const span = $("<span>구매한 상품이 없습니다.</span>");
 
-                const bt2 = $('<div class="buyText2">');
-                bt2.append(buyList.itemPrice);
+                div.append(span);
 
-                const bt3 = $('<div class="buyText3">');
-                bt3.append(buyList.uploadDate);
+                $(".addBuyList").append(div);
 
-                btd.append(bt1, bt2 ,bt3);
+            }else{
 
-                td.append(bid, btd);
+                $.each(result, function (index, buyList) {
 
-                tr.append(td);
-                $(".buyTr").eq(Math.floor(index/4)).append(td);
+                    const tr = $("<tr class='buyTr'>");
+                    const td = $("<td class='buyTd'>");
+                    const bid = $('<div class="buyImgDiv">');
+                    
+                    let imgSrc;
+                    if(buyList.itemImgName != null)    imgSrc = contextPath + buyList.itemImgPath + buyList.itemImgName;
+                    else                            imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
+                    itemImg = $('<a href="' + contextPath + '/detail/select?itemNo=' + buyList.itemNo + '"><img class="buyImg" src="' + imgSrc + '">');
+                    
+                    const bis = $('<span class="buyImgSpan"> 구매 완료 </span>');
+                    bid.append(bis, itemImg);
 
-                if(index % 4 == 0)
-                    $(".addBuyList").append(tr);
+                    const btd = $('<div class="buyTextDiv">');
+                    const bt1 = $('<div class="buyText1">');
+                    bt1.append(buyList.itemName);
 
-            });
+                    const bt2 = $('<div class="buyText2">');
+                    bt2.append(parseInt(buyList.itemPrice).toLocaleString() + "원");
+                    
+
+                    const bt3 = $('<div class="buyText3">');
+                    bt3.append(buyList.uploadDate);
+
+                    btd.append(bt1, bt2 ,bt3);
+
+                    td.append(bid, btd);
+
+                    tr.append(td);
+                    $(".buyTr").eq(Math.floor(index/4)).append(td);
+
+                    if(index % 4 == 0)
+                        $(".addBuyList").append(tr);
+
+                });
+            }
+
             (function(){
                 $("#buyText").text($(".buyTd").length);
             }());
+
         },
+
         error: function (req, status, error) {
             console.log("구매 목록 조회 실패");
             console.log(req.responseText);
         }
+
     });
 }
 
 /* 판매 완료 목록 조회 페이지 */
 function sellPage(){
+
     $.ajax({
         url: contextPath + "/myShop/sellItemList",
         data: { "shopNo": shopNo },
         dataType: "JSON",
         success: function (result) {
-            $.each(result, function (index, sellList) {
-                console.log(sellList);
 
-                const sel = $('<select class="sellOp">');
-                const soldOut = $('<option value="soldOut">판매 완료</option>');
-                const selling = $('<option value="onSale">판매중</option>');
-                sel.append(soldOut, selling);
+            if(result == ""){
 
-                const tr = $("<tr class='sellTr'>");
-                const td = $("<td class='sellTd' id='" + sellList.itemNo + "'>");
-                const sid = $('<div class="sellImgDiv">');
-                
-                let imgSrc;
-                if(sellList.itemImgName != null)    imgSrc = contextPath + sellList.itemPath + sellList.itemImgName;
-                else                            imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
-                itemImg = $('<a href="' + contextPath + '/detail/select?itemNo=' + sellList.itemNo + '"><img class="sellImg" src="' + imgSrc + '">');
-                
-                const sis = $('<span class="sellImgSpan"> 판매 완료 </span>');
-                sid.append(sis, itemImg);
+                const div = $("<div>");
+                const span = $("<span>판매한 상품이 없습니다.</span>");
 
-                const std = $('<div class="sellTextDiv">');
-                const st1 = $('<div class="sellText1">');
-                st1.append(sellList.itemName);
+                div.append(span);
 
-                const st2 = $('<div class="sellText2">');
-                st2.append(sellList.itemPrice);
+                $(".addSellList").append(div);
 
-                const st3 = $('<div class="sellText3">');
-                st3.append(sellList.uploadDate);
+            }else{
 
-                std.append(st1, st2 ,st3);
+                $.each(result, function (index, sellList) {
 
-                if(sellList.memberNo == loginMemberNo){
-                    td.append(sel, sid, std);
-                } else {
-                    td.append(sel, sid, std);
-                }
+                    const sel = $('<select class="sellOp">');
+                    const soldOut = $('<option value="soldOut">판매 완료</option>');
+                    const selling = $('<option value="onSale">판매중</option>');
+                    sel.append(soldOut, selling);
 
-                tr.append(td);
-                $(".sellTr").eq(Math.floor(index/4)).append(td);
+                    const tr = $("<tr class='sellTr'>");
+                    const td = $("<td class='sellTd' id='" + sellList.itemNo + "'>");
+                    const sid = $('<div class="sellImgDiv">');
+                    
+                    let imgSrc;
+                    if(sellList.itemImgName != null)    imgSrc = contextPath + sellList.itemPath + sellList.itemImgName;
+                    else                            imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
+                    itemImg = $('<a href="' + contextPath + '/detail/select?itemNo=' + sellList.itemNo + '"><img class="sellImg" src="' + imgSrc + '">');
+                    
+                    const sis = $('<span class="sellImgSpan"> 판매 완료 </span>');
+                    sid.append(sis, itemImg);
 
-                if(index % 4 == 0)
-                    $(".addSellList").append(tr);
+                    const std = $('<div class="sellTextDiv">');
+                    const st1 = $('<div class="sellText1">');
+                    st1.append(sellList.itemName);
 
-            });
+                    const st2 = $('<div class="sellText2">');
+                    st2.append(parseInt(sellList.itemPrice).toLocaleString() + "원");
+                    
+
+                    const st3 = $('<div class="sellText3">');
+                    st3.append(sellList.uploadDate);
+
+                    std.append(st1, st2 ,st3);
+
+                    if(sellList.memberNo == loginMemberNo){
+                        td.append(sel, sid, std);
+                    } else {
+                        td.append(sel, sid, std);
+                    }
+
+                    tr.append(td);
+                    $(".sellTr").eq(Math.floor(index/4)).append(td);
+
+                    if(index % 4 == 0)
+                        $(".addSellList").append(tr);
+
+                });
+
+            }
+
             (function(){
                 $("#itemText").text($(".sellTd").length);
             }());
@@ -376,6 +473,7 @@ $(document).on("click",".shopNameBtn", function(){
     $("#save").append("<input type='text' id='userName'>");
     $("#save").append("<button class='userNameBtn'>확인</button>");
 });
+
 const nowName = $("#userName").val();
 /* 상점명 변경 확인 버튼 */
 $(document).on("click",".userNameBtn", function(){
@@ -389,19 +487,24 @@ $(document).on("click",".userNameBtn", function(){
             url: contextPath + "/myShop/shopNameCng",
             data: { "memberNo": loginMemberNo, "inputName": inputName.val() },
             success: function(r){
+
                 if(r > 0){
+
                     $("#userName123").text("");
                     $("#userName123").text(inputName.val());
                     $("#save").empty();
                     $("#save").append("<span id='userNameCng'>" + inputName.val() + "</span>");
                     $("#save").append("<button class='shopNameBtn'>상점명 수정</button>");
+
                 }else{
+
                     alert("상점명 변경 실패");
                     $("#userName123").text("");
                     $("#userName123").text(nowName);
                     $("#save").empty();
                     $("#save").append("<span id='userNameCng'>" + nowName + "</span>");
                     $("#save").append("<button class='shopNameBtn'>상점명 수정</button>");
+
                 }
             },
             error:function(req, status, er){
@@ -446,11 +549,14 @@ $(document).on("click", "#myShopContentBtn", function(){
                 parent.empty();
                 parent.append('<div id="myShopContent2">소개글 수정</div>');
                 $("#myShopContent").text( contentTextarea.val() ).css("height", "190px");
+
             }else{
+
                 parent.empty();
                 parent.append('<div id="myShopContent2">소개글 수정</div>');
 
                 $("#myShopContent").text(nowContent).css("height", "190px");
+
             }
         },
         error:function(req, status, er){
@@ -460,6 +566,7 @@ $(document).on("click", "#myShopContentBtn", function(){
 
     
 });
+
 
 /* 소개글 최대 120글자 */
 $(document).on("input", "#contentTextarea", function(){
@@ -472,6 +579,7 @@ $(document).on("input", "#contentTextarea", function(){
         $("#myShopContentBtn").html("확인<br>120/120");
     }
 });
+
 
 /* 상점 후기 최대 120글자 */
 $(document).on("input", ".userPostArea > .userPostTextarea", function(){
@@ -486,8 +594,9 @@ $(document).on("input", ".userPostArea > .userPostTextarea", function(){
         $(this).val($(this).val().substr(0, textCountLimit));
         $("#userPostTextareaBtn").html("확인<br>120/120");
     }
-
 });
+
+
 /* 상점 후기 수정 최대 120글자 */
 $(document).on("input", ".userPost > .userPostTextarea", function(){
     const textLength = $(this).val().length;
@@ -503,6 +612,7 @@ $(document).on("input", ".userPost > .userPostTextarea", function(){
     }
 });
 
+
 /* 댓글 등록 이런식으로 추가 다 ajax 해야되네... */
 $(document).on("click", "#userPostTextareaBtn", function(){
     const locationPost = $("#userPostTextareaBtn").parent().prev();
@@ -514,12 +624,16 @@ $(document).on("click", "#userPostTextareaBtn", function(){
             success: function(r){
                 if(r > 0){
                     $(".userPost").remove();
+                    
+                    $("#postScriptTextDiv").html('상점 후기<span id="postScriptText">1</span>');
+
                     alert("성공");
                     selectReplyList();
                 }else{
                     alert("후기 등록 실패");
                     selectReplyList();
                 }
+
             },
             error:function(req, status, er){
                 console.log(req.responseText);
@@ -553,11 +667,11 @@ function createText(j, text){
     const img = $('<div class="userPostImgDiv"><img class="userPostImg" src="/anabada/resources/images/myShop/profile/캐릭터.png"></div>');
     const ta = $('<textarea class="userPostTextarea"></textarea>');
     const btn = $('<button id="updateUserPostTextareaBtn">확인<br>0/120</button>');
+
     $(".userPost[id=" + j + "]").empty();
     $(".userPost[id=" + j + "]").append(img, ta, btn);
     $(".userPostTextarea").eq(0).val(text);
     $("#updateUserPostTextareaBtn").html('확인<br>' + $(".userPostTextarea").eq(0).val().length + '/120').css("background", "antiquewhite");
-
 
 }
 
@@ -706,7 +820,7 @@ $(".userReportTextareaBtn").on("click", function(){
 $(document).on("click", ".wishDeleteBtn", function(){
     const idx = $(".wishDeleteBtn").index($(this));
 
-    if (confirm("삭제할래요?")) {
+    if (confirm("찜 목록에서 삭제하시겠습니까?")) {
         
         $.ajax({
             url: contextPath + "/myShop/deleteWish",
@@ -716,10 +830,10 @@ $(document).on("click", ".wishDeleteBtn", function(){
                     // $(".wishContainer").eq(idx).remove();
                     $(".wishContainer").remove();
                     alert("찜 목록 삭제 성공");
-                    sellPage();
+                    wishList();
                 }else{
                     alert("찜 목록 삭제 실패");
-                    sellPage();
+                    wishList();
                 }
             },
             error:function(req, status, er){
@@ -731,6 +845,7 @@ $(document).on("click", ".wishDeleteBtn", function(){
         (function() {
             $("#wishSpanText").text($(".wishDeleteBtn").length);
         }());
+
     } else {
         return;
     }
@@ -758,6 +873,7 @@ $(document).on("change", ".itemOp", function(){
             error:function(req, status, er){
                 console.log(req.responseText);
             }
+
         });
     }
     
@@ -765,6 +881,7 @@ $(document).on("change", ".itemOp", function(){
 
 /* 판매완료 상품 내역 페이지 판매중으로 변경 시 */
 $(document).on("change", ".sellOp", function(){
+
     const itemNo = $(this).parent().attr("id");
 
     if($(this).val() == 'onSale'){// 판매완료로 변경 시
@@ -773,6 +890,7 @@ $(document).on("change", ".sellOp", function(){
             url: contextPath + "/myShop/onSale",
             data: { "itemNo": itemNo, "shopNo": shopNo },
             success: function(r){
+
                 if(r > 0){
                     $(".sellTd").remove();
                     sellPage();

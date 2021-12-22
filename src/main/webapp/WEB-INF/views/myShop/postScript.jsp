@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div><!-- ajax -->
+<div id="postScriptTextDiv"><!-- ajax -->
 	상점후기 <span id="postScriptText">0</span>
 </div>
 
