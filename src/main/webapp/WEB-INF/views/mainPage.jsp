@@ -75,12 +75,18 @@
         </div>
 
         <div class="page-button">
-            <div class="move-button"><p>&#8249;</p></div>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-            <div class="move-button"><p>&#8250;</p></div>
+            <div class="move-button" onclick="location.href='list?cp=${pagination.prevPage}'"><p>&#8249;</p></div>
+            
+			<c:choose>
+				<c:when test="${i == pagination.currentPage}">
+					<li><div>${i}</div></li>									
+				</c:when>
+				<c:otherwise>
+					<li><div onclick="location.href='list?cp=${i}'">${i}</div></li>
+				</c:otherwise>
+			</c:choose>
+            
+            <div class="move-button" onclick="location.href='list?cp=${pagination.nextPage}'"><p>&#8250;</p></div>
         </div>
     </section>
 
