@@ -150,5 +150,66 @@ public class ItemDAO {
 		return result;
 	}
 
+	/**
+	 * @param item
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateItem(Item item, Connection conn) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updateItem");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, item.getItemName());
+			pstmt.setString(2, item.getItemPrice());
+			pstmt.setString(3, item.getItemInfo());
+			pstmt.setInt(4, item.getCategoryCode());
+			pstmt.setInt(5, item.getItemNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
+	/** 게시글 이미지 수정
+	 * @param img
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateItemImg(ItemImg img, Connection conn) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updateItemImg");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, img.getImgName());
+			pstmt.setString(2, img.getImgOriginal());
+			pstmt.setInt(3, img.getImgLevel());
+			pstmt.setInt(4, img.getItemNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+			
+		}
+		return result;
+	}
+	
+	
+	
+
 	
 }
