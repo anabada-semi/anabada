@@ -221,3 +221,14 @@
 	            margin: auto;
 
             }
+            
+            .deleteBtn{
+                width: 1.5rem;
+			    height: 1.5rem;
+			    border-radius: 50%;
+			    position: absolute;
+			    top: 0.5rem;
+                right: 0.5rem;
+			    margin-left : -45px;
+            }
+            
