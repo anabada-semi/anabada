@@ -14,7 +14,9 @@ import java.util.Properties;
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.item.model.vo.Time;
 import anabada.semi.shop.model.vo.PostScript;
+import anabada.semi.shop.model.vo.Purchase;
 import anabada.semi.shop.model.vo.Shop;
+import anabada.semi.shop.model.vo.Wish;
 
 public class ShopDAO {
 	private Statement stmt;
@@ -176,6 +178,124 @@ public class ShopDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public List<Wish> selectWsih(int shopNo, Connection conn) throws Exception {
+		List<Wish> wList = new ArrayList<Wish>();
+		try {
+			String sql = prop.getProperty("selectWsih");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, shopNo);
+			
+			rs = pstmt.executeQuery();
+			// W.ITEM_NO, I.ITEM_NM, I.ITEM_PRICE, I.ITEM_DATE, E.IMG_PATH, IMG_NM
+			while(rs.next()) {
+				Wish w = new Wish();
+				
+				w.setItemNo(rs.getInt(1));
+				w.setItemName(rs.getString(2));
+				w.setItemPrice(rs.getString(3));
+				w.setItemDate(rs.getTimestamp(4));
+				w.setImgPath(rs.getString(5));
+				w.setImgName(rs.getString(6));
+				
+				w.setUploadDate(new Time().calculateTime(w.getItemDate()));
+				
+				wList.add(w);
+			}
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return wList;
+	}
+
+	public int deleteWish(int itemNo, int shopNo, Connection conn) throws Exception {
+		int r = 0;
+		try {
+			String sql = prop.getProperty("deleteWish");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, shopNo);
+			pstmt.setInt(2, itemNo);
+			
+			r = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return r;
+	}
+
+	public List<Purchase> selectBuyItem(int shopNo, Connection conn) throws Exception {
+		List<Purchase> pList = new ArrayList<Purchase>();
+		
+		try {
+			String sql = prop.getProperty("selectBuyItem");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, shopNo);
+			
+			rs = pstmt.executeQuery();
+			
+//			SELECT P.SHOP_NO PURCHASER, I.MEMBER_NO SELLER, P.ITEM_NO, P.ITEM_STATUS_CD, 
+//		    I.ITEM_NM, I.ITEM_PRICE, I.ITEM_DATE, E.IMG_PATH, E.IMG_NM
+			
+			while(rs.next()) {
+				Purchase p = new Purchase();
+				
+				p.setPurchaser(rs.getInt(1));
+				p.setSeller(rs.getInt(2));
+				p.setItemNo(rs.getInt(3));
+				p.setItemStatusCode(rs.getInt(4));
+				p.setItemName(rs.getString(5));
+				p.setItemPrice(rs.getString(6));
+				p.setItemDate(rs.getTimestamp(7));
+				p.setItemImgPath(rs.getString(8));
+				p.setItemImgName(rs.getString(9));
+				
+				p.setUploadDate(new Time().calculateTime(p.getItemDate()));
+				
+				pList.add(p);
+			}
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return pList;
+	}
+
+	public List<Item> selectSellItem(int shopNo, Connection conn) throws Exception {
+		List<Item> sList = new ArrayList<Item>();
+		try {
+			String sql = prop.getProperty("selectSellItem");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, shopNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+//				ITEM_NO, ITEM_NM, ITEM_PRICE, ITEM_DATE, ITEM_STATUS_CD, IMG_PATH, IMG_NM
+				Item i = new Item();
+				i.setItemNo(rs.getInt(1));
+				i.setItemName(rs.getString(2));
+				i.setItemPrice(rs.getString(3));
+				i.setItemDate(rs.getTimestamp(4));
+				i.setItemStatusCode(rs.getInt(5));
+				i.setItemPath(rs.getString(6));
+				i.setItemImgName(rs.getString(7));
+				
+				i.setUploadDate(new Time().calculateTime(i.getItemDate()));
+				
+				sList.add(i);
+			}
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return sList;
 	}
 	
 	

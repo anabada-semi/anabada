@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8"%>
 
 <div>
-	찜 <span id="wishSpanText">0</span> (삭제 하려면 이미지를 클릭해주세요.)
+	찜 <span id="wishSpanText">0</span> (상품 페이지로 이동하려면 하려면 이미지를 클릭해주세요.)
 </div>
 
 <hr>
-<div class="wishContainer">
+<%-- <div class="wishContainer">
 	<img class="wishImg"
 		src="${contextPath}/resources/images/myShop/wishList/운동화.jpg">
 	<div class="wishTextDiv">
@@ -43,32 +43,10 @@
 		<div class="wishText1">2,000원</div>
 		<div class="wishText2">7일 전</div>
 	</div>
-</div>
+</div> --%>
 
 
-<script>
-	(function() {
-		//console.log($(".wishContainer").length);
-		$("#wishSpanText").text($(".wishContainer").length);
-	}());
 
-	$(".wishDeleteBtn").on("click", function() {
-		const idx = $(".wishDeleteBtn").index($(this));
-
-		if (confirm("삭제할래요?")) {
-			$(".wishContainer").eq(idx).remove();
-		} else {
-			return;
-		}
-
-		// 즉시 실행 함수
-		(function() {
-			//console.log($(".wishDeleteBtn").length);
-			$("#wishSpanText").text($(".wishDeleteBtn").length);
-		}());
-
-	});
-</script>
 
 
 

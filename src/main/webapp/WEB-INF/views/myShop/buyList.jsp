@@ -7,9 +7,10 @@
 
 <hr>
 
-<table>
+<table class="addBuyList">
 	<tr><td></td><td></td><td></td><td></td></tr>
-	<tr class="buyTr">
+</table>
+	<%-- <tr class="buyTr">
 		<td class="buyTd">
 			<div class="buyImgDiv">
 				<span class="buyImgSpan"> 구매 완료 </span>
@@ -44,18 +45,5 @@
 				<div class="buyText3">4달 전</div>
 			</div>
 		</td>
-	</tr>
-</table>
+	</tr> --%>
 
-
-<script>
-	(function(){
-		$("#buyText").text($(".buyTd").length);
-	}());
-	
-	$(".buyTd").on("click", function(){
-		(function(){
-			$("#buyText").text($(".buyTd").length);
-		}());
-	});
-</script>
