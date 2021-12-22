@@ -45,7 +45,7 @@
         	</c:when>
         	<c:otherwise>
         		<c:forEach items="${itemList}" var="item">
-   			        <div class="item" id="it-1" onclick="location.href='${contextPath}/item/view?no=${item.itemNo}&cp=${pagination.currentPage}'">
+   			        <div class="item" id="it-1" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
 			            <img src="${item.imgList[0].imgLevel == 0}">
 			            <div class="item-title">${item.itemName}</div>
 			            <div class="item-content" style="font-weight: bold;">
@@ -75,12 +75,18 @@
         </div>
 
         <div class="page-button">
-            <div class="move-button"><p>&#8249;</p></div>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-            <div class="move-button"><p>&#8250;</p></div>
+            <div class="move-button" onclick="location.href='list?cp=${pagination.prevPage}'"><p>&#8249;</p></div>
+            
+			<c:choose>
+				<c:when test="${i == pagination.currentPage}">
+					<li><div>${i}</div></li>									
+				</c:when>
+				<c:otherwise>
+					<li><div onclick="location.href='list?cp=${i}'">${i}</div></li>
+				</c:otherwise>
+			</c:choose>
+            
+            <div class="move-button" onclick="location.href='list?cp=${pagination.nextPage}'"><p>&#8250;</p></div>
         </div>
     </section>
 
