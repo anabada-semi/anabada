@@ -8,24 +8,22 @@
     <section id="signUpPage">
         <div id="top-banner">아이디/비밀번호 찾기</div>
         <div id="signUpPage-info">
-            <form action="${contextPath}/sendEmail">
+            <form action="${contextPath}/sendKey">
                 <table>
                     <tr>
-                        <th>회원가입한 이메일</th>
+                        <th>인증번호 입력</th>
                     </tr>
                     <tr>
-                        <td colspan="2"><input type="email" name="inputEmail" id="inputEmail"></td>
-                        <td><button id="key-Btn" disabled>인증번호 보내기</button></td>
+                        <td colspan="2"><input type="number" name="inputKey" id="inputKey"></td>
+                        <td><button id="key-Btn">확인</button></td>
                     </tr>
                     <tr>
-                    	<td id="checkEmail" style="font-size: 16px;"></td>
+                    	<td id="keyTime" style="color: #ccc;">05:00</td>
                     </tr>
                 </table>
             </form>
         </div>
     </section>
-    
-   	<script src="${contextPath}/resources/js/searchIdPw.js"></script>
 
     <!-- footer include -->
 	<jsp:include page="../footer.jsp" />

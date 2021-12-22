@@ -324,5 +324,71 @@ public class MemberDAO {
 		}
 
 
+		
+		/** 이메일로 회원 정보 얻기
+		 * @param inputEmail
+		 * @param conn
+		 * @return member
+		 * @throws Exception
+		 */
+		public Member searchMember(String inputEmail, Connection conn) throws Exception{
+
+			Member member = null;
+			
+			try {
+				
+				String sql = prop.getProperty("searchIdPw");
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, inputEmail);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					
+					member = new Member();
+					member.setMemberNo(rs.getInt("MEMBER_NO"));
+					member.setMemberId(rs.getString("MEMBER_ID"));
+					member.setMemberNm(rs.getString("MEMBER_NM"));
+					
+				}
+				
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			return member;
+		}
+
+
+		
+		/** 비밀번호 변경
+		 * @param memberNo
+		 * @param memberPw
+		 * @param conn
+		 * @return result
+		 * @throws Exception
+		 */
+		public int updatePw(int memberNo, String memberPw, Connection conn) throws Exception{
+
+			int result = 0;
+			
+			try {
+				
+				String sql = prop.getProperty("updatePw");
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, memberPw);
+				pstmt.setInt(2, memberNo);
+				
+				result = pstmt.executeUpdate();
+				
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+
+
 
 }

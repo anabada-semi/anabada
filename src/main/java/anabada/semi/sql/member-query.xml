@@ -61,5 +61,18 @@
 		WHERE MEMBER_NO = ?
 	</entry>
 
+	<!-- 이메일로 회원 정보 얻기 -->
+	<entry key="searchIdPw">
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NM
+		FROM MEMBER
+		WHERE MEMBER_EMAIL = ?
+	</entry>
+	
+	<entry key="updatePw">
+		UPDATE MEMBER SET
+		MEMBER_PW = ?
+		WHERE MEMBER_NO = ?
+	</entry>
+
 </properties>
 
