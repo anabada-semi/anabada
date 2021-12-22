@@ -11,8 +11,11 @@ footer ul, footer ul > li{
 }
 
 main{
-    width: 60%;
-    margin-left: 20%; margin-right: 20%;
+    /* width: 60%;
+    margin-left: 20%; margin-right: 20%; */
+    /* 아나바다 바디 1024px */
+    margin: auto;
+    width: 1024px;
 }
 
 .category{
@@ -122,14 +125,16 @@ main{
 .product-btn > button{
     width: 25%;
     height: 25%;
-    margin-top: 10%;
-    margin-left: 5%;
-    margin-right: 2%;
+    /* margin-top: 10%; */
+    /* margin-left: 5%;
+    margin-right: 2%; */
     background-color: #689BA6;
     border: none;
     border-radius: 5px;
     color: white;
     font-size: 15px;
+
+    margin: auto;
 }
 
 .product-infrom-detail, .product-question{
@@ -164,11 +169,13 @@ main{
     display: block;
     width: 80%;
     /* height: 100%; */
-    margin-left: 10%;
-    margin-right: 10%;
+    /* margin-left: 10%;
+    margin-right: 10%; */
     padding-top: 5px;
     padding-bottom: 5px;
     border-bottom: 1px solid #ccc;
+
+    margin: auto;
 
 }
 
