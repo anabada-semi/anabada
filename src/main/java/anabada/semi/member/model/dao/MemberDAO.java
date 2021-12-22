@@ -331,13 +331,13 @@ public class MemberDAO {
 		 * @return member
 		 * @throws Exception
 		 */
-		public Member updatePw(String inputEmail, Connection conn) throws Exception{
+		public Member searchMember(String inputEmail, Connection conn) throws Exception{
 
 			Member member = null;
 			
 			try {
 				
-				String sql = prop.getProperty("updatePw");
+				String sql = prop.getProperty("searchMember");
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, inputEmail);
@@ -346,6 +346,7 @@ public class MemberDAO {
 				
 				if(rs.next()) {
 					
+					member = new Member();
 					member.setMemberNo(rs.getInt("MEMBER_NO"));
 					member.setMemberId(rs.getString("MEMBER_ID"));
 					member.setMemberNm(rs.getString("MEMBER_NM"));

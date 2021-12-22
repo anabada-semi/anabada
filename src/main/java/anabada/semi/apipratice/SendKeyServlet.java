@@ -18,22 +18,31 @@ public class SendKeyServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		// 세션에서 인증키를 얻어와서
 		HttpSession mailCheck = req.getSession();
+		
 		int key = (int)mailCheck.getAttribute("ran");
+		System.out.println(key);
 		
 		int inputKey = Integer.parseInt(req.getParameter("inputKey"));
+		System.out.println(inputKey);
 		
 		String path = "";
 		
+		// 입력한 번호가 인증키와 같다면
 		if(key == inputKey) {
-			
-			String inputEmail = (String)mailCheck.getAttribute("inputEmail");
-			
-			MemberService service = new MemberService();
-			
+		
 			try {
 				
-				Member member = service.updatePw(inputEmail); 
+				// 입력한 이메일을 세션에서 불러와
+				String inputEmail = (String)mailCheck.getAttribute("inputEmail");
+				System.out.println(inputEmail + "성공");
+				
+				MemberService service = new MemberService();
+				
+				// 회원정보 불러오기
+				Member member = service.searchMember(inputEmail); 
+				System.out.println(member);
 				
 				if(member != null) {
 				
@@ -50,7 +59,7 @@ public class SendKeyServlet extends HttpServlet {
 			}
 			
 		}else {
-			path = "/WEB-INF/views/member/referencePage.jsp";
+			path = "/WEB-INF/views/mainPage.jsp";
 			req.setAttribute("message", "인증에 실패하였습니다.");
 			
 		}

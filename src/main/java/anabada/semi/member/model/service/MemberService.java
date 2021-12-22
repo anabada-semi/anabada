@@ -172,11 +172,11 @@ public class MemberService {
 	 * @return member
 	 * @throws Exception
 	 */
-	public Member updatePw(String inputEmail) throws Exception{
+	public Member searchMember(String inputEmail) throws Exception{
 		
 		Connection conn = getConnection();
 		
-		Member member = dao.updatePw(inputEmail, conn);
+		Member member = dao.searchMember(inputEmail, conn);
 		
 		close(conn);
 		

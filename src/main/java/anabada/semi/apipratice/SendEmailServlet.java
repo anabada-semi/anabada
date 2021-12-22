@@ -52,6 +52,9 @@ public class SendEmailServlet extends HttpServlet{
        mailcheck.setAttribute("inputEmail", inputEmail);
        mailcheck.setMaxInactiveInterval(600);
        
+       System.out.println(mailcheck.getAttribute("ran"));
+       System.out.println(mailcheck.getAttribute("inputEmail"));
+       
        // 메일에 출력할 텍스트
        StringBuffer sb = new StringBuffer();
        sb.append("안녕하세요.\n");
