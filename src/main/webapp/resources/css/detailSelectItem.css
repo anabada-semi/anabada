@@ -308,3 +308,9 @@ main{
 button{
     cursor: pointer;
 }
+
+.product-inform p {
+    display: inline-block;
+    margin-top: 0;
+    margin-left: 5px;
+}

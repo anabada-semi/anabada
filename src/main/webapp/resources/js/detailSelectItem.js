@@ -417,7 +417,7 @@ function updateAnswerReply(replyNo, memberNo, el){
 
 //-----------------------------------------------------------------------------------------
 //문의하기 버튼 클릭시 이동
-$(document).ready(function($) {
+$(document).ready(function() {
 
     $("#question").click(function(event){         
             event.preventDefault();
@@ -435,17 +435,25 @@ function wish(replyNo, el){
 
     }else{  // 로그인한 경우
         $.ajax({
-            url : contextPath + "/detail/wish",
+            url : contextPath + "/wish/select",
             data : {"memberNo" : loginMemberNo, 
                     "itemNo" : itemNo, 
                     },
             type : "POST",  // insert는 대부분 post 방식
             success : function(result){
 
-                if(result > 0){
+                // (0: 삽입 실패, 1: 삽입됨, -1: 있음, -2: 삭제됨)
+                if(result > 0){ // 찜목록에 없는경우
                     alert("찜 목록에 추가되었습니다.");
-                }else{
-                    alert("찜 목록 추가 실패.");
+                    updateWishCount();
+
+                }else if(result == -1){ // 이미 찜한 경우
+                    if(confirm("이미 찜 목록에 추가되어 있습니다. 찜 목록에서 삭제하시겠습니까?")){
+                        deleteWish(itemNo);
+                    }
+
+                } else{ // 찜 내역에 있었지만 삭제된 경우
+                    updateWish(itemNo);   // 찜 테이블에 추가
                 }
             },
             error : function(req, status, error){
@@ -455,3 +463,98 @@ function wish(replyNo, el){
         });
     }
 }
+
+//-----------------------------------------------------------------------------------------
+// 찜 추가(update)
+function updateWish(itemNo){
+
+    $.ajax({
+        url : contextPath + "/wish/update",
+        data : {"memberNo" : loginMemberNo, 
+                "itemNo" : itemNo, 
+                },
+        type : "POST",  // insert는 대부분 post 방식
+        success : function(result){
+
+            if(result > 0){ // 찜 목록에 WISH_STATUS_CD 값이 1로 바뀌었을 경우
+                alert("찜 목록에 추가되었습니다.");
+                updateWishCount();
+                
+            } else{ // 바뀌지 않았을 경우
+                alert("찜 목록 추가 실패");
+            }
+        },
+        error : function(req, status, error){
+            console.log("찜 목록 추가 실패");
+            console.log(req.responseText);
+        } 
+    });
+}
+
+//-----------------------------------------------------------------------------------------
+// 찜 삭제
+function deleteWish(itemNo){
+
+    $.ajax({
+        url : contextPath + "/wish/delete",
+        data : {"memberNo" : loginMemberNo, 
+                "itemNo" : itemNo, 
+                },
+        type : "POST",  // insert는 대부분 post 방식
+        success : function(result){
+
+            if(result > 0){ // 찜목록에 없는경우
+                alert("찜 목록에서 제거되었습니다.");
+                updateWishCount();
+
+            } else{ 
+                console.log("찜 목록 삭제 실패");
+            }
+        },
+        error : function(req, status, error){
+            console.log("찜 목록 삭제 실패");
+            console.log(req.responseText);
+        } 
+    });
+}
+
+//-----------------------------------------------------------------------------------------
+// 찜 갯수 업데이트
+function updateWishCount(){
+
+    const wishCount = $("#wish-count");
+
+    $.ajax({
+        url : contextPath + "/wish/count",
+        data : {"itemNo" : itemNo},
+        type : "POST",  // insert는 대부분 post 방식
+        success : function(count){
+            // console.log("개수: " + count);
+            wishCount.text(count);
+        },
+        error : function(req, status, error){
+            console.log("찜 목록 추가 실패");
+            console.log(req.responseText);
+        } 
+    });
+
+}
+
+//-----------------------------------------------------------------------------------------
+// 조회수 증가
+$(document).ready(function() {
+    const readCount = $("#read-count");
+
+    $.ajax({
+        url : contextPath + "/detail/view",
+        data : {"itemNo" : itemNo},
+        type : "POST",  // insert는 대부분 post 방식
+        success : function(view){
+            readCount.text(view);
+        },
+        error : function(req, status, error){
+            console.log("조회수 증가 실패");
+            console.log(req.responseText);
+        } 
+    });
+});

@@ -14,7 +14,7 @@
 				TO_CHAR(ITEM_PRICE, 'FM9,999,999') ITEM_PRICE,
 				ITEM_INFO,ITEM_DATE, CATEGORY_CD, ITEM_STATUS_CD, 
 				MEMBER_NO, READ_COUNT, b.CATEGORY_NM,
-				(SELECT COUNT(*) FROM WISH WHERE ITEM_NO = ?) WISH
+				(SELECT COUNT(*) FROM WISH WHERE ITEM_NO = ? AND WISH_STATUS_CD = 1) WISH
 			FROM ITEM
 			join category b using(CATEGORY_CD)
 		WHERE ITEM_NO = ?
@@ -89,9 +89,41 @@
 		ORDER BY POSTSCRIPT_NO DESC
 	</entry>
 	
-	<!-- 상점 후기 조회 -->
-	<entry key="wish">
+	<!-- 찜 조회 -->
+	<entry key="wishSelect">
+		SELECT WISH_STATUS_CD
+	    FROM WISH
+	    WHERE MEMBER_NO = ? AND ITEM_NO = ?
+	</entry>
+	
+	<!-- 찜 삽입 -->
+	<entry key="wishInsert">
 		INSERT INTO WISH VALUES(?, ?, default)
+	</entry>
+	
+	<!-- 찜 추가(update) -->
+	<entry key="wishUpdate">
+		UPDATE WISH SET WISH_STATUS_CD = ?
+		WHERE MEMBER_NO = ? AND ITEM_NO = ?
+	</entry>
+	
+	<!-- 찜 개수 조회 -->
+	<entry key="wishCount">
+		SELECT COUNT(*) COUNT FROM WISH 
+		WHERE ITEM_NO = ? AND WISH_STATUS_CD = 1
+	</entry>
+	
+	<!-- 조회수 증가 -->
+	<entry key="updateView">
+		update item set READ_COUNT = READ_COUNT+1 
+		where ITEM_NO = ?
+	</entry>
+	
+	<!-- 조회수 조회 -->
+	<entry key="selectView">
+		SELECT READ_COUNT
+		FROM ITEM
+		WHERE ITEM_NO = ?
 	</entry>
 	
 	

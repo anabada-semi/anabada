@@ -38,7 +38,7 @@ public class DetailSelectItemServlet extends HttpServlet{
 		String command = uri.substring( (contextPath + "/detail/").length() );
 		
 		ItemSelectService service = new ItemSelectService();
-		
+		String path = null;
 		try {
 			if(command.equals("select")) {
 				
@@ -47,7 +47,8 @@ public class DetailSelectItemServlet extends HttpServlet{
 				List<Item> categoryList = service.selectCategory();
 				
 				req.setAttribute("categoryList", categoryList);
-				int itemNo = 3;
+				
+				int itemNo = Integer.parseInt(req.getParameter("no"));
 				
 				// 선택한 아이템 조회
 				Item item = service.selectItem(itemNo);
@@ -60,7 +61,7 @@ public class DetailSelectItemServlet extends HttpServlet{
 				// 상품 이미지 조회
 				List<ItemImg> itemImg = service.selectItemImg(itemNo);
 				
-//			System.out.println("ItemImg: " + ItemImg);
+				System.out.println("ItemImg: " + itemImg);
 				
 				req.setAttribute("itemImg", itemImg);	// 상품 이미지
 				
@@ -91,23 +92,21 @@ public class DetailSelectItemServlet extends HttpServlet{
 				req.setAttribute("postScriptList", postScriptList);	// 상점 정보
 				
 				
-				String path = "/WEB-INF/views/detailSelectItem.jsp";
+				path = "/WEB-INF/views/detailSelectItem.jsp";
 				req.getRequestDispatcher(path).forward(req, resp);
 			}
-			
-			// 찜 하기
-			else if(command.equals("wish")) {
+			// 조회수 증가
+			else if(command.equals("view")) {
 				
 				int itemNo = Integer.parseInt(req.getParameter("itemNo"));
-				int memberNo = Integer.parseInt(req.getParameter("memberNo"));
 				
-				int result = service.wish(itemNo, memberNo);
+				int result = service.updateView(itemNo);
 				
-				new Gson().toJson(result, resp.getWriter());
+				int view = service.selectView(itemNo);
+				
+				new Gson().toJson(view, resp.getWriter());
 				
 			}
-			
-				
 			
 		} catch (Exception e) {
 
