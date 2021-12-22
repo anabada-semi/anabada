@@ -30,9 +30,15 @@
                 <li class="line">
                     <div class="content_title">상품이미지<br><small>(최대 3개)</small></div>
                     <div class="content_photo">
-                        <div class="itemImg"><img src="${img0}">클릭하여<br> 이미지<br>업로드</div>
-                        <div class="itemImg"><img src="${img1}">클릭하여<br> 이미지<br>업로드</div>
-                        <div class="itemImg"><img src="${img2}">클릭하여<br> 이미지<br>업로드</div>
+                        <div class="itemImg"><img src="${img0}">클릭하여<br> 이미지<br>업로드
+                            <button type="button" class="deleteBtn">x</button>
+                        </div>
+                        <div class="itemImg"><img src="${img1}">클릭하여<br> 이미지<br>업로드
+                            <button type="button" class="deleteBtn">x</button>
+                        </div>
+                        <div class="itemImg"><img src="${img2}">클릭하여<br> 이미지<br>업로드
+                            <button type="button" class="deleteBtn">x</button>
+                        </div>
                         
                         <div id=fileArea">
                         <input type="file" name="img0" onchange="loadImg(this,0)">
