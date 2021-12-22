@@ -22,6 +22,8 @@ import anabada.semi.item.model.vo.ItemImg;
 import anabada.semi.item.model.vo.Reply;
 import anabada.semi.item.model.vo.Time;
 import anabada.semi.member.model.vo.Member;
+import anabada.semi.shop.model.vo.PostScript;
+import anabada.semi.shop.model.vo.Shop;
 
 @WebServlet("/detail/*")
 public class DetailSelectItemServlet extends HttpServlet{
@@ -29,54 +31,82 @@ public class DetailSelectItemServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		String method = req.getMethod();
+		
+		String uri = req.getRequestURI();
+		String contextPath = req.getContextPath();
+		String command = uri.substring( (contextPath + "/detail/").length() );
+		
 		ItemSelectService service = new ItemSelectService();
 		
 		try {
-			
-			// 카테고리 옵션 목록
-			// 카테고리 목록 불러오기
-			List<Item> categoryList = service.selectCategory();
-			
-			req.setAttribute("categoryList", categoryList);
-			int itemNo = 3;
-			
-			// 선택한 아이템 조회
-			Item item = service.selectItem(itemNo);
-			
-			String date = Time.calculateTime(item.getItemDate());
-			
-			req.setAttribute("item", item);	// 상품
-			req.setAttribute("date", date);	// 상품 등록 날짜
-			
-			// 상품 이미지 조회
-			List<ItemImg> itemImg = service.selectItemImg(itemNo);
-			
+			if(command.equals("select")) {
+				
+				// 카테고리 옵션 목록
+				// 카테고리 목록 불러오기
+				List<Item> categoryList = service.selectCategory();
+				
+				req.setAttribute("categoryList", categoryList);
+				int itemNo = 3;
+				
+				// 선택한 아이템 조회
+				Item item = service.selectItem(itemNo);
+				
+				String date = Time.calculateTime(item.getItemDate());
+				
+				req.setAttribute("item", item);	// 상품
+				req.setAttribute("date", date);	// 상품 등록 날짜
+				
+				// 상품 이미지 조회
+				List<ItemImg> itemImg = service.selectItemImg(itemNo);
+				
 //			System.out.println("ItemImg: " + ItemImg);
-			
-			req.setAttribute("itemImg", itemImg);	// 상품 이미지
-			
-			// 로그인한 회원의 세션 정보 얻어오기
-			Member loginMember = (Member)req.getSession().getAttribute("loginMember"); 
-			
-			int memberNo = 0;
-			
-			if(loginMember != null) {
-				memberNo = loginMember.getMemberNo();
+				
+				req.setAttribute("itemImg", itemImg);	// 상품 이미지
+				
+				// 로그인한 회원의 세션 정보 얻어오기
+				Member loginMember = (Member)req.getSession().getAttribute("loginMember"); 
+				
+				int memberNo = 0;
+				
+				if(loginMember != null) {
+					memberNo = loginMember.getMemberNo();
+				}
+				
+				// 댓글 조회하기
+				List<Reply> rList = service.selectReplyList(itemNo);
+				List<Reply> answer = service.selectReplyListReverse(itemNo);
+				
+				req.setAttribute("rList", rList);	// 댓글 목록
+				req.setAttribute("answer", answer);	// 댓글 역순 목록
+				
+				// 상점 정보 조회
+				Shop shop = service.selectShop(itemNo);
+				
+				req.setAttribute("shop", shop);	// 상점 정보
+				
+				// 상점 후기 조회
+				List<PostScript> postScriptList = service.selectPostScript(shop.getMemberNo());
+				
+				req.setAttribute("postScriptList", postScriptList);	// 상점 정보
+				
+				
+				String path = "/WEB-INF/views/detailSelectItem.jsp";
+				req.getRequestDispatcher(path).forward(req, resp);
 			}
 			
-			// 댓글 조회하기
-			List<Reply> rList = service.selectReplyList(itemNo);
-			List<Reply> answer = service.selectReplyListReverse(itemNo);
+			// 찜 하기
+			else if(command.equals("wish")) {
+				
+				int itemNo = Integer.parseInt(req.getParameter("itemNo"));
+				int memberNo = Integer.parseInt(req.getParameter("memberNo"));
+				
+				int result = service.wish(itemNo, memberNo);
+				
+				new Gson().toJson(result, resp.getWriter());
+				
+			}
 			
-			req.setAttribute("rList", rList);	// 댓글 목록
-			req.setAttribute("answer", answer);	// 댓글 목록
-			
-			System.out.println("일반: " + rList);
-			System.out.println("역순: " + answer);
-			
-			
-			String path = "/WEB-INF/views/detailSelectItem.jsp";
-			req.getRequestDispatcher(path).forward(req, resp);
 				
 			
 		} catch (Exception e) {

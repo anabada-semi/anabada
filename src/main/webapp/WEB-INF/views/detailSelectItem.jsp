@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <title>물품 상세 조회</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/detailSelectItem.css">
@@ -47,8 +48,9 @@
                             <span><img src="${contextPath}/resources/images/itemIcon/clock.png"> ${date}</span>
                         </div>
                         <div class="product-btn">
-                            <button>찜</button>
-                            <button onclick="">문의하기</button>
+                            <!-- <button onclick = "wish(${item.itemNo}, this);">찜</button> -->
+                            <button onclick = "wish(${item.itemNo}, this)">찜</button>
+                            <button id="question">문의하기</button>
                             <button>수정하기</button>
                         </div>
     
@@ -73,7 +75,7 @@
                         </div>
                     </div>
                     <div class="product-question">
-                        <h3>상품 문의</h3>
+                        <h3 id="item-question">상품 문의</h3>
                         <textarea id="replyContent" cols="30" rows="5" placeholder="내용을 입력해주세요."></textarea>
     
                         <div class="submit">
@@ -166,9 +168,9 @@
                                                                     </c:choose>
                                                                 </div>
 
-                                                                <!-- 상품 판매자 == 로그인 한 사람 || 댓글 단 사람 == 로그인 한 사람 -->
+                                                                <!-- 댓글 단 사람 == 로그인 한 사람 -->
                                                                 <c:choose>
-                                                                    <c:when test="${item.memberNo == loginMember.memberNo || reply.memberNo == loginMember.memberNo}">
+                                                                    <c:when test="${reply.memberNo == loginMember.memberNo}">
                                                                         <div class="replyBtnArea">
                                                                             <button id="deleteReply" onclick="deleteReply(${answer.replyNo})">삭제</button>
                                                                             <button id="updateReply" onclick="updateAnswerReply(${answer.replyNo}, ${loginMember.memberNo}, this)">수정</button>
@@ -196,24 +198,22 @@
                 </div>
                 <div class="main-bottom-rigth">
                     <h3>상점 정보</h3>
-                    <h4>상점 이름</h4>
-                    <h4>상점 후기 <span class="reply-count">후기개수</span></h4>
+                    <h4>${shop.shopName}</h4>
+                    <h4>상점 후기 <span class="reply-count">${fn:length(postScriptList)}</span></h4>
                     <div class="reply">
-                        <div class="reply-">
-                            <span class="user-name">유저 네임</span>
-                            <span class="user-reply">
-                                안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.
-                            </span>
-                        </div>
-                            <div class="reply-">
-                            <span class="user-name">유저 네임</span>
-                            <span class="user-reply">
-                                안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.
-                            </span>
-                        </div>
+
+                        <c:forEach var="i" begin="0" end="1">
+                            <div class="review">
+                                <span class="user-name">${postScriptList[i].memberName}</span>
+                                <span class="user-reply">
+                                    ${postScriptList[i].postScriptCheck}
+                                </span>
+                            </div>
+                        </c:forEach>
+                            
 
 
-                        <button class="more-review">후기 더보기 > </button>
+                        <button class="more-review" onclick="">후기 더보기 > </button>
                     </div>
                 </div>
             </div>

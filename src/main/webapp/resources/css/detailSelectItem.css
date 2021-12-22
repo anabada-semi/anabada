@@ -149,6 +149,8 @@ main{
 .reply-count{
     color: red;
     width: 50px;
+    margin-left: 12px;
+    font-size: 20px;
 }
 .reply, .reply-{
     width: 100%;
@@ -297,4 +299,12 @@ main{
     background-color: whitesmoke;
     border : 1px solid gainsboro;
     border-radius: 5px;
+}
+
+.review{
+    margin-bottom: 20px;
+}
+
+button{
+    cursor: pointer;
 }

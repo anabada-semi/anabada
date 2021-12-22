@@ -17,7 +17,7 @@ function selectReplyList() {
                 
                 if(reply.replyNestedCode == 1){ // 기본 댓글(대댓글이 아니면)
                     
-                    var date =new Date(reply.replyDate).toISOString().replace("T", " ").replace(/\..*/, '');
+                    var date = new Date(reply.replyDate).toISOString().replace("T", " ").replace(/\..*/, '');
 
                     const replyRow = $('<li class="reply-row">');
                     const replyPadding = $("<div>").addClass("reply-padding");
@@ -37,8 +37,9 @@ function selectReplyList() {
                     // => html로 작성
     
                     replyRow.append(replyPadding, rContent);
-    
-                    if(itemMemberNo == loginMemberNo || reply.memberNo == loginMemberNo){    // 판매자 == 로그인 멤버 || 댓글 작성자 == 로그인 멤버-> 답글 버튼 생성
+                    
+                    // 판매자 == 로그인 멤버 || 댓글 작성자 == 로그인 멤버-> 답글 버튼 생성
+                    if(itemMemberNo == loginMemberNo || reply.memberNo == loginMemberNo){
                         
                         const answerReply = $('<button>').addClass("reply-submit").text("답글");
                         answerReply.attr("onclick", "answerReply("+reply.replyNo+", loginMemberNo, this)");
@@ -47,7 +48,6 @@ function selectReplyList() {
 
                         // 댓글 작성자 == 로그인 멤버 -> 수정, 삭제 버튼 영역 생성
                         if(reply.memberNo == loginMemberNo){
-                            
                             const showUpdate = $('<button>').addClass("reply-submit").text("수정");
                             showUpdate.attr("onclick", "showUpdateReply("+reply.replyNo+", this)");
         
@@ -60,47 +60,46 @@ function selectReplyList() {
                         replyBtnArea.append(answerReply);
                         replyRow.append(replyBtnArea);
                         // $("#replyListArea").append(li);
-                    
+                    }
 
-                        $.each(answer, function(index, answer){   // jQuery 반복문
+                    $.each(answer, function(index, answer){   // jQuery 반복문
 
-                            var answerDate =new Date(answer.replyDate).toISOString().replace("T", " ").replace(/\..*/, '');
+                        var answerDate =new Date(answer.replyDate).toISOString().replace("T", " ").replace(/\..*/, '');
 
-                            if(answer.replyNestedNo == reply.replyNo){
-            
-                                const answerRow = $("<li>").addClass("answer-row");
-                                const answerSign = $("<p>").addClass("answer-sign").text("⤷");
-                                const answerPadding = $("<div>").addClass("answer-padding");
-                                const rWriter = $("<p>").addClass("rWriter").text(answer.memberName);
-                                const rDate = $("<p>").addClass("rDate").text(answerDate);
-                                const rContent = $("<p>").addClass("rContent").text(answer.replyContent);
-                                const replyBtnArea = $("<div>").addClass("replyBtnArea");
+                        if(answer.replyNestedNo == reply.replyNo){
+        
+                            const answerRow = $("<li>").addClass("answer-row");
+                            const answerSign = $("<p>").addClass("answer-sign").text("⤷");
+                            const answerPadding = $("<div>").addClass("answer-padding");
+                            const rWriter = $("<p>").addClass("rWriter").text(answer.memberName);
+                            const rDate = $("<p>").addClass("rDate").text(answerDate);
+                            const rContent = $("<p>").addClass("rContent").text(answer.replyContent);
+                            const replyBtnArea = $("<div>").addClass("replyBtnArea");
 
-                                answerPadding.append(rWriter,rDate,rContent);
+                            answerPadding.append(rWriter,rDate,rContent);
 
-                                answerRow.append(answerSign, answerPadding);
+                            answerRow.append(answerSign, answerPadding);
 
+                            if(reply.memberNo == loginMemberNo){
+                                
                                 const deleteReplyAnswer = $('<button>').attr("id","deleteReply").text("삭제");
                                 deleteReplyAnswer.attr("onclick", "deleteReply("+answer.replyNo+")");
 
                                 const updateAnswerReply = $('<button>').attr("id","updateReply").text("수정");
-                                updateAnswerReply.attr("onclick", "updateAnswerReply("+answer.replyNo, loginMemberNo+", this)");
+                                updateAnswerReply.attr("onclick", "updateAnswerReply("+answer.replyNo+", loginMemberNo, this)");
 
                                 replyBtnArea.append(deleteReplyAnswer, updateAnswerReply);
                                 answerRow.append(replyBtnArea);
-                                answerListArea.prepend(answerRow);
                             }
-                            answerArea.append(answerListArea);
-                            replyRow.append(answerArea);
-                        });
+
+                            answerListArea.prepend(answerRow);
+                        }
+                        answerArea.append(answerListArea);
+                        replyRow.append(answerArea);
+                    });
 
                         $("#replyListArea").append(replyRow);
-
-                    }
-
                 }
-
-                
             });
         },
         error : function(req, status, error){
@@ -115,6 +114,17 @@ function selectReplyList() {
 // 댓글 등록
 function addReply(){
 
+    if(loginMemberNo == ""){    // 로그인이 되어 있지 않은 경우
+        alert("로그인 후 이용해 주세요.");
+
+    }else{  // 로그인한 경우
+
+        // 댓글 미작성한 경우
+        if( $("#replyContent").val().trim().length == 0 ){
+            alert("댓글을 작성한 후 버튼을 클릭해주세요.");
+            $("#replyContent").focus();
+
+        } else{ // 댓글을 작성한 경우
     
             $.ajax({
                 url : contextPath + "/reply/insert",
@@ -141,6 +151,8 @@ function addReply(){
                     console.log(req.responseText);
                 }
             });
+        }
+    }
 
         
 }
@@ -319,34 +331,38 @@ function Cancel(el) {
 // 대댓글 삽입
 function insertAnswer(replyNo, el){
 
-    // console.log($(el).parent().prev().val());
+    if(loginMemberNo == ""){    // 로그인이 되어 있지 않은 경우
+        alert("로그인 후 이용해 주세요.");
+
+    }else{  // 로그인한 경우
     
-    $.ajax({
-        url : contextPath + "/answer/insert",
-        data : {"memberNo" : loginMemberNo, 
-                "itemNo" : itemNo, 
-                "replyNo" : replyNo,
-                "replyContent" : $(el).parent().prev().val()
-                },
-        type : "POST",  // insert는 대부분 post 방식
-        // dataType : "JSON",   // 성공 실패만 알면 되므로 JSON 필요 없음
-        success : function(result){
+        $.ajax({
+            url : contextPath + "/answer/insert",
+            data : {"memberNo" : loginMemberNo, 
+                    "itemNo" : itemNo, 
+                    "replyNo" : replyNo,
+                    "replyContent" : $(el).parent().prev().val()
+                    },
+            type : "POST",  // insert는 대부분 post 방식
+            // dataType : "JSON",   // 성공 실패만 알면 되므로 JSON 필요 없음
+            success : function(result){
 
-            console.log("result:" + result);
+                console.log("result:" + result);
 
-            if(result > 0){
-                alert("대댓글이 등록되었습니다.");
-                $(el).parent().prev().val(""); // 작성한 대댓글 내용 삭제
-                selectReplyList();  // 댓글 조회 함수 호출 -> 댓글 화면 다시 만들기
-            }else{
-                alert("대댓글 등록 실패.");
+                if(result > 0){
+                    alert("대댓글이 등록되었습니다.");
+                    $(el).parent().prev().val(""); // 작성한 대댓글 내용 삭제
+                    selectReplyList();  // 댓글 조회 함수 호출 -> 댓글 화면 다시 만들기
+                }else{
+                    alert("대댓글 등록 실패.");
+                }
+            },
+            error : function(req, status, error){
+                console.log("대댓글 삽입 실패");
+                console.log(req.responseText);
             }
-        },
-        error : function(req, status, error){
-            console.log("대댓글 삽입 실패");
-            console.log(req.responseText);
-        }
-    });
+        });
+    }
 
 }
 
@@ -387,7 +403,7 @@ function updateAnswerReply(replyNo, memberNo, el){
     $(el).parent().before(textarea);
 
     // 수정 버튼
-    const updateReply = $("<button>").addClass("reply-submit").text("대댓글 수정").attr("onclick", "updateReply(" + replyNo + ", this)");
+    const updateReply = $("<button>").addClass("reply-submit").text("수정 완료").attr("onclick", "updateReply(" + replyNo + ", this)");
 
     // 취소 버튼
     const cancelBtn = $("<button>").addClass("reply-submit").text("취소").attr("onclick", "updateCancel(this)");
@@ -400,69 +416,42 @@ function updateAnswerReply(replyNo, memberNo, el){
 }
 
 //-----------------------------------------------------------------------------------------
-// 대댓글 더보기
-function updateAnswerReply(replyNo, memberNo, el){
-    // 이미 열려있는 댓글 수정 창이 있을 경우 닫아주기
-    if ($(".replyUpdateContent").length > 0) {
-        
-        if(confirm("확인 클릭 시 수정된 내용이 사라지게 됩니다.")){
-            $(".replyUpdateContent").eq(0).parent().html(beforeReplyRow);
-        }else{
-            return;
-        }
-    }
-    
-    $.ajax({
-        url : contextPath + "/answer/select",
-        data : {"itemNo" : itemNo, "replyNo" : replyNo}, // 
-        type : "GET",
-        dataType : "JSON",  // 반환되는 데이터 형식 지정 -> 응답 받은 후 형변환 진행
-        success : function(rList){
-            
+//문의하기 버튼 클릭시 이동
+$(document).ready(function($) {
 
-
-
-
-        },
-
-        error : function(req, status, error){
-            console.log("댓글 목록 조회 실패");
-            console.log(req.responseText);
-        }
+    $("#question").click(function(event){         
+            event.preventDefault();
+            $('html,body').animate({scrollTop:$("#item-question").offset().top}, 500);
     });
 
-    // 댓글 수정화면 출력 전 요소를 저장해둠.
-    /* beforeReplyRow = $(el).parent().parent().html();
-    console.log(beforeReplyRow); */
+});
+
+//-----------------------------------------------------------------------------------------
+// 찜 버튼 클릭시
+function wish(replyNo, el){
     
-    // 작성되어있던 내용(수정 전 댓글 내용) 
-    let beforeContent = $(el).parent().prev().find(".rContent").html();
-    console.log("전:" + beforeContent);
+    if(loginMemberNo == ""){    // 로그인이 되어 있지 않은 경우
+        alert("로그인 후 이용해 주세요.");
 
-    // 이전 댓글 내용의 크로스사이트 스크립트 처리 해제, 개행문자 변경
-    // -> 자바스크립트에는 replaceAll() 메소드가 없으므로 정규 표현식을 이용하여 변경 -> 'g'
-    beforeContent = beforeContent.replace(/&amp;/g, "&");
-    beforeContent = beforeContent.replace(/&lt;/g, "<");
-    beforeContent = beforeContent.replace(/&gt;/g, ">");
-    beforeContent = beforeContent.replace(/&quot;/g, "\"");
+    }else{  // 로그인한 경우
+        $.ajax({
+            url : contextPath + "/detail/wish",
+            data : {"memberNo" : loginMemberNo, 
+                    "itemNo" : itemNo, 
+                    },
+            type : "POST",  // insert는 대부분 post 방식
+            success : function(result){
 
-    beforeContent = beforeContent.replace(/<br>/g, "\n");
-
-
-    // 기존 댓글 영역을 삭제하고 textarea를 추가 
-    $(el).parent().prev().find(".rContent").remove();
-    const textarea = $("<textarea>").addClass("replyUpdateContent").attr("rows", "3").val(beforeContent);
-    $(el).parent().before(textarea);
-
-    // 수정 버튼
-    const updateReply = $("<button>").addClass("reply-submit").text("대댓글 수정").attr("onclick", "updateReply(" + replyNo + ", this)");
-
-    // 취소 버튼
-    const cancelBtn = $("<button>").addClass("reply-submit").text("취소").attr("onclick", "updateCancel(this)");
-
-    const replyBtnArea = $(el).parent();
-
-    $(replyBtnArea).empty();
-    $(replyBtnArea).append(updateReply);
-    $(replyBtnArea).append(cancelBtn);
+                if(result > 0){
+                    alert("찜 목록에 추가되었습니다.");
+                }else{
+                    alert("찜 목록 추가 실패.");
+                }
+            },
+            error : function(req, status, error){
+                console.log("찜 목록 추가 실패");
+                console.log(req.responseText);
+            } 
+        });
+    }
 }

@@ -71,6 +71,29 @@
 		VALUES(SEQ_REPLY_NO.NEXTVAL, ?, default, 1, ?, ?, default, 2, ?)
 	</entry>
 	
+	<!-- 상점 정보 조회 -->
+	<entry key="selectShop">
+		SELECT MEMBER_NO, SHOP_INTRODUCE, SHOP_NM
+		FROM SHOP
+		WHERE MEMBER_NO = 
+		(SELECT MEMBER_NO FROM ITEM WHERE ITEM_NO = ?)
+	</entry>
+	
+	<!-- 상점 후기 조회 -->
+	<entry key="selectPostScript">
+		SELECT POSTSCRIPT_NO, POSTSCRIPT_CHECK, 
+				SHOP_NO, MEMBER_NO, MEMBER_NM
+		FROM POSTSCRIPT
+		JOIN MEMBER USING(MEMBER_NO)
+		WHERE POSTSCRIPT_STATUS_CD = 0 AND SHOP_NO = ?
+		ORDER BY POSTSCRIPT_NO DESC
+	</entry>
+	
+	<!-- 상점 후기 조회 -->
+	<entry key="wish">
+		INSERT INTO WISH VALUES(?, ?, default)
+	</entry>
+	
 	
 	
 	

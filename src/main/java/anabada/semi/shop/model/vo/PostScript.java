@@ -8,22 +8,17 @@ public class PostScript {
 	private int memberNo;
 	private String shopName;
 	
+	private String memberName;
 	
-
-
 	public PostScript() {}
 	
 	
 	public int getShopNo() {
 		return shopNo;
 	}
-
-
 	public void setShopNo(int shopNo) {
 		this.shopNo = shopNo;
 	}
-
-
 	public String getShopName() {
 		return shopName;
 	}
@@ -54,6 +49,20 @@ public class PostScript {
 	}
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+
+	@Override
+	public String toString() {
+		return "PostScript [postScriptNo=" + postScriptNo + ", postScriptCheck=" + postScriptCheck
+				+ ", postScriptStatusCode=" + postScriptStatusCode + ", shopNo=" + shopNo + ", memberNo=" + memberNo
+				+ ", shopName=" + shopName + ", memberName=" + memberName + "]";
 	}
 	
 	

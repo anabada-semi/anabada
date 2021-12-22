@@ -14,6 +14,8 @@ import java.util.Properties;
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.item.model.vo.ItemImg;
 import anabada.semi.item.model.vo.Reply;
+import anabada.semi.shop.model.vo.PostScript;
+import anabada.semi.shop.model.vo.Shop;
 
 public class ItemSelectDAO {
 
@@ -318,6 +320,97 @@ public class ItemSelectDAO {
 			pstmt.setInt(2, reply.getMemberNo());
 			pstmt.setInt(3, reply.getItemNo());
 			pstmt.setInt(4, reply.getReplyNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+	/** 상점 조회
+	 * @param itemNo
+	 * @param conn
+	 * @return shop (조회X : null)
+	 * @throws Exception
+	 */
+	public Shop selectShop(int itemNo, Connection conn) throws Exception{
+
+		Shop shop = new Shop();
+		
+		try {
+			String sql = prop.getProperty("selectShop");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, itemNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				shop.setMemberNo(rs.getInt("MEMBER_NO"));
+				shop.setShopIntroduce(rs.getString("SHOP_INTRODUCE"));
+				shop.setShopName(rs.getString("SHOP_NM"));
+			}
+			
+		} finally {
+			close(rs); 
+			close(pstmt);
+		}
+		return shop;
+	}
+
+
+
+	/**
+	 * @param memberNo
+	 * @param conn
+	 * @return postScriptList
+	 * @throws Exception
+	 */
+	public List<PostScript> selectPostScript(int memberNo, Connection conn) throws Exception{
+		
+		List<PostScript> postScriptList = new ArrayList<PostScript>();
+		
+		try {
+			String sql = prop.getProperty("selectPostScript");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				PostScript postScript = new PostScript();
+				
+				postScript.setPostScriptNo(rs.getInt("POSTSCRIPT_NO"));
+				postScript.setPostScriptCheck(rs.getString("POSTSCRIPT_CHECK"));
+				postScript.setShopNo(rs.getInt("SHOP_NO"));
+				postScript.setMemberNo(rs.getInt("MEMBER_NO"));
+				postScript.setMemberName(rs.getString("MEMBER_NM"));
+				
+				postScriptList.add(postScript);
+			}
+			
+		} finally {
+			close(rs); 
+			close(pstmt);
+		}
+		return postScriptList;
+	}
+
+
+
+	public int wish(int itemNo, int memberNo, Connection conn) throws Exception{
+		int result = 0;
+		try {
+			String sql = prop.getProperty("wish");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, itemNo);
 			
 			result = pstmt.executeUpdate();
 			

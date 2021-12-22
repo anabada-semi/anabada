@@ -10,6 +10,8 @@ import anabada.semi.item.model.dao.ItemSelectDAO;
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.item.model.vo.ItemImg;
 import anabada.semi.item.model.vo.Reply;
+import anabada.semi.shop.model.vo.PostScript;
+import anabada.semi.shop.model.vo.Shop;
 
 public class ItemSelectService {
 
@@ -183,6 +185,61 @@ public class ItemSelectService {
 		reply.setReplyContent( reply.getReplyContent().replaceAll("(\r\n|\r|\n|\n\r)", "<br>") );
 		
 		int result = dao.insertReplyAnswer(reply, conn);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	/** 상점 조회
+	 * @param itemNo
+	 * @return shop
+	 * @throws Exception
+	 */
+	public Shop selectShop(int itemNo) throws Exception{
+
+		Connection conn = getConnection();
+		
+		Shop shop = dao.selectShop(itemNo, conn);
+		
+		close(conn);
+		
+		return shop;
+	}
+
+
+	/** 상점 후기 조회
+	 * @param memberNo
+	 * @return postScriptList
+	 * @throws Exception
+	 */
+	public List<PostScript> selectPostScript(int memberNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		List<PostScript> postScriptList = dao.selectPostScript(memberNo, conn);
+		
+		close(conn);
+		
+		return postScriptList;
+	}
+
+
+	/** 찜 하기
+	 * @param itemNo
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int wish(int itemNo, int memberNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.wish(itemNo, memberNo, conn);
 		
 		if(result > 0)	commit(conn);
 		else			rollback(conn);

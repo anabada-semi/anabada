@@ -1,4 +1,4 @@
-package anabada.semi.item.controller;
+package anabada.semi.reply.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,7 +37,7 @@ public class ReplyController extends HttpServlet{
 				
 				List<Reply> rList = service.selectReplyList(itemNo);
 				
-				System.out.println("뭔데? "+ rList);
+//				System.out.println("뭔데? "+ rList);
 				
 				new Gson().toJson(rList, resp.getWriter());	// 연결된 스트림을 이용하여 ajax로 값 전달
 				

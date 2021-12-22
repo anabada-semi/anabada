@@ -43,7 +43,7 @@
 			<div class="header-bottom">
 				<div class="header-main">
 					<div class="header-main-top">
-						<div id="logo" class="header-font" onclick="location.href='#'">아나바다</div>
+						<div id="logo" class="header-font" onclick="location.href='${contextPath}'">아나바다</div>
 
 						<div id="search">
 							<div id="search-border">
