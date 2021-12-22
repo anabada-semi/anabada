@@ -33,8 +33,7 @@
     
     <script>
     	function confirm(){
-    		alert("전송 완료!");
-    		document.getElementById("keyTime").innerText = "5:00";
+    		document.getElementById("keyTime").innerText = "05:00";
     	}
     </script>
 

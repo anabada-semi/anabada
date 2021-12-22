@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/sendEmail")
 public class SendEmailServlet extends HttpServlet{
@@ -44,6 +45,9 @@ public class SendEmailServlet extends HttpServlet{
        final String password = "kohyungsuck1!";		//"발급받은 비밀번호";
        
        int ran = (int)(Math.random() * 999999) + 100000;
+       
+       // 세션에 인증번호 담기
+       HttpSession mailcheck = req.getSession();
        
        // 메일에 출력할 텍스트
        StringBuffer sb = new StringBuffer();
@@ -115,8 +119,9 @@ public class SendEmailServlet extends HttpServlet{
          //Transport.send( message );
          
          // resp.getWriter().print(true);
-         req.getRequestDispatcher("/WEB-INF/views/member/searchPage.jsp").forward(req, resp);
+         // req.getRequestDispatcher("/WEB-INF/views/member/searchPage.jsp").forward(req, resp);
          // resp.sendRedirect("/sendEmail");
+         req.setAttribute("message", "전송 완료. 5분 이내로 인증해주세요.");
          
        } catch ( Exception e ) {
          e.printStackTrace();
