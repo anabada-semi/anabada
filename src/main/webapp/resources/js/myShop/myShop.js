@@ -146,10 +146,15 @@ function selectitemList() {
         dataType: "JSON",
         success: function (r) {
             $.each(r, function (index, item) {
-                // contextPath/myShop/myShop?no=item.itemNo
-                const table = $("<table>");
+                // console.log(item);
+
+                const sel = $('<select class="itemOp">');
+                const selling = $('<option value="onSale">판매중</option>');
+                const soldOut = $('<option value="soldOut">판매 완료</option>');
+                sel.append(selling, soldOut);
+
                 const tr = $("<tr class='itemTr'>");
-                const td = $("<td class='itemTd'>");
+                const td = $("<td class='itemTd' id='" + item.itemNo + "'>");
 
                 let imgSrc;
                 if(item.itemImgName != null)    imgSrc = contextPath + item.itemPath + item.itemImgName;
@@ -163,7 +168,12 @@ function selectitemList() {
 
                 itD.append(it1, it2, it3);
 
-                td.append(itemImg, itD);
+                /* 로그인멤버넘버와 아이템에 저장된 멤버넘버와 같으면 상품 정보 변경 가능 */
+                if(item.memberNo == loginMemberNo){
+                    td.append(sel, itemImg, itD);
+                } else {
+                    td.append(itemImg, itD);
+                }
 
                 tr.append(td);
                 $(".itemTr").eq(Math.floor(index/4)).append(td);
@@ -292,7 +302,7 @@ function buyPage(){
     });
 }
 
-/* 판매 목록 조회 페이지 */
+/* 판매 완료 목록 조회 페이지 */
 function sellPage(){
     $.ajax({
         url: contextPath + "/myShop/sellItemList",
@@ -300,9 +310,15 @@ function sellPage(){
         dataType: "JSON",
         success: function (result) {
             $.each(result, function (index, sellList) {
+                console.log(sellList);
+
+                const sel = $('<select class="sellOp">');
+                const soldOut = $('<option value="soldOut">판매 완료</option>');
+                const selling = $('<option value="onSale">판매중</option>');
+                sel.append(soldOut, selling);
 
                 const tr = $("<tr class='sellTr'>");
-                const td = $("<td class='sellTd'>");
+                const td = $("<td class='sellTd' id='" + sellList.itemNo + "'>");
                 const sid = $('<div class="sellImgDiv">');
                 
                 let imgSrc;
@@ -325,7 +341,11 @@ function sellPage(){
 
                 std.append(st1, st2 ,st3);
 
-                td.append(sid, std);
+                if(sellList.memberNo == loginMemberNo){
+                    td.append(sel, sid, std);
+                } else {
+                    td.append(sel, sid, std);
+                }
 
                 tr.append(td);
                 $(".sellTr").eq(Math.floor(index/4)).append(td);
@@ -696,10 +716,10 @@ $(document).on("click", ".wishDeleteBtn", function(){
                     // $(".wishContainer").eq(idx).remove();
                     $(".wishContainer").remove();
                     alert("찜 목록 삭제 성공");
-                    wishList();
+                    sellPage();
                 }else{
                     alert("찜 목록 삭제 실패");
-                    wishList();
+                    sellPage();
                 }
             },
             error:function(req, status, er){
@@ -715,4 +735,55 @@ $(document).on("click", ".wishDeleteBtn", function(){
         return;
     }
 
+});
+
+
+/* 판매중인 상품 내역 페이지 판매완료로 변경 시 */
+$(document).on("change", ".itemOp", function(){
+    const itemNo = $(this).parent().attr("id");
+
+    if($(this).val() == 'soldOut'){// 판매완료로 변경 시
+        
+        $.ajax({
+            url: contextPath + "/myShop/soldOut",
+            data: { "itemNo": itemNo, "shopNo": shopNo },
+            success: function(r){
+                if(r > 0){
+                    $(".itemTd").remove();
+                    selectitemList();
+                }else{
+                    selectitemList();
+                }
+            },
+            error:function(req, status, er){
+                console.log(req.responseText);
+            }
+        });
+    }
+    
+});
+
+/* 판매완료 상품 내역 페이지 판매중으로 변경 시 */
+$(document).on("change", ".sellOp", function(){
+    const itemNo = $(this).parent().attr("id");
+
+    if($(this).val() == 'onSale'){// 판매완료로 변경 시
+
+        $.ajax({
+            url: contextPath + "/myShop/onSale",
+            data: { "itemNo": itemNo, "shopNo": shopNo },
+            success: function(r){
+                if(r > 0){
+                    $(".sellTd").remove();
+                    sellPage();
+                }else{
+                    sellPage();
+                }
+            },
+            error:function(req, status, er){
+                console.log(req.responseText);
+            }
+        });
+    }
+    
 });

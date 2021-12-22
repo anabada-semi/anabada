@@ -297,6 +297,42 @@ public class ShopDAO {
 		
 		return sList;
 	}
+
+	public int soldOutItem(int shopNo, int itemNo, Connection conn) throws Exception {
+		int result = 0;
+		try {
+			String sql = prop.getProperty("soldOutItem");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, itemNo);
+			pstmt.setInt(2, shopNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int onSaleItem(int shopNo, int itemNo, Connection conn) throws Exception {
+		int result = 0;
+		try {
+			String sql = prop.getProperty("onSaleItem");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, itemNo);
+			pstmt.setInt(2, shopNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 }
