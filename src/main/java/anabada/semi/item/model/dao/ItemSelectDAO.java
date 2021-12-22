@@ -183,6 +183,45 @@ public class ItemSelectDAO {
 		}
 		return replyList;
 	}
+	
+	/** 댓글 역순 조회
+	 * @param itemNo
+	 * @param conn
+	 * @return replyList
+	 * @throws Exception
+	 */
+	public List<Reply> selectReplyListReverse(int itemNo, Connection conn) throws Exception{
+		
+		List<Reply> replyList = new ArrayList<Reply>();
+		try {
+			String sql = prop.getProperty("selectReplyListReverse");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, itemNo);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				Reply reply = new Reply();
+				
+				reply.setReplyNo(rs.getInt("REPLY_NO"));
+				reply.setReplyContent(rs.getString("REPLY_CONTENT"));
+				reply.setReplyDate(rs.getTimestamp("REPLY_DT"));
+				reply.setReplySecret(rs.getInt("REPLY_SECRET"));
+				reply.setMemberNo(rs.getInt("MEMBER_NO"));
+				reply.setReplyStatusCode(rs.getInt("REPLY_STATUS_CD"));
+				reply.setMemberName(rs.getString("MEMBER_NM"));
+				reply.setReplyNestedCode(rs.getInt("REPLY_NESTED_CD"));
+				reply.setReplyNestedNo(rs.getInt("REPLY_NESTED_NO"));
+				
+				replyList.add(reply);
+			}
+			
+		} finally {
+			close(rs); 
+			close(pstmt);
+		}
+		return replyList;
+	}
 
 	/** 댓글 삽입
 	 * @param reply

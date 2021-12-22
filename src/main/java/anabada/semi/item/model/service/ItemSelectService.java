@@ -82,6 +82,22 @@ public class ItemSelectService {
 		
 		return replyList;
 	}
+	
+	/** 댓글 역순 조회
+	 * @param itemNo
+	 * @return replyList
+	 * @throws Exception
+	 */
+	public List<Reply> selectReplyListReverse(int itemNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		List<Reply> replyList = dao.selectReplyListReverse(itemNo, conn);
+		
+		close(conn);
+		
+		return replyList;
+	}
 
 
 	/** 댓글 삽입
