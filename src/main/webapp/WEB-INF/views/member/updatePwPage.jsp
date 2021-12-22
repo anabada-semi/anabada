@@ -11,7 +11,7 @@
             <div class="wrap">
                 <img src="${contextPath}/resources/images/main/koyang2.png" class="koyang">
             </div>
-            <form action="">
+            <form action="${contextPate}/member/updatePw" method="post">
                 <table>
                     <tr>
                         <td colspan="3" id="success-text">회원 찾기 성공! 비밀번호 변경 후 이용가능합니다.</td>
@@ -26,11 +26,12 @@
                     </tr>
                     <tr>
                         <th>변경할 비밀번호</th>
-                        <td><input type="text"></td>
+                        <td><input name="memberPw" id="pwd1" type="password"></td>
                     </tr>
                     <tr>
                         <th>변경할 비밀번호 확인</th>
-                        <td><input type="text"></td>
+                        <td><input name="memberPw" id="pwd2" type="password"></td>
+                        <td id="checkPw"></td>
                     </tr>
                     <tr>
                         <td colspan="3"><button id="updatePw-Btn" class="btn-style">변경</button></td>

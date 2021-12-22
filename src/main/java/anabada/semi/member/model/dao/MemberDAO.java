@@ -324,5 +324,42 @@ public class MemberDAO {
 		}
 
 
+		
+		/** 이메일로 회원 정보 얻기
+		 * @param inputEmail
+		 * @param conn
+		 * @return member
+		 * @throws Exception
+		 */
+		public Member updatePw(String inputEmail, Connection conn) throws Exception{
+
+			Member member = null;
+			
+			try {
+				
+				String sql = prop.getProperty("updatePw");
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, inputEmail);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					
+					member.setMemberNo(rs.getInt("MEMBER_NO"));
+					member.setMemberId(rs.getString("MEMBER_ID"));
+					member.setMemberNm(rs.getString("MEMBER_NM"));
+					
+				}
+				
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			return null;
+		}
+
+
 
 }

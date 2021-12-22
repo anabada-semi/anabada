@@ -49,6 +49,7 @@ public class SendEmailServlet extends HttpServlet{
        // 세션에 인증번호 담기
        HttpSession mailcheck = req.getSession();
        mailcheck.setAttribute("ran", ran);
+       mailcheck.setAttribute("inputEmail", inputEmail);
        mailcheck.setMaxInactiveInterval(600);
        
        // 메일에 출력할 텍스트
@@ -121,9 +122,9 @@ public class SendEmailServlet extends HttpServlet{
          //Transport.send( message );
          
          // resp.getWriter().print(true);
-         // req.getRequestDispatcher("/WEB-INF/views/member/searchPage.jsp").forward(req, resp);
+         req.getRequestDispatcher("/WEB-INF/views/member/referencePage.jsp").forward(req, resp);
          // resp.sendRedirect("/sendEmail");
-         req.setAttribute("message", "전송 완료. 5분 이내로 인증해주세요.");
+         // req.setAttribute("message", "전송 완료. 5분 이내로 인증해주세요.");
          
        } catch ( Exception e ) {
          e.printStackTrace();

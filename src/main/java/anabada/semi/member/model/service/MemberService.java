@@ -165,4 +165,22 @@ public class MemberService {
 		return result;
 	}
 
+
+	
+	/** 이메일로 회원 정보 얻기
+	 * @param inputEmail
+	 * @return member
+	 * @throws Exception
+	 */
+	public Member updatePw(String inputEmail) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		Member member = dao.updatePw(inputEmail, conn);
+		
+		close(conn);
+		
+		return member;
+	}
+
 }
