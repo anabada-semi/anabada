@@ -148,6 +148,32 @@ public class ShopService {
 		
 		return sList;
 	}
+
+	public int soldOutItem(int shopNo, int itemNo) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = dao.soldOutItem(shopNo, itemNo, conn);
+		
+		if(result > 0)	commit(conn);
+		else		rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int onSaleItem(int shopNo, int itemNo) throws Exception  {
+		Connection conn = getConnection();
+		
+		int result = dao.onSaleItem(shopNo, itemNo, conn);
+		
+		if(result > 0)	commit(conn);
+		else		rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	
 }

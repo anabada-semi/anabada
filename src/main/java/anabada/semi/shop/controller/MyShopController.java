@@ -216,7 +216,8 @@ public class MyShopController extends HttpServlet {
 				if(method.equals("GET")) {
 					
 					int itemNo = Integer.parseInt(req.getParameter("itemNo"));
-					int shopNo = Integer.parseInt(req.getParameter("shopNo"));
+//					int shopNo = Integer.parseInt(req.getParameter("shopNo"));
+					int shopNo = (int)session.getAttribute("shopNo");
 					
 					resp.getWriter().print( service.deleteWish(itemNo, shopNo) );
 				}
@@ -224,7 +225,8 @@ public class MyShopController extends HttpServlet {
 			}else if(command.equals("buyItemList")) {
 				if(method.equals("GET")) {
 					
-					int shopNo = Integer.parseInt(req.getParameter("shopNo"));
+//					int shopNo = Integer.parseInt(req.getParameter("shopNo"));
+					int shopNo = (int)session.getAttribute("shopNo");
 					
 					List<Purchase> pList = service.selectBuyItem(shopNo);
 					
@@ -235,11 +237,32 @@ public class MyShopController extends HttpServlet {
 			}else if(command.equals("sellItemList")) {
 				if(method.equals("GET")) {
 					
-					int shopNo = Integer.parseInt(req.getParameter("shopNo"));
+//					int shopNo = Integer.parseInt(req.getParameter("shopNo"));
+					int shopNo = (int)session.getAttribute("shopNo");
 					
 					List<Item> sList = service.selectSellItem(shopNo);
 					
 					new Gson().toJson(sList, resp.getWriter());
+				}
+				
+			}else if(command.equals("soldOut")) {
+				if(method.equals("GET")) {
+					
+					int shopNo = Integer.parseInt(req.getParameter("shopNo"));
+					int itemNo = Integer.parseInt(req.getParameter("itemNo"));
+					
+					resp.getWriter().print( service.soldOutItem(shopNo, itemNo) );
+					
+				}
+				
+			}else if(command.equals("onSale")) {
+				if(method.equals("GET")) {
+					
+					int shopNo = Integer.parseInt(req.getParameter("shopNo"));
+					int itemNo = Integer.parseInt(req.getParameter("itemNo"));
+					
+					resp.getWriter().print( service.onSaleItem(shopNo, itemNo) );
+					
 				}
 				
 			}

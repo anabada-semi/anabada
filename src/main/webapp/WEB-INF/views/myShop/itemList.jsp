@@ -31,11 +31,4 @@
 </div>
  -->
  
- <script>
- 	$(".itemTd").on("click", function(){
- 		(function(){
-			$("#itemText").text($(".itemTd").length);
-		}());
- 	});
- </script>
 

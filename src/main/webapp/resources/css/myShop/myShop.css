@@ -197,9 +197,19 @@ text-align: center;
     text-align: center;
 }
 .itemImg{width: 230px; height: 70%;}
-.itemTextDiv{height: 30%;}
+.itemTextDiv{height: 20%;}
 .itemText2{float: left;}
 .itemText3{float: right;}
+
+.itemOp{
+    float: right;
+    margin-bottom: 10;
+    width: 230;
+    border: 0.3px solid #ccc;
+    text-align: center;
+    justify-content: center;
+    outline: none;
+}
 /* itemList css */
 
 /* postScript css */
@@ -229,9 +239,19 @@ text-align: center;
     transform: translate(-50%, -50%);
 }
 .sellImg{width: 100%; vertical-align: middle; height: 175px;}
-.sellTextDiv{height: 30%;}
+.sellTextDiv{height: 20%;}
 .sellText2{float: left;}
 .sellText3{float: right;}
+
+.sellOp{
+    float: right;
+    margin-bottom: 10;
+    width: 230;
+    border: 0.3px solid #ccc;
+    text-align: center;
+    justify-content: center;
+    outline: none;
+}
 /* sellList css */
 
 /* wishList css */
