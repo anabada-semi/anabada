@@ -35,7 +35,11 @@ public class MainBoardServlet extends HttpServlet{
 			
 			// 글 목록 조회
 			List<Item> itemList = service.itemList(pagination);
-		
+			
+			for(Item item : itemList) {
+				item.setDate(Time.calculateTime(item.getItemDate()));
+			}
+			
 			req.setAttribute("pagination", pagination);
 			req.setAttribute("itemList", itemList);
 			
