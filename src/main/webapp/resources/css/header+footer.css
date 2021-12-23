@@ -13,7 +13,7 @@
     font-weight: normal;
     font-style: normal;
 }
-
+#search_input{outline: none;}
 body{
     text-decoration: none;
     font-family: 'GmarketSansMedium';
