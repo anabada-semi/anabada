@@ -62,6 +62,7 @@ function selectReplyList() {
                         // $("#replyListArea").append(li);
                     }
 
+                    // 대댓글
                     $.each(answer, function(index, answer){   // jQuery 반복문
 
                         var answerDate =new Date(answer.replyDate).toISOString().replace("T", " ").replace(/\..*/, '');
@@ -80,7 +81,7 @@ function selectReplyList() {
 
                             answerRow.append(answerSign, answerPadding);
 
-                            if(reply.memberNo == loginMemberNo){
+                            if(answer.memberNo == loginMemberNo){
                                 
                                 const deleteReplyAnswer = $('<button>').attr("id","deleteReply").text("삭제");
                                 deleteReplyAnswer.attr("onclick", "deleteReply("+answer.replyNo+")");
@@ -433,7 +434,10 @@ function wish(replyNo, el){
     if(loginMemberNo == ""){    // 로그인이 되어 있지 않은 경우
         alert("로그인 후 이용해 주세요.");
 
-    }else{  // 로그인한 경우
+    } else if(loginMemberNo == itemMemberNo){   // 로그인한 사용자 == 게시글 작성자
+        alert("내 상품은 찜할 수 없습니다.");
+    }
+    else{  // 로그인한 경우
         $.ajax({
             url : contextPath + "/wish/select",
             data : {"memberNo" : loginMemberNo, 
