@@ -22,6 +22,10 @@ section{
 /* --------------------------------------- */
 
 /* 상품 */
+#category-form{
+	display: inline-block;
+}
+
 #select-it{
     margin-top: 20px;
     margin-bottom: 20px;
@@ -92,20 +96,19 @@ section{
 
 /* 상품 페이지 버튼 */
 
+/* 상품 페이지 버튼 */
+
 .page-button{
     clear: both;
-    width: 310px;
+    width: 400px;
     height: 80px;
     margin: auto;
     margin-bottom: 50px;
+	text-align: center;
 }
 
-.move-button > p{
-    font-size: 25px;
-}
-
-.page-button > div{
-    float: left;
+.page-div , .current-div{
+	display: inline-block;
     margin: auto 8px;
     margin-top: 30px;
     width: 35px;
@@ -119,10 +122,13 @@ section{
     color: grey;
 }
 
-.page-button > div:hover{
+.page-box{
+	margin: auto;
+}
+
+.page-div:hover{
     background-color:#B8CC7A;
     color: white;
 }
-
 
 
