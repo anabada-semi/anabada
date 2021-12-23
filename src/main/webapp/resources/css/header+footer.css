@@ -115,7 +115,7 @@ header{
 }
 
 /* 검색창 */
-#search-border > input{
+#search-border input{
     width: 350px;
     height: 35px;
     float: left;
