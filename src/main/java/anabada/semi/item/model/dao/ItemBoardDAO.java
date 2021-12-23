@@ -159,8 +159,42 @@ public class ItemBoardDAO {
 		
 		return imgList;
 	}
-	
-	
+
+
+
+	/** 카테고리 글 수
+	 * @param categoryTag
+	 * @param conn
+	 * @return listCount
+	 * @throws Exception
+	 */
+	public int categoryGetListCount(int categoryTag, Connection conn) throws Exception {
+		int listCount = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("categorylistCount");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, categoryTag);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return listCount;
+	}
+
+
+
+
 	
 	
 }

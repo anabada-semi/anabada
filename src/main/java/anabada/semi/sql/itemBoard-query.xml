@@ -26,5 +26,12 @@
 		WHERE ITEM_NO = ?
 	</entry>
 
+	<!-- 카테고리 게시글 수 조회 -->
+	<entry key="categoryListCount">
+		SELECT COUNT(*) 
+		FROM ITEM
+		WHERE ITEM_STATUS_CD != 1
+		AND CATEGORY_CD = ?
+	</entry>
 
 </properties>
