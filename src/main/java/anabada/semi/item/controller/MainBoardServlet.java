@@ -38,10 +38,11 @@ public class MainBoardServlet extends HttpServlet{
 			List<Item> itemList = service.itemList(pagination);
 			
 			for(Item item : itemList) {
-				//System.out.println(item);
-				System.out.println((item.getItemDate()));
+				// System.out.println(item);
+				// System.out.println(item.getItemDate());
+				System.out.println(Time.calculateTime(item.getItemDate()));
 				date = Time.calculateTime(item.getItemDate());
-				System.out.println(date);
+				// System.out.println(date);
 			}
 			
 			req.setAttribute("date", date);
