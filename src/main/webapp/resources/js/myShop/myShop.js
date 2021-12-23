@@ -1,6 +1,7 @@
 // 내 상점 페이지 
 $(".btn").on("click", function(){
 	// console.log($(this).index());	
+    const len = $(".btn").length;
 
     $(".btn").removeClass("active");
 
@@ -8,80 +9,134 @@ $(".btn").on("click", function(){
 
     $("#changeDiv").empty();
     
-    switch($(this).index()){
+    if(len == 4){
+        switch($(this).index()){
+            case 0:
+                $.ajax({
+                    url: contextPath + "/myShop/itemList",
+                    success: function(r){
+                        $("#changeDiv").append(r);
+                        selectitemList();
+                    },
+                    error:function(req,status,er){
+                        console.log(req.responseText);
+                    }
+                }); 
+            break;
 
-        case 0: 
-            $.ajax({
-                url: contextPath + "/myShop/itemList",
-                success: function(r){
-                    $("#changeDiv").append(r);
-                    selectitemList();
-                },
-                error:function(req,status,er){
-                    console.log(req.responseText);
-                }
-            }); 
-        break;
+            case 1: 
+                $.ajax({
+                    url: contextPath + "/myShop/postScript",
+                    success: function(r){
+                        $("#changeDiv").append(r);
+                        selectReplyList();
+                        flag = false;
+                    },
+                    error:function(req,status,er){
+                        console.log(req.responseText);
+                    }
+                }); 
+            break;
 
+            case 2: 
+                $.ajax({
+                    url: contextPath + "/myShop/buyList",
+                    success: function(r){
+                        $("#changeDiv").html(r);
+                        buyPage();
+                    },
+                    error:function(req,status,er){
+                        console.log(req.responseText);
+                    }
+                }); 
+            break;
 
-        case 1: 
-            $.ajax({
-                url: contextPath + "/myShop/wishList",
-                success: function(r){
-                    $("#changeDiv").append(r);
-                    wishList();
-                },
-                error:function(req,status,er){
-                    console.log(req.responseText);
-                }
-            }); 
-        break;
+            case 3: 
+                $.ajax({
+                    url: contextPath + "/myShop/sellList",
+                    success: function(r){
+                        $("#changeDiv").html(r);
+                        sellPage();
+                    },
+                    error:function(req,status,er){
+                        console.log(req.responseText);
+                    }
+                }); 
+            break;
 
+            default:
+        }
 
-        case 2: 
-            $.ajax({
-                url: contextPath + "/myShop/postScript",
-                success: function(r){
-                    $("#changeDiv").append(r);
-                    selectReplyList();
-                    flag = false;
-                },
-                error:function(req,status,er){
-                    console.log(req.responseText);
-                }
-            }); 
-        break;
+    }else{
+        switch($(this).index()){
+            case 0: 
+                $.ajax({
+                    url: contextPath + "/myShop/itemList",
+                    success: function(r){
+                        $("#changeDiv").append(r);
+                        selectitemList();
+                    },
+                    error:function(req,status,er){
+                        console.log(req.responseText);
+                    }
+                }); 
+            break;
 
+            case 1: 
+                $.ajax({
+                    url: contextPath + "/myShop/wishList",
+                    success: function(r){
+                        $("#changeDiv").append(r);
+                        wishList();
+                    },
+                    error:function(req,status,er){
+                        console.log(req.responseText);
+                    }
+                }); 
+            break;
 
-        case 3: 
-            $.ajax({
-                url: contextPath + "/myShop/buyList",
-                success: function(r){
-                    $("#changeDiv").html(r);
-                    buyPage();
-                },
-                error:function(req,status,er){
-                    console.log(req.responseText);
-                }
-            }); 
-        break;
+            case 2: 
+                $.ajax({
+                    url: contextPath + "/myShop/postScript",
+                    success: function(r){
+                        $("#changeDiv").append(r);
+                        selectReplyList();
+                        flag = false;
+                    },
+                    error:function(req,status,er){
+                        console.log(req.responseText);
+                    }
+                }); 
+            break;
 
+            case 3: 
+                $.ajax({
+                    url: contextPath + "/myShop/buyList",
+                    success: function(r){
+                        $("#changeDiv").html(r);
+                        buyPage();
+                    },
+                    error:function(req,status,er){
+                        console.log(req.responseText);
+                    }
+                }); 
+            break;
 
-        case 4: 
-            $.ajax({
-                url: contextPath + "/myShop/sellList",
-                success: function(r){
-                    $("#changeDiv").html(r);
-                    sellPage();
-                },
-                error:function(req,status,er){
-                    console.log(req.responseText);
-                }
-            }); 
-        break;
+            case 4: 
+                $.ajax({
+                    url: contextPath + "/myShop/sellList",
+                    success: function(r){
+                        $("#changeDiv").html(r);
+                        sellPage();
+                    },
+                    error:function(req,status,er){
+                        console.log(req.responseText);
+                    }
+                }); 
+            break;
 
-
-        default:
+            default:
+        }
     }
 });
 
@@ -185,7 +240,7 @@ function selectitemList() {
             }else{
             
                 $.each(r, function (index, item) {
-                    // console.log(item);
+                    console.log(item);
 
                     if(itemPk == item.itemNo){
                         return;
@@ -640,6 +695,7 @@ $(document).on("click", "#userPostTextareaBtn", function(){
     if(shopNo == loginMemberNo){
         alert("자신의 상점에서는 후기 작성이 불가능합니다.");
         $(".userPostTextarea").val("");
+        c
         return;
     }
 
@@ -652,7 +708,7 @@ $(document).on("click", "#userPostTextareaBtn", function(){
                     $(".userPost").remove();
                     
                     $("#postScriptTextDiv").html('상점 후기<span id="postScriptText">1</span>');
-
+                    $("#userPostTextareaBtn").html("확인<br>0/120").css("background", "rgb(250, 250, 250)");
                     alert("성공");
                     selectReplyList();
                 }else{
@@ -939,3 +995,18 @@ $(document).on("change", ".sellOp", function(){
     
 });
 
+
+let myIdx = 0;
+$(document).on("click", ".report", function(){
+    const idx = $(".report").index($(this));
+
+    if(myIdx != idx){
+        $("#userReportTextareaBtn").html("확인<br>0/120").css("background", "#ccc");
+        $(".userReportTextarea").val("");
+    }
+    myIdx = idx;
+
+    $(".userReportTextarea").css("display", "none");
+    $(".userReportTextarea").eq(idx).css("display", "block");
+    $(".userReportTextarea").eq(idx).focus();
+});

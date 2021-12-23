@@ -38,10 +38,11 @@
 
 <hr> --%>
     
+    
 
- <div class="userPostArea">
-<div class="userPostAreaImgDiv">
-	<img class="userPostAreaImg" src="${contextPath}/resources/images/myShop/profile/캐릭터.png">
+<div class="userPostArea">
+	<div class="userPostAreaImgDiv">
+		<img class="userPostAreaImg" src="${contextPath}/resources/images/myShop/profile/캐릭터.png">
 	</div>
 	<textarea class='userPostTextarea'></textarea>
 	<button id='userPostTextareaBtn'>확인<br>0/120</button>

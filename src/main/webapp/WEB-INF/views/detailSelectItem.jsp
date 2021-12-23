@@ -170,8 +170,7 @@
                                                         <!-- textarea -->
                                                         <ul class="answerListArea">
                                                             
-                                                            <!-- 대댓글이고 댓글 번호와 대댓글 번호가 일치하면 -->
-                                                            <!-- <c:set var="loop_flag" value="false" /> -->
+                                                            <!-- 대댓글이고 && 댓글 번호와 대댓글 번호가 일치하면 -->
                                                             <c:forEach items="${answer}" var="answer">
                                                             <c:choose>
                                                             <c:when test="${answer.replyNestedCode == 2 && answer.replyNestedNo == reply.replyNo}">
@@ -195,19 +194,17 @@
                                                                     </c:choose>
                                                                 </div>
 
-                                                                <!-- 댓글 단 사람 == 로그인 한 사람 -->
+                                                                <!-- 대댓글 단 사람 == 로그인 한 사람 -->
                                                                 <c:choose>
-                                                                    <c:when test="${reply.memberNo == loginMember.memberNo}">
+                                                                    <c:when test="${answer.memberNo == loginMember.memberNo}">
                                                                         <div class="replyBtnArea">
                                                                             <button id="deleteReply" onclick="deleteReply(${answer.replyNo})">삭제</button>
                                                                             <button id="updateReply" onclick="updateAnswerReply(${answer.replyNo}, ${loginMember.memberNo}, this)">수정</button>
-                                                                            <!-- <button id="moreAnswer" onclick="moreAnswerReply(${answer.replyNo}, ${loginMember.memberNo}, this)">더보기</button> -->
                                                                         </div>
                                                                     </c:when>
                                                                 </c:choose>
                                                                   
                                                             </li>
-                                                            <!-- <c:set var="loop_flag" value="true" /> -->
                                                             </c:when>
                                                             </c:choose>
                                                             </c:forEach>

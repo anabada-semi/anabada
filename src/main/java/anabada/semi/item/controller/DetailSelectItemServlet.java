@@ -50,6 +50,8 @@ public class DetailSelectItemServlet extends HttpServlet{
 				
 				int itemNo = Integer.parseInt(req.getParameter("no"));
 				
+				System.out.println("itemNo : "+ itemNo);
+				
 				// 선택한 아이템 조회
 				Item item = service.selectItem(itemNo);
 				
