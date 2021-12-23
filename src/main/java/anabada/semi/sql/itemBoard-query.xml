@@ -5,7 +5,9 @@
 
 	<!-- 게시글 수 조회 -->
 	<entry key="listCount">
-		SELECT COUNT(*) FROM ITEM
+		SELECT COUNT(*) 
+		FROM ITEM
+		WHERE ITEM_STATUS_CD != 1
 	</entry>
 	
 	<!-- 글 목록 조회 -->

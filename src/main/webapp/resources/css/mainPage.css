@@ -68,6 +68,13 @@ section{
     
 }
 
+.item-title{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
 .item-content > span:last-child{
     color: grey;
     font-weight: normal;
