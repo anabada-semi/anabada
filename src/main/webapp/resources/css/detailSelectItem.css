@@ -18,6 +18,11 @@ main{
     width: 1024px;
 }
 
+.main-bottom-left *, .main-bottom-rigth * {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
 .category{
     width: 100%;
     height: 50px;
@@ -68,7 +73,7 @@ main{
     /* border: 2px solid red; */
 }
 
-.product-img>img{
+.product-img img{
     width: 100%;
     height: 100%;
 }
@@ -125,9 +130,6 @@ main{
 .product-btn > button{
     width: 25%;
     height: 25%;
-    /* margin-top: 10%; */
-    /* margin-left: 5%;
-    margin-right: 2%; */
     background-color: #689BA6;
     border: none;
     border-radius: 5px;
@@ -147,7 +149,7 @@ main{
     padding-right: 10px;
     /* border: 2px solid rgb(250, 101, 151); */
 }
-.main-bottom-left h3, .main-bottom-rigth h3, .main-bottom-rigth h4 {
+.main-bottom-left h5, .main-bottom-rigth h5, .main-bottom-rigth h6 {
     width: 100%;
     border-bottom: 1px solid #ccc;
 }
@@ -217,6 +219,7 @@ main{
 .product-question button{
     float: right;
     width: 60px;
+    margin: 0;
 }
 .submit{
     width: 100%;
@@ -321,3 +324,27 @@ button{
     margin-top: 0;
     margin-left: 5px;
 }
+h6{
+    padding-bottom: 10px;
+}
+
+/* =================================================== */
+  
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+  }
+
+.carousel-control-prev > a{
+    font-size: 30px;
+    color: red;
+}
+
+.carousel-item > img{
+    cursor: pointer;
+}
+
+
+
+
+
