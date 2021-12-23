@@ -61,7 +61,7 @@ public class DetailSelectItemServlet extends HttpServlet{
 				// 상품 이미지 조회
 				List<ItemImg> itemImg = service.selectItemImg(itemNo);
 				
-				System.out.println("ItemImg: " + itemImg);
+//				System.out.println("ItemImg: " + itemImg);
 				
 				req.setAttribute("itemImg", itemImg);	// 상품 이미지
 				

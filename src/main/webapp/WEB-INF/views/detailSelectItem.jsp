@@ -5,7 +5,12 @@
 
 <title>물품 상세 조회</title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/detailSelectItem.css">
-	
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
 	<!-- header include -->
 	<jsp:include page="header.jsp" />
 
@@ -32,14 +37,35 @@
                 
             </div>
             <div class="main-top">
-                <div class="product-img">
-                    <!-- <img src="https://via.placeholder.com/450"> -->
-                    <img src="${contextPath}${itemImg[0].imgPath}${itemImg[0].imgName}">
+
+                <div id="myCarousel" class="carousel slide product-img">
+
+                    <div class="carousel-inner">
+                        
+                        <div class="carousel-item active">
+                            <img src="${contextPath}${itemImg[0].imgPath}${itemImg[0].imgName}" onclick="showImg(this);">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="${contextPath}${itemImg[1].imgPath}${itemImg[1].imgName}" onclick="showImg(this);">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="${contextPath}${itemImg[2].imgPath}${itemImg[2].imgName}" onclick="showImg(this);">
+                        </div>
+                    </div>
+
+                    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev" style="left: 30px;">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#myCarousel" data-slide="next" style="right: 30px;">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+
                 </div>
-                <div class="product-intro">
+
+                    <div class="product-intro">
                     <div class="product-intro-top">
-                        <h3>${item.itemName}</h3>
-                        <h1>${item.itemPrice}원</h1>
+                        <h4 style="font-weight: bold;">${item.itemName}</h4>
+                        <h2 style="font-weight: bold;">${item.itemPrice}원</h2>
                     </div>
                     <div class="product-intro-bottom">
                         <div class="product-inform">
@@ -61,7 +87,7 @@
                 <div class="main-bottom-left">
                     <div class="product-infrom-detail">
                         <div class="detail-top">
-                            <h3>상품 정보</h3>
+                            <h5 style="font-weight: bold;">상품 정보</h5>
                             <span>
                                 ${item.itemInfo}
                             </span>
@@ -69,12 +95,12 @@
     
                         <div class="detail-bottom">
     
-                            <h4><img src="${contextPath}/resources/images/itemIcon/category.png"> 카테고리</h4>
+                            <h5 style="font-weight: bold;"><img src="${contextPath}/resources/images/itemIcon/category.png"> 카테고리</h5>
                             <span>${item.categoryName}</span>
                         </div>
                     </div>
                     <div class="product-question">
-                        <h3 id="item-question">상품 문의</h3>
+                        <h5 id="item-question" style="font-weight: bold;">상품 문의</h5>
                         <textarea id="replyContent" cols="30" rows="5" placeholder="내용을 입력해주세요."></textarea>
     
                         <div class="submit">
@@ -196,9 +222,9 @@
 
                 </div>
                 <div class="main-bottom-rigth">
-                    <h3>상점 정보</h3>
-                    <h4>${shop.shopName}</h4>
-                    <h4>상점 후기 <span class="reply-count">${fn:length(postScriptList)}</span></h4>
+                    <h5 style="font-weight: bold;">상점 이름</h5>
+                    <h6 style="font-weight: bold;">${shop.shopName}</h6>
+                    <h5 style="font-weight: bold;">상점 후기 <span class="reply-count">${fn:length(postScriptList)}</span></h5>
                     <div class="reply">
 
                         <c:forEach var="i" begin="0" end="1">
