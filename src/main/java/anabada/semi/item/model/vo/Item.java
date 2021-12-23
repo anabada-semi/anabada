@@ -14,7 +14,16 @@ public class Item {
 	private int itemStatusCode;
 	private int memberNo;
 	private int readCount;
+	private String date;
 	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	// 주소
 	private String address;
 	
@@ -156,8 +165,9 @@ public class Item {
 	public String toString() {
 		return "Item [itemNo=" + itemNo + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemInfo="
 				+ itemInfo + ", itemDate=" + itemDate + ", categoryCode=" + categoryCode + ", itemStatusCode="
-				+ itemStatusCode + ", memberNo=" + memberNo + ", readCount=" + readCount + ", categoryName="
-				+ categoryName + ", wish=" + wish + "]";
+				+ itemStatusCode + ", memberNo=" + memberNo + ", readCount=" + readCount + ", date=" + date
+				+ ", address=" + address + ", uploadDate=" + uploadDate + ", itemPath=" + itemPath + ", itemImgName="
+				+ itemImgName + ", categoryName=" + categoryName + ", wish=" + wish + ", imgList=" + imgList + "]";
 	}
 
 
