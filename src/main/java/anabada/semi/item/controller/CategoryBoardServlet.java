@@ -25,7 +25,7 @@ public class CategoryBoardServlet extends HttpServlet{
 		RequestDispatcher dispatcher = null;
 		String message = null;
 			
-		String category = req.getParameter("category-tag");
+		String categoryTag = req.getParameter("category-tag");
 		
 		try {
 			
@@ -33,10 +33,10 @@ public class CategoryBoardServlet extends HttpServlet{
 			
 			int cp = req.getParameter("cp") == null ? 1 : Integer.parseInt(req.getParameter("cp"));
 			
-			Pagination pagination = service.getPagination(cp);
+			Pagination pagination = service.getCategoryPagination(cp, categoryTag);
 			
 			// 글 목록 조회
-			List<Item> itemList = service.CategoryitemList(pagination);
+			List<Item> itemList = service.categoryItemList(pagination);
 			
 			for(Item item : itemList) {
 				item.setDate(Time.calculateTime(item.getItemDate()));
