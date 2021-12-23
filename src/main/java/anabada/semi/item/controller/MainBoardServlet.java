@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import anabada.semi.item.model.service.ItemBoardService;
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.item.model.vo.Pagination;
+import anabada.semi.item.model.vo.Time;
 
 @WebServlet("/mainItem")
 public class MainBoardServlet extends HttpServlet{
@@ -34,7 +35,7 @@ public class MainBoardServlet extends HttpServlet{
 			
 			// 글 목록 조회
 			List<Item> itemList = service.itemList(pagination);
-			
+		
 			req.setAttribute("pagination", pagination);
 			req.setAttribute("itemList", itemList);
 			

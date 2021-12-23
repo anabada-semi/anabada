@@ -14,6 +14,7 @@ import java.util.Properties;
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.item.model.vo.ItemImg;
 import anabada.semi.item.model.vo.Pagination;
+import anabada.semi.item.model.vo.Time;
 
 public class ItemBoardDAO {
 	
@@ -99,7 +100,9 @@ public class ItemBoardDAO {
 				item.setItemPrice(rs.getString("ITEM_PRICE"));
 				item.setMemberNo(rs.getInt("MEMBER_NO"));
 				item.setAddress(rs.getString("ADDRESS"));
+				
 				item.setItemDate(rs.getTimestamp("ITEM_DATE"));
+				
 				item.setCategoryCode(rs.getInt("CATEGORY_CD"));
 				item.setItemStatusCode(rs.getInt("ITEM_STATUS_CD"));
 				
