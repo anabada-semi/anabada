@@ -85,7 +85,7 @@ $(".btn").on("click", function(){
     }
 });
 
-let itemPk;
+let itemPk = 0;
 let postNo = [];
 // 상점 후기 목록 조회
 function selectReplyList() {
@@ -282,7 +282,7 @@ function wishList(){
                     let imgSrc;
                     if(wish.imgName != null)    imgSrc = contextPath + wish.imgPath + wish.imgName;
                     else                        imgSrc = contextPath + '/resources/images/myShop/profile/바다.jpg';
-                    const wi = $('<a href="' + contextPath + '/detail/select?no=' + wish.itemNo + '"><img class="wishImg" src="' + wish.imgSrc + '">');
+                    const wi = $('<a href="' + contextPath + '/detail/select?no=' + wish.itemNo + '"><img class="wishImg" src="' + imgSrc + '">');
 
 
                     const wtd = $('<div class="wishTextDiv">');
@@ -888,10 +888,10 @@ $(document).on("change", ".itemOp", function(){
             data: { "itemNo": itemNo, "shopNo": shopNo },
             success: function(r){
                 if(r > 0){
-                    // $(".itemTd").remove();
-                    // selectitemList();
+                    $(".itemTd").remove();
+                    selectitemList();
 
-                    $(".itemTd").eq(idx).remove();
+                    // $(".itemTd").eq(idx).remove();
                 }else{
                     selectitemList();
                 }
@@ -920,10 +920,10 @@ $(document).on("change", ".sellOp", function(){
             success: function(r){
 
                 if(r > 0){
-                    // $(".sellTd").remove();
-                    // sellPage();
+                    $(".sellTd").remove();
+                    sellPage();
 
-                    $(".sellTd").eq(idx).remove();
+                    // $(".sellTd").eq(idx).remove();
                 }else{
                     sellPage();
                 }
