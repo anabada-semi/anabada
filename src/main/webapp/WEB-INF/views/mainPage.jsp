@@ -50,7 +50,7 @@
 			            <div class="item-title">${item.itemName}</div>
 			            <div class="item-content" style="font-weight: bold;">
 			                <span style="float: left;">${item.itemPrice}원</span>
-			                <span style="float: right;">${item.itemDate}</span>
+			                <span style="float: right;">${date}</span>
 			            </div>
 			        </div>
         		</c:forEach>

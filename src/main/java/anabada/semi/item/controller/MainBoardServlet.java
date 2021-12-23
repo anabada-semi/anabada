@@ -36,8 +36,10 @@ public class MainBoardServlet extends HttpServlet{
 			
 			// 글 목록 조회
 			List<Item> itemList = service.itemList(pagination);
-		
+			
 			for(Item item : itemList) {
+				//System.out.println(item);
+				System.out.println((item.getItemDate()));
 				date = Time.calculateTime(item.getItemDate());
 				System.out.println(date);
 			}

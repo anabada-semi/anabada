@@ -100,9 +100,7 @@ public class ItemBoardDAO {
 				item.setItemPrice(rs.getString("ITEM_PRICE"));
 				item.setMemberNo(rs.getInt("MEMBER_NO"));
 				item.setAddress(rs.getString("ADDRESS"));
-				
 				item.setItemDate(rs.getTimestamp("ITEM_DATE"));
-				
 				item.setCategoryCode(rs.getInt("CATEGORY_CD"));
 				item.setItemStatusCode(rs.getInt("ITEM_STATUS_CD"));
 				
