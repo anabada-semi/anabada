@@ -24,6 +24,7 @@ public class MainBoardServlet extends HttpServlet{
 		String path = null;
 		RequestDispatcher dispatcher = null;
 		String message = null;
+		String date = null;
 				
 		try {
 			
@@ -36,6 +37,12 @@ public class MainBoardServlet extends HttpServlet{
 			// 글 목록 조회
 			List<Item> itemList = service.itemList(pagination);
 		
+			for(Item item : itemList) {
+				date = Time.calculateTime(item.getItemDate());
+				System.out.println(date);
+			}
+			
+			req.setAttribute("date", date);
 			req.setAttribute("pagination", pagination);
 			req.setAttribute("itemList", itemList);
 			
