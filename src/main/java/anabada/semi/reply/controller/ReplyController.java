@@ -89,9 +89,7 @@ public class ReplyController extends HttpServlet{
 			}
 			
 		} catch (Exception e) {
-			
-			
-			
+			e.printStackTrace();
 		}
 	}
 	

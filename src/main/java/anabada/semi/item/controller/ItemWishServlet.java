@@ -95,9 +95,7 @@ public class ItemWishServlet extends HttpServlet{
 				
 			
 		} catch (Exception e) {
-
-		
-		
+			e.printStackTrace();
 		}
 		
 	}

@@ -52,11 +52,8 @@ public class ReplyAnswerController extends HttpServlet{
 				resp.getWriter().print(result);
 			}
 			
-			
-			
-			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 	}
