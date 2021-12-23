@@ -78,21 +78,40 @@
 	<div class="container">
 		<div id="div">
 			<%-- <div class="btn active" onclick="location.href='${contextPath}/myShop/itemList';"> --%>
-			<div class="btn active">
-				<span>판매중인 상품</span>
-			</div>
-			<div class="btn">
-				<span>찜 목록</span>
-			</div>
-			<div class="btn">
-				<span>상점후기</span>
-			</div>
-			<div class="btn">
-				<span>구매내역</span>
-			</div>
-			<div class="btn">
-				<span>판매내역</span>
-			</div>
+			<c:choose>
+				<c:when test="${shopNo == loginMember.memberNo}">
+					<div class="btn active">
+						<span>판매중인 상품</span>
+					</div>
+					<div class="btn">
+						<span>찜 목록</span>
+					</div>
+					<div class="btn">
+						<span>상점후기</span>
+					</div>
+					<div class="btn">
+						<span>구매내역</span>
+					</div>
+					<div class="btn">
+						<span>판매내역</span>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="btn active" style="width: 25%;">
+						<span>판매중인 상품</span>
+					</div>
+					<div class="btn" style="width: 25%;">
+						<span>상점후기</span>
+					</div>
+					<div class="btn" style="width: 25%;">
+						<span>구매내역</span>
+					</div>
+					<div class="btn" style="width: 25%;">
+						<span>판매내역</span>
+					</div>
+					
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 	
@@ -112,7 +131,30 @@
 <div id="popup01">
     <div class="close">close</div>
     <div style="margin-top:20px;">Report</div>
-    <textarea class="userReportTextarea"></textarea>
+ <!--    <textarea class="userReportTextarea"></textarea> -->
+ 
+ 	<div class="report" style="border: 1px solid #ccc;">
+        <div>
+            언어폭력 (비방, 욕설, 성희롱)
+        </div>
+        <textarea class="userReportTextarea" style="display: block" placeholder="신고 내용을 직접 작성해주세요. 자세하게 적어주시면 신고처리에 큰 도움이 됩니다."></textarea>
+    </div>
+    
+    <div class="report" style="border: 1px solid #ccc;">
+        <div>
+            거래와 관계 없는 글
+        </div>
+        <textarea class="userReportTextarea" placeholder="신고 내용을 직접 작성해주세요. 자세하게 적어주시면 신고처리에 큰 도움이 됩니다."></textarea>
+    </div>
+    
+    <div class="report" style="border: 1px solid #ccc;">
+        <div>
+            기타 (사유)
+        </div>
+        <textarea class="userReportTextarea" placeholder="신고 내용을 직접 작성해주세요. 자세하게 적어주시면 신고처리에 큰 도움이 됩니다."></textarea>
+    </div>
+ 
+ 
     <button id="userReportTextareaBtn" class="userReportTextareaBtn">신고하기<br>0/120</button>
 </div>
 
