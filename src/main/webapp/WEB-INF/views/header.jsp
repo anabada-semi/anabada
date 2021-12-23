@@ -135,5 +135,3 @@
 				</div>
 			</div>
 		</header>
-
-<script src="${contextPath}/resources/js/myShop/myShop.js"></script>
