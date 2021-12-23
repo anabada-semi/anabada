@@ -285,6 +285,7 @@ public class ShopDAO {
 				i.setItemStatusCode(rs.getInt(5));
 				i.setItemPath(rs.getString(6));
 				i.setItemImgName(rs.getString(7));
+				i.setMemberNo(rs.getInt(8));
 				
 				i.setUploadDate(new Time().calculateTime(i.getItemDate()));
 				

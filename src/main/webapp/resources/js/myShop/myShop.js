@@ -1,4 +1,4 @@
-/* 내 상점 페이지 */
+// 내 상점 페이지 
 $(".btn").on("click", function(){
 	// console.log($(this).index());	
 
@@ -85,7 +85,6 @@ $(".btn").on("click", function(){
     }
 });
 
-let itemPk = 0;
 let postNo = [];
 // 상점 후기 목록 조회
 function selectReplyList() {
@@ -169,13 +168,12 @@ function selectReplyList() {
 
 // 판매중인 상품 목록 조회
 function selectitemList() {
-
+    let itemPk = 0;
     $.ajax({
         url: contextPath + "/myShop/selectItemList",
         data: { "shopNo": shopNo },
         dataType: "JSON",
         success: function (r) {
-
             if(r == ""){
                 const div = $("<div>");
                 const span = $("<span>등록된 상품이 없습니다.</span>");
@@ -248,7 +246,7 @@ function selectitemList() {
 /* 찜 목록 조회 */
 let wishNo = [];
 function wishList(){
-
+    let itemPk = 0;
     const abc = $("#wishSpanText").parent().next();
 
     $.ajax({
@@ -323,7 +321,7 @@ function wishList(){
 
 /* 구매목록 조회 페이지 */
 function buyPage(){
-
+    let itemPk = 0;
     $.ajax({
 
         url: contextPath + "/myShop/buyItemList",
@@ -401,7 +399,7 @@ function buyPage(){
 
 /* 판매 완료 목록 조회 페이지 */
 function sellPage(){
-
+    let itemPk = 0;
     $.ajax({
         url: contextPath + "/myShop/sellItemList",
         data: { "shopNo": shopNo },
@@ -418,7 +416,7 @@ function sellPage(){
                 $(".addSellList").append(div);
 
             }else{
-
+                    
                 $.each(result, function (index, sellList) {
 
                     if(itemPk == sellList.itemNo){
@@ -456,10 +454,11 @@ function sellPage(){
 
                     std.append(st1, st2 ,st3);
 
+
                     if(sellList.memberNo == loginMemberNo){
                         td.append(sel, sid, std);
                     } else {
-                        td.append(sel, sid, std);
+                        td.append(sid, std);
                     }
 
                     tr.append(td);
