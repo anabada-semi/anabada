@@ -173,7 +173,7 @@ public class ItemBoardDAO {
 		
 		try {
 			
-			String sql = prop.getProperty("categorylistCount");
+			String sql = prop.getProperty("categoryListCount");
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, categoryTag);
@@ -190,6 +190,51 @@ public class ItemBoardDAO {
 			close(pstmt);
 		}
 		return listCount;
+	}
+
+
+
+	
+	public List<Item> categoryItemList(Pagination pagination, int categoryTag, Connection conn) throws Exception{
+		
+		List<Item> itemList = new ArrayList<Item>();
+		
+		try {
+			
+			String sql = prop.getProperty("categoryItemList");
+			
+			int startRow = (pagination.getCurrentPage() - 1) * pagination.getLimit() + 1;
+			int endRow = startRow + pagination.getLimit() - 1;
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, categoryTag);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Item item = new Item();
+				
+				item.setItemNo(rs.getInt("ITEM_NO"));
+				item.setItemName(rs.getString("ITEM_NM"));
+				item.setItemPrice(rs.getString("ITEM_PRICE"));
+				item.setMemberNo(rs.getInt("MEMBER_NO"));
+				item.setAddress(rs.getString("ADDRESS"));
+				item.setItemDate(rs.getTimestamp("ITEM_DATE"));
+				item.setCategoryCode(rs.getInt("CATEGORY_CD"));
+				item.setItemStatusCode(rs.getInt("ITEM_STATUS_CD"));
+				
+				itemList.add(item);
+				
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return itemList;
 	}
 
 

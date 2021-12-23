@@ -31,7 +31,7 @@ public class ItemBoardServlet extends HttpServlet{
 		String message = null;
 			
 		ItemBoardService service = new ItemBoardService();
-		
+
 		// 카테고리에 따른 상품 조회
 		if(command.equals("list")){
 			
@@ -44,7 +44,7 @@ public class ItemBoardServlet extends HttpServlet{
 				Pagination pagination = service.getCategoryPagination(cp, categoryTag);
 				
 				// 글 목록 조회
-				List<Item> itemList = service.itemList(pagination);
+				List<Item> itemList = service.categoryItemList(pagination, categoryTag);
 				
 				for(Item item : itemList) {
 					item.setDate(Time.calculateTime(item.getItemDate()));

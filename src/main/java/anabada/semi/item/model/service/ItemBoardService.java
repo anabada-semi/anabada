@@ -76,14 +76,14 @@ public class ItemBoardService {
 	
 	/** 카테고리별 글 목록 조회
 	 * @param pagination
+	 * @param categoryTag 
 	 * @return itemList
 	 * @throws Exception
 	 */
-	/*
-	public List<Item> categoryItemList(Pagination pagination) throws Exception {
+	public List<Item> categoryItemList(Pagination pagination, int categoryTag) throws Exception {
 		Connection conn = getConnection();
 		
-		List<Item> itemList = dao.categoryItemList(pagination, conn);
+		List<Item> itemList = dao.categoryItemList(pagination, categoryTag, conn);
 		
 		// 글 썸네일 조회
 		for(Item temp : itemList) {
@@ -96,7 +96,7 @@ public class ItemBoardService {
 		
 		return itemList;
 	}
-	*/
+	
 	
 	
 
