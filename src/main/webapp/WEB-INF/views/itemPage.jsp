@@ -63,6 +63,7 @@
 			                <span style="float: left;">${item.itemPrice}원</span>
 			                <span style="float: right;">${item.date}</span>
 			            </div>
+			            <div class="item-address"><p>&#127968; ${item.address}</p></div>
 			        </div>
         		</c:forEach>
         	</c:otherwise>

@@ -55,6 +55,7 @@ section{
 
 .item > img{
     width: 100%;
+    height: 182px;
 }
 
 .item > div{
@@ -66,7 +67,7 @@ section{
     
 }
 
-.item-title{
+.item-title, .item-address{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
