@@ -11,7 +11,7 @@
 
     <section id="item-box">
         <div id="select-it">	
-            &#8962; 홈 >
+            &#8962; 홈 > <%-- 카테고리의 변경이 감지되면 숨겨진 버튼을 눌러 폼태그로 전송하는 방식으로 설계 할 예정 --%>
             <form action="${contextPath}/categoryPage" id="category-form">
 	            <select name="category-tag" id="category-tag">
 	                <option value ="100">여성의류</option>
@@ -34,7 +34,7 @@
 	                <option value ="117">반려동물용품</option>
 	                <option value ="118">기타</option>
 	            </select>
-            	<input type="hidden">
+            	<button style="visibility: hidden;">카테고리 값 전송</button>
             </form>
         </div>
 
