@@ -562,6 +562,6 @@ $(document).ready(function() {
 
 //-----------------------------------------------------------------------------------------
 function showImg(e){
-    console.log(e);
+    // console.log(e);
     window.open(e.src);
 };

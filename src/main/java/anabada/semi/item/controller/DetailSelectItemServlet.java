@@ -109,9 +109,7 @@ public class DetailSelectItemServlet extends HttpServlet{
 			}
 			
 		} catch (Exception e) {
-
-		
-		
+			e.printStackTrace();
 		}
 		
 	}
