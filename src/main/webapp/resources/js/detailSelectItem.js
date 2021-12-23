@@ -544,7 +544,7 @@ function updateWishCount(){
 // 조회수 증가
 $(document).ready(function() {
     const readCount = $("#read-count");
-
+    
     $.ajax({
         url : contextPath + "/detail/view",
         data : {"itemNo" : itemNo},
@@ -558,3 +558,9 @@ $(document).ready(function() {
         } 
     });
 });
+
+//-----------------------------------------------------------------------------------------
+function showImg(e){
+    console.log(e);
+    window.open(e.src);
+};
