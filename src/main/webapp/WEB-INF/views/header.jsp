@@ -47,9 +47,14 @@
 
 						<div id="search">
 							<div id="search-border">
-								<input type="text" id="search_input" placeholder="검색어 입력">
-								<img src="${contextPath}/resources/images/header+footer/검색.png"
-									id="search-img" onclick="location.href='#'">
+								<form action="${contextPath}/categoryItem/search" method="GET">
+
+									<input type="text" id="search_input" name="search_input" placeholder="검색어 입력">
+									<img src="${contextPath}/resources/images/header+footer/검색.png" id="search-img">
+									<!-- id="search-img" onclick="location.href='${contextPath}/itemPage?cp=${loginMember.memberNo}';"> -->
+
+								</form>
+
 							</div>
 						</div>
 
@@ -80,7 +85,7 @@
 									</div>
 								</c:when>
 								<c:otherwise>
-									<div class="shop" onclick="location.href='${contextPath}/myShop/myShop?no=${loginMember.memberNo}'; selectitemList();">
+									<div class="shop" onclick="location.href='${contextPath}/myShop/myShop?no=${loginMember.memberNo}';">
 										<img src="${contextPath}/resources/images/header+footer/내상점.png">
 										<p id="shop" class="header-font">내상점</p>
 										<!-- &nbsp;내상점 -->
@@ -131,3 +136,4 @@
 			</div>
 		</header>
 
+<script src="${contextPath}/resources/js/myShop/myShop.js"></script>
