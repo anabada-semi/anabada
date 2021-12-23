@@ -52,7 +52,6 @@ public class LoginServlet extends HttpServlet{
 				session.setAttribute("loginMember", loginMember);
 				session.setAttribute("locationShop", shop);
 
-				session.setMaxInactiveInterval(600);
 
 			}else {
 				session.setAttribute("message", "아이디 또는 비밀번호를 확인해주세요!");
