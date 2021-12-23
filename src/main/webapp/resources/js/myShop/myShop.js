@@ -637,6 +637,12 @@ $(document).on("input", ".userPost > .userPostTextarea", function(){
 $(document).on("click", "#userPostTextareaBtn", function(){
     const locationPost = $("#userPostTextareaBtn").parent().prev();
 
+    if(shopNo == loginMemberNo){
+        alert("자신의 상점에서는 후기 작성이 불가능합니다.");
+        $(".userPostTextarea").val("");
+        return;
+    }
+
     if($(".userPostTextarea").length == 1){
         $.ajax({
             url: contextPath + "/myShop/insertPostScript",
@@ -651,7 +657,6 @@ $(document).on("click", "#userPostTextareaBtn", function(){
                     selectReplyList();
                 }else{
                     alert("후기 등록 실패");
-                    selectReplyList();
                 }
 
             },
@@ -670,7 +675,6 @@ $(document).on("click", "#userPostTextareaBtn", function(){
                     selectReplyList();
                 }else{
                     alert("후기 등록 실패");
-                    selectReplyList();
                 }
             },
             error:function(req, status, er){
@@ -934,3 +938,4 @@ $(document).on("change", ".sellOp", function(){
     }
     
 });
+
