@@ -6,7 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -73,23 +75,36 @@ public class DetailSelectItemServlet extends HttpServlet{
 				// 로그인한 회원의 세션 정보 얻어오기
 				Member loginMember = (Member)req.getSession().getAttribute("loginMember"); 
 				
-				// int memberNo = 0;
+				 int memberNo = 0;
+				
+				if(loginMember != null) {
+					
+					memberNo = loginMember.getMemberNo();
+
+				}
 				
 				// 최근 본 상품 세션에 올리기
-				if(loginMember != null) {
-					List<ItemImg> recentItemList = null;
+				List<ItemImg> recentItemList = null;
+				
+				if(session.getAttribute("recentItemList") == null) {
+					recentItemList = new ArrayList<ItemImg>();
+				}else {
+					// overLap = (List<ItemImg>)session.getAttribute("")
+					recentItemList = (List<ItemImg>)session.getAttribute("recentItemList");
 					
-					if(session.getAttribute("recentItemList") == null) {
-						recentItemList = new ArrayList<ItemImg>();
-					}else {
-						recentItemList = (List<ItemImg>)session.getAttribute("recentItemList");
-					}
-					
-					recentItemList.add(itemImg.get(0));
-					
-					// memberNo = loginMember.getMemberNo();
-					session.setAttribute("recentItemList", recentItemList);
+					// Set<ItemImg> set = new HashSet<ItemImg>(recentItemList); // SET은 중복허용이 안된다고 아는데 흠..
+					// List<ItemImg> tran = new ArrayList<ItemImg>(set); // 
+					// recentItemList = tran;
 				}
+				System.out.println(recentItemList);
+				
+				if(itemImg.get(0) != null) {
+					recentItemList.add(itemImg.get(0));					
+				}
+				
+				System.out.println(recentItemList);
+				
+				session.setAttribute("recentItemList", recentItemList);
 				
 				
 				// 댓글 조회하기

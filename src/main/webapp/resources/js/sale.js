@@ -49,6 +49,24 @@ $(".input_price").keyup(function(event){
 });
 
 
+// 가격 억 단위까지만
+$(".input_price").on("input" , function(){
+
+    let count = $(this).val().length;
+
+    if(count >= 9){
+        
+        $(this).val( $(this).val().substr(0,9) );
+        
+        count = 9;
+
+    }else if( count < 9){
+
+    }
+
+});
+
+
 // 유효성 검사 
 function saleValidate() {
         if ($(".input_title").val().trim().length == 0) {
