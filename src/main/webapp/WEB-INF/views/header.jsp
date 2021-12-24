@@ -93,9 +93,14 @@
 								</c:otherwise>
 							</c:choose>
 							
-							<div class="notice" onclick="location.href='#'">
-								<img src="${contextPath}/resources/images/header+footer/알림.png">
+							<div class="notice" onclick="clickNotice()">
+								<img id="notice-img" src="${contextPath}/resources/images/header+footer/알림.png">
 								<p id="notice" class="header-font">알림</p>
+								<div id="notice-area">
+									<ul class="notice-ul">
+
+									</ul>
+								</div>
 								<!-- &nbsp;알림 -->
 							</div>
 						</div>
