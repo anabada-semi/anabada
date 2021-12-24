@@ -84,9 +84,9 @@ public class ReplyController extends HttpServlet{
 				
 				// 댓글이 db에 삽입되었을때 && 댓글 단 사람(로그인 한 사람) != 판매자
 				if(result > 0 && memberNo != itemMemberNo) {
-					System.out.println("오나?");
+//					System.out.println("오나?");
 					int resultNotice = new NoticeService().insertNotice(notice);
-					System.out.println("resultNotice: " + resultNotice);
+//					System.out.println("resultNotice: " + resultNotice);
 				}
 				
 //				System.out.println("result: " + result);
