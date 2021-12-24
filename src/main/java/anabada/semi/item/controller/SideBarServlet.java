@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import anabada.semi.item.model.service.ItemBoardService;
 import anabada.semi.member.model.vo.Member;
 
-@WebServlet("/sideBAR/*")
+@WebServlet("/sideBar/*")
 public class SideBarServlet extends HttpServlet{
 
 	@Override
@@ -33,14 +33,17 @@ public class SideBarServlet extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 		Member loginMember = (Member)session.getAttribute("loginMember");
-		int memberNo = loginMember.getMemberNo();
-		
+		int memberNo = 0;
+		if(loginMember != null) {
+			memberNo = loginMember.getMemberNo();
+		};
 		
 		// 찜 카운트 ajax
 		if(command.equals("wish")){
 		
 			try {
 				int result = service.wishCount(memberNo);
+				System.out.println(result);
 				
 				PrintWriter out = resp.getWriter();
 				out.print(result);
