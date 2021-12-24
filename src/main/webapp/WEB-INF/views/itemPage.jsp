@@ -95,18 +95,18 @@
         
         <div class="page-button">
         	<div class="page-box">
-	            <div class="move-button page-div" onclick="location.href='list?cp=${pagination.prevPage}'">&lt;</div>
+	            <div class="move-button page-div" onclick="location.href='list?category-tag=${categoryTag}&cp=${pagination.prevPage}'">&lt;</div>
 	            <c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" step="1" var="i">
 					<c:choose>
 						<c:when test="${i == pagination.currentPage}">
 							<div class="current-div" style="background-color: #ccc;">${i}</div>								
 						</c:when>
 						<c:otherwise>
-							<div class="page-div" onclick="location.href='list?category-tag=${categoryTag}?cp=${i}'">${i}</div>
+							<div class="page-div" onclick="location.href='list?category-tag=${categoryTag}&cp=${i}'">${i}</div>
 						</c:otherwise>
 					</c:choose>
 	            </c:forEach>
-	            <div class="move-button page-div" onclick="location.href='list?cp=${pagination.nextPage}'">&gt;</div>
+	            <div class="move-button page-div" onclick="location.href='list?category-tag=${categoryTag}&cp=${pagination.nextPage}'">&gt;</div>
         	</div>
         </div>
 

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/sideBar.css">
 
@@ -14,6 +15,13 @@
                 <div id="recently-dotted"></div>
                 <div class="box-area"></div>
                 <div id="box-img">
+                	<c:forEach items="${recentItemList}" var="itemImg"> 
+                		<div class="recently-img" onclick="location.href='${contextPath}/detail/select?no=${itemImg.itemNo}&cp=${pagination.currentPage}'">
+                		<img src="${contextPath}${itemImg.imgPath}${itemImg.imgName}">
+                	</div>
+                	<!-- 중복제거 -->
+                	</c:forEach>
+                
                	<%-- <div class="recently-img" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
                 		<img src="${contextPath}${item.imgList[0].imgPath}${item.imgList[0].imgName}">
                 	</div>  --%>
