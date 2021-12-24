@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/member/updatePwPage.css">
 
     <section id="updatePwPage">
-        <div id="top-banner">회원 가입</div>
+        <div id="top-banner">아이디/비밀번호 찾기</div>
         <div id="updatePw-info">
             <div class="wrap">
                 <img src="${contextPath}/resources/images/main/koyang2.png" class="koyang">

@@ -14,7 +14,9 @@
                 <div id="recently-dotted"></div>
                 <div class="box-area"></div>
                 <div id="box-img">
-                	<%-- <div class="recently-img"><img src="img/koyang4.png"></div>  --%>
+               	<%-- <div class="recently-img" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
+                		<img src="${contextPath}${item.imgList[0].imgPath}${item.imgList[0].imgName}">
+                	</div>  --%>
                 </div>
                 <div class="box-area"></div>
             </div>
