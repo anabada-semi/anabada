@@ -71,7 +71,7 @@ $(document).ready(function() {
 function categoryClick(el){
   // console.log(el.value);
   let value = el.value;
-  location.href= contextPath+'/member/login?category-tag='+value;
+  location.href= contextPath+'/categoryItem/list?category-tag='+value;
 }
 
 // -----------------------------------------------------------------------------------------
