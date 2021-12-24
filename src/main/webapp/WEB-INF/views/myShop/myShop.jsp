@@ -4,6 +4,7 @@
 	
 <link rel="stylesheet" href="${contextPath}/resources/css/myShop/myShop.css">
 
+
 <jsp:include page="../header.jsp" />
 
 <section>
@@ -164,13 +165,10 @@
 <jsp:include page="../footer.jsp" />
 
 <script>
-	const contextPath = "${contextPath}";
-	const loginMemberNo = "${loginMember.memberNo}";
 	const shopNo = "${shopNo}";
 	
 	var flag = false;
-
-
+	
 </script>
 
 <script src="${contextPath}/resources/js/myShop/myShop.js"></script>
