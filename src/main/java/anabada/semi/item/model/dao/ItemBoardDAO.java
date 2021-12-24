@@ -239,6 +239,33 @@ public class ItemBoardDAO {
 
 
 
+	public int wishCount(int memberNo, Connection conn) throws Exception {
+
+		int result = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("wishCount");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
 
 	
 	
