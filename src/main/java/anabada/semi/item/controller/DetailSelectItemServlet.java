@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -37,6 +38,9 @@ public class DetailSelectItemServlet extends HttpServlet{
 		String uri = req.getRequestURI();
 		String contextPath = req.getContextPath();
 		String command = uri.substring( (contextPath + "/detail/").length() );
+		
+		// 세션
+		HttpSession session = req.getSession();
 		
 		ItemSelectService service = new ItemSelectService();
 		String path = null;
@@ -69,11 +73,24 @@ public class DetailSelectItemServlet extends HttpServlet{
 				// 로그인한 회원의 세션 정보 얻어오기
 				Member loginMember = (Member)req.getSession().getAttribute("loginMember"); 
 				
-				int memberNo = 0;
+				//int memberNo = 0;
 				
+				// 최근 본 상품 세션에 올리기
 				if(loginMember != null) {
-					memberNo = loginMember.getMemberNo();
+					List<ItemImg> recentItemList = null;
+					
+					if(session.getAttribute("recentItemList") == null) {
+						recentItemList = new ArrayList<ItemImg>();
+					}else {
+						recentItemList = (List<ItemImg>)session.getAttribute("recentItemList");
+					}
+					
+					recentItemList.add(itemImg.get(0));
+					
+					//memberNo = loginMember.getMemberNo();
+					session.setAttribute("recentItemList", recentItemList);
 				}
+				
 				
 				// 댓글 조회하기
 				List<Reply> rList = service.selectReplyList(itemNo);
