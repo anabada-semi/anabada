@@ -71,7 +71,7 @@
         		<c:forEach items="${itemList}" var="item">
         			<c:set var="addr" value="${fn:split(item.address, ',,')}"/>
         			
-   			        <div class="item" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
+   			        <div class="item" id="${item.itemNo}" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
 			            <img src="${contextPath}${item.imgList[0].imgPath}${item.imgList[0].imgName}">
 			            <div class="item-title">${item.itemName}</div>
 			            <div class="item-content" style="font-weight: bold;">
