@@ -12,9 +12,9 @@ function selectReplyList() {
             $("#replyListArea").empty();   // 기존 댓글 내용 모두 삭제
             
             const answer = rList;
-            // console.log("? ",rList.replyDate);
             $.each(rList, function(index, reply){   // jQuery 반복문
                 
+                // console.log("? ",reply);
                 if(reply.replyNestedCode == 1){ // 기본 댓글(대댓글이 아니면)
                     
                     var date = new Date(reply.replyDate).toISOString().replace("T", " ").replace(/\..*/, '');
@@ -114,7 +114,7 @@ function selectReplyList() {
 // -----------------------------------------------------------------------------------------
 // 댓글 등록
 function addReply(){
-
+    // console.log("itemMemberNo : " + itemMemberNo);
     if(loginMemberNo == ""){    // 로그인이 되어 있지 않은 경우
         alert("로그인 후 이용해 주세요.");
 
@@ -130,6 +130,7 @@ function addReply(){
             $.ajax({
                 url : contextPath + "/reply/insert",
                 data : {"memberNo" : loginMemberNo, 
+                        "itemMemberNo" : itemMemberNo,
                         "itemNo" : itemNo, 
                         "replyContent" : $("#replyContent").val(),
                         "secret" : $("#secret").prop("checked")
@@ -137,7 +138,7 @@ function addReply(){
                 type : "POST",  // insert는 대부분 post 방식
                 // dataType : "JSON",   // 성공 실패만 알면 되므로 JSON 필요 없음
                 success : function(result){
-                    console.log(result);
+                    // console.log(result);
 
                     if(result > 0){
                         alert("댓글이 등록되었습니다.");
@@ -434,7 +435,7 @@ function wish(replyNo, el){
     if(loginMemberNo == ""){    // 로그인이 되어 있지 않은 경우
         alert("로그인 후 이용해 주세요.");
 
-    } else if(loginMemberNo == itemMemberNo){   // 로그인한 사용자 == 게시글 작성자
+    } else if(loginMemberNo == itemMemberNo){   //로그이
         alert("내 상품은 찜할 수 없습니다.");
     }
     else{  // 로그인한 경우
