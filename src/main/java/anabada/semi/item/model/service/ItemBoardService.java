@@ -81,6 +81,7 @@ public class ItemBoardService {
 	 * @throws Exception
 	 */
 	public List<Item> categoryItemList(Pagination pagination, int categoryTag) throws Exception {
+		
 		Connection conn = getConnection();
 		
 		List<Item> itemList = dao.categoryItemList(pagination, categoryTag, conn);
@@ -112,6 +113,53 @@ public class ItemBoardService {
 		close(conn);
 		
 		return result;
+	}
+
+
+	
+	/** 검색된 글 수
+	 * @param cp
+	 * @param searchInput
+	 * @return listCount
+	 * @throws Exception
+	 */
+	public Pagination getSearchPagination(int cp, String searchInput) throws Exception {
+		Connection conn = getConnection();
+		
+		searchInput = searchInput + "%";
+		
+		int listCount = dao.getSearchPagination(searchInput, conn);
+		
+		close(conn);
+		
+		return new Pagination (listCount, cp);
+	}
+
+
+	/** 검색된 글 목록 조회
+	 * @param pagination
+	 * @param searchInput
+	 * @return itemList
+	 * @throws Exception
+	 */
+	public List<Item> searchItemList(Pagination pagination, String searchInput) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		searchInput = searchInput + "%";
+		
+		List<Item> itemList = dao.searchItemList(pagination, searchInput, conn);
+		
+		// 글 썸네일 조회
+		for(Item temp : itemList) {
+			List<ItemImg> imgList = dao.imageList(temp.getItemNo(), conn);
+			
+			temp.setImgList(imgList);
+		}
+		
+		close(conn);
+		
+		return itemList;
 	}
 	
 	
