@@ -130,6 +130,7 @@ header{
     border: none;
     background: white;
     position: absolute;
+    margin: auto;
 }
 
 #search-border img{
