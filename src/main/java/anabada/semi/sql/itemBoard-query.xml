@@ -44,5 +44,12 @@
 		    ORDER BY ITEM_NO DESC ) A )
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+	<entry key="wishCount">
+		SELECT COUNT(*)
+		FROM WISH
+		WHERE WISH_STATUS_CD = 1
+		AND MEMBER_NO = ?
+	</entry>
 
 </properties>

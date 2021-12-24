@@ -43,10 +43,6 @@
     color: #ccc;
 }
 
-#side-bar > div:nth-child(2){
-    height: 180px;
-}
-
 #recently-item{
     margin-top: 13px;
     height: 20px;
@@ -56,6 +52,22 @@
     width: 70px;
     margin: auto;
     border-bottom: 2px dotted rgb(151, 151, 151);
+}
+
+.box-area{
+    height: 30px;
+}
+
+.recently-img{
+    margin-top: 5px;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+
+.recently-img img{
+    width: 100%;
+    height: 100%;
 }
 
 #side-bar > div:last-child{

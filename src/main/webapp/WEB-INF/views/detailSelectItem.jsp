@@ -74,7 +74,7 @@
                             <span><img src="${contextPath}/resources/images/itemIcon/clock.png"> ${date}</span>
                         </div>
                         <div class="product-btn">
-                            <button onclick = "wish(${item.itemNo}, this)">찜</button>
+                            <button id="heartClick" onclick = "wish(${item.itemNo}, this)">찜</button>
                             <button id="question">문의하기</button>
                             <c:if test="${item.memberNo == loginMember.memberNo}">
                                 <button onclick="location.href='${contextPath}/item/updateForm?no=${item.itemNo}'">수정하기</button>

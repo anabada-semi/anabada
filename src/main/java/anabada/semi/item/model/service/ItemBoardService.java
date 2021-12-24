@@ -96,6 +96,23 @@ public class ItemBoardService {
 		
 		return itemList;
 	}
+
+
+	/** 찜 개수 조회
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int wishCount(int memberNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.wishCount(memberNo, conn);
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	
 	

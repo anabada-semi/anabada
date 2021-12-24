@@ -14,6 +14,7 @@
     <section id="item-box">
         <div id="select-it">	
             &#8962; 홈 > <%-- 카테고리의 변경이 감지되면 숨겨진 버튼을 눌러 폼태그로 전송하는 방식으로 설계 할 예정 --%>
+            <%--
             <form action="${contextPath}/categoryItem/list" id="category-form" method="post">
 	            <select name="category-tag" id="ctselect" style="font-family: 'GmarketSansMedium';">
                 <option value ="100">여성의류</option>
@@ -38,6 +39,21 @@
 	            </select>
             	<button style="visibility: hidden;" id="ctBtn"></button>
             </form>
+             --%>
+             <form action="${contextPath}/categoryItem/list" id="category-form" method="post">
+             	<select name="category-tag" id="ctselect" style="font-family: 'GmarketSansMedium';">
+                    <c:forEach items="${categoryList}" var="c">
+                        <c:choose>
+                            <c:when test="${c.categoryCode == categoryTag}">
+                                <option value="${c.categoryCode}" selected>${c.categoryName}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${c.categoryCode}">${c.categoryName}</option>
+                            </c:otherwise>
+                        </c:choose>
+                	</c:forEach>
+             	</select>
+             </form>
         </div>
 
         <div><h3><span style="color:#B8CC7A">패션의류</span> 상품 추천</h3></div>
@@ -53,7 +69,7 @@
         		<c:forEach items="${itemList}" var="item">
         			<c:set var="addr" value="${fn:split(item.address, ',,')}"/>
         			
-   			        <div class="item" id="it-1" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
+   			        <div class="item" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
 			            <img src="${contextPath}${item.imgList[0].imgPath}${item.imgList[0].imgName}">
 			            <div class="item-title">${item.itemName}</div>
 			            <div class="item-content" style="font-weight: bold;">

@@ -12,10 +12,18 @@
                 <div id="recently-item" style="font-family: 'GmarketSansMedium';">최근본상품</div>
                 <div id="recently-count"></div>
                 <div id="recently-dotted"></div>
-                <div id="recently-img"></div>
+                <div class="box-area"></div>
+                <div id="box-img">
+               	<%-- <div class="recently-img" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
+                		<img src="${contextPath}${item.imgList[0].imgPath}${item.imgList[0].imgName}">
+                	</div>  --%>
+                </div>
+                <div class="box-area"></div>
             </div>
             <div id="button-top">
                 <div><a href="#body-top" id="top-btn" style="font-family: 'GmarketSansMedium';">TOP</a></div>
             </div>
         </div>
     </aside>
+    
+    <script src="${contextPath}/resources/js/sideBar.js"></script>

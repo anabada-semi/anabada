@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import anabada.semi.item.model.service.ItemBoardService;
+import anabada.semi.item.model.service.ItemSelectService;
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.item.model.vo.Pagination;
 import anabada.semi.item.model.vo.Time;
@@ -50,6 +51,11 @@ public class ItemBoardServlet extends HttpServlet{
 					item.setDate(Time.calculateTime(item.getItemDate()));
 				}
 				
+				// 카테고리 목록 조회
+				List<Item> categoryList = new ItemSelectService().selectCategory();
+				
+				req.setAttribute("categoryTag", categoryTag);
+				req.setAttribute("categoryList", categoryList);
 				req.setAttribute("pagination", pagination);
 				req.setAttribute("itemList", itemList);
 				
