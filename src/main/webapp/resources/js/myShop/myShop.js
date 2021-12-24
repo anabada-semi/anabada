@@ -242,10 +242,10 @@ function selectitemList() {
             
                 $.each(r, function (index, item) {
 
-                    if(itemPk == item.itemNo){
-                        return;
-                    }
-                    itemPk = item.itemNo;
+                    // if(itemPk == item.itemNo){
+                    //     return;
+                    // }
+                    // itemPk = item.itemNo;
 
                     const sel = $('<select class="itemOp">');
                     const selling = $('<option value="onSale">판매중</option>');
@@ -323,10 +323,10 @@ function wishList(){
 
                 $.each(r, function (index, wish) {
                     
-                    if(itemPk == wish.itemNo){
-                        return;
-                    }
-                    itemPk = wish.itemNo;
+                    // if(itemPk == wish.itemNo){
+                    //     return;
+                    // }
+                    // itemPk = wish.itemNo;
 
                     wishNo[index] = wish.itemNo;
 
@@ -397,10 +397,10 @@ function buyPage(){
 
                 $.each(result, function (index, buyList) {
 
-                    if(itemPk == buyList.itemNo){
-                        return;
-                    }
-                    itemPk = buyList.itemNo;
+                    // if(itemPk == buyList.itemNo){
+                    //     return;
+                    // }
+                    // itemPk = buyList.itemNo;
 
                     const tr = $("<tr class='buyTr'>");
                     const td = $("<td class='buyTd'>");
@@ -474,10 +474,10 @@ function sellPage(){
                     
                 $.each(result, function (index, sellList) {
 
-                    if(itemPk == sellList.itemNo){
-                        return;
-                    }
-                    itemPk = sellList.itemNo;
+                    // if(itemPk == sellList.itemNo){
+                    //     return;
+                    // }
+                    // itemPk = sellList.itemNo;
 
                     const sel = $('<select class="sellOp">');
                     const soldOut = $('<option value="soldOut">판매 완료</option>');
