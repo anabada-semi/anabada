@@ -46,5 +46,7 @@
 
 	<script src="${contextPath}/resources/js/updatePw.js"></script>
 
+	<jsp:include page="../sideBar.jsp" />
+
     <!-- footer include -->
 	<jsp:include page="../footer.jsp" />

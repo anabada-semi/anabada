@@ -6,7 +6,7 @@
         <div id="side-bar">
             <div>
                 <div id="heart-item" style="font-family: 'GmarketSansMedium';">찜한상품</div>
-                <div id="heart-count" style="font-family: 'GmarketSansMedium';">♥ 0</div>
+                <div class="heart" style="font-family: 'GmarketSansMedium';">♥ <span class="heart" id="heart">0</span></div>
             </div>
             <div>
                 <div id="recently-item" style="font-family: 'GmarketSansMedium';">최근본상품</div>

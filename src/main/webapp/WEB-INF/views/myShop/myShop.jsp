@@ -159,6 +159,8 @@
 </div>
 
 
+<jsp:include page="../sideBar.jsp" />
+
 <jsp:include page="../footer.jsp" />
 
 <script>

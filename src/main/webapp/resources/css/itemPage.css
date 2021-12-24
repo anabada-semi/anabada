@@ -67,7 +67,7 @@ section{
     
 }
 
-.item-title, .item-address{
+.item-title, .item-address > p{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

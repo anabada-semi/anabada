@@ -26,5 +26,23 @@
 		WHERE ITEM_NO = ?
 	</entry>
 
+	<!-- 카테고리 게시글 수 조회 -->
+	<entry key="categoryListCount">
+		SELECT COUNT(*) 
+		FROM ITEM
+		WHERE ITEM_STATUS_CD != 1
+		AND CATEGORY_CD = ?
+	</entry>
+	
+		<!-- 카테고리 별 글 목록 조회 -->
+	<entry key="categoryItemList">
+		SELECT * FROM
+		( SELECT ROWNUM RNUM, A.* FROM (
+		    SELECT * FROM ITEM_LIST
+		    WHERE ITEM_STATUS_CD != 1
+		    AND CATEGORY_CD = ?
+		    ORDER BY ITEM_NO DESC ) A )
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
 
 </properties>
