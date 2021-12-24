@@ -107,26 +107,6 @@
 								id="category"></span>
 							<div class="dropdown-content">
 								<ul id="category-ul" class="header-font">
-									<li class="category_item">여성의류</li>
-									<li class="category_item">남성의류</li>
-									<li class="category_item">신발</li>
-									<li class="category_item">가방</li>
-									<li class="category_item">시계/쥬얼리</li>
-									<li class="category_item">패션 액세서리</li>
-									<li class="category_item">디지털/가전</li>
-									<li class="category_item">스포츠/레저</li>
-									<li class="category_item">차량/오토바이</li>
-									<li class="category_item">스타굿즈</li>
-									<li class="category_item">키덜트</li>
-									<li class="category_item">예술/희귀/수집품</li>
-									<li class="category_item">음반/악기</li>
-									<li class="category_item">도서/티켓/문구</li>
-									<li class="category_item">뷰티/미용</li>
-									<li class="category_item">가구/인테리어</li>
-									<li class="category_item">생활/가공식품</li>
-									<li class="category_item">유아동/출산</li>
-									<li class="category_item">반려동물용품</li>
-									<li class="category_item">기타</li>
 								</ul>
 							</div>
 						</div>
@@ -138,15 +118,15 @@
 
 		<script>
 			const contextPath = "${contextPath}";
-	
+			// console.log("contextPath: " , contextPath);
 			// 로그인한 회원의 회원 번호, 비로그인 시 "" (빈문자열)
 			const loginMemberNo = "${loginMember.memberNo}";
 			
 			// 현재 게시글 번호
-			const itemNo = ${item.itemNo};
+			const itemNo = "${item.itemNo}";
 			
 			// 현재 게시글 작성자 번호
-			const itemMemberNo = ${item.memberNo};
+			const itemMemberNo = "${item.memberNo}";
 	
 			// 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
 			let before;

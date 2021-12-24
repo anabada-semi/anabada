@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -49,8 +50,6 @@ public class DetailSelectItemServlet extends HttpServlet{
 				req.setAttribute("categoryList", categoryList);
 				
 				int itemNo = Integer.parseInt(req.getParameter("no"));
-				
-				System.out.println("itemNo : "+ itemNo);
 				
 				// 선택한 아이템 조회
 				Item item = service.selectItem(itemNo);
@@ -107,6 +106,16 @@ public class DetailSelectItemServlet extends HttpServlet{
 				int view = service.selectView(itemNo);
 				
 				new Gson().toJson(view, resp.getWriter());
+				
+			}
+			// 카테고리 조회
+			else if(command.equals("category")) {
+				
+				// 카테고리 옵션 목록
+				// 카테고리 목록 불러오기
+				List<Item> categoryList = service.selectCategory();
+				
+				new Gson().toJson(categoryList, resp.getWriter());
 				
 			}
 			

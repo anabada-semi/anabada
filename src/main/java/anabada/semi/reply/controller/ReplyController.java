@@ -8,11 +8,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
 import anabada.semi.item.model.service.ItemSelectService;
 import anabada.semi.item.model.vo.Reply;
+import anabada.semi.member.model.vo.Member;
+import anabada.semi.notice.model.service.NoticeService;
+import anabada.semi.notice.model.vo.Notice;
 
 @WebServlet("/reply/*")
 public class ReplyController extends HttpServlet{
@@ -27,6 +31,9 @@ public class ReplyController extends HttpServlet{
 		String command = uri.substring( (contextPath + "/reply/").length() );
 		
 		ItemSelectService service = new ItemSelectService();
+		
+		HttpSession session = req.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
 		
 		try {
 			
@@ -51,6 +58,7 @@ public class ReplyController extends HttpServlet{
 				int memberNo = Integer.parseInt(req.getParameter("memberNo"));
 				int itemNo = Integer.parseInt(req.getParameter("itemNo"));
 				String replyContent = req.getParameter("replyContent");
+				int itemMemberNo = Integer.parseInt(req.getParameter("itemMemberNo"));
 				
 				if(req.getParameter("secret").equals("true")) {
 					reply.setReplySecret(1);	// 비밀O
@@ -58,13 +66,28 @@ public class ReplyController extends HttpServlet{
 					reply.setReplySecret(2);	// 비밀X
 				}
 				
-				System.out.println("secret:"+reply.getReplySecret());
+//				System.out.println("secret:"+reply.getReplySecret());
 				
 				reply.setMemberNo(memberNo);
 				reply.setItemNo(itemNo);
 				reply.setReplyContent(replyContent);
 				
 				int result = service.insertReply(reply);
+				
+				Notice notice = new Notice();
+				
+				notice.setNoticeContent(1);
+				notice.setItemNo(itemNo);
+				notice.setShopNo(itemMemberNo);	//판매자
+				notice.setMemberNo(memberNo);
+				notice.setReplyMemberNo(0);
+				
+				// 댓글이 db에 삽입되었을때 && 댓글 단 사람(로그인 한 사람) != 판매자
+				if(result > 0 && memberNo != itemMemberNo) {
+					System.out.println("오나?");
+					int resultNotice = new NoticeService().insertNotice(notice);
+					System.out.println("resultNotice: " + resultNotice);
+				}
 				
 //				System.out.println("result: " + result);
 				

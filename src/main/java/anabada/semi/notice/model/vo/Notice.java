@@ -3,11 +3,12 @@ package anabada.semi.notice.model.vo;
 public class Notice {
 	
 	private int noticeNo;
-	private String noticeContent;
+	private int noticeContent;
 	private int itemNo;
-	private int shopNo;
-	private int memberNo;
+	private int shopNo;	// 판매자
+	private int memberNo;	// 댓글 단 사람(로그인 한 사람)
 	private int status;
+	private int ReplyMemberNo;
 	
 	public Notice() {
 		// TODO Auto-generated constructor stub
@@ -19,10 +20,10 @@ public class Notice {
 	public void setNoticeNo(int noticeNo) {
 		this.noticeNo = noticeNo;
 	}
-	public String getNoticeContent() {
+	public int getNoticeContent() {
 		return noticeContent;
 	}
-	public void setNoticeContent(String noticeContent) {
+	public void setNoticeContent(int noticeContent) {
 		this.noticeContent = noticeContent;
 	}
 	public int getItemNo() {
@@ -50,11 +51,19 @@ public class Notice {
 		this.status = status;
 	}
 	
+	
+	public int getReplyMemberNo() {
+		return ReplyMemberNo;
+	}
+
+	public void setReplyMemberNo(int replyMemberNo) {
+		ReplyMemberNo = replyMemberNo;
+	}
+
 	@Override
 	public String toString() {
 		return "Notice [noticeNo=" + noticeNo + ", noticeContent=" + noticeContent + ", itemNo=" + itemNo + ", shopNo="
-				+ shopNo + ", memberNo=" + memberNo + ", status=" + status + "]";
+				+ shopNo + ", memberNo=" + memberNo + ", status=" + status + ", ReplyMemberNo=" + ReplyMemberNo + "]";
 	}
-	
-	
+
 }

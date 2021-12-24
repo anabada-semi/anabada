@@ -3,18 +3,21 @@ package anabada.semi.notice.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
+import anabada.semi.member.model.vo.Member;
 import anabada.semi.notice.model.service.NoticeService;
 import anabada.semi.notice.model.vo.Notice;
 
 @WebServlet("/notice/*")
-public class NoticeServlet extends HttpServlet{
+public class NoticeController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -24,22 +27,20 @@ public class NoticeServlet extends HttpServlet{
 		String contextPath = req.getContextPath();
 		String command = uri.substring( (contextPath + "/notice/").length() );
 		
-		String path = null;
+		String path = null; 
+
+		HttpSession session = req.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
 		
 		NoticeService service = new NoticeService();
 		
 		try {
 			if(command.equals("select")) {
 				
-//				Session session = 
+				List<Notice> noticeList = service.selectNotice(loginMember.getMemberNo());
 				
-//				List<Notice> noticeList = service.selectNotice();
-				
-				
+				new Gson().toJson(noticeList, resp.getWriter());
 			}
-			
-			
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
