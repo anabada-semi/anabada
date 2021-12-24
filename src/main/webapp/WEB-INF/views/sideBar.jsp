@@ -19,3 +19,5 @@
             </div>
         </div>
     </aside>
+    
+    <script src="${contextPath}/resources/js/sideBar.js"></script>
