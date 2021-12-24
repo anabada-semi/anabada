@@ -5,6 +5,7 @@ public class Notice {
 	private int noticeNo;
 	private int noticeContent;
 	private int itemNo;
+	private String itemName;
 	private int shopNo;	// 판매자
 	private int memberNo;	// 댓글 단 사람(로그인 한 사람)
 	private int status;
@@ -60,10 +61,21 @@ public class Notice {
 		ReplyMemberNo = replyMemberNo;
 	}
 
-	@Override
-	public String toString() {
-		return "Notice [noticeNo=" + noticeNo + ", noticeContent=" + noticeContent + ", itemNo=" + itemNo + ", shopNo="
-				+ shopNo + ", memberNo=" + memberNo + ", status=" + status + ", ReplyMemberNo=" + ReplyMemberNo + "]";
+	public String getItemName() {
+		return itemName;
 	}
 
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	@Override
+	public String toString() {
+		return "Notice [noticeNo=" + noticeNo + ", noticeContent=" + noticeContent + ", itemNo=" + itemNo
+				+ ", itemName=" + itemName + ", shopNo=" + shopNo + ", memberNo=" + memberNo + ", status=" + status
+				+ ", ReplyMemberNo=" + ReplyMemberNo + "]";
+	}
+
+	
+	
 }

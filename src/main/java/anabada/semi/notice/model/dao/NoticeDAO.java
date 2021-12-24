@@ -33,6 +33,12 @@ public class NoticeDAO {
 		}
 	}
 
+	/** 알림 테이블 조회
+	 * @param loginMemberNo
+	 * @param conn
+	 * @return noticeList
+	 * @throws Exception
+	 */
 	public List<Notice> selectNotice(int loginMemberNo, Connection conn) throws Exception{
 		
 		List<Notice> noticeList = new ArrayList<Notice>(); 
@@ -41,27 +47,41 @@ public class NoticeDAO {
 			String sql = prop.getProperty("selectNotice");
 			pstmt = conn.prepareStatement(sql);
 			
+			pstmt.setInt(1, loginMemberNo);
+			pstmt.setInt(2, loginMemberNo);
+			pstmt.setInt(3, loginMemberNo);
+			pstmt.setInt(4, loginMemberNo);
+			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				
 				Notice notice = new Notice();
 				
+				notice.setNoticeNo(rs.getInt("NOTICE_NO"));
+				notice.setNoticeContent(rs.getInt("NOTICE_CONTENT"));
+				notice.setItemNo(rs.getInt("ITEM_NO"));
+				notice.setShopNo(rs.getInt("SHOP_NO"));
+				notice.setMemberNo(rs.getInt("MEMBER_NO"));
+				notice.setReplyMemberNo(rs.getInt("REPLY_MEMBER_NO"));
+				notice.setItemName(rs.getString("ITEM_NM"));
 				
-				
-				
-				
-				
+				noticeList.add(notice);
 			}
 			
 		} finally {
-			// TODO: handle finally clause
+			close(rs);
+			close(pstmt);
 		}
-		
-		
 		return noticeList;
 	}
 
+	/** 댓글 삽입시 알림 테이블 삽입
+	 * @param notice
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
 	public int insertNotice(Notice notice, Connection conn) throws Exception{
 		int result = 0; 
 		
@@ -72,7 +92,8 @@ public class NoticeDAO {
 			pstmt.setInt(1, notice.getNoticeContent());
 			pstmt.setInt(2, notice.getItemNo());
 			pstmt.setInt(3, notice.getShopNo());
-			pstmt.setInt(3, notice.getMemberNo());
+			pstmt.setInt(4, notice.getMemberNo());
+			pstmt.setInt(5, notice.getReplyMemberNo());
 			
 			result = pstmt.executeUpdate();
 			

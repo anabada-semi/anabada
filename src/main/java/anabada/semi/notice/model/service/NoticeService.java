@@ -13,6 +13,13 @@ public class NoticeService {
 	
 	private NoticeDAO dao = new NoticeDAO();
 
+	
+	
+	/** 알림조회
+	 * @param loginMemberNo
+	 * @return noticeList
+	 * @throws Exception
+	 */
 	public List<Notice> selectNotice(int loginMemberNo) throws Exception{
 		
 		Connection conn = getConnection();
