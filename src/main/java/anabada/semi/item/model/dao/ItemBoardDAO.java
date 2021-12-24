@@ -195,6 +195,13 @@ public class ItemBoardDAO {
 
 
 	
+	/** 카테고리 글 목록 조회
+	 * @param pagination
+	 * @param categoryTag
+	 * @param conn
+	 * @return itemList
+	 * @throws Exception
+	 */
 	public List<Item> categoryItemList(Pagination pagination, int categoryTag, Connection conn) throws Exception{
 		
 		List<Item> itemList = new ArrayList<Item>();
@@ -238,7 +245,13 @@ public class ItemBoardDAO {
 	}
 
 
-
+	
+	/** 찜 갯수
+	 * @param memberNo
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
 	public int wishCount(int memberNo, Connection conn) throws Exception {
 
 		int result = 0;
@@ -262,6 +275,90 @@ public class ItemBoardDAO {
 		}
 		
 		return result;
+	}
+
+
+
+	/** 검색된 글 수
+	 * @param searchInput
+	 * @param conn
+	 * @return listCount
+	 * @throws Exception
+	 */
+	public int getSearchPagination(String searchInput, Connection conn) throws Exception {
+		
+		int listCount = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("searchListCount");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchInput);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+
+
+
+	/** 검색된 글 목록 조회
+	 * @param pagination
+	 * @param searchInput
+	 * @param conn
+	 * @return itemList
+	 * @throws Exception
+	 */
+	public List<Item> searchItemList(Pagination pagination, String searchInput, Connection conn) throws Exception {
+		
+		List<Item> itemList = new ArrayList<Item>();
+		
+		try {
+			
+			String sql = prop.getProperty("searchItemList");
+			
+			int startRow = (pagination.getCurrentPage() - 1) * pagination.getLimit() + 1;
+			int endRow = startRow + pagination.getLimit() - 1;
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchInput);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Item item = new Item();
+				
+				item.setItemNo(rs.getInt("ITEM_NO"));
+				item.setItemName(rs.getString("ITEM_NM"));
+				item.setItemPrice(rs.getString("ITEM_PRICE"));
+				item.setMemberNo(rs.getInt("MEMBER_NO"));
+				item.setAddress(rs.getString("ADDRESS"));
+				item.setItemDate(rs.getTimestamp("ITEM_DATE"));
+				item.setCategoryCode(rs.getInt("CATEGORY_CD"));
+				item.setItemStatusCode(rs.getInt("ITEM_STATUS_CD"));
+				
+				itemList.add(item);
+				
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return itemList;
 	}
 
 

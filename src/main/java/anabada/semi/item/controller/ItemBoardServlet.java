@@ -72,6 +72,33 @@ public class ItemBoardServlet extends HttpServlet{
 		// 검색에 따른 상품 조회
 		else if(command.equals("search")) {
 			
+			String searchInput = req.getParameter("search_input");
+			
+			int cp = req.getParameter("cp") == null ? 1 : Integer.parseInt(req.getParameter("cp"));
+			
+			try {
+				Pagination pagination = service.getSearchPagination(cp, searchInput);
+				
+				// 글 목록 조회
+				List<Item> itemList = service.searchItemList(pagination, searchInput);
+				
+				for(Item item : itemList) {
+					item.setDate(Time.calculateTime(item.getItemDate()));
+				}
+				
+				req.setAttribute("searchInput", searchInput);
+				req.setAttribute("pagination", pagination);
+				req.setAttribute("itemList", itemList);
+				
+				path = "/WEB-INF/views/itemSearchPage.jsp";
+				dispatcher = req.getRequestDispatcher(path);
+				dispatcher.forward(req, resp);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+				
+			}
+			
 			
 			
 		}
