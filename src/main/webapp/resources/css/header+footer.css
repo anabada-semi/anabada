@@ -126,9 +126,15 @@ header{
     border-bottom:0px;
 }
 
+#search-border button{
+    border: none;
+    background: white;
+    position: absolute;
+}
+
 #search-border img{
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 34px;
     float: left;
     display: inline;
 }
