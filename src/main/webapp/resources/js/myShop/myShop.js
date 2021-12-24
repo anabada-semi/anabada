@@ -224,6 +224,7 @@ function selectReplyList() {
 // 판매중인 상품 목록 조회
 function selectitemList() {
     let itemPk = 0;
+
     $.ajax({
         url: contextPath + "/myShop/selectItemList",
         data: { "shopNo": shopNo },
@@ -240,7 +241,6 @@ function selectitemList() {
             }else{
             
                 $.each(r, function (index, item) {
-                    console.log(item);
 
                     if(itemPk == item.itemNo){
                         return;
