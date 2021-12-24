@@ -1,10 +1,10 @@
 // 각 입력 값이 유효성 검사를 진행했는지 기록할 객체
 const updateCheckObj = {
-    "memberNm" : false,
-    "memberEmail" : false,
+    "memberNm" : true,
+    "memberEmail" : true,
     "pwd1" : false,
     "pwd2" : false,
-    "memberPhone3" : false
+    "memberPhone3" : true
 
 }
 

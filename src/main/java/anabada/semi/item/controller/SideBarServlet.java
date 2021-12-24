@@ -47,7 +47,6 @@ public class SideBarServlet extends HttpServlet{
 				};
 				
 				int result = service.wishCount(memberNo);
-				System.out.println(result);
 				
 				PrintWriter out = resp.getWriter();
 				out.print(result);

@@ -58,7 +58,7 @@
 		SELECT COUNT(*) 
 		FROM ITEM
 		WHERE ITEM_STATUS_CD != 1
-		AND ITEM_NM LIKE ?
+		AND (ITEM_NM LIKE ? OR ITEM_NM LIKE ?)
 	</entry>
 	
 	<!-- 검색된 별 글 목록 조회 -->
@@ -67,7 +67,7 @@
 		( SELECT ROWNUM RNUM, A.* FROM (
 		    SELECT * FROM ITEM_LIST
 		    WHERE ITEM_STATUS_CD != 1
-		    AND ITEM_NM LIKE ?
+		    AND (ITEM_NM LIKE ? OR ITEM_NM LIKE ?)
 		    ORDER BY ITEM_NO DESC ) A )
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>

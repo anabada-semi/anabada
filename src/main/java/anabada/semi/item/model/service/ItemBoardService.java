@@ -127,8 +127,9 @@ public class ItemBoardService {
 		Connection conn = getConnection();
 		
 		searchInput = searchInput + "%";
+		String searchInput2 = "%" + searchInput + "%";
 		
-		int listCount = dao.getSearchPagination(searchInput, conn);
+		int listCount = dao.getSearchPagination(searchInput, searchInput2, conn);
 		
 		close(conn);
 		
@@ -147,8 +148,9 @@ public class ItemBoardService {
 		Connection conn = getConnection();
 		
 		searchInput = searchInput + "%";
+		String searchInput2 = "%" + searchInput + "%";
 		
-		List<Item> itemList = dao.searchItemList(pagination, searchInput, conn);
+		List<Item> itemList = dao.searchItemList(pagination, searchInput, searchInput2, conn);
 		
 		// 글 썸네일 조회
 		for(Item temp : itemList) {
