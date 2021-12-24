@@ -113,5 +113,11 @@ $(".deleteBtn").on("click", function(e){
     const index = $(".deleteBtn").index($(this));
 
     $("[name=img"+index+"]").val("");
+
+	// 삭제된 이미의 인덱스를 저장하는 input type="hidden" 태그 추가
+	const input = $("<input type='hidden' name='deleteNo'>").val(index);
+	$("#guide").append(input);
+	
+	
 });
 

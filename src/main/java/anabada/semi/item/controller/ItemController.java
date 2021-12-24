@@ -2,6 +2,7 @@ package anabada.semi.item.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -109,7 +110,7 @@ public class ItemController extends HttpServlet{
 					
 					if(result > 0) {
 						message = "게시글이 등록 되었습니다.";
-						path = "insert";
+						path = "/anabada/detail/select?no="+result;
 					}else {
 						message = "게시글 등록 실패!";
 						path = "insert";
@@ -125,7 +126,7 @@ public class ItemController extends HttpServlet{
 			
 			else if(command.equals("updateForm")) {
 				
-				int itemNo = 61;
+				int itemNo = Integer.parseInt(req.getParameter("no"));
 				
 				Item item = service.updateView(itemNo);
 				
@@ -153,12 +154,27 @@ public class ItemController extends HttpServlet{
 				
 				String itemName = mReq.getParameter("itemName");
 				int categoryCode = Integer.parseInt( mReq.getParameter("categoryCode"));
-				String itemPrice = mReq.getParameter("itemPrice");
+				String itemPrice = mReq.getParameter("itemPrice").replace(",","");
 				String itemInfo = mReq.getParameter("itemInfo");
 				
 				int itemNo = Integer.parseInt( mReq.getParameter("no"));
 				
 				int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
+				
+				System.out.print(Arrays.toString(mReq.getParameterValues("deleteNo")));
+				
+			
+				List<String> deleteNo = new ArrayList<String>();
+				int dn = 0;
+				if(mReq.getParameterValues("deleteNo") !=null ) {
+					
+					deleteNo = Arrays.asList(mReq.getParameterValues("deleteNo"));
+					
+				} else { 
+				    
+				    deleteNo.add("3");
+				}
+				
 				
 				Item item = new Item();
 				item.setItemName(itemName);
@@ -191,27 +207,23 @@ public class ItemController extends HttpServlet{
 						
 				}
 				
-				int result = service.updateItem(item, imgList);
+				int result = service.updateItem(item, imgList, deleteNo);
 				
 				if(result > 0) {
 					message = "게시글이 수정되었습니다.";
-					path = "updateForm";
+					path = "/anabada/detail/select?no="+itemNo;
 				}else {
 					message = "게시글 수정 실패!";
-					path = req.getHeader("referer");
+					path = req.getHeader("referer") + "?no=" + itemNo;
 				}
-				
 				session.setAttribute("message", message);
 				resp.sendRedirect(path);
 				
 			}
 			
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		
 		
 		
