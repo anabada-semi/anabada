@@ -87,7 +87,7 @@ public class Item {
 
 	//	기본 생성자
 	public Item() {	}
-	
+
 	public int getItemNo() {
 		return itemNo;
 	}
