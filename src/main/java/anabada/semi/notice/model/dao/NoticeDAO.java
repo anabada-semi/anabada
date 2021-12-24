@@ -65,6 +65,46 @@ public class NoticeDAO {
 				notice.setMemberNo(rs.getInt("MEMBER_NO"));
 				notice.setReplyMemberNo(rs.getInt("REPLY_MEMBER_NO"));
 				notice.setItemName(rs.getString("ITEM_NM"));
+				notice.setPostSCriptNo(rs.getInt("POSTSCRIRT_NO"));
+				
+				noticeList.add(notice);
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return noticeList;
+	}
+	
+	/** 알림 테이블 조회(후기)
+	 * @param loginMemberNo
+	 * @param conn
+	 * @return noticeList
+	 * @throws Exception
+	 */
+	public List<Notice> selectNotice2(int loginMemberNo, Connection conn) throws Exception{
+		
+		List<Notice> noticeList = new ArrayList<Notice>(); 
+		
+		try {
+			String sql = prop.getProperty("selectNotice2");
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, loginMemberNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				Notice notice = new Notice();
+				
+				notice.setNoticeNo(rs.getInt("NOTICE_NO"));
+				notice.setNoticeContent(rs.getInt("NOTICE_CONTENT"));
+				notice.setShopNo(rs.getInt("SHOP_NO"));
+				notice.setMemberNo(rs.getInt("MEMBER_NO"));
+				notice.setReplyMemberNo(rs.getInt("REPLY_MEMBER_NO"));
+				notice.setPostSCriptNo(rs.getInt("POSTSCRIRT_NO"));
 				
 				noticeList.add(notice);
 			}
@@ -94,6 +134,84 @@ public class NoticeDAO {
 			pstmt.setInt(3, notice.getShopNo());
 			pstmt.setInt(4, notice.getMemberNo());
 			pstmt.setInt(5, notice.getReplyMemberNo());
+			pstmt.setInt(6, notice.getPostSCriptNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	/** 후기 번호 조회
+	 * @param shopNo
+	 * @param memberNo
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int selectPostScriptNo(int shopNo, int memberNo, Connection conn) throws Exception{
+		int result = 0; 
+		
+		try {
+			String sql = prop.getProperty("selectPostScriptNo");
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, shopNo);
+			pstmt.setInt(2, memberNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	/** 알림 삭제(후기)
+	 * @param postNo
+	 * @param conn
+	 * @return result 
+	 * @throws Exception
+	 */
+	public int deleteNotice(int postNo, Connection conn) throws Exception{
+		int result = 0; 
+		
+		try {
+			String sql = prop.getProperty("deleteNotice");
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, postNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
+	/** 읽음 업데이트
+	 * @param noticeNo
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateNotice(int noticeNo, Connection conn) throws Exception{
+		int result = 0; 
+		
+		try {
+			String sql = prop.getProperty("updateNotice");
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, noticeNo);
 			
 			result = pstmt.executeUpdate();
 			

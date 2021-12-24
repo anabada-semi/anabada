@@ -20,6 +20,8 @@ import anabada.semi.common.XSS;
 import anabada.semi.item.model.vo.Item;
 import anabada.semi.member.model.service.MemberService;
 import anabada.semi.member.model.vo.Member;
+import anabada.semi.notice.model.service.NoticeService;
+import anabada.semi.notice.model.vo.Notice;
 import anabada.semi.shop.model.service.ShopService;
 import anabada.semi.shop.model.vo.PostScript;
 import anabada.semi.shop.model.vo.Purchase;
@@ -155,8 +157,23 @@ public class MyShopController extends HttpServlet {
 					String postScript = req.getParameter("postScript");
 					int shopNo = (int)session.getAttribute("shopNo");
 					
-					resp.getWriter().print(service.insertPostScript(shopNo, loginMember.getMemberNo(), postScript));
+					int result = service.insertPostScript(shopNo, loginMember.getMemberNo(), postScript);
 					
+					if(result > 0) {
+						
+						Notice notice = new Notice();
+						
+						notice.setNoticeContent(3);
+						notice.setShopNo(shopNo);
+						notice.setItemNo(0);
+						notice.setMemberNo(loginMember.getMemberNo());
+						notice.setReplyMemberNo(0);
+						notice.setPostSCriptNo(new NoticeService().selectPostScriptNo(shopNo,loginMember.getMemberNo()));
+						
+						new NoticeService().insertNotice(notice);
+					}
+					
+					resp.getWriter().print(result);
 				}
 				
 			}else if(command.equals("updatePostScript")) {
@@ -173,7 +190,14 @@ public class MyShopController extends HttpServlet {
 					
 					int postNo = Integer.parseInt(req.getParameter("postNo"));
 					
-					resp.getWriter().print(service.deletePostScript(postNo));
+					int result = service.deletePostScript(postNo);
+					
+					if(result > 0) {
+						
+						new NoticeService().deleteNotice(postNo);
+					}
+					
+					resp.getWriter().print(result);
 				}
 				
 			}else if(command.equals("selectPostScript")) {
