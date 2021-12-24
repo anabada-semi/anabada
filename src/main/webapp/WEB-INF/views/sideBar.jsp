@@ -12,7 +12,11 @@
                 <div id="recently-item" style="font-family: 'GmarketSansMedium';">최근본상품</div>
                 <div id="recently-count"></div>
                 <div id="recently-dotted"></div>
-                <div id="recently-img"></div>
+                <div class="box-area"></div>
+                <div id="box-img">
+                	<%-- <div class="recently-img"><img src="img/koyang4.png"></div>  --%>
+                </div>
+                <div class="box-area"></div>
             </div>
             <div id="button-top">
                 <div><a href="#body-top" id="top-btn" style="font-family: 'GmarketSansMedium';">TOP</a></div>

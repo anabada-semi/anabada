@@ -45,8 +45,8 @@
         	</c:when>
         	<c:otherwise>
         		<c:forEach items="${itemList}" var="item">
-   			        <div class="item" id="it-1" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
-			            <img src="${contextPath}${item.imgList[0].imgPath}${item.imgList[0].imgName}">
+   			        <div class="item" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
+						<img src="${contextPath}${item.imgList[0].imgPath}${item.imgList[0].imgName}">
 			            <div class="item-title">${item.itemName}</div>
 			            <div class="item-content" style="font-weight: bold;">
 			                <span style="float: left;">${item.itemPrice}원</span>

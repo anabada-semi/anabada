@@ -55,6 +55,19 @@ public class SideBarServlet extends HttpServlet{
 			
 		}
 		
+		else if(command.equals("recently")){
+			
+			try {
+				
+				
+				
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		}
+		
 		
 	}
 	
