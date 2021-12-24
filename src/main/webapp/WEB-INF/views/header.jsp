@@ -47,11 +47,14 @@
 
 						<div id="search">
 							<div id="search-border">
+							
 								<form action="${contextPath}/categoryItem/search" method="GET">
 
 									<input type="text" id="search_input" name="search_input" placeholder="검색어 입력">
-									<img src="${contextPath}/resources/images/header+footer/검색.png" id="search-img">
-									<!-- id="search-img" onclick="location.href='${contextPath}/itemPage?cp=${loginMember.memberNo}';"> -->
+									<button>
+										<img src="${contextPath}/resources/images/header+footer/검색.png" id="search-img">
+										<%-- id="search-img" onclick="location.href='${contextPath}/itemPage?cp=${loginMember.memberNo}';"> --%>
+									</button>
 
 								</form>
 
