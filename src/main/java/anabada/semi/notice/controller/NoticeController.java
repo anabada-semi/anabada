@@ -1,7 +1,9 @@
 package anabada.semi.notice.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,18 +39,31 @@ public class NoticeController extends HttpServlet{
 		try {
 			if(command.equals("select")) {
 				
-				List<Notice> noticeList = service.selectNotice(loginMember.getMemberNo());
+				if(loginMember != null) {
+					
+					List<Notice> noticeList = service.selectNotice(loginMember.getMemberNo());
+					
+					List<Notice> noticeList2 = service.selectNotice2(loginMember.getMemberNo());
+					
+					noticeList.addAll(noticeList2);
+					
+					new Gson().toJson(noticeList, resp.getWriter());
+				}
 				
-				new Gson().toJson(noticeList, resp.getWriter());
+			}
+			
+			else if(command.equals("update")) {
+				
+				int noticeNo = Integer.parseInt(req.getParameter("noticeNo"));
+				
+				int result = service.updateNotice(noticeNo);
+				
+				new Gson().toJson(result, resp.getWriter());
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		
 		
 	}
 	

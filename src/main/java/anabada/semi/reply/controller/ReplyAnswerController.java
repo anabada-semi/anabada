@@ -42,13 +42,9 @@ public class ReplyAnswerController extends HttpServlet{
 				reply.setItemNo(itemNo);
 				reply.setReplyNo(replyNo);
 				reply.setReplyContent(replyContent);
-				
-//				System.out.println("result 전");
 
 				int result = service.insertReplyAnswer(reply);
 				 
-//				System.out.println("result: " + result);
-				
 				resp.getWriter().print(result);
 			}
 			

@@ -44,8 +44,6 @@ public class ReplyController extends HttpServlet{
 				
 				List<Reply> rList = service.selectReplyList(itemNo);
 				
-//				System.out.println("뭔데? "+ rList);
-				
 				new Gson().toJson(rList, resp.getWriter());	// 연결된 스트림을 이용하여 ajax로 값 전달
 				
 			}
@@ -66,8 +64,6 @@ public class ReplyController extends HttpServlet{
 					reply.setReplySecret(2);	// 비밀X
 				}
 				
-//				System.out.println("secret:"+reply.getReplySecret());
-				
 				reply.setMemberNo(memberNo);
 				reply.setItemNo(itemNo);
 				reply.setReplyContent(replyContent);
@@ -84,12 +80,8 @@ public class ReplyController extends HttpServlet{
 				
 				// 댓글이 db에 삽입되었을때 && 댓글 단 사람(로그인 한 사람) != 판매자
 				if(result > 0 && memberNo != itemMemberNo) {
-//					System.out.println("오나?");
-					int resultNotice = new NoticeService().insertNotice(notice);
-//					System.out.println("resultNotice: " + resultNotice);
+					new NoticeService().insertNotice(notice);
 				}
-				
-//				System.out.println("result: " + result);
 				
 				resp.getWriter().print(result);
 			}

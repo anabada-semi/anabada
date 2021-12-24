@@ -13,9 +13,12 @@ window.setInterval(function(){
 
       if(loginMemberNo.length != 0){  // 로그인 한 경우
 
-          // 이전 알림이 없다면 ==> noticeListSave에 알림이 저장되어 있지않다면
+          // 이전 알림이 없다면 ==> noticeListSave에 알림이 저장되어 있지않다면 => 로그인 했다면
           if(noticeListSave.length == 0){ 
             noticeListSave = selectListJson;  // 조회한 알람 대입
+
+            imgurl = contextPath+"/resources/images/header+footer/알림2.png";
+            // $("#notice-img").attr("src", imgurl).addClass("blink");
           }
 
           // 이전 알림이 있다면 ==> noticeListSave에 알림이 저장되어있다면
@@ -85,19 +88,27 @@ function clickNotice(){
           
           $.each(noticeList, function(index, noticeList){   // jQuery 반복문
             
-            let li = $("<li onclick='goNotice(1,this)'>")
-            
             if(noticeList.noticeContent == 1){  // 댓글이 달렸을 경우
-              // li.append(reply);
+              let li = $("<li onclick='goNotice(1, this, "+noticeList.noticeNo+")'>")
+              
               li.text(noticeList.itemName + " 상품에 댓글이 달렸습니다.");
               li.val(noticeList.itemNo);
               noticeUl.append(li);
             }
             
             else if(noticeList.noticeContent == 2 && noticeList.replyMemberNo != noticeList.memberNo){ // 대댓글이 달렸을 경우
+              let li = $("<li onclick='goNotice(1, this, "+noticeList.noticeNo+")'>")
               
               li.text(noticeList.itemName + "상품에 대댓글이 달렸습니다." );
               li.val(noticeList.itemNo);
+              noticeUl.append(li);
+            }
+            
+            else if(noticeList.noticeContent == 3){
+              let li = $("<li onclick='goNotice(2, this, "+noticeList.noticeNo+")'>")
+              
+              li.text("내 상점에 후기가 달렸습니다." );
+              li.val(noticeList.shopNo);
               noticeUl.append(li);
             }
           });
@@ -110,11 +121,12 @@ function clickNotice(){
   
 };
 
-
 // -----------------------------------------------------------------------------------------
-function goNotice(no, el){
-
+function goNotice(no, el, noticeNo){
+  
   let value = el.value;
+
+  console.log("noticeNo: " + noticeNo);
 
   // 댓글에 관한 알림이면
   if(no == 1){
@@ -122,12 +134,25 @@ function goNotice(no, el){
   } 
   // 후기에 관한 알림이면
   else{
-    location.href= contextPath+'/detailmyShop/myShop?no='+value;
+    location.href= contextPath+'/myShop/myShop?no='+value;
   }
+  
+  $.ajax({
+    url : contextPath + "/notice/update",
+    data : {"noticeNo" : noticeNo},
+    type : "POST",
+    success : function(result){
+
+      if(result == 0){
+        alert("업데이트 실패");
+      }
+      else{
+        console.log("업데이트 됨");
+      }
+    }
+  });
 
 }
-
-
 
 // -----------------------------------------------------------------------------------------
 // 알림 영역 벗어나면 div 영역 없어지게

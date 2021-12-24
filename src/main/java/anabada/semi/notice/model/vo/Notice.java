@@ -10,6 +10,7 @@ public class Notice {
 	private int memberNo;	// 댓글 단 사람(로그인 한 사람)
 	private int status;
 	private int ReplyMemberNo;
+	private int PostSCriptNo;	// 댓글 번호
 	
 	public Notice() {
 		// TODO Auto-generated constructor stub
@@ -69,11 +70,19 @@ public class Notice {
 		this.itemName = itemName;
 	}
 
+	public int getPostSCriptNo() {
+		return PostSCriptNo;
+	}
+
+	public void setPostSCriptNo(int postSCriptNo) {
+		PostSCriptNo = postSCriptNo;
+	}
+
 	@Override
 	public String toString() {
 		return "Notice [noticeNo=" + noticeNo + ", noticeContent=" + noticeContent + ", itemNo=" + itemNo
 				+ ", itemName=" + itemName + ", shopNo=" + shopNo + ", memberNo=" + memberNo + ", status=" + status
-				+ ", ReplyMemberNo=" + ReplyMemberNo + "]";
+				+ ", ReplyMemberNo=" + ReplyMemberNo + ", PostSCriptNo=" + PostSCriptNo + "]";
 	}
 
 	
