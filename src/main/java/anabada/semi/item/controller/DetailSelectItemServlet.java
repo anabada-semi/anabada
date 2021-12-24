@@ -73,7 +73,7 @@ public class DetailSelectItemServlet extends HttpServlet{
 				// 로그인한 회원의 세션 정보 얻어오기
 				Member loginMember = (Member)req.getSession().getAttribute("loginMember"); 
 				
-				//int memberNo = 0;
+				// int memberNo = 0;
 				
 				// 최근 본 상품 세션에 올리기
 				if(loginMember != null) {
@@ -87,7 +87,7 @@ public class DetailSelectItemServlet extends HttpServlet{
 					
 					recentItemList.add(itemImg.get(0));
 					
-					//memberNo = loginMember.getMemberNo();
+					// memberNo = loginMember.getMemberNo();
 					session.setAttribute("recentItemList", recentItemList);
 				}
 				
