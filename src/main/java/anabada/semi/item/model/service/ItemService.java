@@ -105,13 +105,14 @@ public class ItemService {
 	}
 
 
-	/** 게시글 수정
+	/** 게시글 수정 + 이미지 수정
 	 * @param item
 	 * @param imgList
+	 * @param deleteNo 
 	 * @return result
 	 * @throws Exception
 	 */
-	public int updateItem(Item item, List<ItemImg> imgList) throws Exception{
+	public int updateItem(Item item, List<ItemImg> imgList, List<String> deleteNo) throws Exception{
 		
 		Connection conn = getConnection();
 		
@@ -131,8 +132,23 @@ public class ItemService {
 				
 				if(result == 0) {
 					result = dao.insertItemImg(img, conn);
+					
+					}
+				}
+			
+			if(result > 0) {
+			for(String dn : deleteNo) {
+					
+					if(dn != "3") {
+						 result = dao.deleteItemImg(dn, item, conn);
+					}
 				}
 			}
+			
+			// 삭제
+			// deleteNo가 담긴 배열에 하나씩 꺼냄  1
+			// deleteNo == 파일 레벨 == 1
+			// DELETE FROM 이미지테이블 WHERE 게시글번호==10 이미지레벨==1
 			
 			if(result > 0) commit(conn);
 			else 		  rollback(conn);
@@ -145,6 +161,10 @@ public class ItemService {
 		
 		return result;
 	}
-	
+
+
+
+
+
 
 }
