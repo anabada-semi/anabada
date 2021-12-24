@@ -45,5 +45,12 @@
 		WHERE IMG_LEVEL = ?
 		AND ITEM_NO = ?
 	</entry>
+	
+		<!-- 아이템 이미지 삭제 -->
+	<entry key= "deleteItemImg">
+		DELETE FROM ITEM_IMG 
+		WHERE ITEM_NO = ?
+		AND IMG_LEVEL = ?
+	</entry>
 </properties>
 

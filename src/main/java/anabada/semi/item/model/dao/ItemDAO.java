@@ -208,8 +208,39 @@ public class ItemDAO {
 		return result;
 	}
 	
+
+	
+	/** 게시글 이미지 삭제 수정
+	 * @param dn
+	 * @param item
+	 * @param conn
+	 * @return  result
+	 * @throws Exception
+	 */
+	
+	public int deleteItemImg(String dn, Item item, Connection conn) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("deleteItemImg");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, item.getItemNo());
+			pstmt.setInt(2, Integer.parseInt(dn));
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 
 	
 }
+
