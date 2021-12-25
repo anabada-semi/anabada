@@ -26,6 +26,24 @@ public class NoticeService {
 		
 		List<Notice> noticeList = dao.selectNotice(loginMemberNo, conn);
 		
+		close(conn);
+		
+		return noticeList;
+	}
+	
+	/** 알림조회2
+	 * @param loginMemberNo
+	 * @return noticeList
+	 * @throws Exception
+	 */
+	public List<Notice> selectNotice2(int loginMemberNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		List<Notice> noticeList = dao.selectNotice2(loginMemberNo, conn);
+		
+		close(conn);
+		
 		return noticeList;
 	}
 
@@ -45,6 +63,61 @@ public class NoticeService {
 		
 		return result;
 	}
+
+	
+	/** 후기 번호 조회
+	 * @param shopNo
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int selectPostScriptNo(int shopNo, int memberNo) throws Exception{
+
+		Connection conn = getConnection();
+		
+		int result = dao.selectPostScriptNo(shopNo, memberNo, conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	/** 알림 삭제(후기)
+	 * @param postNo
+	 * @return result 
+	 * @throws Exception
+	 */
+	public int deleteNotice(int postNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.deleteNotice(postNo, conn);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	/** 읽음 업데이트
+	 * @param noticeNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateNotice(int noticeNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.updateNotice(noticeNo, conn);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
 	
 	
 	

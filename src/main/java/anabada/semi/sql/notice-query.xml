@@ -6,22 +6,22 @@
 	<entry key="selectNotice">
 		select * 
 		    from (
-		        SELECT A.NOTICE_NO, A.NOTICE_CONTENT, ITEM_NO, A.SHOP_NO, A.MEMBER_NO, A.REPLY_MEMBER_NO, ITEM_NM
+		        SELECT A.NOTICE_NO, A.NOTICE_CONTENT, ITEM_NO, A.SHOP_NO, A.MEMBER_NO, A.REPLY_MEMBER_NO, ITEM_NM, POSTSCRIRT_NO
 		        FROM NOTICE A
 		        JOIN ITEM USING(ITEM_NO)
 		        WHERE NOTICE_CONTENT = 1 AND STATUS = 1 AND SHOP_NO = ?
 		        UNION
-		        SELECT A.NOTICE_NO, A.NOTICE_CONTENT, ITEM_NO, A.SHOP_NO, A.MEMBER_NO, A.REPLY_MEMBER_NO, ITEM_NM
+		        SELECT A.NOTICE_NO, A.NOTICE_CONTENT, ITEM_NO, A.SHOP_NO, A.MEMBER_NO, A.REPLY_MEMBER_NO, ITEM_NM, POSTSCRIRT_NO
 		        FROM NOTICE A
 		        JOIN ITEM USING(ITEM_NO)
 		        WHERE NOTICE_CONTENT = 2 AND STATUS = 1 AND SHOP_NO = ?
 		        UNION
-		        SELECT A.NOTICE_NO, A.NOTICE_CONTENT, ITEM_NO, A.SHOP_NO, A.MEMBER_NO, A.REPLY_MEMBER_NO, ITEM_NM
+		        SELECT A.NOTICE_NO, A.NOTICE_CONTENT, ITEM_NO, A.SHOP_NO, A.MEMBER_NO, A.REPLY_MEMBER_NO, ITEM_NM, POSTSCRIRT_NO
 		        FROM NOTICE A
 		        JOIN ITEM USING(ITEM_NO)
 		        WHERE NOTICE_CONTENT = 2 AND STATUS = 1 AND REPLY_MEMBER_NO = ?
 		        UNION
-		        SELECT A.NOTICE_NO, A.NOTICE_CONTENT, ITEM_NO, A.SHOP_NO, A.MEMBER_NO, A.REPLY_MEMBER_NO, ITEM_NM
+		        SELECT A.NOTICE_NO, A.NOTICE_CONTENT, ITEM_NO, A.SHOP_NO, A.MEMBER_NO, A.REPLY_MEMBER_NO, ITEM_NM, POSTSCRIRT_NO
 		        FROM NOTICE A
 		        JOIN ITEM USING(ITEM_NO)
 		        WHERE A.NOTICE_CONTENT = 2 AND A.STATUS = 1 AND A.MEMBER_NO = ?
@@ -30,10 +30,38 @@
 		<![CDATA[where rownum <= 5]]>
 	</entry>
 
-	<!-- 댓글 알림 삽입 -->
+	<!-- 알림 조회(후기)-->
+	<entry key="selectNotice2">
+		SELECT NOTICE_NO, NOTICE_CONTENT, SHOP_NO, MEMBER_NO, REPLY_MEMBER_NO, POSTSCRIRT_NO
+		FROM NOTICE 
+		WHERE NOTICE_CONTENT = 3 AND STATUS = 1 AND SHOP_NO = ?
+		ORDER BY NOTICE_NO
+	</entry>
+
+	<!-- 알림 삽입 -->
 	<entry key="insertNotice">
 		INSERT INTO NOTICE VALUES
-		(SEQ_NOTICE_NO.nextval, ?, ?, ?, ?, DEFAULT, ?)
+		(SEQ_NOTICE_NO.nextval, ?, ?, ?, ?, DEFAULT, ?, ?)
+	</entry>
+
+	<!-- 후기 번호 조회 -->
+	<entry key="selectPostScriptNo">
+		select POSTSCRIPT_NO
+		from POSTSCRIPT
+		where SHOP_NO = ? and MEMBER_NO = ? and <![CDATA[rownum < 2]]>
+		order by POSTSCRIPT_NO desc
+	</entry>
+
+	<!-- 알림 삭제 -->
+	<entry key="deleteNotice">
+		DELETE FROM NOTICE 
+		WHERE NOTICE_CONTENT = 3 and POSTSCRIRT_NO = ?
+	</entry>
+
+	<!-- 읽음 얻데이트 -->
+	<entry key="updateNotice">
+		update notice set STATUS = 2
+		where NOTICE_NO = ?
 	</entry>
 
 	

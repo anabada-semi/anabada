@@ -68,8 +68,6 @@ public class DetailSelectItemServlet extends HttpServlet{
 				// 상품 이미지 조회
 				List<ItemImg> itemImg = service.selectItemImg(itemNo);
 				
-//				System.out.println("ItemImg: " + itemImg);
-				
 				req.setAttribute("itemImg", itemImg);	// 상품 이미지
 				
 				// 로그인한 회원의 세션 정보 얻어오기
@@ -133,7 +131,7 @@ public class DetailSelectItemServlet extends HttpServlet{
 				
 				int itemNo = Integer.parseInt(req.getParameter("itemNo"));
 				
-				int result = service.updateView(itemNo);
+				service.updateView(itemNo);
 				
 				int view = service.selectView(itemNo);
 				
