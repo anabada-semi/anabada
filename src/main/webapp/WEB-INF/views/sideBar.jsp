@@ -16,7 +16,7 @@
                 <div class="box-area"></div>
                 <div id="box-img">
                 	<c:forEach items="${recentItemList}" var="itemImg"> 
-                		<div class="recently-img" onclick="location.href='${contextPath}/detail/select?no=${itemImg.itemNo}&cp=${pagination.currentPage}'">
+                		<div class="recently-img" onclick="location.href='${contextPath}/detail/select?no=${itemImg.itemNo}'">
                				<img src="${contextPath}${itemImg.imgPath}${itemImg.imgName}">
                 		</div>
                 	<!-- 중복제거 , 개수제한-->

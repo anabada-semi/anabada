@@ -83,26 +83,52 @@ public class DetailSelectItemServlet extends HttpServlet{
 				
 				// 최근 본 상품 세션에 올리기
 				List<ItemImg> recentItemList = null;
+				int recentCount = 1; // 박스 개수 체크용 변수
+				boolean recentCheck = true; // 중복 체크용 변수
+				
 				
 				if(session.getAttribute("recentItemList") == null) {
 					recentItemList = new ArrayList<ItemImg>();
+					
 				}else {
-					// overLap = (List<ItemImg>)session.getAttribute("")
 					recentItemList = (List<ItemImg>)session.getAttribute("recentItemList");
 					
-					// Set<ItemImg> set = new HashSet<ItemImg>(recentItemList); // SET은 중복허용이 안된다고 아는데 흠..
-					// List<ItemImg> tran = new ArrayList<ItemImg>(set); // 
-					// recentItemList = tran;
+					// 중복 방지
+					for(ItemImg i : recentItemList) {
+
+						if(itemNo == i.getItemNo()) {
+							System.out.println(i.getItemNo() + "중복");
+							recentCheck = false;
+							--recentCount;
+							System.out.println("중복빼기" + recentCount + "개");
+						}
+						// 중복이 아니면 박스 1 추가
+						++recentCount;
+						System.out.println(recentCount + "개");							
+					
+					}
+
 				}
 				System.out.println(recentItemList);
 				
-				if(itemImg.get(0) != null) {
-					recentItemList.add(itemImg.get(0));					
+				if(recentCheck) {
+					recentItemList.add(itemImg.get(0));		
+					//Set<ItemImg> set = new HashSet<ItemImg>(recentItemList); // SET은 중복허용이 안된다고 아는데 흠..
+					//List<ItemImg> tran = new ArrayList<ItemImg>(set); // 
+					//recentItemList = tran;
+					System.out.println(recentItemList);
+					session.setAttribute("recentItemList", recentItemList);
+					
+					// 공간이 5개 초과하면 
+					if(recentCount > 5) {
+						recentItemList.remove(0); // 0번 인덱스 ItemImg 삭제
+					}
+					
+
+
 				}
 				
-				System.out.println(recentItemList);
 				
-				session.setAttribute("recentItemList", recentItemList);
 				
 				
 				// 댓글 조회하기
