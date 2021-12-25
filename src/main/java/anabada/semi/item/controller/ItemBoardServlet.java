@@ -1,6 +1,7 @@
 package anabada.semi.item.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -47,8 +48,17 @@ public class ItemBoardServlet extends HttpServlet{
 				// 글 목록 조회
 				List<Item> itemList = service.categoryItemList(pagination, categoryTag);
 				
+				// 가격 천 단위 소수점 표기
+				DecimalFormat df = new DecimalFormat("###,###");
+				
 				for(Item item : itemList) {
+					// 시간 변환
 					item.setDate(Time.calculateTime(item.getItemDate()));
+					
+					// 소수점 변환
+					int dfnum = Integer.parseInt(item.getItemPrice());
+					String price = df.format(dfnum);
+					item.setItemPrice(price);
 				}
 				
 				// 카테고리 목록 조회
@@ -82,8 +92,17 @@ public class ItemBoardServlet extends HttpServlet{
 				// 글 목록 조회
 				List<Item> itemList = service.searchItemList(pagination, searchInput);
 				
+				// 가격 천 단위 소수점 표기
+				DecimalFormat df = new DecimalFormat("###,###");
+				
 				for(Item item : itemList) {
+					// 시간 변환
 					item.setDate(Time.calculateTime(item.getItemDate()));
+					
+					// 소수점 변환
+					int dfnum = Integer.parseInt(item.getItemPrice());
+					String price = df.format(dfnum);
+					item.setItemPrice(price);
 				}
 				
 				req.setAttribute("searchInput", searchInput);
