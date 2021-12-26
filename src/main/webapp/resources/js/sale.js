@@ -1,3 +1,5 @@
+// 이미지 등록 유무 검사용 변수
+let imgInputCount = 0;
 
 
 // 제목 40글자
@@ -70,6 +72,12 @@ function saleValidate() {
             return false;
 
         }
+
+		// 상품 이미지 최소 1장 검사
+		if(imgInputCount <= 0){
+			alert("상품 이미지를 최소 한 장 넣어주세요.");
+			return false;
+		}
     
     }
 
@@ -97,6 +105,9 @@ function loadImg(value, num){
            
 
             $(".itemImg").eq(num).children("img").attr("src",e.target.result);
+			
+			// 상품 이미지 추가 Count + 1
+			imgInputCount = imgInputCount + 1;
             
         }
     }
@@ -119,6 +130,8 @@ $(".deleteBtn").on("click", function(e){
 	const input = $("<input type='hidden' name='deleteNo'>").val(index);
 	$("#guide").append(input);
 	
+	// 상품 이미지 삭제 Count - 1
+	imgInputCount = imgInputCount - 1;
 	
 });
 
