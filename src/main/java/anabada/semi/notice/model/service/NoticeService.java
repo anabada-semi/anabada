@@ -117,6 +117,33 @@ public class NoticeService {
 		
 		return result;
 	}
+	
+
+	/** 봄 업데이트
+	 * @param noticeList
+	 * @return result
+	 * @throws Exception
+	 */
+
+	public int updateView(List<Notice> noticeList) throws Exception{
+		
+		int result = 0;
+		
+		Connection conn = getConnection();
+		
+		for(Notice notice : noticeList) {
+			
+			result = dao.updateView(notice, conn);
+			if(result == 0) rollback(conn);
+		}
+		
+		if(result > 0)	commit(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
 
 	
 	

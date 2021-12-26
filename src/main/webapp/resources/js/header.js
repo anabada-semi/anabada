@@ -1,15 +1,18 @@
 let noticeListSave = []; // 비어있는 배열(리스트)
 let imgurl = contextPath+"/resources/images/header+footer/알림.png";
 
-window.setInterval(function(){ 
-  // 알람 테이블 조회 ajax
-  
+selectNoticeList();
+
+// 알림 조회 함수
+function selectNoticeList(){
   $.ajax({
     url : contextPath + "/notice/select",
     dataType : "JSON",
-    success : function(selectList){
+    success : function (selectList){
       
-      const selectListJson = JSON.stringify(selectList); 
+      const selectListJson = JSON.stringify(selectList);
+
+      console.log(selectListJson);
 
       if(loginMemberNo.length != 0){  // 로그인 한 경우
 
@@ -17,8 +20,17 @@ window.setInterval(function(){
           if(noticeListSave.length == 0){ 
             noticeListSave = selectListJson;  // 조회한 알람 대입
 
-            imgurl = contextPath+"/resources/images/header+footer/알림2.png";
-            // $("#notice-img").attr("src", imgurl).addClass("blink");
+            $.each(selectList, function(index, selectList){   // jQuery 반복문
+
+              if(selectList.status == 1){ // 삽입된 알림이면(보지 않았다면)
+
+                imgurl = contextPath+"/resources/images/header+footer/알림2.png";
+                $("#notice-img").attr("src", imgurl).addClass("blink");
+                return false;
+              }
+
+            });
+
           }
 
           // 이전 알림이 있다면 ==> noticeListSave에 알림이 저장되어있다면
@@ -26,31 +38,41 @@ window.setInterval(function(){
             
             // 조회한 알림과 이전 알림이 다를 때
             if(selectListJson != noticeListSave){
+              console.log("조회한 알림과 이전 알림이 다를 때");
 
-              if(selectListJson.length >= noticeListSave.length ){
-
-                // 이미지 빨간색 & 깜빡임 효과
-                imgurl = contextPath+"/resources/images/header+footer/알림2.png";
-                $("#notice-img").attr("src", imgurl).addClass("blink");
-              }
-
+                imgurl = contextPath+"/resources/images/header+footer/알림.png";
+                $("#notice-img").attr("src", imgurl).removeClass("blink");
             }
 
             // 조회한 알림과 이전 알림이 같을 때
             if(selectListJson == noticeListSave){
+              console.log("조회 알람과 이전 알림이 같을때");
+              $.each(selectList, function(index, selectList){   // jQuery 반복문
 
-              imgurl = contextPath+"/resources/images/header+footer/알림.png";
-              $("#notice-img").attr("src", imgurl).removeClass("blink");
+                if(selectList.status == 1){ // 삽입된 알림이면(보지 않았다면)
+                  
+                  imgurl = contextPath+"/resources/images/header+footer/알림2.png";
+                  $("#notice-img").attr("src", imgurl).addClass("blink");
+                  return false;
+                }
+                else{
+                  imgurl = contextPath+"/resources/images/header+footer/알림.png";
+                  $("#notice-img").attr("src", imgurl).removeClass("blink");
+                }
+              });
+
             }
 
           } /* end else */
-
       } /* end if */
-  
     } /* end function */
+  });
+}
 
-  }); /* end ajax */
-
+// 10초마다 알림 조회 
+window.setInterval(function selectNotice(){ 
+  // 알람 테이블 조회 ajax
+  selectNoticeList();
 }, 10000); // 10초마다 반복
 
 // -----------------------------------------------------------------------------------------
@@ -60,7 +82,7 @@ function clickNotice(){
   imgurl = contextPath+"/resources/images/header+footer/알림.png";
   
   $.ajax({
-    url : contextPath + "/notice/select",
+    url : contextPath + "/notice/updateView",
     dataType : "JSON",
     success : function(noticeList){
       

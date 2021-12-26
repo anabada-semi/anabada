@@ -46,6 +46,27 @@ public class NoticeController extends HttpServlet{
 					List<Notice> noticeList2 = service.selectNotice2(loginMember.getMemberNo());
 					
 					noticeList.addAll(noticeList2);
+
+					new Gson().toJson(noticeList, resp.getWriter());
+				}
+				
+			}
+			
+			else if(command.equals("updateView")) {
+				
+				if(loginMember != null) {
+					
+					List<Notice> noticeList = service.selectNotice(loginMember.getMemberNo());
+					
+					List<Notice> noticeList2 = service.selectNotice2(loginMember.getMemberNo());
+					
+					noticeList.addAll(noticeList2);
+					
+					
+					if(!noticeList.isEmpty()) {
+						
+						service.updateView(noticeList);
+					}
 					
 					new Gson().toJson(noticeList, resp.getWriter());
 				}
@@ -54,7 +75,7 @@ public class NoticeController extends HttpServlet{
 			
 			else if(command.equals("update")) {
 				
-				int noticeNo = Integer.parseInt(req.getParameter("noticeNo"));
+				int noticeNo = Integer.parseInt(req.getParameter("noticeList"));
 				
 				int result = service.updateNotice(noticeNo);
 				
