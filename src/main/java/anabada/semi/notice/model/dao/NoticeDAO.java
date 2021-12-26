@@ -66,6 +66,7 @@ public class NoticeDAO {
 				notice.setReplyMemberNo(rs.getInt("REPLY_MEMBER_NO"));
 				notice.setItemName(rs.getString("ITEM_NM"));
 				notice.setPostSCriptNo(rs.getInt("POSTSCRIRT_NO"));
+				notice.setStatus(rs.getInt("STATUS"));
 				
 				noticeList.add(notice);
 			}
@@ -105,6 +106,7 @@ public class NoticeDAO {
 				notice.setMemberNo(rs.getInt("MEMBER_NO"));
 				notice.setReplyMemberNo(rs.getInt("REPLY_MEMBER_NO"));
 				notice.setPostSCriptNo(rs.getInt("POSTSCRIRT_NO"));
+				notice.setStatus(rs.getInt("STATUS"));
 				
 				noticeList.add(notice);
 			}
@@ -211,7 +213,32 @@ public class NoticeDAO {
 			String sql = prop.getProperty("updateNotice");
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, noticeNo);
+			pstmt.setInt(1, 2);
+			pstmt.setInt(2, noticeNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	/** 봄 업데이트
+	 * @param noticeList
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateView(Notice notice, Connection conn) throws Exception{
+		int result = 0; 
+		
+		try {
+			String sql = prop.getProperty("updateNotice");
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, 3);
+			pstmt.setInt(2, notice.getNoticeNo());
 			
 			result = pstmt.executeUpdate();
 			
