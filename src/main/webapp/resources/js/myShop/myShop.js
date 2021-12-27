@@ -263,7 +263,15 @@ function selectitemList() {
 
                     const itD = $('<div class="itemTextDiv">');
 
-                    const it1 = $('<div class="itemText1">' + item.itemName + '<div>');
+                    let itemName = item.itemName;
+                    let it1;
+                    if(itemName.length > 10){
+                        it1 = $('<div class="itemText1">' + itemName.substring(0, 13) + "..." + '<div>');
+                    }else{
+                        it1 = $('<div class="itemText1">' + itemName + '<div>');
+                    }
+
+                    // const it1 = $('<div class="itemText1">' + ssitemName + '<div>');
                     const it2 = $('<div class="itemText2">' + parseInt(item.itemPrice).toLocaleString() + '원<div>');
                     const it3 = $('<div class="itemText3">' + item.uploadDate + '<div>');
 
@@ -785,7 +793,7 @@ $(document).on("click", ".userPostUpdate", function(){
         flag = true;
     }
 
-    console.log(postNum, nowIndex);
+    // console.log(postNum, nowIndex);
 });
 
 /* 상점 후기 삭제 */
