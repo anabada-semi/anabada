@@ -103,6 +103,7 @@ public class ItemController extends HttpServlet{
 							temp.setImgLevel( level );
 							
 							imgList.add(temp);
+							
 							level++;
 						}
 						
@@ -190,6 +191,8 @@ public class ItemController extends HttpServlet{
 				
 				List<ItemImg> imgList = new ArrayList<ItemImg>();
 				
+				int level = 0;
+				
 				while(files.hasMoreElements()){
 					
 					String name = files.nextElement(); 
@@ -201,10 +204,11 @@ public class ItemController extends HttpServlet{
 						temp.setImgName(mReq.getFilesystemName(name));
 						temp.setImgOriginal(mReq.getOriginalFileName(name));
 						temp.setImgPath(filePath);
-						temp.setImgLevel( Integer.parseInt(name.replace("img", "") ) );
+						temp.setImgLevel( level );
 						temp.setItemNo(itemNo);
 						
 						imgList.add(temp);
+						level++;
 					}
 						
 				}
