@@ -12,8 +12,6 @@ function selectNoticeList(){
       
       const selectListJson = JSON.stringify(selectList);
 
-      console.log(selectListJson);
-
       if(loginMemberNo.length != 0){  // 로그인 한 경우
 
           // 이전 알림이 없다면 ==> noticeListSave에 알림이 저장되어 있지않다면 => 로그인 했다면
@@ -38,15 +36,13 @@ function selectNoticeList(){
             
             // 조회한 알림과 이전 알림이 다를 때
             if(selectListJson != noticeListSave){
-              console.log("조회한 알림과 이전 알림이 다를 때");
-
+              
                 imgurl = contextPath+"/resources/images/header+footer/알림.png";
                 $("#notice-img").attr("src", imgurl).removeClass("blink");
             }
 
             // 조회한 알림과 이전 알림이 같을 때
             if(selectListJson == noticeListSave){
-              console.log("조회 알람과 이전 알림이 같을때");
               $.each(selectList, function(index, selectList){   // jQuery 반복문
 
                 if(selectList.status == 1){ // 삽입된 알림이면(보지 않았다면)
