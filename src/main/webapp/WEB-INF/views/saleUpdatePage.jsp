@@ -7,7 +7,7 @@
 	<jsp:include page="header.jsp" />
 	
     <main>
-     <div id="title"><h3>상품등록</h3></div>
+     <div id="title"><h3>상품수정</h3></div>
         <form action="update" method="post" enctype="multipart/form-data"  role="form" onsubmit="return saleValidate();">
             <section>
             <h2>기본정보</h2>
