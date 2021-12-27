@@ -101,7 +101,6 @@ public class ItemController extends HttpServlet{
 							temp.setImgLevel( Integer.parseInt(name.replace("img", "") ) );
 							
 							imgList.add(temp);
-							
 						}
 						
 					}

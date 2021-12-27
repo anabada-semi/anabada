@@ -136,6 +136,7 @@ public class ItemSelectDAO {
 				img.setImgName(rs.getString("IMG_NM"));
 				img.setImgPath(rs.getString("IMG_PATH"));
 				img.setImgLevel(rs.getInt("IMG_LEVEL"));
+				img.setItemNo(itemNo); // 최근 본 상품을 위해 추가
 				
 				itemImg.add(img);
 			}

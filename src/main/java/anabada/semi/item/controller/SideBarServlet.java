@@ -31,19 +31,22 @@ public class SideBarServlet extends HttpServlet{
 			
 		ItemBoardService service = new ItemBoardService();
 		
-		HttpSession session = req.getSession();
-		Member loginMember = (Member)session.getAttribute("loginMember");
-		int memberNo = 0;
-		if(loginMember != null) {
-			memberNo = loginMember.getMemberNo();
-		};
-		
 		// 찜 카운트 ajax
 		if(command.equals("wish")){
 		
 			try {
+				
+				HttpSession session = req.getSession();
+				
+				int memberNo = 0;
+				
+				Member loginMember = (Member)session.getAttribute("loginMember");
+				
+				if(loginMember != null) {
+					memberNo = loginMember.getMemberNo();
+				};
+				
 				int result = service.wishCount(memberNo);
-				System.out.println(result);
 				
 				PrintWriter out = resp.getWriter();
 				out.print(result);

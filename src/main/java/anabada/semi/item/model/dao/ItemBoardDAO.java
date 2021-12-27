@@ -281,11 +281,12 @@ public class ItemBoardDAO {
 
 	/** 검색된 글 수
 	 * @param searchInput
+	 * @param searchInput2 
 	 * @param conn
 	 * @return listCount
 	 * @throws Exception
 	 */
-	public int getSearchPagination(String searchInput, Connection conn) throws Exception {
+	public int getSearchPagination(String searchInput, String searchInput2, Connection conn) throws Exception {
 		
 		int listCount = 0;
 		
@@ -295,6 +296,7 @@ public class ItemBoardDAO {
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, searchInput);
+			pstmt.setString(2, searchInput2);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -315,11 +317,12 @@ public class ItemBoardDAO {
 	/** 검색된 글 목록 조회
 	 * @param pagination
 	 * @param searchInput
+	 * @param searchInput2 
 	 * @param conn
 	 * @return itemList
 	 * @throws Exception
 	 */
-	public List<Item> searchItemList(Pagination pagination, String searchInput, Connection conn) throws Exception {
+	public List<Item> searchItemList(Pagination pagination, String searchInput, String searchInput2, Connection conn) throws Exception {
 		
 		List<Item> itemList = new ArrayList<Item>();
 		
@@ -332,8 +335,9 @@ public class ItemBoardDAO {
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, searchInput);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setString(2, searchInput2);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 			
 			rs = pstmt.executeQuery();
 			

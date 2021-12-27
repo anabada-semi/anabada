@@ -46,7 +46,16 @@
         	<c:otherwise>
         		<c:forEach items="${itemList}" var="item">
    			        <div class="item" id="${item.itemNo}" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
-						<img src="${contextPath}${item.imgList[0].imgPath}${item.imgList[0].imgName}">
+						
+						<c:choose>
+							<c:when test="${empty item.imgList}">
+								<img src="${contextPath}/resources/images/main/koyang4.png">				
+							</c:when>
+							<c:otherwise>
+								<img src="${contextPath}${item.imgList[0].imgPath}${item.imgList[0].imgName}">
+							</c:otherwise>
+						</c:choose>
+						
 			            <div class="item-title">${item.itemName}</div>
 			            <div class="item-content" style="font-weight: bold;">
 			                <span style="float: left;">${item.itemPrice}원</span>

@@ -27,7 +27,7 @@
         		<c:forEach items="${itemList}" var="item">
         			<c:set var="addr" value="${fn:split(item.address, ',,')}"/>
         			
-   			        <div class="item" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
+   			        <div class="item" id="${item.itemNo}" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
 			            <img src="${contextPath}${item.imgList[0].imgPath}${item.imgList[0].imgName}">
 			            <div class="item-title">${item.itemName}</div>
 			            <div class="item-content" style="font-weight: bold;">
@@ -42,18 +42,18 @@
         
         <div class="page-button">
         	<div class="page-box">
-	            <div class="move-button page-div" onclick="location.href='search?cp=${pagination.prevPage}'">&lt;</div>
+	            <div class="move-button page-div" onclick="location.href='search?search_input=${searchInput}&cp=${pagination.prevPage}'">&lt;</div>
 	            <c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" step="1" var="i">
 					<c:choose>
 						<c:when test="${i == pagination.currentPage}">
 							<div class="current-div" style="background-color: #ccc;">${i}</div>								
 						</c:when>
 						<c:otherwise>
-							<div class="page-div" onclick="location.href='search?cp=${i}'">${i}</div>
+							<div class="page-div" onclick="location.href='search?search_input=${searchInput}&cp=${i}'">${i}</div>
 						</c:otherwise>
 					</c:choose>
 	            </c:forEach>
-	            <div class="move-button page-div" onclick="location.href='search?cp=${pagination.nextPage}'">&gt;</div>
+	            <div class="move-button page-div" onclick="location.href='search?search_input=${searchInput}&cp=${pagination.nextPage}'">&gt;</div>
         	</div>
         </div>
 

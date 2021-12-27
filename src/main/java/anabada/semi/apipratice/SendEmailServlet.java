@@ -44,7 +44,7 @@ public class SendEmailServlet extends HttpServlet{
        final String username = "kohyeongsuck@gmail.com";		//"구글 이메일";         
        final String password = "kohyungsuck1!";		//"발급받은 비밀번호";
        
-       int ran = (int)(Math.random() * 999999) + 100000;
+       int ran = (int)(Math.random() * 900000) + 100000;
        
        // 세션에 인증번호 담기
        HttpSession mailcheck = req.getSession();

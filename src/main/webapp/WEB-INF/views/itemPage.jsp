@@ -71,8 +71,17 @@
         		<c:forEach items="${itemList}" var="item">
         			<c:set var="addr" value="${fn:split(item.address, ',,')}"/>
         			
-   			        <div class="item" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
-			            <img src="${contextPath}${item.imgList[0].imgPath}${item.imgList[0].imgName}">
+   			        <div class="item" id="${item.itemNo}" onclick="location.href='${contextPath}/detail/select?no=${item.itemNo}&cp=${pagination.currentPage}'">
+			            
+			            <c:choose>
+							<c:when test="${empty item.imgList}">
+								<img src="${contextPath}/resources/images/main/koyang4.png">				
+							</c:when>
+							<c:otherwise>
+								<img src="${contextPath}${item.imgList[0].imgPath}${item.imgList[0].imgName}">
+							</c:otherwise>
+						</c:choose>
+			            
 			            <div class="item-title">${item.itemName}</div>
 			            <div class="item-content" style="font-weight: bold;">
 			                <span style="float: left;">${item.itemPrice}원</span>
@@ -86,18 +95,18 @@
         
         <div class="page-button">
         	<div class="page-box">
-	            <div class="move-button page-div" onclick="location.href='list?cp=${pagination.prevPage}'">&lt;</div>
+	            <div class="move-button page-div" onclick="location.href='list?category-tag=${categoryTag}&cp=${pagination.prevPage}'">&lt;</div>
 	            <c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" step="1" var="i">
 					<c:choose>
 						<c:when test="${i == pagination.currentPage}">
 							<div class="current-div" style="background-color: #ccc;">${i}</div>								
 						</c:when>
 						<c:otherwise>
-							<div class="page-div" onclick="location.href='list?category-tag=${categoryTag}?cp=${i}'">${i}</div>
+							<div class="page-div" onclick="location.href='list?category-tag=${categoryTag}&cp=${i}'">${i}</div>
 						</c:otherwise>
 					</c:choose>
 	            </c:forEach>
-	            <div class="move-button page-div" onclick="location.href='list?cp=${pagination.nextPage}'">&gt;</div>
+	            <div class="move-button page-div" onclick="location.href='list?category-tag=${categoryTag}&cp=${pagination.nextPage}'">&gt;</div>
         	</div>
         </div>
 
