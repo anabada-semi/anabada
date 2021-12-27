@@ -18,9 +18,7 @@
             <div class="category">
                 <img src="${contextPath}/resources/images/itemIcon/home.png"> 홈 >
                
-               	<label>카테고리</label>
-
-                <select class="item-category-list">
+                <select class="item-category-list" onchange="categoryClick(this)">
                     <c:forEach items="${categoryList}" var="c">
 
                         <c:choose>
