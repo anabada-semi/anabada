@@ -52,6 +52,21 @@ public class ShopDAO {
 		}
 		return result;
 	}
+	public int updateMemberName(String inputName, int memberNo, Connection conn) throws Exception {
+		int result = 0;
+		try {
+			String sql = prop.getProperty("updateMemberName");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, inputName);
+			pstmt.setInt(2, memberNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 	public int updateShopContent(String inputContent, int memberNo, Connection conn) throws Exception {
 		int result = 0;
@@ -334,6 +349,7 @@ public class ShopDAO {
 		}
 		return result;
 	}
+
 	
 	
 }

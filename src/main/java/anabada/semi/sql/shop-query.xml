@@ -4,6 +4,9 @@
 	<entry key="updateShopName">
 		UPDATE SHOP SET SHOP_NM = ? WHERE MEMBER_NO = ?
 	</entry>
+	<entry key="updateMemberName">
+		UPDATE MEMBER SET MEMBER_NM = ? WHERE MEMBER_NO = ?
+	</entry>
 	
 	<entry key="updateShopContent">
 		UPDATE SHOP SET SHOP_INTRODUCE = ? WHERE MEMBER_NO = ?

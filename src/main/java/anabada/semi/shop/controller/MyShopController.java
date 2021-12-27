@@ -120,7 +120,6 @@ public class MyShopController extends HttpServlet {
 					int result = service.updateShopName(inputName, memberNo);
 					
 					if(result > 0) {
-						
 						shop =  new MemberService().selectShop(loginMember.getMemberNo());
 						session.setAttribute("locationShop", shop);
 					}
