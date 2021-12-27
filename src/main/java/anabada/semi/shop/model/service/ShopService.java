@@ -16,11 +16,16 @@ public class ShopService {
 	private ShopDAO dao = new ShopDAO();
 
 	public int updateShopName(String inputName, int memberNo) throws Exception {
+		int i = 0;
 		Connection conn = getConnection();
 		
 		int result = dao.updateShopName(inputName, memberNo, conn);
+		int r = dao.updateMemberName(inputName, memberNo, conn);
 		
-		if(result > 0)	{
+		if(result > 0 && result == r)	i = 1;
+		else							i = 0;
+		
+		if(i > 0)	{
 			commit(conn);
 			new Shop().setShopName(inputName);
 		}
@@ -28,7 +33,7 @@ public class ShopService {
 		
 		close(conn);
 		
-		return result;
+		return i;
 	}
 
 	public int updateShopContent(String inputContent, int memberNo) throws Exception {
