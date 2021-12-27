@@ -58,7 +58,16 @@
                         <select id="categoryCode" name="categoryCode" size=8 style="width: 250px;">
                             
                            <c:forEach items="${category}" var="c">
-	                    	 <option value="${c.categoryCode}">${c.categoryName}</option>
+                           
+                            <c:choose>
+	                            <c:when test="${c.categoryCode == 100}">
+	                                <option value="${c.categoryCode}" selected>${c.categoryName}</option>
+	                            </c:when>
+	                            <c:otherwise>
+	                                <option value="${c.categoryCode}">${c.categoryName}</option>
+	                            </c:otherwise>
+	                        </c:choose>
+	                        
 	                  	</c:forEach>
                         </select>
                     </div>
