@@ -103,5 +103,4 @@
     <!-- footer include -->
 	<jsp:include page="footer.jsp" />
 
-
     <script src="${contextPath}/resources/js/sale.js"></script>
