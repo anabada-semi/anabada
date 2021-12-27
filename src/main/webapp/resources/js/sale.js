@@ -1,14 +1,6 @@
 // 이미지 등록 유무 검사용 변수
 let imgInputCount = 0;
 
-// for(let i = 0; i < 3; i++){
-//     let count = $(".itemImg > img").eq(i).attr("src").length;
-//     if(count != 0){
-//         imgInputCount = imgInputCount + 1;
-//     }
-//  } 
-
-// console.log("itemImgList.legth: " + itemImgList.length);
 // 제목 40글자
 $(".input_title").on("input" , function(){
 
@@ -81,10 +73,21 @@ function saleValidate() {
         }
 
 		// 상품 이미지 최소 1장 검사
-		if(imgInputCount <= 0){
+		for(let i = 0; i < 3; i++){
+			let flag = false;
+		    let count = $(".itemImg > img").eq(i).attr("src").length;
+
+		    if(count != 0)	flag = true;
+		}
+		
+		if(!flag){
 			alert("상품 이미지를 최소 한 장 넣어주세요.");
 			return false;
 		}
+		/*if(imgInputCount <= 0){
+			alert("상품 이미지를 최소 한 장 넣어주세요.");
+			return false;
+		}*/
     
     }
 
@@ -118,9 +121,6 @@ function loadImg(value, num){
             
         }
     }
-
-
-
 }
 
 
