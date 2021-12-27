@@ -330,6 +330,7 @@ function wishList(){
             }else{
 
                 $.each(r, function (index, wish) {
+                    console.log(wish.itemName.length);
                     
                     // if(itemPk == wish.itemNo){
                     //     return;
@@ -348,7 +349,13 @@ function wishList(){
 
                     const wtd = $('<div class="wishTextDiv">');
                     const wTitle = $('<div class="wishTitle">');
-                    wTitle.text(wish.itemName);
+
+                    let itemName = wish.itemName;
+                    if(itemName.length > 8){
+                        wTitle.text(itemName.substr(0,9) + "...");
+                    }else{
+                        wTitle.text(itemName);
+                    }
 
                     const wdBtn = $('<button class="wishDeleteBtn">');
                     wdBtn.text('찜 삭제');
@@ -424,7 +431,13 @@ function buyPage(){
 
                     const btd = $('<div class="buyTextDiv">');
                     const bt1 = $('<div class="buyText1">');
-                    bt1.append(buyList.itemName);
+
+                    let itemName = buyList.itemName;
+                    if(itemName.length > 10){
+                        bt1.append(itemName.substring(0, 13) + "...");
+                    }else{
+                        bt1.append(itemName);
+                    }
 
                     const bt2 = $('<div class="buyText2">');
                     bt2.append(parseInt(buyList.itemPrice).toLocaleString() + "원");
