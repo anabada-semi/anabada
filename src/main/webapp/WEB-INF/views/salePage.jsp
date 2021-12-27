@@ -31,13 +31,13 @@
                         
                         
                         <div id=fileArea">
-                        <input type="file" name="img0" onchange="loadImg(this,0)">
+                        <input type="file" name="img0" onchange="loadImg(this,0)" required>
                         <input type="file" name="img1" onchange="loadImg(this,1)">
                         <input type="file" name="img2" onchange="loadImg(this,2)">
                         </div>
                        
                         <div id="guide">
-                            - 이미지는 최소 1장 등록해야하며 최대 3장까지 등록 가능합니다.
+                            - <span>이미지는 최소 1장 등록</span>해야하며 최대 3장까지 등록 가능합니다.
                             <br>
                             - 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
                         </div>
