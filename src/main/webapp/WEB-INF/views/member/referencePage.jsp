@@ -17,9 +17,6 @@
                         <td colspan="2"><input type="number" name="inputKey" id="inputKey"></td>
                         <td><button id="key-Btn">확인</button></td>
                     </tr>
-                    <tr>
-                    	<td id="keyTime" style="color: #ccc;">05:00</td>
-                    </tr>
                 </table>
             </form>
         </div>
