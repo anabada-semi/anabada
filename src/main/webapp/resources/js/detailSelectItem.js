@@ -22,7 +22,7 @@ function selectReplyList() {
                     const replyRow = $('<li class="reply-row">');
                     const replyPadding = $("<div>").addClass("reply-padding");
                     
-                    const rWriter = $('<p class="rWriter">').text(reply.memberName);
+                    const rWriter = $('<p class="rWriter">').text(reply.memberName).attr("id",reply.memberNo);
                     const rDate = $('<p class="rDate">').text("작성일 : " + date);
 
                     const answerArea = $("<div>").addClass("answerArea");
@@ -72,7 +72,7 @@ function selectReplyList() {
                             const answerRow = $("<li>").addClass("answer-row");
                             const answerSign = $("<p>").addClass("answer-sign").text("⤷");
                             const answerPadding = $("<div>").addClass("answer-padding");
-                            const rWriter = $("<p>").addClass("rWriter").text(answer.memberName);
+                            const rWriter = $("<p>").addClass("rWriter").text(answer.memberName).attr("id", answer.memberNo);
                             const rDate = $("<p>").addClass("rDate").text(answerDate);
                             const rContent = $("<p>").addClass("rContent").text(answer.replyContent);
                             const replyBtnArea = $("<div>").addClass("replyBtnArea");
@@ -337,13 +337,18 @@ function insertAnswer(replyNo, el){
         alert("로그인 후 이용해 주세요.");
 
     }else{  // 로그인한 경우
-    
+        
+        // console.log("ul: " + $(el).parent().parent().parent().parent().parent().id());
+        console.log("ul: " + $(el).closest('li').children().children().first().attr('id'));
+
         $.ajax({
             url : contextPath + "/answer/insert",
             data : {"memberNo" : loginMemberNo, 
-                    "itemNo" : itemNo, 
+                    "itemNo" : itemNo,
+                    "itemMemberNo": itemMemberNo,
                     "replyNo" : replyNo,
-                    "replyContent" : $(el).parent().prev().val()
+                    "replyContent" : $(el).parent().prev().val(),
+                    "replyAnswerNo" : $(el).closest('li').children().children().first().attr('id')
                     },
             type : "POST",  // insert는 대부분 post 방식
             // dataType : "JSON",   // 성공 실패만 알면 되므로 JSON 필요 없음

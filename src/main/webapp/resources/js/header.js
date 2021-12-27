@@ -83,6 +83,7 @@ function clickNotice(){
     success : function(noticeList){
       
       noticeListSave = JSON.stringify(noticeList);
+
       $("#notice-img").attr("src", imgurl).removeClass("blink");
       
       const noticeArea = $("#notice-area");
@@ -96,17 +97,22 @@ function clickNotice(){
         alert("로그인 후 이용해 주세요.");
       }else{
         
-        if(noticeList.length == 0){ // 알림이 없는 경우
+        if(noticeListSave.length == 0){ // 알림이 없는 경우
           
           let li = $("<li>")
           li.text("알림이 없습니다.");
           noticeUl.append(li);
           
-        }else{
+        }
+        else{  // 알림이 있는 경우
+          console.log("알림이 있는 경우");
           
           $.each(noticeList, function(index, noticeList){   // jQuery 반복문
             
+            console.log("값 : " + noticeList.noticeNo);
+            
             if(noticeList.noticeContent == 1){  // 댓글이 달렸을 경우
+              console.log("댓글");
               let li = $("<li onclick='goNotice(1, this, "+noticeList.noticeNo+")'>")
               
               li.text(noticeList.itemName + " 상품에 댓글이 달렸습니다.");
@@ -115,6 +121,7 @@ function clickNotice(){
             }
             
             else if(noticeList.noticeContent == 2 && noticeList.replyMemberNo != noticeList.memberNo){ // 대댓글이 달렸을 경우
+              console.log("대댓글");
               let li = $("<li onclick='goNotice(1, this, "+noticeList.noticeNo+")'>")
               
               li.text(noticeList.itemName + "상품에 대댓글이 달렸습니다." );
@@ -123,6 +130,7 @@ function clickNotice(){
             }
             
             else if(noticeList.noticeContent == 3){
+              console.log("후기");
               let li = $("<li onclick='goNotice(2, this, "+noticeList.noticeNo+")'>")
               
               li.text("내 상점에 후기가 달렸습니다." );

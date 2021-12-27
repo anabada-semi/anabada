@@ -134,7 +134,7 @@
 			const itemNo = "${item.itemNo}";
 			
 			// 현재 게시글 작성자 번호
-			const itemMemberNo = "${item.memberNo}";
+			var itemMemberNo = "${item.memberNo}";
 	
 			// 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
 			let before;

@@ -121,7 +121,7 @@
                                         <c:when test="${reply.replyNestedCode != 2 }">
                                                 <li class="reply-row">
                                                     <div class="reply-padding">
-                                                        <p class="rWriter">${reply.memberName}</p>
+                                                        <p class="rWriter" id="${reply.memberNo}">${reply.memberName}</p>
                                                         <fmt:formatDate var="replyDate" value="${reply.replyDate}" pattern="yyyy-MM-dd HH:mm:ss" />
                                                         <p class="rDate">작성일 : ${replyDate}</p>
                                                     </div>
@@ -183,7 +183,7 @@
                                                                 <!-- beforeReplyRow -->
                                                                 <p class="answer-sign">⤷</p>
                                                                 <div class="answer-padding">
-                                                                    <p class="rWriter">${answer.memberName}</p>
+                                                                    <p class="rWriter" id="${answer.memberNo}">${answer.memberName}</p>
                                                                     <fmt:formatDate var="answerDate" value="${answer.replyDate}" pattern="yyyy-MM-dd HH:mm:ss" />
                                                                     <p class="rDate">${answerDate}</p>
                                                                     
@@ -255,7 +255,7 @@
         // const itemNo = ${item.itemNo};
         
         // 현재 게시글 작성자 번호
-        // const itemMemberNo = ${item.memberNo};
+        itemMemberNo = "${item.memberNo}";
 
         // 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
         let beforeReplyRow;
