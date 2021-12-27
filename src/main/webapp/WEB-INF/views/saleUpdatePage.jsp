@@ -110,10 +110,13 @@
         
           </main>  
           
+            <script>
+                // const loginMemberNo = "${loginMember.memberNo}";
+                const itemImgList = "${item.imgList}";
+            </script>
           	<jsp:include page="sideBar.jsp" />
           
             <!-- footer include -->
             <jsp:include page="footer.jsp" />
-        
         
         <script src="${contextPath}/resources/js/sale.js"></script>

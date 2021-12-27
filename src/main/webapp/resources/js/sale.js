@@ -1,7 +1,14 @@
 // 이미지 등록 유무 검사용 변수
 let imgInputCount = 0;
 
+// for(let i = 0; i < 3; i++){
+//     let count = $(".itemImg > img").eq(i).attr("src").length;
+//     if(count != 0){
+//         imgInputCount = imgInputCount + 1;
+//     }
+//  } 
 
+// console.log("itemImgList.legth: " + itemImgList.length);
 // 제목 40글자
 $(".input_title").on("input" , function(){
 
@@ -154,4 +161,3 @@ $(".input_price").on("input" , function(){
     }
 
 });
-
