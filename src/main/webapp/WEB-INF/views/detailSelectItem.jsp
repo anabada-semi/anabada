@@ -228,14 +228,26 @@
                     <h5 style="font-weight: bold;">상점 후기 <span class="reply-count">${fn:length(postScriptList)}</span></h5>
                     <div class="reply">
 
-                        <c:forEach var="i" begin="0" end="1">
-                            <div class="review">
-                                <span class="user-name">${postScriptList[i].memberName}</span>
-                                <span class="user-reply">
-                                    ${postScriptList[i].postScriptCheck}
-                                </span>
-                            </div>
-                        </c:forEach>
+                        <c:choose>
+                            <c:when test="${empty postScriptList}">
+                                <div class="review">
+                                    <span class="user-reply">
+                                        아직 후기가 없어요..
+                                    </span>
+                                </div>
+                            </c:when>
+
+                            <c:otherwise>
+                                <c:forEach var="i" begin="0" end="1">
+                                    <div class="review">
+                                        <span class="user-name">${postScriptList[i].memberName}</span>
+                                        <span class="user-reply">
+                                            ${postScriptList[i].postScriptCheck}
+                                        </span>
+                                    </div>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
 
                         <button class="more-review" onclick="location.href='${contextPath}/myShop/myShop?no=${shop.memberNo}'">후기 더보기 > </button>
                     </div>

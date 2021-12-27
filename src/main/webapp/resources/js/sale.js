@@ -49,7 +49,7 @@ $(".input_price").keyup(function(event){
     $(this).val(inputVal.replace(/[^0-9]/gi,''));
 });
 
-
+let num = 0;
 
 // 유효성 검사 
 function saleValidate() {
@@ -71,24 +71,17 @@ function saleValidate() {
             return false;
 
         }
-
-		// 상품 이미지 최소 1장 검사
-		for(let i = 0; i < 3; i++){
-			let flag = false;
-		    let count = $(".itemImg > img").eq(i).attr("src").length;
-
-		    if(count != 0)	flag = true;
-		}
-		
-		if(!flag){
-			alert("상품 이미지를 최소 한 장 넣어주세요.");
-			return false;
-		}
-		/*if(imgInputCount <= 0){
-			alert("상품 이미지를 최소 한 장 넣어주세요.");
-			return false;
-		}*/
+        
+/*         if(!emptyList()){
+            alert("상품 이미지를 최소 한 장 넣어주세요.");
+            return false;
+        }
     
+        if(num == 3){
+            alert("상품 이미지를 최소 한 장 넣어주세요.");
+			return false;
+        } */
+		
     }
 
 $(function() {
@@ -161,3 +154,21 @@ $(".input_price").on("input" , function(){
     }
 
 });
+
+/* function emptyList(){
+    
+    let num = 0;
+
+    for(let i=0; i < 3; i++){
+        if($("#imgList"+i).attr("src")==""){
+            num++;
+            console.log("if문 들어와?");
+        }
+    }
+
+    if(num == 3){
+        return false;
+    } else{
+        return true;
+    }
+} */
