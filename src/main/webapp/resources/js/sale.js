@@ -72,22 +72,19 @@ function saleValidate() {
 
         }
 
-		// 상품 이미지 최소 1장 검사
+		/*상품 이미지 최소 1장 검사
 		for(let i = 0; i < 3; i++){
 			let flag = false;
 		    let count = $(".itemImg > img").eq(i).attr("src").length;
 
-		    if(count != 0)	flag = true;
+		   if(count != 0)	flag = true;
 		}
 		
 		if(!flag){
 			alert("상품 이미지를 최소 한 장 넣어주세요.");
 			return false;
-		}
-		/*if(imgInputCount <= 0){
-			alert("상품 이미지를 최소 한 장 넣어주세요.");
-			return false;
 		}*/
+		
     
     }
 
@@ -112,9 +109,11 @@ function loadImg(value, num){
 
         reader.onload = function(e){
 
-           
-
+  
+			
             $(".itemImg").eq(num).children("img").attr("src",e.target.result);
+			
+			
 			
 			// 상품 이미지 추가 Count + 1
 			imgInputCount = imgInputCount + 1;
