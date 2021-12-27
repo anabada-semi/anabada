@@ -1,9 +1,6 @@
 // 이미지 등록 유무 검사용 변수
 let imgInputCount = 0;
 
-
-
-
 // 제목 40글자
 $(".input_title").on("input" , function(){
 
@@ -164,4 +161,3 @@ $(".input_price").on("input" , function(){
     }
 
 });
-
