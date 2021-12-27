@@ -86,6 +86,11 @@ public class DetailSelectItemServlet extends HttpServlet{
 				int recentCount = 1; // 박스 개수 체크용 변수
 				boolean recentCheck = true; // 중복 체크용 변수
 				
+				// 판매 완료 된 상품 일 시 되돌아가기
+				if(item.getItemStatusCode() == 1) {
+					session.setAttribute("message", "이미 판매 완료된 상품입니다.");
+					resp.sendRedirect(req.getContextPath());
+				}
 				
 				if(session.getAttribute("recentItemList") == null) {
 					recentItemList = new ArrayList<ItemImg>();
