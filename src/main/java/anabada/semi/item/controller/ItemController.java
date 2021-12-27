@@ -37,7 +37,7 @@ public class ItemController extends HttpServlet{
 		String path = null;
 		RequestDispatcher dispatcher = null;
 		String message = null;
-		
+		HttpSession session = req.getSession();
 		try {
 			
 			ItemService service = new ItemService();
@@ -53,13 +53,17 @@ public class ItemController extends HttpServlet{
 					path = "/WEB-INF/views/salePage.jsp";
 					req.getRequestDispatcher(path).forward(req, resp);
 					
+					// 최소 사진 카운트
+					int count = 0;
+					req.setAttribute("ms", count);
+					
 				}
 				
 				else {
 					
 					int maxSize = 1024 * 1024 * 100;
 					
-					HttpSession session = req.getSession();
+					//HttpSession session = req.getSession();
 					
 					String root = session.getServletContext().getRealPath("/");
 					String filePath = "/resources/images/item/";
@@ -86,6 +90,8 @@ public class ItemController extends HttpServlet{
 					Enumeration<String> files = mReq.getFileNames();
 					
 					List<ItemImg> imgList = new ArrayList<ItemImg>();
+					
+
 					
 					int level = 0;
 					
@@ -119,6 +125,7 @@ public class ItemController extends HttpServlet{
 						path = "insert";
 					}
 
+					// session.setAttribute("uid2", "제발요 되주세요");
 					session.setAttribute("message", message);
 					resp.sendRedirect(path);
 					
@@ -138,6 +145,16 @@ public class ItemController extends HttpServlet{
 				req.setAttribute("item", item);
 				req.setAttribute("category", category);
 				
+				// 최소 사진 카운트
+				//System.out.println("시이작" + item);
+				//System.out.println("이미지" + item.getImgList());
+				int count = 0;
+				for(ItemImg i : item.getImgList()) {
+					count++;
+					System.out.println(count);
+				}
+				req.setAttribute("ms", count);
+				
 				path = "/WEB-INF/views/saleUpdatePage.jsp";
 				req.getRequestDispatcher(path).forward(req, resp);
 				
@@ -146,7 +163,7 @@ public class ItemController extends HttpServlet{
 				
 				int maxSize = 1024 * 1024 * 100;
 				
-				HttpSession session = req.getSession();
+				//HttpSession session = req.getSession();
 				
 				String root = session.getServletContext().getRealPath("/");
 				String filePath = "/resources/images/item/";

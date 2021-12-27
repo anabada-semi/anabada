@@ -31,13 +31,34 @@
                     <div class="content_title">상품이미지<br><small>(최대 3개)</small></div>
                     <div class="content_photo">
                         <div class="itemImg"><img src="${img0}">클릭하여<br> 이미지<br>업로드
-                            <button type="button" class="deleteBtn">x</button>
+                            <c:choose>
+                            	<c:when test="${empty img0}">
+                            		<button type="button" class="deleteBtn" id="delete0" disabled>x</button>
+                            	</c:when>
+                            	<c:otherwise>
+		                            <button type="button" class="deleteBtn" id="delete0">x</button>                            	
+                            	</c:otherwise>
+                            </c:choose>
                         </div>
                         <div class="itemImg"><img src="${img1}">클릭하여<br> 이미지<br>업로드
-                            <button type="button" class="deleteBtn">x</button>
+                            <c:choose>
+                            	<c:when test="${empty img1}">
+                            		<button type="button" class="deleteBtn" id="delete1" disabled>x</button>
+                            	</c:when>
+                            	<c:otherwise>
+		                            <button type="button" class="deleteBtn" id="delete1">x</button>                            	
+                            	</c:otherwise>
+                            </c:choose>
                         </div>
                         <div class="itemImg"><img src="${img2}">클릭하여<br> 이미지<br>업로드
-                            <button type="button" class="deleteBtn">x</button>
+                            <c:choose>
+                            	<c:when test="${empty img2}">
+                            		<button type="button" class="deleteBtn" id="delete2" disabled>x</button>
+                            	</c:when>
+                            	<c:otherwise>
+		                            <button type="button" class="deleteBtn" id="delete2">x</button>                            	
+                            	</c:otherwise>
+                            </c:choose>
                         </div>
                         
                         <div id=fileArea">
@@ -113,6 +134,7 @@
             <script>
                 // const loginMemberNo = "${loginMember.memberNo}";
                 const itemImgList = "${item.imgList}";
+                const ms = "${ms}";
             </script>
           	<jsp:include page="sideBar.jsp" />
           
