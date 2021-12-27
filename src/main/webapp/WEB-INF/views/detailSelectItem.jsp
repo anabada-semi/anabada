@@ -45,12 +45,16 @@
                         <div class="carousel-item active">
                             <img src="${contextPath}${itemImg[0].imgPath}${itemImg[0].imgName}" onclick="showImg(this);">
                         </div>
-                        <div class="carousel-item">
-                            <img src="${contextPath}${itemImg[1].imgPath}${itemImg[1].imgName}" onclick="showImg(this);">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="${contextPath}${itemImg[2].imgPath}${itemImg[2].imgName}" onclick="showImg(this);">
-                        </div>
+                        <c:if test="${!empty itemImg[1].imgPath}">
+                            <div class="carousel-item">
+                                <img src="${contextPath}${itemImg[1].imgPath}${itemImg[1].imgName}" onclick="showImg(this);">
+                            </div>
+                        </c:if>
+                        <c:if test="${!empty itemImg[2].imgPath}">
+                            <div class="carousel-item">
+                                <img src="${contextPath}${itemImg[2].imgPath}${itemImg[2].imgName}" onclick="showImg(this);">
+                            </div>
+                        </c:if>
                     </div>
 
                     <a class="carousel-control-prev" href="#myCarousel" data-slide="prev" style="left: 30px;">
