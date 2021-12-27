@@ -145,18 +145,18 @@ $(".deleteBtn").on("click", function(e){
 
 
 
-// 가격 억 단위까지만
+// 가격 백만 단위까지만
 $(".input_price").on("input" , function(){
 
     let count = $(this).val().length;
 
-    if(count >= 9){
+    if(count >= 7){
         
-        $(this).val( $(this).val().substr(0,9) );
+        $(this).val( $(this).val().substr(0,7) );
         
-        count = 9;
+        count = 7;
 
-    }else if( count < 9){
+    }else if( count < 7){
 
     }
 
