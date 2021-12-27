@@ -22,18 +22,18 @@
 					<c:choose>
 						<c:when test="${ empty sessionScope.loginMember }">
 							<div id="login">
-								<a href="${contextPath}/member/login" class="header-btn-style header-font">로그인</a>
+								<a href="${contextPath}/member/login" class="header-btn-style header-font" style="color: gray;">로그인</a>
 							</div>
 							<div id="singup">
-								<a href="${contextPath}/member/signUp" class="header-btn-style header-font">회원가입</a>
+								<a href="${contextPath}/member/signUp" class="header-btn-style header-font" style="color: gray;">회원가입</a>
 							</div>
 						</c:when>
 						<c:otherwise>
 							<div id="login">
-								<a href="${contextPath}/member/logout" class="header-btn-style header-font">로그아웃</a>
+								<a href="${contextPath}/member/logout" class="header-btn-style header-font" style="color: gray;">로그아웃</a>
 							</div>
 							<div id="singup">
-								<a href="${contextPath}/member/myPage" class="header-btn-style header-font">내 정보</a>
+								<a href="${contextPath}/member/myPage" class="header-btn-style header-font" style="color: gray;">내 정보</a>
 							</div>
 						</c:otherwise>
 					</c:choose>
@@ -50,7 +50,7 @@
 							
 								<form action="${contextPath}/categoryItem/search" method="GET">
 
-									<input type="text" id="search_input" name="search_input" placeholder="검색어 입력">
+									<input type="text" id="search_input" name="search_input" placeholder="검색어 입력" style="font-family: 'GmarketSansMedium';">
 									<button>
 										<img src="${contextPath}/resources/images/header+footer/검색.png" id="search-img">
 										<%-- id="search-img" onclick="location.href='${contextPath}/itemPage?cp=${loginMember.memberNo}';"> --%>
