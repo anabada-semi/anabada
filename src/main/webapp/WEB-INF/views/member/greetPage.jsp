@@ -15,11 +15,11 @@
         </div>
         <div class="float-Box">
             <h1>회원가입이 완료 되었습니다.</h1>
-            나는 고양이 고고 고양이 이이이<br>
-            너도 고양이 규규 규양이 이이이<br>
-            우리 모두 고 양 이  이 이   이<br>
-            고고고 양이 규규규 양이<br>
-            고고고 양이 규규규 양이<br>
+            가까운 이웃과 안전하게 중고상품을<br>
+            거래 할 수 있는 사이트<br>
+            아나바다에 오신 것을 환영합니다.<br>
+            지금 즉시 로그인 하여<br>
+            원하시는 서비스를 이용해보세요.<br>
             <button onclick="location.href='${contextPath}/member/login'">바로 로그인</button>
         </div>
     </section>
