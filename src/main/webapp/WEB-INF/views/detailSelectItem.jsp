@@ -45,12 +45,16 @@
                         <div class="carousel-item active">
                             <img src="${contextPath}${itemImg[0].imgPath}${itemImg[0].imgName}" onclick="showImg(this);">
                         </div>
-                        <div class="carousel-item">
-                            <img src="${contextPath}${itemImg[1].imgPath}${itemImg[1].imgName}" onclick="showImg(this);">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="${contextPath}${itemImg[2].imgPath}${itemImg[2].imgName}" onclick="showImg(this);">
-                        </div>
+                        <c:if test="${!empty itemImg[1].imgPath}">
+                            <div class="carousel-item">
+                                <img src="${contextPath}${itemImg[1].imgPath}${itemImg[1].imgName}" onclick="showImg(this);">
+                            </div>
+                        </c:if>
+                        <c:if test="${!empty itemImg[2].imgPath}">
+                            <div class="carousel-item">
+                                <img src="${contextPath}${itemImg[2].imgPath}${itemImg[2].imgName}" onclick="showImg(this);">
+                            </div>
+                        </c:if>
                     </div>
 
                     <a class="carousel-control-prev" href="#myCarousel" data-slide="prev" style="left: 30px;">
@@ -117,7 +121,7 @@
                                         <c:when test="${reply.replyNestedCode != 2 }">
                                                 <li class="reply-row">
                                                     <div class="reply-padding">
-                                                        <p class="rWriter">${reply.memberName}</p>
+                                                        <p class="rWriter" id="${reply.memberNo}">${reply.memberName}</p>
                                                         <fmt:formatDate var="replyDate" value="${reply.replyDate}" pattern="yyyy-MM-dd HH:mm:ss" />
                                                         <p class="rDate">작성일 : ${replyDate}</p>
                                                     </div>
@@ -179,7 +183,7 @@
                                                                 <!-- beforeReplyRow -->
                                                                 <p class="answer-sign">⤷</p>
                                                                 <div class="answer-padding">
-                                                                    <p class="rWriter">${answer.memberName}</p>
+                                                                    <p class="rWriter" id="${answer.memberNo}">${answer.memberName}</p>
                                                                     <fmt:formatDate var="answerDate" value="${answer.replyDate}" pattern="yyyy-MM-dd HH:mm:ss" />
                                                                     <p class="rDate">${answerDate}</p>
                                                                     
@@ -251,7 +255,7 @@
         // const itemNo = ${item.itemNo};
         
         // 현재 게시글 작성자 번호
-        // const itemMemberNo = ${item.memberNo};
+        itemMemberNo = "${item.memberNo}";
 
         // 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
         let beforeReplyRow;

@@ -75,7 +75,7 @@ public class NoticeController extends HttpServlet{
 			
 			else if(command.equals("update")) {
 				
-				int noticeNo = Integer.parseInt(req.getParameter("noticeList"));
+				int noticeNo = Integer.parseInt(req.getParameter("noticeNo"));
 				
 				int result = service.updateNotice(noticeNo);
 				

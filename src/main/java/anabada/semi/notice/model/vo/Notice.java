@@ -9,7 +9,7 @@ public class Notice {
 	private int shopNo;	// 판매자
 	private int memberNo;	// 댓글 단 사람(로그인 한 사람)
 	private int status;
-	private int ReplyMemberNo;
+	private int ReplyMemberNo;	// 대댓글 단 사람 번호
 	private int PostSCriptNo;	// 댓글 번호
 	
 	public Notice() {
