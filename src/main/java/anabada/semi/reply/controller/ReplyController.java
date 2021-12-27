@@ -77,6 +77,7 @@ public class ReplyController extends HttpServlet{
 				notice.setShopNo(itemMemberNo);	//판매자
 				notice.setMemberNo(memberNo);
 				notice.setReplyMemberNo(0);
+				notice.setPostSCriptNo(0);	// 후기를 달았으면 후기 번호
 				
 				// 댓글이 db에 삽입되었을때 && 댓글 단 사람(로그인 한 사람) != 판매자
 				if(result > 0 && memberNo != itemMemberNo) {

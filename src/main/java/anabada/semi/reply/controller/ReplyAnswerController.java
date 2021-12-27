@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import anabada.semi.item.model.service.ItemSelectService;
 import anabada.semi.item.model.vo.Reply;
+import anabada.semi.notice.model.service.NoticeService;
+import anabada.semi.notice.model.vo.Notice;
 
 @WebServlet("/answer/*")
 public class ReplyAnswerController extends HttpServlet{
@@ -35,6 +37,8 @@ public class ReplyAnswerController extends HttpServlet{
 				int memberNo = Integer.parseInt(req.getParameter("memberNo"));
 				int itemNo = Integer.parseInt(req.getParameter("itemNo"));
 				int replyNo = Integer.parseInt(req.getParameter("replyNo"));
+				int itemMemberNo = Integer.parseInt(req.getParameter("itemMemberNo"));
+				int replyAnswerNo = Integer.parseInt(req.getParameter("replyAnswerNo"));
 				
 				String replyContent = req.getParameter("replyContent");
 				
@@ -44,7 +48,18 @@ public class ReplyAnswerController extends HttpServlet{
 				reply.setReplyContent(replyContent);
 
 				int result = service.insertReplyAnswer(reply);
-				 
+				
+				if(result > 0) {
+					Notice notice = new Notice();
+					notice.setNoticeContent(2);
+					notice.setItemNo(itemNo);
+					notice.setShopNo(itemMemberNo);	// 판매자
+					notice.setMemberNo(memberNo);	// 대댓글 작성자 == 로그인 한 사람
+					notice.setReplyMemberNo(replyAnswerNo);	// 대댓글 단 사람 번호
+					notice.setPostSCriptNo(0);	// 후기를 달았으면 후기 번호
+					
+					new NoticeService().insertNotice(notice);
+				}
 				resp.getWriter().print(result);
 			}
 			

@@ -50,7 +50,6 @@ public class NoticeDAO {
 			pstmt.setInt(1, loginMemberNo);
 			pstmt.setInt(2, loginMemberNo);
 			pstmt.setInt(3, loginMemberNo);
-			pstmt.setInt(4, loginMemberNo);
 			
 			rs = pstmt.executeQuery();
 			
