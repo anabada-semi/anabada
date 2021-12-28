@@ -80,6 +80,10 @@
                 font-size: 14px;
                 width: 100%;
             }
+            
+             #guide  span{
+               color: red;
+            }
 
             .line{
                 border-bottom: 1px solid rgb(220, 219, 228);
