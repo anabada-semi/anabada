@@ -91,6 +91,7 @@ button{
 #userName{
     font-size: 14px;
     border: 0.3px solid #ccc;
+    outline: none;
 }
 .userNameBtn{
     font-size: 13px;
@@ -284,7 +285,7 @@ text-align: center;
     z-index: 2;
     position: fixed;
     text-align: center;
-    border-radius: 40px;
+    border-radius: 12px;
 }
 .backon{
     content: "";
