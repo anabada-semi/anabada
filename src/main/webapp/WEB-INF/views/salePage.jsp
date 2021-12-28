@@ -17,16 +17,16 @@
                 <li class="line">
                     <div class="content_title">상품이미지<br><small>(최대 3개)</small></div>
                     <div class="content_photo">
-                        <div class="itemImg"><img>클릭하여<br> 이미지<br>업로드
-                            <button type="button" class="deleteBtn">x</button>
+                        <div class="itemImg" id="boxes1"><img id="imgbox1">클릭하여<br> 이미지<br>업로드
+                            <button type="button" class="deleteBtn" id="delete0" disabled>x</button>
                         </div>
 
-                        <div class="itemImg"><img>클릭하여<br> 이미지<br>업로드
-                            <button type="button" class="deleteBtn">x</button>
+                        <div class="itemImg" id="boxes2"><img id="imgbox2">클릭하여<br> 이미지<br>업로드
+                            <button type="button" class="deleteBtn" id="delete1" disabled>x</button>
                         </div>
 
-                        <div class="itemImg"><img>클릭하여<br> 이미지<br>업로드
-                            <button type="button" class="deleteBtn">x</button>
+                        <div class="itemImg" id="boxes3"><img id="imgbox3">클릭하여<br> 이미지<br>업로드
+                            <button type="button" class="deleteBtn" id="delete2" disabled>x</button>
                         </div>
                         
                         
@@ -37,7 +37,7 @@
                         </div>
                        
                         <div id="guide">
-                            - 이미지는 최소 1장 등록해야하며 최대 3장까지 등록 가능합니다.
+                            - <span>이미지는 최소 1장 등록</span>해야하며 최대 3장까지 등록 가능합니다.
                             <br>
                             - 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
                         </div>
@@ -102,5 +102,10 @@
   
     <!-- footer include -->
 	<jsp:include page="footer.jsp" />
-
+	
+	<script>
+		const ms = "${ms}";
+		<%-- var uid = '<%=(String)session.getAttribute("uid")%>';
+		var uid2 = '<%=(String)session.getAttribute("uid2")%>'; --%>
+	</script>
     <script src="${contextPath}/resources/js/sale.js"></script>
