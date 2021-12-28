@@ -623,6 +623,7 @@ $(document).on("click", "#myShopContent2", function(){
 	myShopContent = myShopContent.replace(/&lt;/g, "<");
 	myShopContent = myShopContent.replace(/&gt;/g, ">");
 	myShopContent = myShopContent.replace(/&quot;/g, "\"");
+	myShopContent = myShopContent.replaceAll(/<br>/g, '\r\n');
 
     $("#contentTextarea").val( myShopContent );
 
@@ -645,6 +646,7 @@ $(document).on("click", "#myShopContentBtn", function(){
 	main = main.replace(/</g, "&lt;");
 	main = main.replace(/>/g, "&gt;");
 	main = main.replace(/\"/g, "&quot;");
+	main = main.replaceAll(/(\n|\r\n)/g, "<br>");
 
     $.ajax({
         url: contextPath + "/myShop/shopContentCng",
