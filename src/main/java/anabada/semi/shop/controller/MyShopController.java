@@ -134,11 +134,15 @@ public class MyShopController extends HttpServlet {
 					String inputContent = req.getParameter("inputContent");
 					int memberNo = Integer.parseInt( req.getParameter("memberNo") );
 					
-					int shopNo = (Integer)session.getAttribute("shopNo");
-					shop = new MemberService().selectShop(shopNo);
-					session.setAttribute("locationShop", shop);
+					int result = service.updateShopContent(inputContent, memberNo);
 					
-					resp.getWriter().print(service.updateShopContent(inputContent, memberNo));
+					if(result > 0) {
+						int shopNo = (Integer)session.getAttribute("shopNo");
+						shop = new MemberService().selectShop(shopNo);
+						session.setAttribute("locationShop", shop);
+					}
+					
+					resp.getWriter().print(result);
 				}
 				
 			}else if(command.equals("myShop")) {
