@@ -109,10 +109,7 @@ function clickNotice(){
           
           $.each(noticeList, function(index, noticeList){   // jQuery 반복문
             
-            console.log("값 : " + noticeList.noticeNo);
-            
             if(noticeList.noticeContent == 1){  // 댓글이 달렸을 경우
-              console.log("댓글");
               let li = $("<li onclick='goNotice(1, this, "+noticeList.noticeNo+")'>")
               
               li.text(noticeList.itemName + " 상품에 댓글이 달렸습니다.");
@@ -121,7 +118,6 @@ function clickNotice(){
             }
             
             else if(noticeList.noticeContent == 2 && noticeList.replyMemberNo != noticeList.memberNo){ // 대댓글이 달렸을 경우
-              console.log("대댓글");
               let li = $("<li onclick='goNotice(1, this, "+noticeList.noticeNo+")'>")
               
               li.text(noticeList.itemName + "상품에 대댓글이 달렸습니다." );
@@ -130,7 +126,6 @@ function clickNotice(){
             }
             
             else if(noticeList.noticeContent == 3){
-              console.log("후기");
               let li = $("<li onclick='goNotice(2, this, "+noticeList.noticeNo+")'>")
               
               li.text("내 상점에 후기가 달렸습니다." );
@@ -154,7 +149,7 @@ function goNotice(no, el, noticeNo){
 
   console.log("noticeNo: " + noticeNo);
 
-  // 댓글에 관한 알림이면
+  // 댓글, 대댓글에 관한 알림이면
   if(no == 1){
     location.href= contextPath+'/detail/select?no='+value;
   } 
