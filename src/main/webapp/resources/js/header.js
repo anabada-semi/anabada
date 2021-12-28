@@ -165,7 +165,7 @@ function goNotice(no, el, noticeNo){
     success : function(result){
 
       if(result == 0){
-        alert("업데이트 실패");
+        console.log("업데이트 실패");
       }
       else{
         console.log("업데이트 됨");
