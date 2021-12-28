@@ -16,7 +16,7 @@
 
 		<main>
             <div class="category">
-                <img src="${contextPath}/resources/images/itemIcon/home.png"> 홈 >
+                <img src="${contextPath}/resources/images/itemIcon/home.png" style="cursor: pointer;" onclick="location.href='${contextPath}'"> 홈 >
                
                 <select class="item-category-list" onchange="categoryClick(this)">
                     <c:forEach items="${categoryList}" var="c">
