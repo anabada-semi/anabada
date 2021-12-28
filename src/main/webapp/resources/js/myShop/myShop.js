@@ -178,7 +178,7 @@ function selectReplyList() {
                     }
                     
                     const upc = $("<div class='userPost-content'>");
-                    upc.text(post.postScriptCheck);
+                    upc.html(post.postScriptCheck);
                     
                     const ups = $("<div class='userPost-shop'>");
                     // ups.text("상점 이동");
@@ -561,7 +561,7 @@ function sellPage(){
 
 
 
-const textCountLimit = 120;
+const textCountLimit = 70;
 
 /* 상점명 변경 */
 $(document).on("click",".shopNameBtn", function(){
@@ -575,9 +575,7 @@ const nowName = $("#userName").val();
 $(document).on("click",".userNameBtn", function(){
     const inputName = $("#userName");
 
-    const reg = /^[\w\dㄱ-힣][\w\dㄱ-힣-_]{3,12}$/;
-
-    if(reg.test(inputName.val())){
+    if(inputName.val().trim().length > 1){
 
         $.ajax({
             url: contextPath + "/myShop/shopNameCng",
@@ -609,7 +607,7 @@ $(document).on("click",".userNameBtn", function(){
         });
 
     }else{
-        alert("4글자 이상");
+        alert("2글자 이상");
     }
 });
 
@@ -620,38 +618,51 @@ $(document).on("click", "#myShopContent2", function(){
     parent.empty();
     parent.append("<textarea name='' id='contentTextarea'></textarea>");
     
-    $("#contentTextarea").val( $("#myShopContent").text() );
+	let myShopContent = $("#myShopContent").html();
+	myShopContent = myShopContent.replace(/&amp;/g, "&");
+	myShopContent = myShopContent.replace(/&lt;/g, "<");
+	myShopContent = myShopContent.replace(/&gt;/g, ">");
+	myShopContent = myShopContent.replace(/&quot;/g, "\"");
+
+    $("#contentTextarea").val( myShopContent );
 
     const textLength = $("#contentTextarea").val().length;
 
     $("#myShopContent").text("").css("height", "0px");
     
-    parent.append("<button id='myShopContentBtn'>확인<br>" + textLength + "/120</button>");
+    parent.append("<button id='myShopContentBtn'>확인<br>" + textLength + "/70</button>");
 
 });
 
-const nowContent = $("#myShopContent").val();
 /* 소개글 변경 후 확인 버튼 */
 $(document).on("click", "#myShopContentBtn", function(){
+	const nowContent = $("#myShopContent").html();
     const contentTextarea = $("#contentTextarea");
     const parent = $("#myShopContent1");
 
+	let main = $("#contentTextarea").val();
+	main = main.replace(/&/g, "&amp;");
+	main = main.replace(/</g, "&lt;");
+	main = main.replace(/>/g, "&gt;");
+	main = main.replace(/\"/g, "&quot;");
+
     $.ajax({
         url: contextPath + "/myShop/shopContentCng",
-        data: { "memberNo": loginMemberNo, "inputContent": contentTextarea.val() },
+        data: { "memberNo": loginMemberNo, "inputContent": main },
         success: function(r){
             if(r > 0){
-
+	
                 parent.empty();
                 parent.append('<div id="myShopContent2">소개글 수정</div>');
-                $("#myShopContent").text( contentTextarea.val() ).css("height", "190px");
+
+                $("#myShopContent").html( main ).css("height", "190px");
 
             }else{
 
                 parent.empty();
                 parent.append('<div id="myShopContent2">소개글 수정</div>');
 
-                $("#myShopContent").text(nowContent).css("height", "190px");
+                $("#myShopContent").text( nowContent ).css("height", "190px");
 
             }
         },
@@ -668,68 +679,76 @@ $(document).on("click", "#myShopContentBtn", function(){
 $(document).on("input", "#contentTextarea", function(){
     const textLength = $(this).val().length;
     
-    $("#myShopContentBtn").html("확인<br>" + textLength + "/120");
+    $("#myShopContentBtn").html("확인<br>" + textLength + "/70");
 
     if(textLength > textCountLimit){
         $(this).val($(this).val().substr(0, textCountLimit));
-        $("#myShopContentBtn").html("확인<br>120/120");
+        $("#myShopContentBtn").html("확인<br>70/70");
     }
 });
 
 
-/* 상점 후기 최대 120글자 */
+/* 상점 후기 최대 70글자 */
 $(document).on("input", ".userPostArea > .userPostTextarea", function(){
     const textLength = $(this).val().length;
     
-    $("#userPostTextareaBtn").html("확인<br>" + textLength + "/120");
+    $("#userPostTextareaBtn").html("확인<br>" + textLength + "/70");
 
     if(textLength > 0)  $("#userPostTextareaBtn").css("background", "antiquewhite");
     else                $("#userPostTextareaBtn").css("background", "rgb(250, 250, 250)");
 
     if(textLength > textCountLimit){
         $(this).val($(this).val().substr(0, textCountLimit));
-        $("#userPostTextareaBtn").html("확인<br>120/120");
+        $("#userPostTextareaBtn").html("확인<br>70/70");
     }
 });
 
 
-/* 상점 후기 수정 최대 120글자 */
+/* 상점 후기 수정 최대 70글자 */
 $(document).on("input", ".userPost > .userPostTextarea", function(){
     const textLength = $(this).val().length;
     
-    $("#updateUserPostTextareaBtn").html("확인<br>" + textLength + "/120");
+    $("#updateUserPostTextareaBtn").html("확인<br>" + textLength + "/70");
 
     if(textLength > 0)  $("#updateUserPostTextareaBtn").css("background", "antiquewhite");
     else                $("#updateUserPostTextareaBtn").css("background", "rgb(250, 250, 250)");
 
     if(textLength > textCountLimit){
         $(this).val($(this).val().substr(0, textCountLimit));
-        $("#updateUserPostTextareaBtn").html("확인<br>120/120");
+        $("#updateUserPostTextareaBtn").html("확인<br>70/70");
     }
 });
 
 
-/* 댓글 등록 이런식으로 추가 다 ajax 해야되네... */
+/* 상점 후기 등록 이런식으로 추가 다 ajax 해야되네... */
 $(document).on("click", "#userPostTextareaBtn", function(){
     const locationPost = $("#userPostTextareaBtn").parent().prev();
 
     if(shopNo == loginMemberNo){
         alert("자신의 상점에서는 후기 작성이 불가능합니다.");
         $(".userPostTextarea").val("");
-        c
         return;
     }
+
+	let main = [];
+	main[0] = $(".userPostTextarea").val();
+	
+	main[0] = main[0].replace(/&/g, "&amp;");
+	main[0] = main[0].replace(/</g, "&lt;");
+	main[0] = main[0].replace(/>/g, "&gt;");
+	main[0] = main[0].replace(/\"/g, "&quot;");
+	
 
     if($(".userPostTextarea").length == 1){
         $.ajax({
             url: contextPath + "/myShop/insertPostScript",
-            data: { "memberNo": loginMemberNo, "postScript": $(".userPostTextarea").val() },
+            data: { "memberNo": loginMemberNo, "postScript": main[0] },
             success: function(r){
                 if(r > 0){
                     $(".userPost").remove();
                     
                     $("#postScriptTextDiv").html('상점 후기<span id="postScriptText">1</span>');
-                    $("#userPostTextareaBtn").html("확인<br>0/120").css("background", "rgb(250, 250, 250)");
+                    $("#userPostTextareaBtn").html("확인<br>0/70").css("background", "rgb(250, 250, 250)");
                     alert("성공");
                     selectReplyList();
                 }else{
@@ -742,9 +761,15 @@ $(document).on("click", "#userPostTextareaBtn", function(){
             }
         });
     }else{
+		main[1] = $(".userPostTextarea").eq(1).val();
+		main[1] = main[1].replace(/&/g, "&amp;");
+		main[1] = main[1].replace(/</g, "&lt;");
+		main[1] = main[1].replace(/>/g, "&gt;");
+		main[1] = main[1].replace(/\"/g, "&quot;");
+		
         $.ajax({
             url: contextPath + "/myShop/insertPostScript",
-            data: { "memberNo": loginMemberNo, "postScript": $(".userPostTextarea").eq(1).val() },
+            data: { "memberNo": loginMemberNo, "postScript": main[1] },
             success: function(r){
                 if(r > 0){
                     $(".userPost").remove();
@@ -767,12 +792,12 @@ function createText(j, text){
 
     const img = $('<div class="userPostImgDiv"><img class="userPostImg" src="/anabada/resources/images/myShop/profile/캐릭터.png"></div>');
     const ta = $('<textarea class="userPostTextarea"></textarea>');
-    const btn = $('<button id="updateUserPostTextareaBtn">확인<br>0/120</button>');
+    const btn = $('<button id="updateUserPostTextareaBtn">확인<br>0/70</button>');
 
     $(".userPost[id=" + j + "]").empty();
     $(".userPost[id=" + j + "]").append(img, ta, btn);
     $(".userPostTextarea").eq(0).val(text);
-    $("#updateUserPostTextareaBtn").html('확인<br>' + $(".userPostTextarea").eq(0).val().length + '/120').css("background", "antiquewhite");
+    $("#updateUserPostTextareaBtn").html('확인<br>' + $(".userPostTextarea").eq(0).val().length + '/70').css("background", "antiquewhite");
 
 }
 
@@ -789,8 +814,14 @@ $(document).on("click", ".userPostUpdate", function(){
 
 
     Temp[0] = $(".userPost[id=" + nowIndex + "]").html()
-    Temp[1] = $(".userPost[id=" + nowIndex + "]").children().children().eq(4).text()
+    Temp[1] = $(".userPost[id=" + nowIndex + "]").children().children().eq(4).html()
     
+	Temp[1] = Temp[1].replace(/&amp;/g, "&");
+    Temp[1] = Temp[1].replace(/&lt;/g, "<");
+    Temp[1] = Temp[1].replace(/&gt;/g, ">");
+    Temp[1] = Temp[1].replace(/&quot;/g, "\"");
+    /*Temp[1] = Temp[1].replace(/<br>/g, "\n");*/
+
     if(flag){
         if(confirm("고?")){
             $(".userPost[id=" + deleteIndex + "]").empty();
@@ -844,9 +875,17 @@ $(document).on("click", ".userPostDelete", function(){
 $(document).on("click", "#updateUserPostTextareaBtn", function(){
     const locationPost = $("#updateUserPostTextareaBtn").parent().prev();
 
+	let main = [];
+	main[0] = $(".userPostTextarea").eq(0).val();
+	
+	main[0] = main[0].replace(/&/g, "&amp;");
+	main[0] = main[0].replace(/</g, "&lt;");
+	main[0] = main[0].replace(/>/g, "&gt;");
+	main[0] = main[0].replace(/\"/g, "&quot;");
+
     $.ajax({
         url: contextPath + "/myShop/updatePostScript",
-        data: { "postNo": postNum, "postScript": $(".userPostTextarea").eq(0).val() },
+        data: { "postNo": postNum, "postScript": main[0] },
         success: function(r){
             if(r > 0){
                 $(".userPost").remove();
@@ -878,7 +917,7 @@ $(document).on("click", ".userPostReport", function(){
             $("#popup01").hide(); //close버튼 이거나 뒷배경 클릭시 팝업 삭제
             $(".backon").hide();
             $(".userReportTextarea").val("");
-            $("#userReportTextareaBtn").html("확인<br>0/120").css("background", "#ccc");
+            $("#userReportTextareaBtn").html("확인<br>0/70").css("background", "#ccc");
 
         }
     });
@@ -889,11 +928,11 @@ $(document).on("click", ".userPostReport", function(){
 $(document).on("input", ".userReportTextarea", function(){
     const textLength = $(this).val().length;
 
-    $("#userReportTextareaBtn").html("확인<br>" + textLength + "/120");
+    $("#userReportTextareaBtn").html("확인<br>" + textLength + "/70");
 
     if(textLength > textCountLimit){
         $(this).val($(this).val().substr(0, textCountLimit));
-        $("#userReportTextareaBtn").html("확인<br>120/120");
+        $("#userReportTextareaBtn").html("확인<br>70/70");
     }
 
     if($(this).val().length != 0)
@@ -910,7 +949,7 @@ $(".userReportTextareaBtn").on("click", function(){
         $("#popup01").hide(); //close버튼 이거나 뒷배경 클릭시 팝업 삭제
         $(".backon").hide();
         $(".userReportTextarea").val("");
-        $("#userReportTextareaBtn").html("확인<br>0/120").css("background", "#ccc");
+        $("#userReportTextareaBtn").html("확인<br>0/70").css("background", "#ccc");
     } else{
         return;
     }
@@ -1022,7 +1061,7 @@ $(document).on("click", ".report", function(){
     const idx = $(".report").index($(this));
 
     if(myIdx != idx){
-        $("#userReportTextareaBtn").html("확인<br>0/120").css("background", "#ccc");
+        $("#userReportTextareaBtn").html("확인<br>0/70").css("background", "#ccc");
         $(".userReportTextarea").val("");
     }
     myIdx = idx;

@@ -130,8 +130,13 @@ public class MyShopController extends HttpServlet {
 			}else if(command.equals("shopContentCng")) {
 				if(method.equals("GET")) {
 					
-					String inputContent = new XSS().replaceParameter(req.getParameter("inputContent"));
+//					String inputContent = new XSS().replaceParameter(req.getParameter("inputContent"));
+					String inputContent = req.getParameter("inputContent");
 					int memberNo = Integer.parseInt( req.getParameter("memberNo") );
+					
+					int shopNo = (Integer)session.getAttribute("shopNo");
+					shop = new MemberService().selectShop(shopNo);
+					session.setAttribute("locationShop", shop);
 					
 					resp.getWriter().print(service.updateShopContent(inputContent, memberNo));
 				}
@@ -154,6 +159,7 @@ public class MyShopController extends HttpServlet {
 				if(method.equals("GET")) {
 					
 					String postScript = req.getParameter("postScript");
+					//String postScript = temp.replaceAll("\r\n|\r|\n|\n\r", "<br>");
 					int shopNo = (int)session.getAttribute("shopNo");
 					
 					int result = service.insertPostScript(shopNo, loginMember.getMemberNo(), postScript);
@@ -180,6 +186,7 @@ public class MyShopController extends HttpServlet {
 					
 					int postNo = Integer.parseInt(req.getParameter("postNo"));
 					String postScript = req.getParameter("postScript");
+					//String postScript = temp.replaceAll("\r\n|\r|\n|\n\r", "<br>");
 					
 					resp.getWriter().print(service.updatePostScript(postNo, postScript));
 				}
