@@ -1,0 +1,8 @@
+diff a/src/main/webapp/WEB-INF/views/salePage.jsp b/src/main/webapp/WEB-INF/views/salePage.jsp	(rejected hunks)
+@@ -103,5 +103,4 @@
+     <!-- footer include -->
+ 	<jsp:include page="footer.jsp" />
+ 
+-
+     <script src="${contextPath}/resources/js/sale.js"></script>
+\ No newline at end of file
